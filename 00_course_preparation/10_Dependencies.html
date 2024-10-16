@@ -331,7 +331,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -347,6 +349,21 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -358,6 +375,63 @@ document.write(`
                   
   <section id="todo-dependences">
 <h1>Todo: Dependences<a class="headerlink" href="#todo-dependences" title="Permalink to this heading">#</a></h1>
+<p>Install latest development version of napari-easy-augment-batch-dl and tnia-python</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bnorthan</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">napari</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+</pre></div>
+</div>
+<p>You will also need one or more of stardist, cellpose, segment-everything or Yolo</p>
+<section id="stardist">
+<h2>Stardist<a class="headerlink" href="#stardist" title="Permalink to this heading">#</a></h2>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.2</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow&lt;2.11&quot;</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span><span class="o">==</span><span class="mf">0.8.5</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
+</pre></div>
+</div>
+</section>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span><span class="p">[</span><span class="ow">and</span><span class="o">-</span><span class="n">cuda</span><span class="p">]</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="pytorch-for-unet-segmentation">
+<h2>Pytorch (for unet segmentation)<a class="headerlink" href="#pytorch-for-unet-segmentation" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip3</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">tifffile</span>
+</pre></div>
+</div>
+</section>
+<section id="cellpose">
+<h2>Cellpose<a class="headerlink" href="#cellpose" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+</pre></div>
+</div>
+</section>
+<section id="sam-segment-anything">
+<h2>SAM (Segment Anything)<a class="headerlink" href="#sam-segment-anything" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">segment</span><span class="o">-</span><span class="n">everything</span>
+</pre></div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -409,6 +483,27 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
