@@ -1,0 +1,16 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+
+options: # The options key will be applied to all chapters, but not sub-sections
+  numbered: False
+
+parts:
+- caption: Notebooks and Napari Widgets for Deep Learning
+  chapters:
+  - file: 00_course_preparation/05_Setup
+    sections:
+    - file: 00_course_preparation/10_Dependencies
+  
