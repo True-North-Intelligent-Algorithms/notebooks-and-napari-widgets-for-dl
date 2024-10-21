@@ -1,0 +1,781 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Cellpose trained to learn scale &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20_scale/20_cell_pose_diameter';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F20_scale/20_cell_pose_diameter.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/20_scale/20_cell_pose_diameter.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Cellpose trained to learn scale</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cellpose trained to learn scale</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-super-simple-fake-dataset">Make a super simple fake dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-cyto2">Load Cyto2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#process-with-cyto2-with-different-diameters">Process with Cyto2 with different diameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-the-objects-to-make-a-fake-training-set">Repeat the objects to make a fake training set</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-custom-model">Make a custom model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-our-custom-model">Train our custom model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#show-all-the-cyto-labels-and-label-custom">Show all the cyto labels and label custom</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="cellpose-trained-to-learn-scale">
+<h1>Cellpose trained to learn scale<a class="headerlink" href="#cellpose-trained-to-learn-scale" title="Permalink to this heading">#</a></h1>
+<p>This example shows how to train cellpose to find objects at different scales.  It is an iteration on a previous example which trained cellpose on a trivial image with one very small and one very large sphere.  This time we try to use the same cellpose model to detect several spheres of varying sizes in the same image.</p>
+<p>When applying a cellpose model to an image, it is common to use the ‘diameter’ parameter to rescale image to detect structure at a different scale than the network was trained for.  However this may not work if single images have objects at different scales within the image.</p>
+<p>If the training data has a mixture of small and large objects, cellpose can learn these.   This can be shown with a simple simulation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">raster_geometry</span> <span class="k">as</span> <span class="nn">rg</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">tnia.simulation.phantoms</span> <span class="kn">import</span> <span class="n">add_small_to_large_2d</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">imshow_multi2d</span><span class="p">,</span> <span class="n">imshow2d</span>
+<span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-a-super-simple-fake-dataset">
+<h1>Make a super simple fake dataset<a class="headerlink" href="#make-a-super-simple-fake-dataset" title="Permalink to this heading">#</a></h1>
+<p>Here we add a few different objects of different sizes.</p>
+<p>To create a training set we a keep a copy of the single spheres (which are put in 224 by 224 arrays by raster geometry… perfect for training patches)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">im</span>
+
+
+<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">624</span><span class="p">,</span> <span class="mi">224</span>
+
+<span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">truth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">]</span>
+
+<span class="n">x_</span> <span class="o">=</span> <span class="mi">44</span>
+
+<span class="c1"># for train will be a list of the 224 by 224 circle images that will be used for training</span>
+<span class="n">for_train</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rs</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x_</span><span class="p">,</span> <span class="mi">112</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="p">[</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">r</span><span class="o">*</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="p">[</span><span class="mi">224</span><span class="p">,</span> <span class="mi">224</span><span class="p">]</span>
+    <span class="n">temp</span><span class="o">=</span><span class="n">rg</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">r</span><span class="p">)</span>
+    <span class="n">for_train</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>
+    <span class="n">add_small_to_large_2d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;replace_non_zero&#39;</span><span class="p">)</span>
+    <span class="n">add_small_to_large_2d</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">i</span><span class="o">*</span><span class="n">temp</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;replace_non_zero&#39;</span><span class="p">)</span>
+    <span class="n">x_</span> <span class="o">=</span> <span class="n">x_</span> <span class="o">+</span> <span class="mi">50</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">truth</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/6f22e752021583b29a5d7d0f06f2f781cffb6a800d07af3260854e908d8b02a0.png" src="../_images/6f22e752021583b29a5d7d0f06f2f781cffb6a800d07af3260854e908d8b02a0.png" />
+<img alt="../_images/803ff5d27e8f0cc22df20c64cc22111a5dc89493de3882c3aba39acb60e08054.png" src="../_images/803ff5d27e8f0cc22df20c64cc22111a5dc89493de3882c3aba39acb60e08054.png" />
+</div>
+</div>
+</section>
+<section id="load-cyto2">
+<h1>Load Cyto2<a class="headerlink" href="#load-cyto2" title="Permalink to this heading">#</a></h1>
+<p>We also print the mean diameter of cyto2 (if log is on this will print by default too)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">io</span>
+<span class="n">model_cyto2</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto2&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cyto2 diameter mean&#39;</span><span class="p">,</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">diam_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:31:05,573 [INFO] &gt;&gt; cyto2 &lt;&lt; model set to be used
+2024-10-20 16:31:05,576 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-20 16:31:05,577 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-20 16:31:05,721 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cyto2torch_0
+2024-10-20 16:31:05,885 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+cyto2 diameter mean 30.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="process-with-cyto2-with-different-diameters">
+<h1>Process with Cyto2 with different diameters<a class="headerlink" href="#process-with-cyto2-with-different-diameters" title="Permalink to this heading">#</a></h1>
+<p>We try a few different diameters to see if we can find all the objects. Unfortunately there is no diameter value that works for everything.</p>
+<p>It looks like d=6 finds the small objects, d=140 finds the big one, and default finds only a medium one.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow_threshold</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cellprob_threshold</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.8</span>
+
+<span class="n">labels_d6</span> <span class="o">=</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">diameter</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">flow_threshold</span><span class="o">=</span><span class="n">flow_threshold</span><span class="p">,</span> <span class="n">cellprob_threshold</span><span class="o">=</span><span class="n">cellprob_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">labels_default</span> <span class="o">=</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">flow_threshold</span><span class="o">=</span><span class="n">flow_threshold</span><span class="p">,</span> <span class="n">cellprob_threshold</span><span class="o">=</span><span class="n">cellprob_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">labels_none</span> <span class="o">=</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">diameter</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">flow_threshold</span><span class="o">=</span><span class="n">flow_threshold</span><span class="p">,</span> <span class="n">cellprob_threshold</span><span class="o">=</span><span class="n">cellprob_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">labels_d70</span> <span class="o">=</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">diameter</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span><span class="n">flow_threshold</span><span class="o">=</span><span class="n">flow_threshold</span><span class="p">,</span> <span class="n">cellprob_threshold</span><span class="o">=</span><span class="n">cellprob_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">labels_d140</span> <span class="o">=</span> <span class="n">model_cyto2</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span><span class="n">diameter</span><span class="o">=</span><span class="mi">140</span><span class="p">,</span><span class="n">flow_threshold</span><span class="o">=</span><span class="n">flow_threshold</span><span class="p">,</span> <span class="n">cellprob_threshold</span><span class="o">=</span><span class="n">cellprob_threshold</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">image</span><span class="p">,</span> <span class="n">labels_d6</span><span class="p">,</span> <span class="n">labels_default</span><span class="p">,</span> <span class="n">labels_none</span><span class="p">,</span> <span class="n">labels_d70</span><span class="p">,</span> <span class="n">labels_d140</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;truth&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 d=6&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 default&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 None&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 d=70&#39;</span><span class="p">,</span><span class="s1">&#39;cyto2 d=140&#39;</span><span class="p">],</span> <span class="mi">6</span> <span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">22</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/25fc075f65b25b5d610470702419bcd5ae666241ec2c6afc9183550a343611cb.png" src="../_images/25fc075f65b25b5d610470702419bcd5ae666241ec2c6afc9183550a343611cb.png" />
+</div>
+</div>
+</section>
+<section id="repeat-the-objects-to-make-a-fake-training-set">
+<h1>Repeat the objects to make a fake training set<a class="headerlink" href="#repeat-the-objects-to-make-a-fake-training-set" title="Permalink to this heading">#</a></h1>
+<p>Just repeat a few times to make a trivial training set.  No need to even add blur or noise, we just want to see if a custom model can learn different scales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">train</span> <span class="ow">in</span> <span class="n">for_train</span><span class="p">:</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="o">+</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)[</span><span class="o">...</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">Y</span><span class="o">+</span><span class="p">[</span><span class="n">train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">train</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+
+<span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False True
+False True
+False True
+False True
+False True
+False True
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>60
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="make-a-custom-model">
+<h1>Make a custom model<a class="headerlink" href="#make-a-custom-model" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;./&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;custom&#39;</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">logger_setup</span><span class="p">()</span>
+<span class="n">model_custom</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span><span class="c1">#, pretrained_model=os.path.join(model_path,&#39;models&#39;,model_name))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>creating new log file
+2024-10-20 16:31:14,260 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-20 16:31:14,261 [INFO] 
+cellpose version: 	3.0.9 
+platform:       	win32 
+python version: 	3.10.14 
+torch version:  	2.2.2+cu118
+2024-10-20 16:31:14,264 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-20 16:31:14,266 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-20 16:31:14,366 [INFO] &gt;&gt;&gt;&gt; no model weights loaded
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-our-custom-model">
+<h1>Train our custom model<a class="headerlink" href="#train-our-custom-model" title="Permalink to this heading">#</a></h1>
+<p>Note our fake training set was trivial, a set of images each containing single circle ranging from large circles to small.</p>
+<p>However I found that in order to learn this very simple data, we need to explicitly set ‘rescale’ to False when training.</p>
+<p>Otherwise the images are rescaled during the training process, and we don’t actually learn the different scales.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">train</span>
+
+<span class="n">test</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">train_seg</span><span class="p">(</span><span class="n">model_custom</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> 
+    <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
+    <span class="n">save_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> 
+    <span class="n">n_epochs</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
+    <span class="c1">#nimg_per_epoch=60,</span>
+    <span class="n">min_train_masks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">normalize</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">rescale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  
+    <span class="n">model_name</span><span class="o">=</span><span class="n">model_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:06,177 [INFO] computing flows for labels
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:02&lt;00:00, 21.77it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:08,943 [INFO] &gt;&gt;&gt; computing diameters
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:00&lt;00:00, 3538.80it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:08,964 [INFO] &gt;&gt;&gt; using channels [0, 0]
+2024-10-20 16:47:08,979 [INFO] &gt;&gt;&gt; n_epochs=180, n_train=60, n_test=None
+2024-10-20 16:47:08,979 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
+2024-10-20 16:47:08,982 [INFO] &gt;&gt;&gt; saving model to models\custom
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:09,875 [INFO] 0, train_loss=0.0033, test_loss=0.0000, LR=0.0000, time 0.89s
+2024-10-20 16:47:13,725 [INFO] 5, train_loss=0.0266, test_loss=0.0000, LR=0.0028, time 4.74s
+2024-10-20 16:47:17,567 [INFO] 10, train_loss=0.0362, test_loss=0.0000, LR=0.0050, time 8.59s
+2024-10-20 16:47:25,326 [INFO] 20, train_loss=0.0367, test_loss=0.0000, LR=0.0050, time 16.34s
+2024-10-20 16:47:33,275 [INFO] 30, train_loss=0.0267, test_loss=0.0000, LR=0.0050, time 24.29s
+2024-10-20 16:47:41,591 [INFO] 40, train_loss=0.0116, test_loss=0.0000, LR=0.0050, time 32.61s
+2024-10-20 16:47:50,123 [INFO] 50, train_loss=0.0313, test_loss=0.0000, LR=0.0050, time 41.14s
+2024-10-20 16:47:58,326 [INFO] 60, train_loss=0.0147, test_loss=0.0000, LR=0.0050, time 49.34s
+2024-10-20 16:48:06,804 [INFO] 70, train_loss=0.0089, test_loss=0.0000, LR=0.0050, time 57.82s
+2024-10-20 16:48:15,201 [INFO] 80, train_loss=0.0064, test_loss=0.0000, LR=0.0050, time 66.22s
+2024-10-20 16:48:23,334 [INFO] 90, train_loss=0.0061, test_loss=0.0000, LR=0.0050, time 74.35s
+2024-10-20 16:48:31,438 [INFO] 100, train_loss=0.0059, test_loss=0.0000, LR=0.0050, time 82.46s
+2024-10-20 16:48:40,012 [INFO] 110, train_loss=0.0055, test_loss=0.0000, LR=0.0050, time 91.03s
+2024-10-20 16:48:48,520 [INFO] 120, train_loss=0.0043, test_loss=0.0000, LR=0.0050, time 99.54s
+2024-10-20 16:48:57,288 [INFO] 130, train_loss=0.0061, test_loss=0.0000, LR=0.0025, time 108.31s
+2024-10-20 16:49:05,305 [INFO] 140, train_loss=0.0041, test_loss=0.0000, LR=0.0006, time 116.32s
+2024-10-20 16:49:13,360 [INFO] 150, train_loss=0.0028, test_loss=0.0000, LR=0.0002, time 124.38s
+2024-10-20 16:49:21,820 [INFO] 160, train_loss=0.0032, test_loss=0.0000, LR=0.0000, time 132.84s
+2024-10-20 16:49:29,869 [INFO] 170, train_loss=0.0029, test_loss=0.0000, LR=0.0000, time 140.89s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">labels_custom</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">model_custom</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">normalize</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">truth</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">labels_custom</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(132112.0, 49928)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;Image&#39; at 0x25068f3e230&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="show-all-the-cyto-labels-and-label-custom">
+<h1>Show all the cyto labels and label custom<a class="headerlink" href="#show-all-the-cyto-labels-and-label-custom" title="Permalink to this heading">#</a></h1>
+<p>Note, cyto can only find objects of different sizes by tuning the <code class="docutils literal notranslate"><span class="pre">diameter</span></code> param.  Custom can find very different object sizes by default.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">random_label_cmap</span>
+
+<span class="n">cmaps</span> <span class="o">=</span> <span class="p">[</span><span class="n">random_label_cmap</span><span class="p">()]</span><span class="o">*</span><span class="mi">7</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">truth</span><span class="p">,</span> <span class="n">labels_d6</span><span class="p">,</span> <span class="n">labels_default</span><span class="p">,</span> <span class="n">labels_none</span><span class="p">,</span> <span class="n">labels_d70</span><span class="p">,</span> <span class="n">labels_d140</span><span class="p">,</span> <span class="n">labels_custom</span><span class="p">],</span> 
+                     <span class="p">[</span><span class="s1">&#39;truth&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 d=6&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 default&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 None&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 70&#39;</span><span class="p">,</span> <span class="s1">&#39;cyto2 d=140&#39;</span><span class="p">,</span> <span class="s1">&#39;custom&#39;</span><span class="p">],</span><span class="mi">7</span> <span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">26</span><span class="p">,</span> <span class="n">colormaps</span><span class="o">=</span><span class="n">cmaps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/45a498f0e447e62ee149189b872e180bcf772fd491a0f73fd2fa261701bc0965.png" src="../_images/45a498f0e447e62ee149189b872e180bcf772fd491a0f73fd2fa261701bc0965.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model_custom</span><span class="o">.</span><span class="n">diam_labels</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_cyto2</span><span class="o">.</span><span class="n">diam_labels</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0
+30.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./20_scale"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Cellpose trained to learn scale</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-super-simple-fake-dataset">Make a super simple fake dataset</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-cyto2">Load Cyto2</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#process-with-cyto2-with-different-diameters">Process with Cyto2 with different diameters</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat-the-objects-to-make-a-fake-training-set">Repeat the objects to make a fake training set</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-a-custom-model">Make a custom model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-our-custom-model">Train our custom model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#show-all-the-cyto-labels-and-label-custom">Show all the cyto labels and label custom</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

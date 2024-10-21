@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Todo: Dependences &#8212; My Jupyter Book</title>
+    <title>Explore Data &#8212; My Jupyter Book</title>
   
   
   
@@ -61,10 +61,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '00_course_preparation/10_Dependencies';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '15_sparse_labelling/10_label_predict';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Setup" href="05_Setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -156,8 +155,8 @@ const thebe_selector_output = ".output, .cell_output"
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
-<ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="05_Setup.html">Setup</a></li>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
 
 </ul>
 
@@ -230,7 +229,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F00_course_preparation/10_Dependencies.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F15_sparse_labelling/10_label_predict.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -260,7 +259,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/00_course_preparation/10_Dependencies.md" target="_blank"
+      <li><a href="../_sources/15_sparse_labelling/10_label_predict.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -270,7 +269,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.ipynb</span>
 </a>
 </li>
       
@@ -329,9 +328,7 @@ document.write(`
   </button>
 `);
 </script>
-<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</label>
+
 </div></div>
       
     </div>
@@ -342,26 +339,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Todo: Dependences</h1>
+    <h1>Explore Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
-</ul>
-            </nav>
         </div>
     </div>
 </div>
@@ -371,65 +353,98 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="todo-dependences">
-<h1>Todo: Dependences<a class="headerlink" href="#todo-dependences" title="Permalink to this heading">#</a></h1>
-<p>Install latest development version of napari-easy-augment-batch-dl and tnia-python</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bnorthan</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span>
+  <section id="explore-data">
+<h1>Explore Data<a class="headerlink" href="#explore-data" title="Permalink to this heading">#</a></h1>
+<p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">io</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">napari</span>
+<span class="kn">from</span> <span class="nn">napari_easy_augment_batch_dl</span> <span class="kn">import</span> <span class="n">easy_augment_batch_dl</span>
 </pre></div>
 </div>
-<p>You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">napari</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<p>You will also need one or more of stardist, cellpose, segment-everything or Yolo</p>
-<section id="stardist">
-<h2>Stardist<a class="headerlink" href="#stardist" title="Permalink to this heading">#</a></h2>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.2</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow&lt;2.11&quot;</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span><span class="o">==</span><span class="mf">0.8.5</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+
+<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span>
+    <span class="n">batch_dl</span>
+<span class="p">)</span>
+
+<span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_11_tough_cellpose_2&#39;</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_for_protrusions_2&#39;</span>
+<span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
+<span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+    <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
+
+    <span class="n">model</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">3</span>
+
+    <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">param_widgets</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+    <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_model</span><span class="p">()</span>
+    
 </pre></div>
 </div>
-</section>
-<section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span><span class="p">[</span><span class="ow">and</span><span class="o">-</span><span class="n">cuda</span><span class="p">]</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  PytorchSemanticModel
+found class  CellPoseInstanceModel
+creating new log file
+2024-10-20 10:27:36,490 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-20 10:27:36,491 [INFO] 
+cellpose version: 	3.0.9 
+platform:       	win32 
+python version: 	3.10.14 
+torch version:  	2.2.2+cu118
+found class  MobileSAMModel
+found class  YoloSAMModel
+2024-10-20 10:27:41,260 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-20 10:27:41,262 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-20 10:27:41,358 [INFO] &gt;&gt;&gt;&gt; loading model D:\images\tnia-python-images\\imagesc\\2024_10_11_tough_cellpose_2\models\cellpose_for_protrusions_2
+2024-10-20 10:27:41,497 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+2024-10-20 10:27:41,498 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  61.457 (mean diameter of training ROIs)
 </pre></div>
 </div>
-</section>
-</section>
-<section id="pytorch-for-unet-segmentation">
-<h2>Pytorch (for unet segmentation)<a class="headerlink" href="#pytorch-for-unet-segmentation" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip3</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">tifffile</span>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_07_cellpose_multi_nuclear&#39;</span>
+
+<span class="n">test</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;Empty_02 - Copy.tif&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
+
+<span class="n">test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 </pre></div>
 </div>
-</section>
-<section id="cellpose">
-<h2>Cellpose<a class="headerlink" href="#cellpose" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 65535)
 </pre></div>
 </div>
-</section>
-<section id="sam-segment-anything">
-<h2>SAM (Segment Anything)<a class="headerlink" href="#sam-segment-anything" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">segment</span><span class="o">-</span><span class="n">everything</span>
-</pre></div>
 </div>
-</section>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -445,7 +460,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./00_course_preparation"
+            path: "./15_sparse_labelling"
         },
         predefinedOutput: true
     }
@@ -463,15 +478,6 @@ document.write(`
   
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="05_Setup.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Setup</p>
-      </div>
-    </a>
 </div></div>
   
 </div>
@@ -481,27 +487,6 @@ document.write(`
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
-</ul>
-  </nav></div>
-
-</div></div>
               
             
           </div>
