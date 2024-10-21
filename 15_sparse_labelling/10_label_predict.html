@@ -383,10 +383,11 @@ document.write(`
     <span class="n">batch_dl</span>
 <span class="p">)</span>
 
-<span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_11_tough_cellpose_2&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_sparse&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_for_protrusions_2&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#&#39;cellpose_for_protrusions_2&#39;</span>
 <span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
 <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
@@ -412,19 +413,76 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  PytorchSemanticModel
 found class  CellPoseInstanceModel
 creating new log file
-2024-10-20 10:27:36,490 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2024-10-20 10:27:36,491 [INFO] 
+2024-10-21 10:37:06,787 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-21 10:37:06,790 [INFO] 
 cellpose version: 	3.0.9 
 platform:       	win32 
 python version: 	3.10.14 
 torch version:  	2.2.2+cu118
 found class  MobileSAMModel
 found class  YoloSAMModel
-2024-10-20 10:27:41,260 [INFO] ** TORCH CUDA version installed and working. **
-2024-10-20 10:27:41,262 [INFO] &gt;&gt;&gt;&gt; using GPU
-2024-10-20 10:27:41,358 [INFO] &gt;&gt;&gt;&gt; loading model D:\images\tnia-python-images\\imagesc\\2024_10_11_tough_cellpose_2\models\cellpose_for_protrusions_2
-2024-10-20 10:27:41,497 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
-2024-10-20 10:27:41,498 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  61.457 (mean diameter of training ROIs)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\6410573_8085113.jpeg
+labelsum is  428298
+(707, 959, 3) (707, 959)
+6410573_8085113_0
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0
+image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\8220954_10897041.jpg
+labelsum is  235767
+(375, 670, 3) (375, 670)
+8220954_10897041_0
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\6410573_8085113_0.tif is a low contrast image
+deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\8220954_10897041_0.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\37752018_59910952.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\37752018_59910952.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\8220954_10897041.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\8220954_10897041.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\6410573_8085113.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\6410573_8085113.tif is a low contrast image
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0\6410573_8085113_0.json
+Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0\6410573_8085113_0.tif
+Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0\8220954_10897041_0.json
+Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0\8220954_10897041_0.tif
+Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\6410573_8085113_0.tif
+Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\8220954_10897041_0.tif
+image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\6410573_8085113.jpeg
+labelsum is  960889
+(707, 959, 3) (707, 959)
+6410573_8085113_0
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/6410573_8085113_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0
+image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\8220954_10897041.jpg
+labelsum is  235767
+(375, 670, 3) (375, 670)
+8220954_10897041_0
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\input0/8220954_10897041_0.tif
+C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\6410573_8085113_0.tif is a low contrast image
+deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\labels\ground truth0\8220954_10897041_0.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\37752018_59910952.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\37752018_59910952.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\8220954_10897041.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\8220954_10897041.tif is a low contrast image
+deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\annotations\class_0\6410573_8085113.tif is a low contrast image
+deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_sparse\predictions\class_0\6410573_8085113.tif is a low contrast image
 </pre></div>
 </div>
 </div>
