@@ -1,4 +1,4 @@
-## Introdction
+## Labeling and Augmentation
 
 Todo:  Introduction to labelling and augmentation section
 

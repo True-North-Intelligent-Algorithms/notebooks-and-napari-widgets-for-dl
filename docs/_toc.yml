@@ -10,7 +10,30 @@ options: # The options key will be applied to all chapters, but not sub-sections
 parts:
 - caption: Notebooks and Napari Widgets for Deep Learning
   chapters:
-  - file: 00_course_preparation/05_Setup
+  - file: 00_course_preparation/02_tools
     sections:
+    - file: 00_course_preparation/05_Setup
     - file: 00_course_preparation/10_Dependencies
+  - file: 10_label_augment_train/05_introduction
+    sections:
+    - file: 10_label_augment_train/10_label_predict.ipynb
+    - file: 10_label_augment_train/20_create_patches.ipynb
+    - file: 10_label_augment_train/30_stardist_training_2d.ipynb
+    - file: 10_label_augment_train/35_cellpose_training_2d.ipynb
+  - file: 15_sparse_labelling/05_introduction
+    sections:
+    - file: 15_sparse_labelling/10_label_predict.ipynb
+    - file: 15_sparse_labelling/20_create_patches.ipynb
+    - file: 15_sparse_labelling/30_stardist_training_2d.ipynb
+  - file: 20_scale/05_introduction
+    sections:
+    - file: 20_scale/10_stardist_receptive_field 2D.ipynb
+    - file: 20_scale/20_cell_pose_diameter.ipynb
+    - file: 20_scale/30_label_predict.ipynb
+  - file: 30_segment_everything/05_introduction
+    sections:
+    - file: 30_segment_everything/10_explore_data.ipynb
+    - file: 30_segment_everything/20_mobile_sam.ipynb
+    - file: 30_segment_everything/30_filter_labels.ipynb
+
   
