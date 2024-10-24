@@ -1,0 +1,1171 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Sparse Stardist training example &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '15_sparse_labelling/30_stardist_training_2d';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F15_sparse_labelling/30_stardist_training_2d.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/15_sparse_labelling/30_stardist_training_2d.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sparse Stardist training example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sparse Stardist training example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-what-devices-we-have-access-to">Check what devices we have access to….</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-inputs-and-ground-truth">Load inputs and ground truth</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-helper-to-collect-the-training-data">Use a helper to collect the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-images">Inspect images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-to-make-sure-we-have-negative-values-in-the-labels">Check to make sure we have negative values in the labels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-stardist-model">Create stardist model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-network-on-one-of-the-training-images-self-prediction">Test network on one of the training images (self prediction)</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="sparse-stardist-training-example">
+<h1>Sparse Stardist training example<a class="headerlink" href="#sparse-stardist-training-example" title="Permalink to this heading">#</a></h1>
+<p>Once we have sparse labels the training process is the same as non-sparse.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">imshow_multi2d</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 06:02:12.641668: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-10-23 06:02:12.651885: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-23 06:02:12.666401: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-23 06:02:12.666425: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-23 06:02:12.675863: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-23 06:02:13.194393: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-what-devices-we-have-access-to">
+<h1>Check what devices we have access to….<a class="headerlink" href="#check-what-devices-we-have-access-to" title="Permalink to this heading">#</a></h1>
+<p>Not as important to have a beefy GPU for 2D as it is for 3D, but let’s check</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visible_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">visible_devices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PhysicalDevice(name=&#39;/physical_device:CPU:0&#39;, device_type=&#39;CPU&#39;), PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 06:02:15.285568: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:02:15.327907: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:02:15.328063: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-inputs-and-ground-truth">
+<h1>Load inputs and ground truth<a class="headerlink" href="#load-inputs-and-ground-truth" title="Permalink to this heading">#</a></h1>
+<p>We load directories called ‘input0’ and ‘ground truth0’ which should exist under <code class="docutils literal notranslate"><span class="pre">train_path</span></code>.  The reason we append ‘0’ to the end of the name is simply because some of the code that generates image and label sets is meant to work on multiple channels (so the 0 is the channel number)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#tnia_images_path = Path(r&#39;/home/bnorthan/images&#39;)</span>
+<span class="n">tnia_images_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;D:/images&quot;</span><span class="p">)</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_sparse&#39;</span><span class="p">)</span>
+<span class="c1">#test_name=&#39;bsp1-2.jpg&#39;</span>
+<span class="n">n_rays</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span> <span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;info.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+    <span class="c1"># Access the sub_sample parameter</span>
+    <span class="n">sub_sample</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sub_sample&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sub_sample&#39;</span><span class="p">,</span><span class="n">sub_sample</span><span class="p">)</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;axes&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span><span class="n">axes</span><span class="p">)</span>
+
+<span class="n">image_patch_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;ground truth0&#39;</span><span class="p">)</span>
+<span class="n">label_patch_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;input0&#39;</span> <span class="p">)</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span> <span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_patch_path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;image_patch_path does not exist&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">label_patch_path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;label_patch_path does not exist&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sub_sample 1
+axes YXC
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-a-helper-to-collect-the-training-data">
+<h1>Use a helper to collect the training data<a class="headerlink" href="#use-a-helper-to-collect-the-training-data" title="Permalink to this heading">#</a></h1>
+<p>The helper will also optionally normalize the inputs.</p>
+<p>Normalization is a tricky issue sometimes it makes sense to normalize before creating patches, such that the data is normalized based on statistics of a larger region, closer to the normalization range that will be used for prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">collect_training_data</span>
+<span class="n">add_trivial_channel</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">collect_training_data</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">sub_sample</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">downsample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize_input</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_trivial_channel</span> <span class="o">=</span> <span class="n">add_trivial_channel</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type X &#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type Y &#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
+type X  &lt;class &#39;list&#39;&gt;
+type Y  &lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspect-images">
+<h1>Inspect images<a class="headerlink" href="#inspect-images" title="Permalink to this heading">#</a></h1>
+<p>Output training data shapes and plot images to make sure image and label set look OK</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">35</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.007905139..1.0].
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(256, 256, 3) (256, 256)
+-0.007905139 1.0
+0 65535
+</pre></div>
+</div>
+<img alt="../_images/62c3d450d3dbf4a07c1dd9c52ce2bde366b2a057cd5b2485050c258b89079ab2.png" src="../_images/62c3d450d3dbf4a07c1dd9c52ce2bde366b2a057cd5b2485050c258b89079ab2.png" />
+</div>
+</div>
+</section>
+<section id="check-to-make-sure-we-have-negative-values-in-the-labels">
+<h1>Check to make sure we have negative values in the labels<a class="headerlink" href="#check-to-make-sure-we-have-negative-values-in-the-labels" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">divide_training_data</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span> <span class="o">=</span> <span class="n">divide_training_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">val_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">Y_train</span> <span class="o">=</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">Y_val</span> <span class="o">=</span> <span class="n">Y_val</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Y_train</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">Y_train</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1 44
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-stardist-model">
+<h1>Create stardist model<a class="headerlink" href="#create-stardist-model" title="Permalink to this heading">#</a></h1>
+<p>In this cell we create the model.  Make sure to rename the model and give it a descriptive name that conveys the training data and setting used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stardist.models</span> <span class="kn">import</span> <span class="n">StarDist2D</span><span class="p">,</span> <span class="n">Config2D</span>
+<span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">augmenter</span>
+
+<span class="k">if</span> <span class="n">axes</span> <span class="o">==</span> <span class="s1">&#39;YXC&#39;</span><span class="p">:</span>
+    <span class="n">n_channel_in</span> <span class="o">=</span><span class="mi">3</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">n_channel_in</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;ladybug_sparse&quot;</span>
+<span class="n">new_model</span> <span class="o">=</span> <span class="kc">True</span> 
+
+<span class="k">if</span> <span class="n">new_model</span><span class="p">:</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config2D</span> <span class="p">(</span><span class="n">n_rays</span><span class="o">=</span><span class="n">n_rays</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span><span class="n">n_channel_in</span><span class="o">=</span><span class="n">n_channel_in</span><span class="p">,</span> <span class="n">train_patch_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">unet_n_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>base_model.py (198): output path for model already exists, files may be overwritten: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/models/ladybug_sparse
+2024-10-23 06:06:23.260110: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.260265: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.260343: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.317818: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.317956: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.318048: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 06:06:23.318119: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 6264 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 4070 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using default values: prob_thresh=0.5, nms_thresh=0.4.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-model">
+<h1>Train the model<a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#model.train(X_train, Y_train, validation_data=(X_val,Y_val),epochs=100, steps_per_epoch=200, augmenter=augmenter) </span>
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span><span class="n">Y_val</span><span class="p">),</span><span class="n">epochs</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">steps_per_epoch</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/200
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1729678015.834298  126696 service.cc:145] XLA service 0x7de3a0002790 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1729678015.834325  126696 service.cc:153]   StreamExecutor device (0): NVIDIA GeForce RTX 4070 Laptop GPU, Compute Capability 8.9
+2024-10-23 06:06:55.919704: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-10-23 06:07:01.314635: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:465] Loaded cuDNN version 8907
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  3/200</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 50ms/step - dist_dist_iou_metric: 7.4945e-06 - dist_relevant_mae: 16.6135 - dist_relevant_mse: 367.0920 - loss: 4.0206 - prob_kld: 0.3650  
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I0000 00:00:1729678031.069700  126696 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">35s</span> 85ms/step - dist_dist_iou_metric: 0.1627 - dist_relevant_mae: 11.3809 - dist_relevant_mse: 211.2150 - loss: 2.9400 - prob_kld: 0.3043 - val_dist_dist_iou_metric: 0.2841 - val_dist_relevant_mae: 9.9700 - val_dist_relevant_mse: 191.5270 - val_loss: 2.8396 - val_prob_kld: 0.3304 - learning_rate: 3.0000e-04
+Epoch 2/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.3767 - dist_relevant_mae: 7.1337 - dist_relevant_mse: 91.8835 - loss: 2.0531 - prob_kld: 0.2562 - val_dist_dist_iou_metric: 0.2686 - val_dist_relevant_mae: 10.0539 - val_dist_relevant_mse: 198.0379 - val_loss: 2.6728 - val_prob_kld: 0.1469 - learning_rate: 3.0000e-04
+Epoch 3/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.3968 - dist_relevant_mae: 6.8994 - dist_relevant_mse: 87.3241 - loss: 1.9318 - prob_kld: 0.1855 - val_dist_dist_iou_metric: 0.4432 - val_dist_relevant_mae: 7.3069 - val_dist_relevant_mse: 108.2121 - val_loss: 2.1132 - val_prob_kld: 0.1366 - learning_rate: 3.0000e-04
+Epoch 4/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.4796 - dist_relevant_mae: 5.7217 - dist_relevant_mse: 63.2763 - loss: 1.6740 - prob_kld: 0.1531 - val_dist_dist_iou_metric: 0.3419 - val_dist_relevant_mae: 8.5012 - val_dist_relevant_mse: 150.5417 - val_loss: 2.3270 - val_prob_kld: 0.1116 - learning_rate: 3.0000e-04
+Epoch 5/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.4964 - dist_relevant_mae: 5.4311 - dist_relevant_mse: 58.0395 - loss: 1.5534 - prob_kld: 0.1094 - val_dist_dist_iou_metric: 0.4269 - val_dist_relevant_mae: 7.2659 - val_dist_relevant_mse: 115.0903 - val_loss: 2.0640 - val_prob_kld: 0.0957 - learning_rate: 3.0000e-04
+Epoch 6/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.5226 - dist_relevant_mae: 5.0477 - dist_relevant_mse: 50.8718 - loss: 1.4664 - prob_kld: 0.0900 - val_dist_dist_iou_metric: 0.4551 - val_dist_relevant_mae: 6.9290 - val_dist_relevant_mse: 101.6881 - val_loss: 2.0071 - val_prob_kld: 0.1061 - learning_rate: 3.0000e-04
+Epoch 7/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.5544 - dist_relevant_mae: 4.5802 - dist_relevant_mse: 42.5514 - loss: 1.3897 - prob_kld: 0.1029 - val_dist_dist_iou_metric: 0.5209 - val_dist_relevant_mae: 6.0703 - val_dist_relevant_mse: 78.8316 - val_loss: 1.8247 - val_prob_kld: 0.0955 - learning_rate: 3.0000e-04
+Epoch 8/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.5766 - dist_relevant_mae: 4.2513 - dist_relevant_mse: 37.2060 - loss: 1.2927 - prob_kld: 0.0768 - val_dist_dist_iou_metric: 0.5066 - val_dist_relevant_mae: 6.5110 - val_dist_relevant_mse: 83.5902 - val_loss: 1.9162 - val_prob_kld: 0.0988 - learning_rate: 3.0000e-04
+Epoch 9/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.5964 - dist_relevant_mae: 3.9555 - dist_relevant_mse: 32.3517 - loss: 1.2139 - prob_kld: 0.0635 - val_dist_dist_iou_metric: 0.5198 - val_dist_relevant_mae: 6.0387 - val_dist_relevant_mse: 78.6560 - val_loss: 1.8324 - val_prob_kld: 0.1095 - learning_rate: 3.0000e-04
+Epoch 10/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.6154 - dist_relevant_mae: 3.7544 - dist_relevant_mse: 29.8220 - loss: 1.1935 - prob_kld: 0.0693 - val_dist_dist_iou_metric: 0.5159 - val_dist_relevant_mae: 6.1397 - val_dist_relevant_mse: 78.4183 - val_loss: 1.8297 - val_prob_kld: 0.0866 - learning_rate: 3.0000e-04
+Epoch 11/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.6303 - dist_relevant_mae: 3.5219 - dist_relevant_mse: 25.9147 - loss: 1.1289 - prob_kld: 0.0620 - val_dist_dist_iou_metric: 0.5337 - val_dist_relevant_mae: 5.9985 - val_dist_relevant_mse: 73.7102 - val_loss: 1.8037 - val_prob_kld: 0.0889 - learning_rate: 3.0000e-04
+Epoch 12/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.6701 - dist_relevant_mae: 3.1137 - dist_relevant_mse: 21.1914 - loss: 1.0249 - prob_kld: 0.0500 - val_dist_dist_iou_metric: 0.5804 - val_dist_relevant_mae: 5.1865 - val_dist_relevant_mse: 56.3722 - val_loss: 1.6573 - val_prob_kld: 0.1048 - learning_rate: 3.0000e-04
+Epoch 13/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.6927 - dist_relevant_mae: 2.8543 - dist_relevant_mse: 18.0229 - loss: 0.9833 - prob_kld: 0.0484 - val_dist_dist_iou_metric: 0.5919 - val_dist_relevant_mae: 4.8290 - val_dist_relevant_mse: 52.9113 - val_loss: 1.5534 - val_prob_kld: 0.0725 - learning_rate: 3.0000e-04
+Epoch 14/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7208 - dist_relevant_mae: 2.5489 - dist_relevant_mse: 14.6762 - loss: 0.9122 - prob_kld: 0.0389 - val_dist_dist_iou_metric: 0.6102 - val_dist_relevant_mae: 4.5877 - val_dist_relevant_mse: 46.3141 - val_loss: 1.5059 - val_prob_kld: 0.0733 - learning_rate: 3.0000e-04
+Epoch 15/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.7260 - dist_relevant_mae: 2.5353 - dist_relevant_mse: 14.3680 - loss: 0.9121 - prob_kld: 0.0409 - val_dist_dist_iou_metric: 0.6668 - val_dist_relevant_mae: 3.9589 - val_dist_relevant_mse: 34.1588 - val_loss: 1.3918 - val_prob_kld: 0.0849 - learning_rate: 3.0000e-04
+Epoch 16/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7496 - dist_relevant_mae: 2.2154 - dist_relevant_mse: 11.3120 - loss: 0.8353 - prob_kld: 0.0332 - val_dist_dist_iou_metric: 0.6524 - val_dist_relevant_mae: 4.1353 - val_dist_relevant_mse: 36.5734 - val_loss: 1.4161 - val_prob_kld: 0.0738 - learning_rate: 3.0000e-04
+Epoch 17/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7559 - dist_relevant_mae: 2.1607 - dist_relevant_mse: 10.6495 - loss: 0.8206 - prob_kld: 0.0326 - val_dist_dist_iou_metric: 0.6968 - val_dist_relevant_mae: 3.4312 - val_dist_relevant_mse: 27.8910 - val_loss: 1.2603 - val_prob_kld: 0.0589 - learning_rate: 3.0000e-04
+Epoch 18/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7743 - dist_relevant_mae: 1.9756 - dist_relevant_mse: 9.0055 - loss: 0.7835 - prob_kld: 0.0273 - val_dist_dist_iou_metric: 0.6676 - val_dist_relevant_mae: 3.7073 - val_dist_relevant_mse: 32.4118 - val_loss: 1.3081 - val_prob_kld: 0.0515 - learning_rate: 3.0000e-04
+Epoch 19/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7801 - dist_relevant_mae: 1.9373 - dist_relevant_mse: 8.6066 - loss: 0.7925 - prob_kld: 0.0288 - val_dist_dist_iou_metric: 0.7096 - val_dist_relevant_mae: 3.3398 - val_dist_relevant_mse: 25.5800 - val_loss: 1.2308 - val_prob_kld: 0.0477 - learning_rate: 3.0000e-04
+Epoch 20/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.7898 - dist_relevant_mae: 1.7966 - dist_relevant_mse: 7.5733 - loss: 0.7397 - prob_kld: 0.0243 - val_dist_dist_iou_metric: 0.6848 - val_dist_relevant_mae: 3.5183 - val_dist_relevant_mse: 27.7450 - val_loss: 1.2605 - val_prob_kld: 0.0417 - learning_rate: 3.0000e-04
+Epoch 21/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8007 - dist_relevant_mae: 1.7248 - dist_relevant_mse: 6.8640 - loss: 0.7416 - prob_kld: 0.0229 - val_dist_dist_iou_metric: 0.7164 - val_dist_relevant_mae: 3.1955 - val_dist_relevant_mse: 24.6181 - val_loss: 1.1974 - val_prob_kld: 0.0431 - learning_rate: 3.0000e-04
+Epoch 22/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.7981 - dist_relevant_mae: 1.7651 - dist_relevant_mse: 7.1687 - loss: 0.7431 - prob_kld: 0.0231 - val_dist_dist_iou_metric: 0.7391 - val_dist_relevant_mae: 2.8626 - val_dist_relevant_mse: 19.9051 - val_loss: 1.1292 - val_prob_kld: 0.0416 - learning_rate: 3.0000e-04
+Epoch 23/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8095 - dist_relevant_mae: 1.6556 - dist_relevant_mse: 6.4781 - loss: 0.7112 - prob_kld: 0.0211 - val_dist_dist_iou_metric: 0.7070 - val_dist_relevant_mae: 3.3597 - val_dist_relevant_mse: 24.4202 - val_loss: 1.2262 - val_prob_kld: 0.0392 - learning_rate: 3.0000e-04
+Epoch 24/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8073 - dist_relevant_mae: 1.6549 - dist_relevant_mse: 6.3752 - loss: 0.7193 - prob_kld: 0.0260 - val_dist_dist_iou_metric: 0.7331 - val_dist_relevant_mae: 2.9912 - val_dist_relevant_mse: 21.5523 - val_loss: 1.1533 - val_prob_kld: 0.0400 - learning_rate: 3.0000e-04
+Epoch 25/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8192 - dist_relevant_mae: 1.5673 - dist_relevant_mse: 5.7448 - loss: 0.7052 - prob_kld: 0.0198 - val_dist_dist_iou_metric: 0.7158 - val_dist_relevant_mae: 3.0957 - val_dist_relevant_mse: 21.2644 - val_loss: 1.1705 - val_prob_kld: 0.0363 - learning_rate: 3.0000e-04
+Epoch 26/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8181 - dist_relevant_mae: 1.5314 - dist_relevant_mse: 5.3555 - loss: 0.6812 - prob_kld: 0.0183 - val_dist_dist_iou_metric: 0.7675 - val_dist_relevant_mae: 2.6695 - val_dist_relevant_mse: 16.6302 - val_loss: 1.0867 - val_prob_kld: 0.0376 - learning_rate: 3.0000e-04
+Epoch 27/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8267 - dist_relevant_mae: 1.4721 - dist_relevant_mse: 5.0032 - loss: 0.6698 - prob_kld: 0.0184 - val_dist_dist_iou_metric: 0.7744 - val_dist_relevant_mae: 2.5149 - val_dist_relevant_mse: 15.3713 - val_loss: 1.0627 - val_prob_kld: 0.0446 - learning_rate: 3.0000e-04
+Epoch 28/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8323 - dist_relevant_mae: 1.4565 - dist_relevant_mse: 5.0432 - loss: 0.6730 - prob_kld: 0.0177 - val_dist_dist_iou_metric: 0.7882 - val_dist_relevant_mae: 2.3710 - val_dist_relevant_mse: 13.5670 - val_loss: 1.0208 - val_prob_kld: 0.0315 - learning_rate: 3.0000e-04
+Epoch 29/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8364 - dist_relevant_mae: 1.4022 - dist_relevant_mse: 4.5580 - loss: 0.6603 - prob_kld: 0.0160 - val_dist_dist_iou_metric: 0.7743 - val_dist_relevant_mae: 2.5053 - val_dist_relevant_mse: 14.8030 - val_loss: 1.0629 - val_prob_kld: 0.0468 - learning_rate: 3.0000e-04
+Epoch 30/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8319 - dist_relevant_mae: 1.4162 - dist_relevant_mse: 4.6274 - loss: 0.6602 - prob_kld: 0.0172 - val_dist_dist_iou_metric: 0.7847 - val_dist_relevant_mae: 2.4274 - val_dist_relevant_mse: 14.2825 - val_loss: 1.0331 - val_prob_kld: 0.0326 - learning_rate: 3.0000e-04
+Epoch 31/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8411 - dist_relevant_mae: 1.3399 - dist_relevant_mse: 4.1295 - loss: 0.6408 - prob_kld: 0.0154 - val_dist_dist_iou_metric: 0.7835 - val_dist_relevant_mae: 2.3912 - val_dist_relevant_mse: 13.5362 - val_loss: 1.0260 - val_prob_kld: 0.0326 - learning_rate: 3.0000e-04
+Epoch 32/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8368 - dist_relevant_mae: 1.3945 - dist_relevant_mse: 4.4654 - loss: 0.6580 - prob_kld: 0.0160 - val_dist_dist_iou_metric: 0.7885 - val_dist_relevant_mae: 2.3641 - val_dist_relevant_mse: 13.0076 - val_loss: 1.0199 - val_prob_kld: 0.0320 - learning_rate: 3.0000e-04
+Epoch 33/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8495 - dist_relevant_mae: 1.2786 - dist_relevant_mse: 3.8238 - loss: 0.6437 - prob_kld: 0.0148 - val_dist_dist_iou_metric: 0.7986 - val_dist_relevant_mae: 2.2493 - val_dist_relevant_mse: 12.6429 - val_loss: 0.9920 - val_prob_kld: 0.0271 - learning_rate: 3.0000e-04
+Epoch 34/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8458 - dist_relevant_mae: 1.3008 - dist_relevant_mse: 3.8937 - loss: 0.6299 - prob_kld: 0.0141 - val_dist_dist_iou_metric: 0.7972 - val_dist_relevant_mae: 2.3568 - val_dist_relevant_mse: 12.2796 - val_loss: 1.0354 - val_prob_kld: 0.0489 - learning_rate: 3.0000e-04
+Epoch 35/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8394 - dist_relevant_mae: 1.3666 - dist_relevant_mse: 4.1944 - loss: 0.6489 - prob_kld: 0.0157 - val_dist_dist_iou_metric: 0.7661 - val_dist_relevant_mae: 2.5786 - val_dist_relevant_mse: 15.6307 - val_loss: 1.0624 - val_prob_kld: 0.0316 - learning_rate: 3.0000e-04
+Epoch 36/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8477 - dist_relevant_mae: 1.2928 - dist_relevant_mse: 3.8171 - loss: 0.6218 - prob_kld: 0.0136 - val_dist_dist_iou_metric: 0.7675 - val_dist_relevant_mae: 2.4795 - val_dist_relevant_mse: 15.8205 - val_loss: 1.0362 - val_prob_kld: 0.0252 - learning_rate: 3.0000e-04
+Epoch 37/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8545 - dist_relevant_mae: 1.2288 - dist_relevant_mse: 3.5292 - loss: 0.6226 - prob_kld: 0.0135 - val_dist_dist_iou_metric: 0.7708 - val_dist_relevant_mae: 2.5063 - val_dist_relevant_mse: 14.2598 - val_loss: 1.0464 - val_prob_kld: 0.0300 - learning_rate: 3.0000e-04
+Epoch 38/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8560 - dist_relevant_mae: 1.2240 - dist_relevant_mse: 3.5227 - loss: 0.6250 - prob_kld: 0.0136 - val_dist_dist_iou_metric: 0.7957 - val_dist_relevant_mae: 2.2150 - val_dist_relevant_mse: 12.2545 - val_loss: 0.9840 - val_prob_kld: 0.0259 - learning_rate: 3.0000e-04
+Epoch 39/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8529 - dist_relevant_mae: 1.2353 - dist_relevant_mse: 3.4448 - loss: 0.6201 - prob_kld: 0.0131 - val_dist_dist_iou_metric: 0.7810 - val_dist_relevant_mae: 2.3675 - val_dist_relevant_mse: 13.2876 - val_loss: 1.0194 - val_prob_kld: 0.0308 - learning_rate: 3.0000e-04
+Epoch 40/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8589 - dist_relevant_mae: 1.1793 - dist_relevant_mse: 3.2282 - loss: 0.5973 - prob_kld: 0.0117 - val_dist_dist_iou_metric: 0.8206 - val_dist_relevant_mae: 2.0679 - val_dist_relevant_mse: 10.1906 - val_loss: 0.9656 - val_prob_kld: 0.0369 - learning_rate: 3.0000e-04
+Epoch 41/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8558 - dist_relevant_mae: 1.2185 - dist_relevant_mse: 3.4173 - loss: 0.6251 - prob_kld: 0.0143 - val_dist_dist_iou_metric: 0.8050 - val_dist_relevant_mae: 2.1220 - val_dist_relevant_mse: 11.2767 - val_loss: 0.9669 - val_prob_kld: 0.0274 - learning_rate: 3.0000e-04
+Epoch 42/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8543 - dist_relevant_mae: 1.2264 - dist_relevant_mse: 3.5027 - loss: 0.6326 - prob_kld: 0.0138 - val_dist_dist_iou_metric: 0.7958 - val_dist_relevant_mae: 2.2186 - val_dist_relevant_mse: 11.9002 - val_loss: 0.9869 - val_prob_kld: 0.0281 - learning_rate: 3.0000e-04
+Epoch 43/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8388 - dist_relevant_mae: 1.3802 - dist_relevant_mse: 4.3860 - loss: 0.6590 - prob_kld: 0.0262 - val_dist_dist_iou_metric: 0.7985 - val_dist_relevant_mae: 2.1434 - val_dist_relevant_mse: 11.7529 - val_loss: 0.9767 - val_prob_kld: 0.0329 - learning_rate: 3.0000e-04
+Epoch 44/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8618 - dist_relevant_mae: 1.1595 - dist_relevant_mse: 3.1363 - loss: 0.5917 - prob_kld: 0.0118 - val_dist_dist_iou_metric: 0.7808 - val_dist_relevant_mae: 2.3908 - val_dist_relevant_mse: 12.4723 - val_loss: 1.0204 - val_prob_kld: 0.0271 - learning_rate: 3.0000e-04
+Epoch 45/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8633 - dist_relevant_mae: 1.1251 - dist_relevant_mse: 2.9773 - loss: 0.6039 - prob_kld: 0.0121 - val_dist_dist_iou_metric: 0.7835 - val_dist_relevant_mae: 2.3681 - val_dist_relevant_mse: 13.0038 - val_loss: 1.0147 - val_prob_kld: 0.0260 - learning_rate: 3.0000e-04
+Epoch 46/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8616 - dist_relevant_mae: 1.1706 - dist_relevant_mse: 3.1789 - loss: 0.6027 - prob_kld: 0.0112 - val_dist_dist_iou_metric: 0.8068 - val_dist_relevant_mae: 2.1191 - val_dist_relevant_mse: 11.0040 - val_loss: 0.9635 - val_prob_kld: 0.0247 - learning_rate: 3.0000e-04
+Epoch 47/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8666 - dist_relevant_mae: 1.0893 - dist_relevant_mse: 2.7429 - loss: 0.5905 - prob_kld: 0.0109 - val_dist_dist_iou_metric: 0.8002 - val_dist_relevant_mae: 2.1870 - val_dist_relevant_mse: 11.6650 - val_loss: 0.9779 - val_prob_kld: 0.0254 - learning_rate: 3.0000e-04
+Epoch 48/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8663 - dist_relevant_mae: 1.1136 - dist_relevant_mse: 2.9507 - loss: 0.5978 - prob_kld: 0.0113 - val_dist_dist_iou_metric: 0.7925 - val_dist_relevant_mae: 2.2243 - val_dist_relevant_mse: 11.8270 - val_loss: 0.9892 - val_prob_kld: 0.0292 - learning_rate: 3.0000e-04
+Epoch 49/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8699 - dist_relevant_mae: 1.0887 - dist_relevant_mse: 2.7067 - loss: 0.5933 - prob_kld: 0.0120 - val_dist_dist_iou_metric: 0.8143 - val_dist_relevant_mae: 2.2045 - val_dist_relevant_mse: 10.7234 - val_loss: 0.9857 - val_prob_kld: 0.0297 - learning_rate: 3.0000e-04
+Epoch 50/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8529 - dist_relevant_mae: 1.2311 - dist_relevant_mse: 3.3261 - loss: 0.6218 - prob_kld: 0.0113 - val_dist_dist_iou_metric: 0.7772 - val_dist_relevant_mae: 2.4420 - val_dist_relevant_mse: 12.7571 - val_loss: 1.0289 - val_prob_kld: 0.0255 - learning_rate: 3.0000e-04
+Epoch 51/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8690 - dist_relevant_mae: 1.0914 - dist_relevant_mse: 2.7604 - loss: 0.5835 - prob_kld: 0.0101 - val_dist_dist_iou_metric: 0.7885 - val_dist_relevant_mae: 2.2663 - val_dist_relevant_mse: 11.7542 - val_loss: 0.9929 - val_prob_kld: 0.0246 - learning_rate: 3.0000e-04
+Epoch 52/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8759 - dist_relevant_mae: 1.0343 - dist_relevant_mse: 2.5800 - loss: 0.5739 - prob_kld: 0.0100 - val_dist_dist_iou_metric: 0.8180 - val_dist_relevant_mae: 2.1339 - val_dist_relevant_mse: 9.8030 - val_loss: 0.9774 - val_prob_kld: 0.0355 - learning_rate: 3.0000e-04
+Epoch 53/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8676 - dist_relevant_mae: 1.1073 - dist_relevant_mse: 2.8418 - loss: 0.5953 - prob_kld: 0.0109 - val_dist_dist_iou_metric: 0.7881 - val_dist_relevant_mae: 2.2668 - val_dist_relevant_mse: 12.8638 - val_loss: 0.9956 - val_prob_kld: 0.0271 - learning_rate: 3.0000e-04
+Epoch 54/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8732 - dist_relevant_mae: 1.0599 - dist_relevant_mse: 2.6168 - loss: 0.5956 - prob_kld: 0.0100 - val_dist_dist_iou_metric: 0.8326 - val_dist_relevant_mae: 1.8183 - val_dist_relevant_mse: 8.5732 - val_loss: 0.9008 - val_prob_kld: 0.0221 - learning_rate: 3.0000e-04
+Epoch 55/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8786 - dist_relevant_mae: 1.0114 - dist_relevant_mse: 2.4010 - loss: 0.5791 - prob_kld: 0.0092 - val_dist_dist_iou_metric: 0.8114 - val_dist_relevant_mae: 2.0156 - val_dist_relevant_mse: 9.9104 - val_loss: 0.9453 - val_prob_kld: 0.0271 - learning_rate: 3.0000e-04
+Epoch 56/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8748 - dist_relevant_mae: 1.0225 - dist_relevant_mse: 2.4288 - loss: 0.5714 - prob_kld: 0.0098 - val_dist_dist_iou_metric: 0.8224 - val_dist_relevant_mae: 1.9680 - val_dist_relevant_mse: 9.1461 - val_loss: 0.9304 - val_prob_kld: 0.0218 - learning_rate: 3.0000e-04
+Epoch 57/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8746 - dist_relevant_mae: 1.0545 - dist_relevant_mse: 2.5706 - loss: 0.5883 - prob_kld: 0.0095 - val_dist_dist_iou_metric: 0.8035 - val_dist_relevant_mae: 2.1848 - val_dist_relevant_mse: 10.6596 - val_loss: 0.9759 - val_prob_kld: 0.0239 - learning_rate: 3.0000e-04
+Epoch 58/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8733 - dist_relevant_mae: 1.0657 - dist_relevant_mse: 2.6244 - loss: 0.5921 - prob_kld: 0.0097 - val_dist_dist_iou_metric: 0.8045 - val_dist_relevant_mae: 2.1040 - val_dist_relevant_mse: 11.0023 - val_loss: 0.9559 - val_prob_kld: 0.0200 - learning_rate: 3.0000e-04
+Epoch 59/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8676 - dist_relevant_mae: 1.1081 - dist_relevant_mse: 2.7716 - loss: 0.5904 - prob_kld: 0.0095 - val_dist_dist_iou_metric: 0.8061 - val_dist_relevant_mae: 2.0995 - val_dist_relevant_mse: 11.2092 - val_loss: 0.9547 - val_prob_kld: 0.0197 - learning_rate: 3.0000e-04
+Epoch 60/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8822 - dist_relevant_mae: 0.9854 - dist_relevant_mse: 2.3185 - loss: 0.5670 - prob_kld: 0.0091 - val_dist_dist_iou_metric: 0.8149 - val_dist_relevant_mae: 2.0104 - val_dist_relevant_mse: 10.1264 - val_loss: 0.9403 - val_prob_kld: 0.0231 - learning_rate: 3.0000e-04
+Epoch 61/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8828 - dist_relevant_mae: 0.9730 - dist_relevant_mse: 2.2271 - loss: 0.5711 - prob_kld: 0.0088 - val_dist_dist_iou_metric: 0.8069 - val_dist_relevant_mae: 2.0837 - val_dist_relevant_mse: 10.4478 - val_loss: 0.9594 - val_prob_kld: 0.0276 - learning_rate: 3.0000e-04
+Epoch 62/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8829 - dist_relevant_mae: 0.9723 - dist_relevant_mse: 2.2452 - loss: 0.5630 - prob_kld: 0.0089 - val_dist_dist_iou_metric: 0.8069 - val_dist_relevant_mae: 2.0883 - val_dist_relevant_mse: 10.4899 - val_loss: 0.9558 - val_prob_kld: 0.0231 - learning_rate: 3.0000e-04
+Epoch 63/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8845 - dist_relevant_mae: 0.9495 - dist_relevant_mse: 2.1449 - loss: 0.5746 - prob_kld: 0.0089 - val_dist_dist_iou_metric: 0.8107 - val_dist_relevant_mae: 2.0741 - val_dist_relevant_mse: 10.2863 - val_loss: 0.9540 - val_prob_kld: 0.0241 - learning_rate: 3.0000e-04
+Epoch 64/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8797 - dist_relevant_mae: 1.0048 - dist_relevant_mse: 2.3087 - loss: 0.5739 - prob_kld: 0.0087 - val_dist_dist_iou_metric: 0.8203 - val_dist_relevant_mae: 1.9670 - val_dist_relevant_mse: 9.4934 - val_loss: 0.9316 - val_prob_kld: 0.0232 - learning_rate: 3.0000e-04
+Epoch 65/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8756 - dist_relevant_mae: 1.0579 - dist_relevant_mse: 2.5431 - loss: 0.5923 - prob_kld: 0.0088 - val_dist_dist_iou_metric: 0.8184 - val_dist_relevant_mae: 1.9719 - val_dist_relevant_mse: 9.6841 - val_loss: 0.9296 - val_prob_kld: 0.0201 - learning_rate: 3.0000e-04
+Epoch 66/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8796 - dist_relevant_mae: 1.0009 - dist_relevant_mse: 2.2916 - loss: 0.5705 - prob_kld: 0.0084 - val_dist_dist_iou_metric: 0.8049 - val_dist_relevant_mae: 2.0939 - val_dist_relevant_mse: 9.9834 - val_loss: 0.9558 - val_prob_kld: 0.0220 - learning_rate: 3.0000e-04
+Epoch 67/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8810 - dist_relevant_mae: 0.9665 - dist_relevant_mse: 2.2428 - loss: 0.5478 - prob_kld: 0.0081 - val_dist_dist_iou_metric: 0.7967 - val_dist_relevant_mae: 2.1839 - val_dist_relevant_mse: 10.6883 - val_loss: 0.9734 - val_prob_kld: 0.0216 - learning_rate: 3.0000e-04
+Epoch 68/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8803 - dist_relevant_mae: 1.0044 - dist_relevant_mse: 2.3272 - loss: 0.5741 - prob_kld: 0.0081 - val_dist_dist_iou_metric: 0.8186 - val_dist_relevant_mae: 1.9112 - val_dist_relevant_mse: 9.1689 - val_loss: 0.9209 - val_prob_kld: 0.0236 - learning_rate: 3.0000e-04
+Epoch 69/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8854 - dist_relevant_mae: 0.9516 - dist_relevant_mse: 2.1716 - loss: 0.5593 - prob_kld: 0.0082 - val_dist_dist_iou_metric: 0.8188 - val_dist_relevant_mae: 1.9139 - val_dist_relevant_mse: 9.3104 - val_loss: 0.9259 - val_prob_kld: 0.0280 - learning_rate: 3.0000e-04
+Epoch 70/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8854 - dist_relevant_mae: 0.9423 - dist_relevant_mse: 2.1136 - loss: 0.5633 - prob_kld: 0.0083 - val_dist_dist_iou_metric: 0.8239 - val_dist_relevant_mae: 1.9348 - val_dist_relevant_mse: 8.3788 - val_loss: 0.9210 - val_prob_kld: 0.0190 - learning_rate: 3.0000e-04
+Epoch 71/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8866 - dist_relevant_mae: 0.9448 - dist_relevant_mse: 2.1244 - loss: 0.5574 - prob_kld: 0.0076 - val_dist_dist_iou_metric: 0.8144 - val_dist_relevant_mae: 1.9978 - val_dist_relevant_mse: 9.4325 - val_loss: 0.9366 - val_prob_kld: 0.0220 - learning_rate: 3.0000e-04
+Epoch 72/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8890 - dist_relevant_mae: 0.9032 - dist_relevant_mse: 1.9515 - loss: 0.5566 - prob_kld: 0.0076 - val_dist_dist_iou_metric: 0.8327 - val_dist_relevant_mae: 1.8737 - val_dist_relevant_mse: 8.3486 - val_loss: 0.9087 - val_prob_kld: 0.0189 - learning_rate: 3.0000e-04
+Epoch 73/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8912 - dist_relevant_mae: 0.9089 - dist_relevant_mse: 1.9219 - loss: 0.5566 - prob_kld: 0.0073 - val_dist_dist_iou_metric: 0.7986 - val_dist_relevant_mae: 2.2417 - val_dist_relevant_mse: 11.3714 - val_loss: 0.9892 - val_prob_kld: 0.0258 - learning_rate: 3.0000e-04
+Epoch 74/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8823 - dist_relevant_mae: 0.9645 - dist_relevant_mse: 2.2244 - loss: 0.5672 - prob_kld: 0.0086 - val_dist_dist_iou_metric: 0.8407 - val_dist_relevant_mae: 1.7768 - val_dist_relevant_mse: 7.2989 - val_loss: 0.8898 - val_prob_kld: 0.0194 - learning_rate: 3.0000e-04
+Epoch 75/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8856 - dist_relevant_mae: 0.9493 - dist_relevant_mse: 2.0915 - loss: 0.5580 - prob_kld: 0.0082 - val_dist_dist_iou_metric: 0.8161 - val_dist_relevant_mae: 1.9709 - val_dist_relevant_mse: 9.1692 - val_loss: 0.9291 - val_prob_kld: 0.0199 - learning_rate: 3.0000e-04
+Epoch 76/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8855 - dist_relevant_mae: 0.9305 - dist_relevant_mse: 2.0474 - loss: 0.5632 - prob_kld: 0.0083 - val_dist_dist_iou_metric: 0.8261 - val_dist_relevant_mae: 1.8666 - val_dist_relevant_mse: 8.3851 - val_loss: 0.9052 - val_prob_kld: 0.0168 - learning_rate: 3.0000e-04
+Epoch 77/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8894 - dist_relevant_mae: 0.9106 - dist_relevant_mse: 1.9723 - loss: 0.5540 - prob_kld: 0.0077 - val_dist_dist_iou_metric: 0.8148 - val_dist_relevant_mae: 2.0064 - val_dist_relevant_mse: 9.7343 - val_loss: 0.9370 - val_prob_kld: 0.0207 - learning_rate: 3.0000e-04
+Epoch 78/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8898 - dist_relevant_mae: 0.8997 - dist_relevant_mse: 1.9436 - loss: 0.5618 - prob_kld: 0.0078 - val_dist_dist_iou_metric: 0.8210 - val_dist_relevant_mae: 1.8905 - val_dist_relevant_mse: 9.2179 - val_loss: 0.9097 - val_prob_kld: 0.0165 - learning_rate: 3.0000e-04
+Epoch 79/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8910 - dist_relevant_mae: 0.8989 - dist_relevant_mse: 1.9377 - loss: 0.5635 - prob_kld: 0.0081 - val_dist_dist_iou_metric: 0.8023 - val_dist_relevant_mae: 2.0848 - val_dist_relevant_mse: 10.2506 - val_loss: 0.9504 - val_prob_kld: 0.0184 - learning_rate: 3.0000e-04
+Epoch 80/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8864 - dist_relevant_mae: 0.9494 - dist_relevant_mse: 2.0874 - loss: 0.5700 - prob_kld: 0.0106 - val_dist_dist_iou_metric: 0.8269 - val_dist_relevant_mae: 1.9125 - val_dist_relevant_mse: 8.1546 - val_loss: 0.9151 - val_prob_kld: 0.0176 - learning_rate: 3.0000e-04
+Epoch 81/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8909 - dist_relevant_mae: 0.9019 - dist_relevant_mse: 1.9108 - loss: 0.5591 - prob_kld: 0.0070 - val_dist_dist_iou_metric: 0.7990 - val_dist_relevant_mae: 2.1812 - val_dist_relevant_mse: 10.1248 - val_loss: 0.9696 - val_prob_kld: 0.0183 - learning_rate: 3.0000e-04
+Epoch 82/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8820 - dist_relevant_mae: 0.9902 - dist_relevant_mse: 2.2183 - loss: 0.5644 - prob_kld: 0.0073 - val_dist_dist_iou_metric: 0.8188 - val_dist_relevant_mae: 1.9206 - val_dist_relevant_mse: 8.7484 - val_loss: 0.9177 - val_prob_kld: 0.0186 - learning_rate: 3.0000e-04
+Epoch 83/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8931 - dist_relevant_mae: 0.8653 - dist_relevant_mse: 1.8359 - loss: 0.5407 - prob_kld: 0.0070 - val_dist_dist_iou_metric: 0.8261 - val_dist_relevant_mae: 1.8441 - val_dist_relevant_mse: 8.5659 - val_loss: 0.9049 - val_prob_kld: 0.0210 - learning_rate: 3.0000e-04
+Epoch 84/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8937 - dist_relevant_mae: 0.8800 - dist_relevant_mse: 1.8426 - loss: 0.5398 - prob_kld: 0.0065 - val_dist_dist_iou_metric: 0.8256 - val_dist_relevant_mae: 1.8531 - val_dist_relevant_mse: 8.3943 - val_loss: 0.9045 - val_prob_kld: 0.0188 - learning_rate: 3.0000e-04
+Epoch 85/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8924 - dist_relevant_mae: 0.8714 - dist_relevant_mse: 1.8484 - loss: 0.5582 - prob_kld: 0.0073 - val_dist_dist_iou_metric: 0.8312 - val_dist_relevant_mae: 1.8642 - val_dist_relevant_mse: 8.1085 - val_loss: 0.9109 - val_prob_kld: 0.0230 - learning_rate: 3.0000e-04
+Epoch 86/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8905 - dist_relevant_mae: 0.9153 - dist_relevant_mse: 1.9277 - loss: 0.5526 - prob_kld: 0.0069 - val_dist_dist_iou_metric: 0.8293 - val_dist_relevant_mae: 1.8420 - val_dist_relevant_mse: 8.1654 - val_loss: 0.9047 - val_prob_kld: 0.0213 - learning_rate: 3.0000e-04
+Epoch 87/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8855 - dist_relevant_mae: 0.9450 - dist_relevant_mse: 2.0298 - loss: 0.5551 - prob_kld: 0.0071 - val_dist_dist_iou_metric: 0.8212 - val_dist_relevant_mae: 1.9040 - val_dist_relevant_mse: 8.6055 - val_loss: 0.9182 - val_prob_kld: 0.0224 - learning_rate: 3.0000e-04
+Epoch 88/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8885 - dist_relevant_mae: 0.9442 - dist_relevant_mse: 2.0478 - loss: 0.5552 - prob_kld: 0.0070 - val_dist_dist_iou_metric: 0.8300 - val_dist_relevant_mae: 1.8551 - val_dist_relevant_mse: 7.8768 - val_loss: 0.9052 - val_prob_kld: 0.0191 - learning_rate: 3.0000e-04
+Epoch 89/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8960 - dist_relevant_mae: 0.8505 - dist_relevant_mse: 1.7216 - loss: 0.5520 - prob_kld: 0.0070 - val_dist_dist_iou_metric: 0.8327 - val_dist_relevant_mae: 1.7891 - val_dist_relevant_mse: 7.5541 - val_loss: 0.8897 - val_prob_kld: 0.0169 - learning_rate: 3.0000e-04
+Epoch 90/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8937 - dist_relevant_mae: 0.8543 - dist_relevant_mse: 1.7233 - loss: 0.5458 - prob_kld: 0.0073 - val_dist_dist_iou_metric: 0.8185 - val_dist_relevant_mae: 1.9379 - val_dist_relevant_mse: 8.7299 - val_loss: 0.9228 - val_prob_kld: 0.0201 - learning_rate: 3.0000e-04
+Epoch 91/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8932 - dist_relevant_mae: 0.8815 - dist_relevant_mse: 1.8382 - loss: 0.5455 - prob_kld: 0.0073 - val_dist_dist_iou_metric: 0.8246 - val_dist_relevant_mae: 1.8857 - val_dist_relevant_mse: 7.9738 - val_loss: 0.9097 - val_prob_kld: 0.0175 - learning_rate: 3.0000e-04
+Epoch 92/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8983 - dist_relevant_mae: 0.8384 - dist_relevant_mse: 1.6902 - loss: 0.5312 - prob_kld: 0.0064 - val_dist_dist_iou_metric: 0.8260 - val_dist_relevant_mae: 1.8503 - val_dist_relevant_mse: 8.6319 - val_loss: 0.9031 - val_prob_kld: 0.0180 - learning_rate: 3.0000e-04
+Epoch 93/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8964 - dist_relevant_mae: 0.8549 - dist_relevant_mse: 1.7197 - loss: 0.5545 - prob_kld: 0.0065 - val_dist_dist_iou_metric: 0.8246 - val_dist_relevant_mae: 1.8604 - val_dist_relevant_mse: 8.4963 - val_loss: 0.9028 - val_prob_kld: 0.0156 - learning_rate: 3.0000e-04
+Epoch 94/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8965 - dist_relevant_mae: 0.8514 - dist_relevant_mse: 1.7799 - loss: 0.5558 - prob_kld: 0.0068 - val_dist_dist_iou_metric: 0.8298 - val_dist_relevant_mae: 1.8145 - val_dist_relevant_mse: 7.6417 - val_loss: 0.8973 - val_prob_kld: 0.0194 - learning_rate: 3.0000e-04
+Epoch 95/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8971 - dist_relevant_mae: 0.8551 - dist_relevant_mse: 1.6757 - loss: 0.5461 - prob_kld: 0.0065 - val_dist_dist_iou_metric: 0.8327 - val_dist_relevant_mae: 1.7827 - val_dist_relevant_mse: 7.6561 - val_loss: 0.8900 - val_prob_kld: 0.0184 - learning_rate: 3.0000e-04
+Epoch 96/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8995 - dist_relevant_mae: 0.8197 - dist_relevant_mse: 1.6229 - loss: 0.5272 - prob_kld: 0.0061 - val_dist_dist_iou_metric: 0.8417 - val_dist_relevant_mae: 1.6945 - val_dist_relevant_mse: 6.9273 - val_loss: 0.8698 - val_prob_kld: 0.0158 - learning_rate: 3.0000e-04
+Epoch 97/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8974 - dist_relevant_mae: 0.8392 - dist_relevant_mse: 1.6990 - loss: 0.5325 - prob_kld: 0.0064 - val_dist_dist_iou_metric: 0.8071 - val_dist_relevant_mae: 2.0612 - val_dist_relevant_mse: 10.1184 - val_loss: 0.9476 - val_prob_kld: 0.0203 - learning_rate: 3.0000e-04
+Epoch 98/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8933 - dist_relevant_mae: 0.8794 - dist_relevant_mse: 1.7812 - loss: 0.5468 - prob_kld: 0.0063 - val_dist_dist_iou_metric: 0.8248 - val_dist_relevant_mae: 1.8594 - val_dist_relevant_mse: 8.3057 - val_loss: 0.9080 - val_prob_kld: 0.0210 - learning_rate: 3.0000e-04
+Epoch 99/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8972 - dist_relevant_mae: 0.8299 - dist_relevant_mse: 1.6516 - loss: 0.5324 - prob_kld: 0.0065 - val_dist_dist_iou_metric: 0.8127 - val_dist_relevant_mae: 2.0104 - val_dist_relevant_mse: 9.1333 - val_loss: 0.9341 - val_prob_kld: 0.0170 - learning_rate: 3.0000e-04
+Epoch 100/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9016 - dist_relevant_mae: 0.8146 - dist_relevant_mse: 1.6210 - loss: 0.5338 - prob_kld: 0.0059 - val_dist_dist_iou_metric: 0.8075 - val_dist_relevant_mae: 2.0076 - val_dist_relevant_mse: 9.7211 - val_loss: 0.9439 - val_prob_kld: 0.0273 - learning_rate: 3.0000e-04
+Epoch 101/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8932 - dist_relevant_mae: 0.8895 - dist_relevant_mse: 1.8596 - loss: 0.5390 - prob_kld: 0.0071 - val_dist_dist_iou_metric: 0.7920 - val_dist_relevant_mae: 2.1817 - val_dist_relevant_mse: 11.1619 - val_loss: 0.9678 - val_prob_kld: 0.0165 - learning_rate: 3.0000e-04
+Epoch 102/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8934 - dist_relevant_mae: 0.8673 - dist_relevant_mse: 1.7496 - loss: 0.5441 - prob_kld: 0.0064 - val_dist_dist_iou_metric: 0.8018 - val_dist_relevant_mae: 2.1007 - val_dist_relevant_mse: 10.5285 - val_loss: 0.9529 - val_prob_kld: 0.0177 - learning_rate: 3.0000e-04
+Epoch 103/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8980 - dist_relevant_mae: 0.8665 - dist_relevant_mse: 1.7362 - loss: 0.5502 - prob_kld: 0.0062 - val_dist_dist_iou_metric: 0.8313 - val_dist_relevant_mae: 1.7793 - val_dist_relevant_mse: 7.8334 - val_loss: 0.8856 - val_prob_kld: 0.0147 - learning_rate: 3.0000e-04
+Epoch 104/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8956 - dist_relevant_mae: 0.8587 - dist_relevant_mse: 1.7302 - loss: 0.5305 - prob_kld: 0.0072 - val_dist_dist_iou_metric: 0.8239 - val_dist_relevant_mae: 1.8606 - val_dist_relevant_mse: 8.1421 - val_loss: 0.9044 - val_prob_kld: 0.0173 - learning_rate: 3.0000e-04
+Epoch 105/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8942 - dist_relevant_mae: 0.8635 - dist_relevant_mse: 1.7175 - loss: 0.5448 - prob_kld: 0.0063 - val_dist_dist_iou_metric: 0.8189 - val_dist_relevant_mae: 1.9153 - val_dist_relevant_mse: 8.3274 - val_loss: 0.9139 - val_prob_kld: 0.0158 - learning_rate: 3.0000e-04
+Epoch 106/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8991 - dist_relevant_mae: 0.8544 - dist_relevant_mse: 1.6972 - loss: 0.5358 - prob_kld: 0.0058 - val_dist_dist_iou_metric: 0.8393 - val_dist_relevant_mae: 1.6839 - val_dist_relevant_mse: 7.1026 - val_loss: 0.8660 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 107/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9016 - dist_relevant_mae: 0.8036 - dist_relevant_mse: 1.5630 - loss: 0.5285 - prob_kld: 0.0059 - val_dist_dist_iou_metric: 0.8498 - val_dist_relevant_mae: 1.6182 - val_dist_relevant_mse: 6.3319 - val_loss: 0.8575 - val_prob_kld: 0.0188 - learning_rate: 3.0000e-04
+Epoch 108/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9023 - dist_relevant_mae: 0.8042 - dist_relevant_mse: 1.5461 - loss: 0.5324 - prob_kld: 0.0056 - val_dist_dist_iou_metric: 0.8209 - val_dist_relevant_mae: 1.8843 - val_dist_relevant_mse: 8.1534 - val_loss: 0.9066 - val_prob_kld: 0.0146 - learning_rate: 3.0000e-04
+Epoch 109/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9016 - dist_relevant_mae: 0.8048 - dist_relevant_mse: 1.5494 - loss: 0.5346 - prob_kld: 0.0060 - val_dist_dist_iou_metric: 0.8406 - val_dist_relevant_mae: 1.6932 - val_dist_relevant_mse: 6.8232 - val_loss: 0.8729 - val_prob_kld: 0.0192 - learning_rate: 3.0000e-04
+Epoch 110/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8869 - dist_relevant_mae: 0.9458 - dist_relevant_mse: 1.9648 - loss: 0.5704 - prob_kld: 0.0070 - val_dist_dist_iou_metric: 0.8109 - val_dist_relevant_mae: 1.9647 - val_dist_relevant_mse: 9.5583 - val_loss: 0.9229 - val_prob_kld: 0.0149 - learning_rate: 3.0000e-04
+Epoch 111/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8962 - dist_relevant_mae: 0.8415 - dist_relevant_mse: 1.7203 - loss: 0.5286 - prob_kld: 0.0064 - val_dist_dist_iou_metric: 0.8308 - val_dist_relevant_mae: 1.7700 - val_dist_relevant_mse: 7.9971 - val_loss: 0.8844 - val_prob_kld: 0.0153 - learning_rate: 3.0000e-04
+Epoch 112/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9016 - dist_relevant_mae: 0.7851 - dist_relevant_mse: 1.4677 - loss: 0.5041 - prob_kld: 0.0054 - val_dist_dist_iou_metric: 0.8262 - val_dist_relevant_mae: 1.8407 - val_dist_relevant_mse: 7.8685 - val_loss: 0.9018 - val_prob_kld: 0.0186 - learning_rate: 3.0000e-04
+Epoch 113/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9005 - dist_relevant_mae: 0.8244 - dist_relevant_mse: 1.6404 - loss: 0.5554 - prob_kld: 0.0063 - val_dist_dist_iou_metric: 0.8417 - val_dist_relevant_mae: 1.6555 - val_dist_relevant_mse: 6.8548 - val_loss: 0.8605 - val_prob_kld: 0.0143 - learning_rate: 3.0000e-04
+Epoch 114/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9026 - dist_relevant_mae: 0.7937 - dist_relevant_mse: 1.5428 - loss: 0.5419 - prob_kld: 0.0061 - val_dist_dist_iou_metric: 0.8278 - val_dist_relevant_mae: 1.8374 - val_dist_relevant_mse: 8.0890 - val_loss: 0.9060 - val_prob_kld: 0.0235 - learning_rate: 3.0000e-04
+Epoch 115/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9077 - dist_relevant_mae: 0.7548 - dist_relevant_mse: 1.3914 - loss: 0.5194 - prob_kld: 0.0056 - val_dist_dist_iou_metric: 0.8228 - val_dist_relevant_mae: 1.8597 - val_dist_relevant_mse: 8.5917 - val_loss: 0.9025 - val_prob_kld: 0.0155 - learning_rate: 3.0000e-04
+Epoch 116/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9048 - dist_relevant_mae: 0.7924 - dist_relevant_mse: 1.5326 - loss: 0.5263 - prob_kld: 0.0055 - val_dist_dist_iou_metric: 0.8346 - val_dist_relevant_mae: 1.7310 - val_dist_relevant_mse: 7.5259 - val_loss: 0.8769 - val_prob_kld: 0.0156 - learning_rate: 3.0000e-04
+Epoch 117/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9053 - dist_relevant_mae: 0.7856 - dist_relevant_mse: 1.4889 - loss: 0.5292 - prob_kld: 0.0056 - val_dist_dist_iou_metric: 0.8281 - val_dist_relevant_mae: 1.7826 - val_dist_relevant_mse: 7.8789 - val_loss: 0.8864 - val_prob_kld: 0.0148 - learning_rate: 3.0000e-04
+Epoch 118/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9030 - dist_relevant_mae: 0.7949 - dist_relevant_mse: 1.5215 - loss: 0.5211 - prob_kld: 0.0057 - val_dist_dist_iou_metric: 0.8269 - val_dist_relevant_mae: 1.8440 - val_dist_relevant_mse: 7.7509 - val_loss: 0.8988 - val_prob_kld: 0.0150 - learning_rate: 3.0000e-04
+Epoch 119/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9022 - dist_relevant_mae: 0.7963 - dist_relevant_mse: 1.4768 - loss: 0.5190 - prob_kld: 0.0068 - val_dist_dist_iou_metric: 0.8257 - val_dist_relevant_mae: 1.8665 - val_dist_relevant_mse: 7.9502 - val_loss: 0.9054 - val_prob_kld: 0.0170 - learning_rate: 3.0000e-04
+Epoch 120/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9025 - dist_relevant_mae: 0.7996 - dist_relevant_mse: 1.5685 - loss: 0.5181 - prob_kld: 0.0055 - val_dist_dist_iou_metric: 0.8475 - val_dist_relevant_mae: 1.6441 - val_dist_relevant_mse: 6.5625 - val_loss: 0.8617 - val_prob_kld: 0.0178 - learning_rate: 3.0000e-04
+Epoch 121/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.8973 - dist_relevant_mae: 0.8456 - dist_relevant_mse: 1.6618 - loss: 0.5417 - prob_kld: 0.0063 - val_dist_dist_iou_metric: 0.8180 - val_dist_relevant_mae: 1.9223 - val_dist_relevant_mse: 8.4273 - val_loss: 0.9153 - val_prob_kld: 0.0158 - learning_rate: 3.0000e-04
+Epoch 122/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9001 - dist_relevant_mae: 0.8152 - dist_relevant_mse: 1.5780 - loss: 0.5357 - prob_kld: 0.0060 - val_dist_dist_iou_metric: 0.8243 - val_dist_relevant_mae: 1.8206 - val_dist_relevant_mse: 8.0909 - val_loss: 0.8938 - val_prob_kld: 0.0146 - learning_rate: 3.0000e-04
+Epoch 123/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9035 - dist_relevant_mae: 0.7761 - dist_relevant_mse: 1.4446 - loss: 0.5263 - prob_kld: 0.0058 - val_dist_dist_iou_metric: 0.8399 - val_dist_relevant_mae: 1.6580 - val_dist_relevant_mse: 6.8095 - val_loss: 0.8615 - val_prob_kld: 0.0149 - learning_rate: 3.0000e-04
+Epoch 124/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9037 - dist_relevant_mae: 0.7802 - dist_relevant_mse: 1.4638 - loss: 0.5141 - prob_kld: 0.0054 - val_dist_dist_iou_metric: 0.8100 - val_dist_relevant_mae: 2.0290 - val_dist_relevant_mse: 9.5887 - val_loss: 0.9393 - val_prob_kld: 0.0184 - learning_rate: 3.0000e-04
+Epoch 125/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9026 - dist_relevant_mae: 0.7935 - dist_relevant_mse: 1.5271 - loss: 0.5266 - prob_kld: 0.0056 - val_dist_dist_iou_metric: 0.8422 - val_dist_relevant_mae: 1.6611 - val_dist_relevant_mse: 6.3502 - val_loss: 0.8600 - val_prob_kld: 0.0127 - learning_rate: 3.0000e-04
+Epoch 126/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9066 - dist_relevant_mae: 0.7712 - dist_relevant_mse: 1.3887 - loss: 0.5274 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8235 - val_dist_relevant_mae: 1.8572 - val_dist_relevant_mse: 8.2035 - val_loss: 0.9016 - val_prob_kld: 0.0151 - learning_rate: 3.0000e-04
+Epoch 127/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9054 - dist_relevant_mae: 0.7729 - dist_relevant_mse: 1.4028 - loss: 0.5301 - prob_kld: 0.0053 - val_dist_dist_iou_metric: 0.8036 - val_dist_relevant_mae: 2.0771 - val_dist_relevant_mse: 9.8563 - val_loss: 0.9455 - val_prob_kld: 0.0150 - learning_rate: 3.0000e-04
+Epoch 128/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9058 - dist_relevant_mae: 0.7808 - dist_relevant_mse: 1.4484 - loss: 0.5165 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8423 - val_dist_relevant_mae: 1.7422 - val_dist_relevant_mse: 6.6275 - val_loss: 0.8815 - val_prob_kld: 0.0180 - learning_rate: 3.0000e-04
+Epoch 129/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.8988 - dist_relevant_mae: 0.8329 - dist_relevant_mse: 1.6011 - loss: 0.5345 - prob_kld: 0.0060 - val_dist_dist_iou_metric: 0.8025 - val_dist_relevant_mae: 2.1051 - val_dist_relevant_mse: 10.0849 - val_loss: 0.9539 - val_prob_kld: 0.0178 - learning_rate: 3.0000e-04
+Epoch 130/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9062 - dist_relevant_mae: 0.7707 - dist_relevant_mse: 1.4069 - loss: 0.5351 - prob_kld: 0.0055 - val_dist_dist_iou_metric: 0.8217 - val_dist_relevant_mae: 1.8289 - val_dist_relevant_mse: 8.2983 - val_loss: 0.8979 - val_prob_kld: 0.0170 - learning_rate: 3.0000e-04
+Epoch 131/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9059 - dist_relevant_mae: 0.7978 - dist_relevant_mse: 1.5137 - loss: 0.5342 - prob_kld: 0.0052 - val_dist_dist_iou_metric: 0.8379 - val_dist_relevant_mae: 1.6944 - val_dist_relevant_mse: 6.6667 - val_loss: 0.8681 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 132/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9081 - dist_relevant_mae: 0.7517 - dist_relevant_mse: 1.3565 - loss: 0.5416 - prob_kld: 0.0054 - val_dist_dist_iou_metric: 0.8439 - val_dist_relevant_mae: 1.6638 - val_dist_relevant_mse: 6.7406 - val_loss: 0.8632 - val_prob_kld: 0.0154 - learning_rate: 3.0000e-04
+Epoch 133/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9089 - dist_relevant_mae: 0.7439 - dist_relevant_mse: 1.3702 - loss: 0.5081 - prob_kld: 0.0048 - val_dist_dist_iou_metric: 0.8378 - val_dist_relevant_mae: 1.6922 - val_dist_relevant_mse: 6.9616 - val_loss: 0.8727 - val_prob_kld: 0.0192 - learning_rate: 3.0000e-04
+Epoch 134/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9057 - dist_relevant_mae: 0.7798 - dist_relevant_mse: 1.4471 - loss: 0.5270 - prob_kld: 0.0054 - val_dist_dist_iou_metric: 0.8426 - val_dist_relevant_mae: 1.6526 - val_dist_relevant_mse: 6.6876 - val_loss: 0.8616 - val_prob_kld: 0.0160 - learning_rate: 3.0000e-04
+Epoch 135/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9057 - dist_relevant_mae: 0.7829 - dist_relevant_mse: 1.4706 - loss: 0.5356 - prob_kld: 0.0053 - val_dist_dist_iou_metric: 0.8436 - val_dist_relevant_mae: 1.6229 - val_dist_relevant_mse: 6.6097 - val_loss: 0.8564 - val_prob_kld: 0.0167 - learning_rate: 3.0000e-04
+Epoch 136/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9025 - dist_relevant_mae: 0.7915 - dist_relevant_mse: 1.4715 - loss: 0.5241 - prob_kld: 0.0052 - val_dist_dist_iou_metric: 0.8322 - val_dist_relevant_mae: 1.7903 - val_dist_relevant_mse: 7.4200 - val_loss: 0.8913 - val_prob_kld: 0.0181 - learning_rate: 3.0000e-04
+Epoch 137/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9088 - dist_relevant_mae: 0.7472 - dist_relevant_mse: 1.3644 - loss: 0.5231 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8227 - val_dist_relevant_mae: 1.8758 - val_dist_relevant_mse: 8.0480 - val_loss: 0.9063 - val_prob_kld: 0.0161 - learning_rate: 3.0000e-04
+Epoch 138/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9056 - dist_relevant_mae: 0.7665 - dist_relevant_mse: 1.4244 - loss: 0.5177 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8226 - val_dist_relevant_mae: 1.8885 - val_dist_relevant_mse: 8.1464 - val_loss: 0.9081 - val_prob_kld: 0.0153 - learning_rate: 3.0000e-04
+Epoch 139/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9101 - dist_relevant_mae: 0.7312 - dist_relevant_mse: 1.3242 - loss: 0.5275 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8423 - val_dist_relevant_mae: 1.6518 - val_dist_relevant_mse: 6.9242 - val_loss: 0.8613 - val_prob_kld: 0.0159 - learning_rate: 3.0000e-04
+Epoch 140/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9118 - dist_relevant_mae: 0.7200 - dist_relevant_mse: 1.3022 - loss: 0.5144 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8202 - val_dist_relevant_mae: 1.8739 - val_dist_relevant_mse: 8.4696 - val_loss: 0.9081 - val_prob_kld: 0.0183 - learning_rate: 3.0000e-04
+Epoch 141/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9094 - dist_relevant_mae: 0.7491 - dist_relevant_mse: 1.3265 - loss: 0.5256 - prob_kld: 0.0051 - val_dist_dist_iou_metric: 0.8528 - val_dist_relevant_mae: 1.5574 - val_dist_relevant_mse: 5.9991 - val_loss: 0.8429 - val_prob_kld: 0.0164 - learning_rate: 3.0000e-04
+Epoch 142/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9032 - dist_relevant_mae: 0.8021 - dist_relevant_mse: 1.4825 - loss: 0.5275 - prob_kld: 0.0052 - val_dist_dist_iou_metric: 0.8401 - val_dist_relevant_mae: 1.6982 - val_dist_relevant_mse: 6.6420 - val_loss: 0.8701 - val_prob_kld: 0.0154 - learning_rate: 3.0000e-04
+Epoch 143/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9097 - dist_relevant_mae: 0.7301 - dist_relevant_mse: 1.3134 - loss: 0.5222 - prob_kld: 0.0049 - val_dist_dist_iou_metric: 0.8444 - val_dist_relevant_mae: 1.6647 - val_dist_relevant_mse: 6.3154 - val_loss: 0.8626 - val_prob_kld: 0.0146 - learning_rate: 3.0000e-04
+Epoch 144/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9059 - dist_relevant_mae: 0.7689 - dist_relevant_mse: 1.3743 - loss: 0.5238 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8342 - val_dist_relevant_mae: 1.7684 - val_dist_relevant_mse: 7.0921 - val_loss: 0.8871 - val_prob_kld: 0.0184 - learning_rate: 3.0000e-04
+Epoch 145/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9094 - dist_relevant_mae: 0.7517 - dist_relevant_mse: 1.3631 - loss: 0.5044 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8465 - val_dist_relevant_mae: 1.6301 - val_dist_relevant_mse: 6.3173 - val_loss: 0.8558 - val_prob_kld: 0.0147 - learning_rate: 3.0000e-04
+Epoch 146/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9090 - dist_relevant_mae: 0.7451 - dist_relevant_mse: 1.3310 - loss: 0.5192 - prob_kld: 0.0049 - val_dist_dist_iou_metric: 0.8204 - val_dist_relevant_mae: 1.9068 - val_dist_relevant_mse: 7.9470 - val_loss: 0.9112 - val_prob_kld: 0.0148 - learning_rate: 3.0000e-04
+Epoch 147/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9082 - dist_relevant_mae: 0.7574 - dist_relevant_mse: 1.3719 - loss: 0.5116 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8330 - val_dist_relevant_mae: 1.7783 - val_dist_relevant_mse: 6.9327 - val_loss: 0.8862 - val_prob_kld: 0.0155 - learning_rate: 3.0000e-04
+Epoch 148/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9084 - dist_relevant_mae: 0.7404 - dist_relevant_mse: 1.3145 - loss: 0.5183 - prob_kld: 0.0051 - val_dist_dist_iou_metric: 0.8445 - val_dist_relevant_mae: 1.6114 - val_dist_relevant_mse: 6.2765 - val_loss: 0.8521 - val_prob_kld: 0.0147 - learning_rate: 3.0000e-04
+Epoch 149/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9087 - dist_relevant_mae: 0.7456 - dist_relevant_mse: 1.3370 - loss: 0.5170 - prob_kld: 0.0051 - val_dist_dist_iou_metric: 0.8161 - val_dist_relevant_mae: 1.9218 - val_dist_relevant_mse: 8.4209 - val_loss: 0.9307 - val_prob_kld: 0.0313 - learning_rate: 3.0000e-04
+Epoch 150/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9104 - dist_relevant_mae: 0.7368 - dist_relevant_mse: 1.3154 - loss: 0.5130 - prob_kld: 0.0060 - val_dist_dist_iou_metric: 0.8166 - val_dist_relevant_mae: 1.9235 - val_dist_relevant_mse: 8.2803 - val_loss: 0.9139 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 151/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9106 - dist_relevant_mae: 0.7322 - dist_relevant_mse: 1.3087 - loss: 0.5090 - prob_kld: 0.0046 - val_dist_dist_iou_metric: 0.8388 - val_dist_relevant_mae: 1.7108 - val_dist_relevant_mse: 6.9121 - val_loss: 0.8729 - val_prob_kld: 0.0157 - learning_rate: 3.0000e-04
+Epoch 152/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9122 - dist_relevant_mae: 0.7306 - dist_relevant_mse: 1.2595 - loss: 0.5262 - prob_kld: 0.0045 - val_dist_dist_iou_metric: 0.8144 - val_dist_relevant_mae: 1.9230 - val_dist_relevant_mse: 9.0382 - val_loss: 0.9164 - val_prob_kld: 0.0167 - learning_rate: 3.0000e-04
+Epoch 153/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9116 - dist_relevant_mae: 0.7209 - dist_relevant_mse: 1.2792 - loss: 0.5227 - prob_kld: 0.0049 - val_dist_dist_iou_metric: 0.8347 - val_dist_relevant_mae: 1.7179 - val_dist_relevant_mse: 7.0757 - val_loss: 0.8721 - val_prob_kld: 0.0135 - learning_rate: 3.0000e-04
+Epoch 154/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9084 - dist_relevant_mae: 0.7598 - dist_relevant_mse: 1.3750 - loss: 0.5102 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8181 - val_dist_relevant_mae: 1.9102 - val_dist_relevant_mse: 8.2477 - val_loss: 0.9137 - val_prob_kld: 0.0166 - learning_rate: 3.0000e-04
+Epoch 155/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9069 - dist_relevant_mae: 0.7636 - dist_relevant_mse: 1.4145 - loss: 0.5208 - prob_kld: 0.0049 - val_dist_dist_iou_metric: 0.8361 - val_dist_relevant_mae: 1.7307 - val_dist_relevant_mse: 6.7466 - val_loss: 0.8764 - val_prob_kld: 0.0152 - learning_rate: 3.0000e-04
+Epoch 156/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9116 - dist_relevant_mae: 0.7232 - dist_relevant_mse: 1.2546 - loss: 0.5164 - prob_kld: 0.0045 - val_dist_dist_iou_metric: 0.8499 - val_dist_relevant_mae: 1.5663 - val_dist_relevant_mse: 6.2010 - val_loss: 0.8431 - val_prob_kld: 0.0148 - learning_rate: 3.0000e-04
+Epoch 157/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9138 - dist_relevant_mae: 0.7091 - dist_relevant_mse: 1.2196 - loss: 0.5168 - prob_kld: 0.0044 - val_dist_dist_iou_metric: 0.8479 - val_dist_relevant_mae: 1.5486 - val_dist_relevant_mse: 6.3108 - val_loss: 0.8394 - val_prob_kld: 0.0146 - learning_rate: 3.0000e-04
+Epoch 158/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9088 - dist_relevant_mae: 0.7280 - dist_relevant_mse: 1.2651 - loss: 0.5143 - prob_kld: 0.0046 - val_dist_dist_iou_metric: 0.7912 - val_dist_relevant_mae: 2.1801 - val_dist_relevant_mse: 10.9643 - val_loss: 0.9653 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 159/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9031 - dist_relevant_mae: 0.8026 - dist_relevant_mse: 1.4838 - loss: 0.5338 - prob_kld: 0.0049 - val_dist_dist_iou_metric: 0.8228 - val_dist_relevant_mae: 1.8448 - val_dist_relevant_mse: 7.6440 - val_loss: 0.8977 - val_prob_kld: 0.0137 - learning_rate: 3.0000e-04
+Epoch 160/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9125 - dist_relevant_mae: 0.7216 - dist_relevant_mse: 1.2137 - loss: 0.5026 - prob_kld: 0.0045 - val_dist_dist_iou_metric: 0.8280 - val_dist_relevant_mae: 1.7920 - val_dist_relevant_mse: 7.8261 - val_loss: 0.8877 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 161/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9099 - dist_relevant_mae: 0.7385 - dist_relevant_mse: 1.3568 - loss: 0.5218 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8263 - val_dist_relevant_mae: 1.7915 - val_dist_relevant_mse: 8.0138 - val_loss: 0.8930 - val_prob_kld: 0.0197 - learning_rate: 3.0000e-04
+Epoch 162/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9133 - dist_relevant_mae: 0.7146 - dist_relevant_mse: 1.2434 - loss: 0.5088 - prob_kld: 0.0042 - val_dist_dist_iou_metric: 0.8246 - val_dist_relevant_mae: 1.8034 - val_dist_relevant_mse: 7.3346 - val_loss: 0.8896 - val_prob_kld: 0.0138 - learning_rate: 3.0000e-04
+Epoch 163/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9141 - dist_relevant_mae: 0.7024 - dist_relevant_mse: 1.2010 - loss: 0.5074 - prob_kld: 0.0043 - val_dist_dist_iou_metric: 0.8340 - val_dist_relevant_mae: 1.7334 - val_dist_relevant_mse: 7.3834 - val_loss: 0.8808 - val_prob_kld: 0.0191 - learning_rate: 3.0000e-04
+Epoch 164/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9128 - dist_relevant_mae: 0.7231 - dist_relevant_mse: 1.2964 - loss: 0.5317 - prob_kld: 0.0050 - val_dist_dist_iou_metric: 0.8458 - val_dist_relevant_mae: 1.6088 - val_dist_relevant_mse: 6.3382 - val_loss: 0.8517 - val_prob_kld: 0.0148 - learning_rate: 3.0000e-04
+Epoch 165/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9143 - dist_relevant_mae: 0.7054 - dist_relevant_mse: 1.2086 - loss: 0.5014 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8184 - val_dist_relevant_mae: 1.8950 - val_dist_relevant_mse: 8.6144 - val_loss: 0.9087 - val_prob_kld: 0.0147 - learning_rate: 3.0000e-04
+Epoch 166/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9124 - dist_relevant_mae: 0.7048 - dist_relevant_mse: 1.2019 - loss: 0.5088 - prob_kld: 0.0044 - val_dist_dist_iou_metric: 0.8488 - val_dist_relevant_mae: 1.5648 - val_dist_relevant_mse: 6.3127 - val_loss: 0.8416 - val_prob_kld: 0.0136 - learning_rate: 3.0000e-04
+Epoch 167/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9077 - dist_relevant_mae: 0.7804 - dist_relevant_mse: 1.4122 - loss: 0.5330 - prob_kld: 0.0047 - val_dist_dist_iou_metric: 0.8453 - val_dist_relevant_mae: 1.6147 - val_dist_relevant_mse: 6.3674 - val_loss: 0.8530 - val_prob_kld: 0.0150 - learning_rate: 3.0000e-04
+Epoch 168/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9102 - dist_relevant_mae: 0.7424 - dist_relevant_mse: 1.3139 - loss: 0.5159 - prob_kld: 0.0053 - val_dist_dist_iou_metric: 0.8104 - val_dist_relevant_mae: 2.0032 - val_dist_relevant_mse: 9.0759 - val_loss: 0.9309 - val_prob_kld: 0.0152 - learning_rate: 3.0000e-04
+Epoch 169/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9146 - dist_relevant_mae: 0.7066 - dist_relevant_mse: 1.2175 - loss: 0.5189 - prob_kld: 0.0043 - val_dist_dist_iou_metric: 0.8473 - val_dist_relevant_mae: 1.5737 - val_dist_relevant_mse: 6.1386 - val_loss: 0.8440 - val_prob_kld: 0.0142 - learning_rate: 3.0000e-04
+Epoch 170/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9054 - dist_relevant_mae: 0.7942 - dist_relevant_mse: 1.4439 - loss: 0.5206 - prob_kld: 0.0044 - val_dist_dist_iou_metric: 0.8193 - val_dist_relevant_mae: 1.8928 - val_dist_relevant_mse: 8.5140 - val_loss: 0.9097 - val_prob_kld: 0.0161 - learning_rate: 3.0000e-04
+Epoch 171/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9148 - dist_relevant_mae: 0.7083 - dist_relevant_mse: 1.2297 - loss: 0.5121 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8241 - val_dist_relevant_mae: 1.8203 - val_dist_relevant_mse: 8.0476 - val_loss: 0.8936 - val_prob_kld: 0.0144 - learning_rate: 3.0000e-04
+Epoch 172/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9124 - dist_relevant_mae: 0.7261 - dist_relevant_mse: 1.2576 - loss: 0.5246 - prob_kld: 0.0048 - val_dist_dist_iou_metric: 0.8552 - val_dist_relevant_mae: 1.5410 - val_dist_relevant_mse: 5.7439 - val_loss: 0.8391 - val_prob_kld: 0.0158 - learning_rate: 3.0000e-04
+Epoch 173/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9054 - dist_relevant_mae: 0.7783 - dist_relevant_mse: 1.4059 - loss: 0.5300 - prob_kld: 0.0052 - val_dist_dist_iou_metric: 0.8334 - val_dist_relevant_mae: 1.7242 - val_dist_relevant_mse: 7.2322 - val_loss: 0.8751 - val_prob_kld: 0.0152 - learning_rate: 3.0000e-04
+Epoch 174/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9154 - dist_relevant_mae: 0.6979 - dist_relevant_mse: 1.1855 - loss: 0.5061 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8392 - val_dist_relevant_mae: 1.6239 - val_dist_relevant_mse: 6.8643 - val_loss: 0.8556 - val_prob_kld: 0.0157 - learning_rate: 3.0000e-04
+Epoch 175/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9137 - dist_relevant_mae: 0.7045 - dist_relevant_mse: 1.2078 - loss: 0.5049 - prob_kld: 0.0048 - val_dist_dist_iou_metric: 0.8447 - val_dist_relevant_mae: 1.6127 - val_dist_relevant_mse: 6.5482 - val_loss: 0.8539 - val_prob_kld: 0.0163 - learning_rate: 3.0000e-04
+Epoch 176/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9139 - dist_relevant_mae: 0.7021 - dist_relevant_mse: 1.1803 - loss: 0.5106 - prob_kld: 0.0042 - val_dist_dist_iou_metric: 0.8416 - val_dist_relevant_mae: 1.6503 - val_dist_relevant_mse: 6.7175 - val_loss: 0.8601 - val_prob_kld: 0.0149 - learning_rate: 3.0000e-04
+Epoch 177/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9104 - dist_relevant_mae: 0.7497 - dist_relevant_mse: 1.3517 - loss: 0.5227 - prob_kld: 0.0043 - val_dist_dist_iou_metric: 0.8225 - val_dist_relevant_mae: 1.8289 - val_dist_relevant_mse: 8.5254 - val_loss: 0.9097 - val_prob_kld: 0.0288 - learning_rate: 3.0000e-04
+Epoch 178/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9149 - dist_relevant_mae: 0.6848 - dist_relevant_mse: 1.1571 - loss: 0.5246 - prob_kld: 0.0054 - val_dist_dist_iou_metric: 0.8572 - val_dist_relevant_mae: 1.4947 - val_dist_relevant_mse: 5.6519 - val_loss: 0.8382 - val_prob_kld: 0.0242 - learning_rate: 3.0000e-04
+Epoch 179/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9113 - dist_relevant_mae: 0.7183 - dist_relevant_mse: 1.2721 - loss: 0.5057 - prob_kld: 0.0048 - val_dist_dist_iou_metric: 0.8456 - val_dist_relevant_mae: 1.5543 - val_dist_relevant_mse: 6.5966 - val_loss: 0.8411 - val_prob_kld: 0.0152 - learning_rate: 3.0000e-04
+Epoch 180/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9171 - dist_relevant_mae: 0.6868 - dist_relevant_mse: 1.1563 - loss: 0.4977 - prob_kld: 0.0038 - val_dist_dist_iou_metric: 0.8373 - val_dist_relevant_mae: 1.7145 - val_dist_relevant_mse: 7.0782 - val_loss: 0.8735 - val_prob_kld: 0.0156 - learning_rate: 3.0000e-04
+Epoch 181/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9122 - dist_relevant_mae: 0.7245 - dist_relevant_mse: 1.2475 - loss: 0.5135 - prob_kld: 0.0044 - val_dist_dist_iou_metric: 0.8388 - val_dist_relevant_mae: 1.6563 - val_dist_relevant_mse: 6.8313 - val_loss: 0.8604 - val_prob_kld: 0.0141 - learning_rate: 3.0000e-04
+Epoch 182/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9107 - dist_relevant_mae: 0.7292 - dist_relevant_mse: 1.2862 - loss: 0.5092 - prob_kld: 0.0046 - val_dist_dist_iou_metric: 0.8464 - val_dist_relevant_mae: 1.6106 - val_dist_relevant_mse: 6.1444 - val_loss: 0.8515 - val_prob_kld: 0.0143 - learning_rate: 3.0000e-04
+Epoch 183/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9145 - dist_relevant_mae: 0.7027 - dist_relevant_mse: 1.1973 - loss: 0.5110 - prob_kld: 0.0039 - val_dist_dist_iou_metric: 0.8344 - val_dist_relevant_mae: 1.7026 - val_dist_relevant_mse: 7.2084 - val_loss: 0.8703 - val_prob_kld: 0.0147 - learning_rate: 3.0000e-04
+Epoch 184/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9154 - dist_relevant_mae: 0.6889 - dist_relevant_mse: 1.1611 - loss: 0.5094 - prob_kld: 0.0042 - val_dist_dist_iou_metric: 0.8422 - val_dist_relevant_mae: 1.6499 - val_dist_relevant_mse: 6.5887 - val_loss: 0.8585 - val_prob_kld: 0.0135 - learning_rate: 3.0000e-04
+Epoch 185/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9144 - dist_relevant_mae: 0.7036 - dist_relevant_mse: 1.2134 - loss: 0.5057 - prob_kld: 0.0042 - val_dist_dist_iou_metric: 0.7989 - val_dist_relevant_mae: 2.1673 - val_dist_relevant_mse: 9.6188 - val_loss: 0.9614 - val_prob_kld: 0.0129 - learning_rate: 3.0000e-04
+Epoch 186/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9049 - dist_relevant_mae: 0.7896 - dist_relevant_mse: 1.4192 - loss: 0.5158 - prob_kld: 0.0052 - val_dist_dist_iou_metric: 0.8273 - val_dist_relevant_mae: 1.7849 - val_dist_relevant_mse: 7.6914 - val_loss: 0.8858 - val_prob_kld: 0.0138 - learning_rate: 3.0000e-04
+Epoch 187/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9195 - dist_relevant_mae: 0.6627 - dist_relevant_mse: 1.0657 - loss: 0.5092 - prob_kld: 0.0038 - val_dist_dist_iou_metric: 0.8458 - val_dist_relevant_mae: 1.6073 - val_dist_relevant_mse: 6.4168 - val_loss: 0.8501 - val_prob_kld: 0.0136 - learning_rate: 3.0000e-04
+Epoch 188/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9163 - dist_relevant_mae: 0.6794 - dist_relevant_mse: 1.1186 - loss: 0.4949 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8318 - val_dist_relevant_mae: 1.7375 - val_dist_relevant_mse: 7.2679 - val_loss: 0.8762 - val_prob_kld: 0.0137 - learning_rate: 3.0000e-04
+Epoch 189/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9173 - dist_relevant_mae: 0.6778 - dist_relevant_mse: 1.1198 - loss: 0.4983 - prob_kld: 0.0037 - val_dist_dist_iou_metric: 0.8199 - val_dist_relevant_mae: 1.8595 - val_dist_relevant_mse: 7.8043 - val_loss: 0.9019 - val_prob_kld: 0.0150 - learning_rate: 3.0000e-04
+Epoch 190/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9116 - dist_relevant_mae: 0.7141 - dist_relevant_mse: 1.2508 - loss: 0.5107 - prob_kld: 0.0044 - val_dist_dist_iou_metric: 0.8168 - val_dist_relevant_mae: 1.8802 - val_dist_relevant_mse: 8.3065 - val_loss: 0.9065 - val_prob_kld: 0.0154 - learning_rate: 3.0000e-04
+Epoch 191/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9143 - dist_relevant_mae: 0.7257 - dist_relevant_mse: 1.2509 - loss: 0.5211 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8338 - val_dist_relevant_mae: 1.6963 - val_dist_relevant_mse: 7.2549 - val_loss: 0.8724 - val_prob_kld: 0.0181 - learning_rate: 3.0000e-04
+Epoch 192/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9127 - dist_relevant_mae: 0.7212 - dist_relevant_mse: 1.2601 - loss: 0.5149 - prob_kld: 0.0043 - val_dist_dist_iou_metric: 0.8188 - val_dist_relevant_mae: 1.8386 - val_dist_relevant_mse: 8.1073 - val_loss: 0.8967 - val_prob_kld: 0.0139 - learning_rate: 3.0000e-04
+Epoch 193/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9159 - dist_relevant_mae: 0.6861 - dist_relevant_mse: 1.1788 - loss: 0.5018 - prob_kld: 0.0042 - val_dist_dist_iou_metric: 0.8385 - val_dist_relevant_mae: 1.6256 - val_dist_relevant_mse: 6.8048 - val_loss: 0.8525 - val_prob_kld: 0.0123 - learning_rate: 3.0000e-04
+Epoch 194/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9168 - dist_relevant_mae: 0.6767 - dist_relevant_mse: 1.1258 - loss: 0.5001 - prob_kld: 0.0037 - val_dist_dist_iou_metric: 0.8189 - val_dist_relevant_mae: 1.8989 - val_dist_relevant_mse: 8.6153 - val_loss: 0.9089 - val_prob_kld: 0.0141 - learning_rate: 3.0000e-04
+Epoch 195/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9213 - dist_relevant_mae: 0.6421 - dist_relevant_mse: 1.0067 - loss: 0.5044 - prob_kld: 0.0036 - val_dist_dist_iou_metric: 0.8248 - val_dist_relevant_mae: 1.8043 - val_dist_relevant_mse: 8.0842 - val_loss: 0.8899 - val_prob_kld: 0.0140 - learning_rate: 3.0000e-04
+Epoch 196/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9136 - dist_relevant_mae: 0.7199 - dist_relevant_mse: 1.2778 - loss: 0.5077 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8045 - val_dist_relevant_mae: 2.0171 - val_dist_relevant_mse: 9.6876 - val_loss: 0.9305 - val_prob_kld: 0.0120 - learning_rate: 3.0000e-04
+Epoch 197/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 46ms/step - dist_dist_iou_metric: 0.9169 - dist_relevant_mae: 0.6920 - dist_relevant_mse: 1.1656 - loss: 0.4991 - prob_kld: 0.0040 - val_dist_dist_iou_metric: 0.8268 - val_dist_relevant_mae: 1.7723 - val_dist_relevant_mse: 7.6855 - val_loss: 0.8838 - val_prob_kld: 0.0143 - learning_rate: 3.0000e-04
+Epoch 198/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9177 - dist_relevant_mae: 0.6825 - dist_relevant_mse: 1.1306 - loss: 0.5199 - prob_kld: 0.0041 - val_dist_dist_iou_metric: 0.8301 - val_dist_relevant_mae: 1.7486 - val_dist_relevant_mse: 7.3297 - val_loss: 0.8776 - val_prob_kld: 0.0128 - learning_rate: 3.0000e-04
+Epoch 199/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9189 - dist_relevant_mae: 0.6534 - dist_relevant_mse: 1.0539 - loss: 0.5090 - prob_kld: 0.0039 - val_dist_dist_iou_metric: 0.8473 - val_dist_relevant_mae: 1.5366 - val_dist_relevant_mse: 6.2195 - val_loss: 0.8388 - val_prob_kld: 0.0164 - learning_rate: 3.0000e-04
+Epoch 200/200
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">9s</span> 45ms/step - dist_dist_iou_metric: 0.9168 - dist_relevant_mae: 0.6929 - dist_relevant_mse: 1.1733 - loss: 0.5157 - prob_kld: 0.0045 - val_dist_dist_iou_metric: 0.8394 - val_dist_relevant_mae: 1.6402 - val_dist_relevant_mse: 6.8935 - val_loss: 0.8620 - val_prob_kld: 0.0189 - learning_rate: 3.0000e-04
+
+Loading network weights from &#39;weights_best.h5&#39;.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.history.History at 0x7de4ccb7b050&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Not sure optimize threshold works with sparse labeling</span>
+<span class="c1">#model.optimize_thresholds(X_train, Y_train)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-network-on-one-of-the-training-images-self-prediction">
+<h1>Test network on one of the training images (self prediction)<a class="headerlink" href="#test-network-on-one-of-the-training-images-self-prediction" title="Permalink to this heading">#</a></h1>
+<p>Self prediction is not a good way to evaluate the ‘real’ performance of the NN.  However it is good sanity test.  If the self prediction looks wrong something really went bad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">labels</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">prob_thresh</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">nms_thresh</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">Y_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">labels</span><span class="p">],[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;ground truth&#39;</span><span class="p">,</span><span class="s1">&#39;predicted instances&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.007905139..1.0].
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.024096385..1.0].
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.007905139..1.0].
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.007905139..1.0].
+</pre></div>
+</div>
+<img alt="../_images/c98d4d931ed5647741f02bf3407bb3f9bb448422cd46955616e9db3a7f8c1b98.png" src="../_images/c98d4d931ed5647741f02bf3407bb3f9bb448422cd46955616e9db3a7f8c1b98.png" />
+<img alt="../_images/d424e996da1fd2d537d6193ee15ff48be3265dcbd5742707b19b13315603bfb0.png" src="../_images/d424e996da1fd2d537d6193ee15ff48be3265dcbd5742707b19b13315603bfb0.png" />
+<img alt="../_images/eac8508f9488c8c01cf0b6045e96037b0889d794a79a5b513b60662aab6af63c.png" src="../_images/eac8508f9488c8c01cf0b6045e96037b0889d794a79a5b513b60662aab6af63c.png" />
+<img alt="../_images/cfb306595c5e5fe4efe5d241fc3687bb49bba17b64b03588810d425cbebf62e2.png" src="../_images/cfb306595c5e5fe4efe5d241fc3687bb49bba17b64b03588810d425cbebf62e2.png" />
+<img alt="../_images/21a1494bc0506e5884ad12c3e22bef6fa6a5a5f3006d9126a0b408fb02121b6c.png" src="../_images/21a1494bc0506e5884ad12c3e22bef6fa6a5a5f3006d9126a0b408fb02121b6c.png" />
+<img alt="../_images/80103d696465d966c16d0ce20ff8aa489b32e7e70a34a50cd8281703d655d17b.png" src="../_images/80103d696465d966c16d0ce20ff8aa489b32e7e70a34a50cd8281703d655d17b.png" />
+<img alt="../_images/5ce132257907fb0a5fc710bd60bb382139024bd91035ffe26d47d473d5977c86.png" src="../_images/5ce132257907fb0a5fc710bd60bb382139024bd91035ffe26d47d473d5977c86.png" />
+<img alt="../_images/3a247c9d9390d49cfad537ddd18ad2e079d360bd1cc538a5068597e9543bcb35.png" src="../_images/3a247c9d9390d49cfad537ddd18ad2e079d360bd1cc538a5068597e9543bcb35.png" />
+<img alt="../_images/82235fee608bb09040c70e81e0bf0da08c71b6d18bad874d9ca4daadd2494de2.png" src="../_images/82235fee608bb09040c70e81e0bf0da08c71b6d18bad874d9ca4daadd2494de2.png" />
+<img alt="../_images/2a3ce794aece3d584ca21d090ed5d1171dffb4dca77c9e67d2a0a170e17fe5ce.png" src="../_images/2a3ce794aece3d584ca21d090ed5d1171dffb4dca77c9e67d2a0a170e17fe5ce.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./15_sparse_labelling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Sparse Stardist training example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-what-devices-we-have-access-to">Check what devices we have access to….</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-inputs-and-ground-truth">Load inputs and ground truth</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-helper-to-collect-the-training-data">Use a helper to collect the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-images">Inspect images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-to-make-sure-we-have-negative-values-in-the-labels">Check to make sure we have negative values in the labels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-stardist-model">Create stardist model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-network-on-one-of-the-training-images-self-prediction">Test network on one of the training images (self prediction)</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

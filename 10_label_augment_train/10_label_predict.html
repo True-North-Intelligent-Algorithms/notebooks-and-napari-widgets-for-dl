@@ -358,8 +358,7 @@ document.write(`
 <p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">io</span>
-<span class="kn">import</span> <span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">napari</span>
 <span class="kn">from</span> <span class="nn">napari_easy_augment_batch_dl</span> <span class="kn">import</span> <span class="n">easy_augment_batch_dl</span>
@@ -367,8 +366,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:albumentations.check_version:A new version of Albumentations is available: 1.4.18 (you have 1.4.12). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
 </pre></div>
 </div>
 </div>
@@ -384,12 +385,16 @@ document.write(`
 <span class="p">)</span>
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#&#39;cellpose_for_protrusions_2&#39;</span>
-<span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;ladybug_first_try&#39;</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span>
 <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
+
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
 
 
@@ -397,87 +402,50 @@ document.write(`
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
 
-    <span class="n">model</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">2</span>
-    <span class="n">model</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    model = batch_dl.deep_learning_project.models[model_type]</span>
+<span class="sd">    model.prob_thresh = -1</span>
+<span class="sd">    model.flow_thresh = 0.4</span>
+<span class="sd">    model.chan_segment = 2</span>
+<span class="sd">    model.chan2 = 3</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
 
     <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">param_widgets</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
     <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_model</span><span class="p">()</span>
-    
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  PytorchSemanticModel
-found class  CellPoseInstanceModel
-creating new log file
-2024-10-21 10:17:01,543 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2024-10-21 10:17:01,544 [INFO] 
-cellpose version: 	3.0.9 
-platform:       	win32 
-python version: 	3.10.14 
-torch version:  	2.2.2+cu118
-found class  MobileSAMModel
-found class  YoloSAMModel
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.io:WRITING LOG OUTPUT TO /home/bnorthan/.cellpose/run.log
+INFO:cellpose.io:
+cellpose version: 	3.0.10 
+platform:       	linux 
+python version: 	3.12.4 
+torch version:  	2.4.0+cu121
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\8220954_10897041.jpg
-labelsum is  412306
-(317, 364, 3) (317, 364)
-8220954_10897041_0
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  CellPoseInstanceModel
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0\8220954_10897041_0.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\37752018_59910952.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\37752018_59910952.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\8220954_10897041.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\8220954_10897041.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\6410573_8085113.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\6410573_8085113.tif is a low contrast image
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.core:** TORCH CUDA version installed and working. **
+INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
+INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs1/models/cellpose_for_ladybugs
+/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(filename, map_location=device)
+INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_labels =  34.060 (mean diameter of training ROIs)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0\8220954_10897041_0.json
-Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0\8220954_10897041_0.tif
-Deleted file: C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0\8220954_10897041_0.tif
-image file is  C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\8220954_10897041.jpg
-labelsum is  412306
-(317, 364, 3) (317, 364)
-8220954_10897041_0
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\input0/8220954_10897041_0.tif
-C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>deep_learning_project.py (347): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\labels\ground truth0\8220954_10897041_0.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\37752018_59910952.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\37752018_59910952.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\8220954_10897041.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\8220954_10897041.tif is a low contrast image
-deep_learning_project.py (368): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\annotations\class_0\6410573_8085113.tif is a low contrast image
-deep_learning_project.py (373): C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\predictions\class_0\6410573_8085113.tif is a low contrast image
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_07_cellpose_multi_nuclear&#39;</span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.models:&gt;&gt; cyto3 &lt;&lt; model set to be used
+INFO:cellpose.models:Downloading: &quot;https://www.cellpose.org/models/cyto3&quot; to /home/bnorthan/.cellpose/models/cyto3
 
-<span class="n">test</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;Empty_02 - Copy.tif&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
-
-<span class="n">test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 65535)
+100%|██████████| 25.3M/25.3M [00:02&lt;00:00, 9.74MB/s]
+INFO:cellpose.core:** TORCH CUDA version installed and working. **
+INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
+INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/.cellpose/models/cyto3
+/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  state_dict = torch.load(filename, map_location=device)
+INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
 </pre></div>
 </div>
 </div>

@@ -1,0 +1,795 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Stardist training example &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '10_label_augment_train/30_stardist_training_2d';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F10_label_augment_train/30_stardist_training_2d.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/10_label_augment_train/30_stardist_training_2d.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Stardist training example</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Stardist training example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-what-devices-we-have-access-to">Check what devices we have access to….</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-inputs-and-ground-truth">Load inputs and ground truth</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-helper-to-collect-the-training-data">Use a helper to collect the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-images">Inspect images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-stardist-model">Create stardist model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-network-on-one-of-the-training-images-self-prediction">Test network on one of the training images (self prediction)</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="stardist-training-example">
+<h1>Stardist training example<a class="headerlink" href="#stardist-training-example" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">imshow_multi2d</span>
+<span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">json</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:03.003682: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-10-23 19:21:03.016068: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-23 19:21:03.031625: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-23 19:21:03.031652: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-23 19:21:03.042694: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-23 19:21:03.836417: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-what-devices-we-have-access-to">
+<h1>Check what devices we have access to….<a class="headerlink" href="#check-what-devices-we-have-access-to" title="Permalink to this heading">#</a></h1>
+<p>Not as important to have a beefy GPU for 2D as it is for 3D, but let’s check</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">visible_devices</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">list_physical_devices</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">visible_devices</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PhysicalDevice(name=&#39;/physical_device:CPU:0&#39;, device_type=&#39;CPU&#39;), PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:07.158211: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:07.220896: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:07.221069: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-inputs-and-ground-truth">
+<h1>Load inputs and ground truth<a class="headerlink" href="#load-inputs-and-ground-truth" title="Permalink to this heading">#</a></h1>
+<p>We load directories called ‘input0’ and ‘ground truth0’ which should exist under <code class="docutils literal notranslate"><span class="pre">train_path</span></code>.  The reason we append ‘0’ to the end of the name is simply because some of the code that generates image and label sets is meant to work on multiple channels (so the 0 is the channel number)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#tnia_images_path = Path(r&#39;/home/bnorthan/images&#39;)</span>
+<span class="n">tnia_images_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;D:/images&quot;</span><span class="p">)</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
+<span class="c1">#test_name=&#39;bsp1-2.jpg&#39;</span>
+<span class="n">n_rays</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span> <span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;info.json&#39;</span><span class="p">),</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">json_file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">json_file</span><span class="p">)</span>
+    <span class="c1"># Access the sub_sample parameter</span>
+    <span class="n">sub_sample</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;sub_sample&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sub_sample&#39;</span><span class="p">,</span><span class="n">sub_sample</span><span class="p">)</span>
+    <span class="n">axes</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;axes&#39;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span><span class="n">axes</span><span class="p">)</span>
+
+<span class="n">image_patch_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;ground truth0&#39;</span><span class="p">)</span>
+<span class="n">label_patch_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">train_path</span> <span class="p">,</span> <span class="s1">&#39;input0&#39;</span> <span class="p">)</span>
+
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span> <span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">model_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">model_path</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_patch_path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;image_patch_path does not exist&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">label_patch_path</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;label_patch_path does not exist&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>sub_sample 1
+axes YXC
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="use-a-helper-to-collect-the-training-data">
+<h1>Use a helper to collect the training data<a class="headerlink" href="#use-a-helper-to-collect-the-training-data" title="Permalink to this heading">#</a></h1>
+<p>The helper will also optionally normalize the inputs.  However in this case we set <code class="docutils literal notranslate"><span class="pre">normalize_input</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p>Normalization is a tricky issue sometimes it makes sense to normalize before creating patches, such that the data is normalized based on statistics of a larger region, closer to the normalization range that will be used for prediction.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">collect_training_data</span>
+<span class="n">add_trivial_channel</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">collect_training_data</span><span class="p">(</span><span class="n">train_path</span><span class="p">,</span> <span class="n">sub_sample</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">downsample</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">normalize_input</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_trivial_channel</span> <span class="o">=</span> <span class="n">add_trivial_channel</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type X &#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type Y &#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
+type X  &lt;class &#39;list&#39;&gt;
+type Y  &lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspect-images">
+<h1>Inspect images<a class="headerlink" href="#inspect-images" title="Permalink to this heading">#</a></h1>
+<p>Output training data shapes and plot images to make sure image and label set look OK</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span><span class="o">=</span><span class="mi">35</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="n">fig</span><span class="o">=</span><span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">Y</span><span class="p">[</span><span class="n">n</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span> <span class="s1">&#39;label&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(256, 256, 3) (256, 256)
+0.041214988 1.0
+0 26
+</pre></div>
+</div>
+<img alt="../_images/4d9026f3548309c8008eae0dab010cf79ceb7bcffeeabb9e87da0879797f0627.png" src="../_images/4d9026f3548309c8008eae0dab010cf79ceb7bcffeeabb9e87da0879797f0627.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">divide_training_data</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">X_val</span><span class="p">,</span> <span class="n">Y_val</span> <span class="o">=</span> <span class="n">divide_training_data</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">val_size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;type X_train &#39;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">X_train</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type X_train  &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-stardist-model">
+<h1>Create stardist model<a class="headerlink" href="#create-stardist-model" title="Permalink to this heading">#</a></h1>
+<p>In this cell we create the model.  Make sure to rename the model and give it a descriptive name that conveys the training data and setting used.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">stardist.models</span> <span class="kn">import</span> <span class="n">StarDist2D</span><span class="p">,</span> <span class="n">Config2D</span>
+
+<span class="k">if</span> <span class="n">axes</span> <span class="o">==</span> <span class="s1">&#39;YXC&#39;</span><span class="p">:</span>
+    <span class="n">n_channel_in</span> <span class="o">=</span><span class="mi">3</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">n_channel_in</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;ladybug_first_try&quot;</span>
+<span class="n">new_model</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">if</span> <span class="n">new_model</span><span class="p">:</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">Config2D</span> <span class="p">(</span><span class="n">n_rays</span><span class="o">=</span><span class="n">n_rays</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">axes</span><span class="p">,</span><span class="n">n_channel_in</span><span class="o">=</span><span class="n">n_channel_in</span><span class="p">,</span> <span class="n">train_patch_size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span><span class="mi">256</span><span class="p">),</span> <span class="n">unet_n_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">config</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">StarDist2D</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">model_name</span><span class="p">,</span> <span class="n">basedir</span><span class="o">=</span><span class="n">model_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:24.535863: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.536005: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.536079: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.589061: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.589212: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.589335: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-23 19:21:24.589406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 6264 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 4070 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading network weights from &#39;weights_best.h5&#39;.
+Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
+Using default values: prob_thresh=0.5, nms_thresh=0.4.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="train-the-model">
+<h1>Train the model<a class="headerlink" href="#train-the-model" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">X_val</span><span class="p">,</span><span class="n">Y_val</span><span class="p">),</span><span class="n">epochs</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">steps_per_epoch</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1729725695.026569  186943 service.cc:145] XLA service 0x76296001fe20 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1729725695.026618  186943 service.cc:153]   StreamExecutor device (0): NVIDIA GeForce RTX 4070 Laptop GPU, Compute Capability 8.9
+2024-10-23 19:21:35.112017: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-10-23 19:21:40.489358: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:465] Loaded cuDNN version 8907
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  2/200</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 73ms/step - dist_dist_iou_metric: 0.8748 - dist_relevant_mae: 1.3071 - dist_relevant_mse: 5.3448 - loss: 0.4891 - prob_kld: 0.0135 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I0000 00:00:1729725710.258196  186943 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">41s</span> 117ms/step - dist_dist_iou_metric: 0.9127 - dist_relevant_mae: 0.8487 - dist_relevant_mse: 2.1027 - loss: 0.3870 - prob_kld: 0.0061 - val_dist_dist_iou_metric: 0.9314 - val_dist_relevant_mae: 0.6628 - val_dist_relevant_mse: 1.3742 - val_loss: 0.3480 - val_prob_kld: 0.0023 - learning_rate: 3.0000e-04
+Epoch 2/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 76ms/step - dist_dist_iou_metric: 0.9309 - dist_relevant_mae: 0.6504 - dist_relevant_mse: 1.2761 - loss: 0.3443 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9267 - val_dist_relevant_mae: 0.7218 - val_dist_relevant_mse: 1.4885 - val_loss: 0.3597 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 3/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9300 - dist_relevant_mae: 0.6621 - dist_relevant_mse: 1.3125 - loss: 0.3464 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9331 - val_dist_relevant_mae: 0.6468 - val_dist_relevant_mse: 1.3480 - val_loss: 0.3447 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 4/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9316 - dist_relevant_mae: 0.6439 - dist_relevant_mse: 1.2671 - loss: 0.3429 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9305 - val_dist_relevant_mae: 0.6684 - val_dist_relevant_mse: 1.4020 - val_loss: 0.3493 - val_prob_kld: 0.0024 - learning_rate: 3.0000e-04
+Epoch 5/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9315 - dist_relevant_mae: 0.6448 - dist_relevant_mse: 1.2840 - loss: 0.3426 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9328 - val_dist_relevant_mae: 0.6494 - val_dist_relevant_mse: 1.3462 - val_loss: 0.3451 - val_prob_kld: 0.0020 - learning_rate: 3.0000e-04
+Epoch 6/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9279 - dist_relevant_mae: 0.6820 - dist_relevant_mse: 1.3543 - loss: 0.3499 - prob_kld: 0.0025 - val_dist_dist_iou_metric: 0.9317 - val_dist_relevant_mae: 0.6632 - val_dist_relevant_mse: 1.3746 - val_loss: 0.3479 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 7/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9279 - dist_relevant_mae: 0.6855 - dist_relevant_mse: 1.3461 - loss: 0.3514 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9270 - val_dist_relevant_mae: 0.7192 - val_dist_relevant_mse: 1.4800 - val_loss: 0.3593 - val_prob_kld: 0.0023 - learning_rate: 3.0000e-04
+Epoch 8/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9317 - dist_relevant_mae: 0.6413 - dist_relevant_mse: 1.2437 - loss: 0.3420 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9326 - val_dist_relevant_mae: 0.6485 - val_dist_relevant_mse: 1.3469 - val_loss: 0.3450 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 9/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 75ms/step - dist_dist_iou_metric: 0.9329 - dist_relevant_mae: 0.6306 - dist_relevant_mse: 1.2301 - loss: 0.3395 - prob_kld: 0.0021 - val_dist_dist_iou_metric: 0.9310 - val_dist_relevant_mae: 0.6686 - val_dist_relevant_mse: 1.3967 - val_loss: 0.3490 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 10/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9311 - dist_relevant_mae: 0.6473 - dist_relevant_mse: 1.2746 - loss: 0.3437 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9321 - val_dist_relevant_mae: 0.6555 - val_dist_relevant_mse: 1.3666 - val_loss: 0.3465 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
+Epoch 11/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9313 - dist_relevant_mae: 0.6476 - dist_relevant_mse: 1.2763 - loss: 0.3433 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9330 - val_dist_relevant_mae: 0.6471 - val_dist_relevant_mse: 1.3454 - val_loss: 0.3447 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 12/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9307 - dist_relevant_mae: 0.6525 - dist_relevant_mse: 1.2789 - loss: 0.3444 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9278 - val_dist_relevant_mae: 0.6973 - val_dist_relevant_mse: 1.4575 - val_loss: 0.3549 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
+Epoch 13/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9261 - dist_relevant_mae: 0.7020 - dist_relevant_mse: 1.4089 - loss: 0.3541 - prob_kld: 0.0025 - val_dist_dist_iou_metric: 0.9333 - val_dist_relevant_mae: 0.6484 - val_dist_relevant_mse: 1.3356 - val_loss: 0.3450 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 14/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9310 - dist_relevant_mae: 0.6477 - dist_relevant_mse: 1.2430 - loss: 0.3423 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9325 - val_dist_relevant_mae: 0.6481 - val_dist_relevant_mse: 1.3436 - val_loss: 0.3449 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 15/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 72ms/step - dist_dist_iou_metric: 0.9319 - dist_relevant_mae: 0.6399 - dist_relevant_mse: 1.2357 - loss: 0.3421 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9303 - val_dist_relevant_mae: 0.6683 - val_dist_relevant_mse: 1.3854 - val_loss: 0.3490 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 16/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 72ms/step - dist_dist_iou_metric: 0.9314 - dist_relevant_mae: 0.6475 - dist_relevant_mse: 1.2724 - loss: 0.3431 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9290 - val_dist_relevant_mae: 0.6875 - val_dist_relevant_mse: 1.4323 - val_loss: 0.3529 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
+Epoch 17/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9304 - dist_relevant_mae: 0.6581 - dist_relevant_mse: 1.2802 - loss: 0.3467 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9332 - val_dist_relevant_mae: 0.6418 - val_dist_relevant_mse: 1.3289 - val_loss: 0.3437 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
+Epoch 18/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9322 - dist_relevant_mae: 0.6386 - dist_relevant_mse: 1.2430 - loss: 0.3422 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9333 - val_dist_relevant_mae: 0.6503 - val_dist_relevant_mse: 1.3397 - val_loss: 0.3453 - val_prob_kld: 0.0020 - learning_rate: 3.0000e-04
+Epoch 19/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9326 - dist_relevant_mae: 0.6320 - dist_relevant_mse: 1.2272 - loss: 0.3391 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9303 - val_dist_relevant_mae: 0.6722 - val_dist_relevant_mse: 1.3922 - val_loss: 0.3498 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
+Epoch 20/20
+<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 72ms/step - dist_dist_iou_metric: 0.9318 - dist_relevant_mae: 0.6443 - dist_relevant_mse: 1.2580 - loss: 0.3427 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9334 - val_dist_relevant_mae: 0.6430 - val_dist_relevant_mse: 1.3208 - val_loss: 0.3440 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
+
+Loading network weights from &#39;weights_best.h5&#39;.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.history.History at 0x762a96b3c650&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#model.optimize_thresholds(X_train, Y_train)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="test-network-on-one-of-the-training-images-self-prediction">
+<h1>Test network on one of the training images (self prediction)<a class="headerlink" href="#test-network-on-one-of-the-training-images-self-prediction" title="Permalink to this heading">#</a></h1>
+<p>Self prediction is not a good way to evaluate the ‘real’ performance of the NN.  However it is good sanity test.  If the self prediction looks wrong something really went bad.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">labels</span><span class="p">,</span> <span class="n">details</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_instances</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">prob_thresh</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">nms_thresh</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">Y_train</span><span class="p">[</span><span class="n">n</span><span class="p">],</span><span class="n">labels</span><span class="p">],[</span><span class="s1">&#39;input&#39;</span><span class="p">,</span><span class="s1">&#39;ground truth&#39;</span><span class="p">,</span><span class="s1">&#39;predicted instances&#39;</span><span class="p">],</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.003937008..1.0].
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.003937008..1.0].
+</pre></div>
+</div>
+<img alt="../_images/0882f443e9109f5c25b832096183a106e2b903d5aee5bee5df2a0c084f02c824.png" src="../_images/0882f443e9109f5c25b832096183a106e2b903d5aee5bee5df2a0c084f02c824.png" />
+<img alt="../_images/43a59fa8dc918f86667583dcbbb16e1169e869e77d8ea07469c58dcfb0934151.png" src="../_images/43a59fa8dc918f86667583dcbbb16e1169e869e77d8ea07469c58dcfb0934151.png" />
+<img alt="../_images/50a425edd3cd6b18aed917be9e5320fbcdbd469f2cd2ddf9c29373ddfae60d98.png" src="../_images/50a425edd3cd6b18aed917be9e5320fbcdbd469f2cd2ddf9c29373ddfae60d98.png" />
+<img alt="../_images/cda0b6d63c19565d1194c620599a3202de67f29f27b7f71ae559b338e16e2293.png" src="../_images/cda0b6d63c19565d1194c620599a3202de67f29f27b7f71ae559b338e16e2293.png" />
+<img alt="../_images/e3b4adcd1bcc182caa95696bd55f6164d92968e364190ac5d4a32fe8693bcf56.png" src="../_images/e3b4adcd1bcc182caa95696bd55f6164d92968e364190ac5d4a32fe8693bcf56.png" />
+<img alt="../_images/51fb3ff86d8d6c5296445c82b0edd42ea14d50180914724075fa1fb8d00cc27f.png" src="../_images/51fb3ff86d8d6c5296445c82b0edd42ea14d50180914724075fa1fb8d00cc27f.png" />
+<img alt="../_images/a64024d0eeb2f134fb27153efc09fa853882fcf57d08401df81d77f3358ad2a3.png" src="../_images/a64024d0eeb2f134fb27153efc09fa853882fcf57d08401df81d77f3358ad2a3.png" />
+<img alt="../_images/ef98954dfeba4f74e323df29b40c6697f511b32f9e23ef8da6c8c42cdf682e58.png" src="../_images/ef98954dfeba4f74e323df29b40c6697f511b32f9e23ef8da6c8c42cdf682e58.png" />
+<img alt="../_images/34254886a89d6a71286c365aa2e9e2c2d93c024181000c7e88a22e05851006df.png" src="../_images/34254886a89d6a71286c365aa2e9e2c2d93c024181000c7e88a22e05851006df.png" />
+<img alt="../_images/c55d4f3517c7010106cef11d57e4357ebdbde7def206390a7f66798c028cf9c4.png" src="../_images/c55d4f3517c7010106cef11d57e4357ebdbde7def206390a7f66798c028cf9c4.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./10_label_augment_train"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Stardist training example</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#check-what-devices-we-have-access-to">Check what devices we have access to….</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-inputs-and-ground-truth">Load inputs and ground truth</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#use-a-helper-to-collect-the-training-data">Use a helper to collect the training data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-images">Inspect images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-stardist-model">Create stardist model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#train-the-model">Train the model</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#test-network-on-one-of-the-training-images-self-prediction">Test network on one of the training images (self prediction)</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
