@@ -1,12 +1,4 @@
-## Todo: Dependences
-
-
-Install latest development version of napari-easy-augment-batch-dl and tnia-python
-
-```
-    pip install git+https://github.com/bnorthan/napari-easy-augment-batch-dl.git
-    pip install git+https://github.com/True-North-Intelligent-Algorithms/tnia-python.git
-```
+## Dependences
 
 You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)
 
@@ -24,21 +16,21 @@ You will also need one or more of stardist, cellpose, segment-everything or Yolo
 #### Windows
 
 ```
-    conda install -c conda-forge cudatoolkit=11.2 cudnn=8.1.0
+    conda install -c conda-forge cudatoolkit=11.8 cudnn=8.1.0
     pip install "tensorflow<2.11"
-    pip install stardist==0.8.5
-    pip install gputools
-    pip install edt
 ```
 
 #### Linux
 
 ```
     pip install tensorflow[and-cuda]
-    pip install stardist
-    pip install gputools
-    pip install edt
 ```
+
+#### Windows and Linux
+
+pip install stardist
+pip install gputools
+pip install edt
 
 ### Pytorch (for unet segmentation)
 
@@ -58,6 +50,18 @@ You will also need one or more of stardist, cellpose, segment-everything or Yolo
 
 ### SAM (Segment Anything)
 
+Install ```segment-everything``` which will install SAM as a dependency and also has a vendored copy of [MobileSAMv2](https://github.com/ChaoningZhang/MobileSAM)
+
 ```
     pip install segment-everything
+```
+
+### Napari-easy-augment-batch-dl and tnia-python
+
+Install latest development version of napari-easy-augment-batch-dl, tnia-python and napari-segment-everything.
+
+```
+    pip install git+https://github.com/bnorthan/napari-easy-augment-batch-dl.git
+    pip install git+https://github.com/True-North-Intelligent-Algorithms/tnia-python.git 
+    pip install git+https://github.com/True-North-Intelligent-Algorithms/napari-segment-everything.git
 ```

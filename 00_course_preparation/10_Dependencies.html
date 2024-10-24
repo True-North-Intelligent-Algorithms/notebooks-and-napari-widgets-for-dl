@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Todo: Dependences &#8212; My Jupyter Book</title>
+    <title>Dependences &#8212; My Jupyter Book</title>
   
   
   
@@ -158,6 +158,7 @@ const thebe_selector_output = ".output, .cell_output"
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="05_Setup.html">Setup</a></li>
+
 
 </ul>
 
@@ -342,7 +343,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Todo: Dependences</h1>
+    <h1>Dependences</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -355,11 +356,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-and-linux">Windows and Linux</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-and-tnia-python">Napari-easy-augment-batch-dl and tnia-python</a></li>
 </ul>
             </nav>
         </div>
@@ -371,13 +374,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="todo-dependences">
-<h1>Todo: Dependences<a class="headerlink" href="#todo-dependences" title="Permalink to this heading">#</a></h1>
-<p>Install latest development version of napari-easy-augment-batch-dl and tnia-python</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bnorthan</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span>
-</pre></div>
-</div>
+  <section id="dependences">
+<h1>Dependences<a class="headerlink" href="#dependences" title="Permalink to this heading">#</a></h1>
 <p>You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">napari</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
@@ -390,22 +388,22 @@ document.write(`
 <h2>Stardist<a class="headerlink" href="#stardist" title="Permalink to this heading">#</a></h2>
 <section id="windows">
 <h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.2</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.8</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow&lt;2.11&quot;</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span><span class="o">==</span><span class="mf">0.8.5</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
 </pre></div>
 </div>
 </section>
 <section id="linux">
 <h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span><span class="p">[</span><span class="ow">and</span><span class="o">-</span><span class="n">cuda</span><span class="p">]</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
 </pre></div>
 </div>
+</section>
+<section id="windows-and-linux">
+<h3>Windows and Linux<a class="headerlink" href="#windows-and-linux" title="Permalink to this heading">#</a></h3>
+<p>pip install stardist
+pip install gputools
+pip install edt</p>
 </section>
 </section>
 <section id="pytorch-for-unet-segmentation">
@@ -426,7 +424,17 @@ document.write(`
 </section>
 <section id="sam-segment-anything">
 <h2>SAM (Segment Anything)<a class="headerlink" href="#sam-segment-anything" title="Permalink to this heading">#</a></h2>
+<p>Install <code class="docutils literal notranslate"><span class="pre">segment-everything</span></code> which will install SAM as a dependency and also has a vendored copy of <a class="reference external" href="https://github.com/ChaoningZhang/MobileSAM">MobileSAMv2</a></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">segment</span><span class="o">-</span><span class="n">everything</span>
+</pre></div>
+</div>
+</section>
+<section id="napari-easy-augment-batch-dl-and-tnia-python">
+<h2>Napari-easy-augment-batch-dl and tnia-python<a class="headerlink" href="#napari-easy-augment-batch-dl-and-tnia-python" title="Permalink to this heading">#</a></h2>
+<p>Install latest development version of napari-easy-augment-batch-dl, tnia-python and napari-segment-everything.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bnorthan</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </section>
@@ -493,11 +501,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-and-linux">Windows and Linux</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-and-tnia-python">Napari-easy-augment-batch-dl and tnia-python</a></li>
 </ul>
   </nav></div>
 
