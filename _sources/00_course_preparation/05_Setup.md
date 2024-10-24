@@ -16,8 +16,7 @@ Visual Studio Code can be installed from [here](https://code.visualstudio.com/do
 
 The following extensions are needed (you can search for them in the ```Extensions``` panel)
 
-Python Extensions (choose the one from Microsoft)
-Python Debugger ()
+Python Extension and Python Debugger (choose the one from Microsoft)
 
 ![Not found](./VS_Python.jpg)
 

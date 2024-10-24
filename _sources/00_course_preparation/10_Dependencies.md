@@ -1,4 +1,4 @@
-## Dependences
+## Dependencies
 
 You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)
 
@@ -28,9 +28,11 @@ You will also need one or more of stardist, cellpose, segment-everything or Yolo
 
 #### Windows and Linux
 
-pip install stardist
-pip install gputools
-pip install edt
+```
+pip install stardist 
+pip install gputools 
+pip install edt 
+```
 
 ### Pytorch (for unet segmentation)
 

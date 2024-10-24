@@ -1,4 +1,4 @@
-## Introdction
+## Sparse Labeling 
 
 Todo:  Introduction to labelling and augmentation section
 

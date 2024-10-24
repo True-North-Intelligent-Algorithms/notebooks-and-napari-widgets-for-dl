@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10_label_augment_train/10_label_predict';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20_scale/30_label_predict';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Make patches from labels" href="20_create_patches.html" />
-    <link rel="prev" title="Labeling and Augmentation" href="05_introduction.html" />
+    <link rel="next" title="Segment Everything" href="../30_segment_everything/05_introduction.html" />
+    <link rel="prev" title="Cellpose trained to learn scale" href="20_cell_pose_diameter.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -165,20 +165,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Labeling and Augmentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/05_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="30_stardist_training_2d.html">Stardist training example</a></li>
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
 
 
 
@@ -203,13 +203,13 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Scale</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
+<li class="toctree-l2"><a class="reference internal" href="20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
 
 
 
@@ -217,7 +217,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="simple">
@@ -294,7 +294,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F10_label_augment_train/10_label_predict.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F20_scale/30_label_predict.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -324,7 +324,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/10_label_augment_train/10_label_predict.ipynb" target="_blank"
+      <li><a href="../_sources/20_scale/30_label_predict.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -434,7 +434,14 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:albumentations.check_version:A new version of Albumentations is available: 1.4.18 (you have 1.4.12). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:albumentations.check_version:A new version of Albumentations is available: 1.4.18 (you have 1.4.11). Upgrade using: pip install --upgrade albumentations
+2024-10-22 09:33:47.202751: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2024-10-22 09:33:47.212745: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-22 09:33:47.227159: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-22 09:33:47.227184: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-22 09:33:47.236538: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-22 09:33:47.848762: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
 </pre></div>
 </div>
 </div>
@@ -451,15 +458,12 @@ document.write(`
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
-<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_sparse&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;ladybug_first_try&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;ladybug_sparse&#39;</span>
+<span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
 <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
-
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
-
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
 
 
@@ -481,36 +485,55 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.io:WRITING LOG OUTPUT TO /home/bnorthan/.cellpose/run.log
-INFO:cellpose.io:
-cellpose version: 	3.0.10 
-platform:       	linux 
-python version: 	3.12.4 
-torch version:  	2.4.0+cu121
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  StardistInstanceModel
+Loading network weights from &#39;weights_best.h5&#39;.
+Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
+Using default values: prob_thresh=0.5, nms_thresh=0.4.
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  CellPoseInstanceModel
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-22 09:33:54.386041: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.427335: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.427538: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.428746: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.429002: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.429196: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.509732: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.509939: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.510043: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
+2024-10-22 09:33:54.510114: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1138 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 4070 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.core:** TORCH CUDA version installed and working. **
-INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
-INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs1/models/cellpose_for_ladybugs
-/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  state_dict = torch.load(filename, map_location=device)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_labels =  34.060 (mean diameter of training ROIs)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1729604086.216713   73333 service.cc:145] XLA service 0x79618400a560 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1729604086.216732   73333 service.cc:153]   StreamExecutor device (0): NVIDIA GeForce RTX 4070 Laptop GPU, Compute Capability 8.9
+2024-10-22 09:34:46.235030: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
+2024-10-22 09:34:46.290192: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:465] Loaded cuDNN version 8907
+2024-10-22 09:34:47.594859: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.20GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:47.653799: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:49.339816: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.14MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:49.370611: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.14MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:50.165242: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:50.165271: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:50.173946: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:50.182620: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+2024-10-22 09:34:50.182627: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
+I0000 00:00:1729604090.484897   73333 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.models:&gt;&gt; cyto3 &lt;&lt; model set to be used
-INFO:cellpose.models:Downloading: &quot;https://www.cellpose.org/models/cyto3&quot; to /home/bnorthan/.cellpose/models/cyto3
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_07_cellpose_multi_nuclear&#39;</span>
 
-100%|██████████| 25.3M/25.3M [00:02&lt;00:00, 9.74MB/s]
-INFO:cellpose.core:** TORCH CUDA version installed and working. **
-INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
-INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/.cellpose/models/cyto3
-/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  state_dict = torch.load(filename, map_location=device)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+<span class="n">test</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;Empty_02 - Copy.tif&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
+
+<span class="n">test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 65535)
 </pre></div>
 </div>
 </div>
@@ -530,7 +553,7 @@ INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled t
         },
         kernelOptions: {
             name: "python3",
-            path: "./10_label_augment_train"
+            path: "./20_scale"
         },
         predefinedOutput: true
     }
@@ -549,20 +572,20 @@ INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled t
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="05_introduction.html"
+       href="20_cell_pose_diameter.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Labeling and Augmentation</p>
+        <p class="prev-next-title">Cellpose trained to learn scale</p>
       </div>
     </a>
     <a class="right-next"
-       href="20_create_patches.html"
+       href="../30_segment_everything/05_introduction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Make patches from labels</p>
+        <p class="prev-next-title">Segment Everything</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
