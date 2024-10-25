@@ -163,10 +163,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Labeling and Augmentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="07_file_organization.html">File Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_label_predict.html">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
 
 
@@ -217,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -443,6 +447,7 @@ document.write(`
                   
   <section id="train-a-cellpose-2d-model">
 <h1>Train a cellpose 2D model<a class="headerlink" href="#train-a-cellpose-2d-model" title="Permalink to this heading">#</a></h1>
+<p>This notebook shows how to train a Stardist model.  After training go back and load the model into <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> to test the model.</p>
 <p>Before running this notebook a set of patches must exist in the following format.</p>
 <ol class="arabic simple">
 <li><p>Ground Truth are put in a directory called <code class="docutils literal notranslate"><span class="pre">/ground</span> <span class="pre">truth0</span></code></p></li>
@@ -616,8 +621,8 @@ torch version:  	2.4.0+cu121
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">train</span>
 
-<span class="n">channel_to_segment</span> <span class="o">=</span> <span class="mi">2</span>
-<span class="n">optional_channel</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">channel_to_segment</span> <span class="o">=</span> <span class="mi">0</span> 
+<span class="n">optional_channel</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="n">new_model_path</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">train_seg</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> 
                               <span class="c1">#test_data=X_val,</span>

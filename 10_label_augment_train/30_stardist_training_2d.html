@@ -163,10 +163,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Labeling and Augmentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="07_file_organization.html">File Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_label_predict.html">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
 
 
@@ -217,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -441,6 +445,13 @@ document.write(`
                   
   <section id="stardist-training-example">
 <h1>Stardist training example<a class="headerlink" href="#stardist-training-example" title="Permalink to this heading">#</a></h1>
+<p>This notebook shows how to train a Stardist model.  After training go back and load the model into <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> to test the model.</p>
+<p>Before running this notebook a set of patches must exist in the following format.</p>
+<ol class="arabic simple">
+<li><p>Ground Truth are put in a directory called <code class="docutils literal notranslate"><span class="pre">/ground</span> <span class="pre">truth0</span></code></p></li>
+<li><p>Inputs are put in a directory called <code class="docutils literal notranslate"><span class="pre">inputn</span></code> where n is an integer 0…m and represents the channel.  Note:  RGB images may only have one ‘channel’ directory.</p></li>
+<li><p>In each of the both directories there exist a set of files of the same names.  For example if in the <code class="docutils literal notranslate"><span class="pre">inputn</span></code> directory we have <code class="docutils literal notranslate"><span class="pre">apples0</span></code>, <code class="docutils literal notranslate"><span class="pre">apples1</span></code>, <code class="docutils literal notranslate"><span class="pre">apples2</span></code> label images of the same name must exist in the <code class="docutils literal notranslate"><span class="pre">ground</span> <span class="pre">truth</span></code> directory.</p></li>
+</ol>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
@@ -448,17 +459,6 @@ document.write(`
 <span class="kn">import</span> <span class="nn">tensorflow</span> <span class="k">as</span> <span class="nn">tf</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">json</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:03.003682: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2024-10-23 19:21:03.016068: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
-2024-10-23 19:21:03.031625: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
-2024-10-23 19:21:03.031652: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2024-10-23 19:21:03.042694: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-10-23 19:21:03.836417: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
 </pre></div>
 </div>
 </div>
@@ -478,11 +478,6 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PhysicalDevice(name=&#39;/physical_device:CPU:0&#39;, device_type=&#39;CPU&#39;), PhysicalDevice(name=&#39;/physical_device:GPU:0&#39;, device_type=&#39;GPU&#39;)]
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:07.158211: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:07.220896: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:07.221069: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-</pre></div>
-</div>
 </div>
 </div>
 </section>
@@ -491,12 +486,10 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
 <p>We load directories called ‘input0’ and ‘ground truth0’ which should exist under <code class="docutils literal notranslate"><span class="pre">train_path</span></code>.  The reason we append ‘0’ to the end of the name is simply because some of the code that generates image and label sets is meant to work on multiple channels (so the 0 is the channel number)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#tnia_images_path = Path(r&#39;/home/bnorthan/images&#39;)</span>
-<span class="n">tnia_images_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;D:/images&quot;</span><span class="p">)</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
+<span class="c1">#data_path = r&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
-<span class="c1">#test_name=&#39;bsp1-2.jpg&#39;</span>
 <span class="n">n_rays</span> <span class="o">=</span> <span class="mi">32</span>
 
 <span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span> <span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">)</span>
@@ -550,8 +543,7 @@ axes YXC
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
-type X  &lt;class &#39;list&#39;&gt;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type X  &lt;class &#39;list&#39;&gt;
 type Y  &lt;class &#39;list&#39;&gt;
 </pre></div>
 </div>
@@ -572,12 +564,15 @@ type Y  &lt;class &#39;list&#39;&gt;
 </div>
 </div>
 <div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [-0.003937008..1.0].
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(256, 256, 3) (256, 256)
-0.041214988 1.0
+-0.003937008 1.0
 0 26
 </pre></div>
 </div>
-<img alt="../_images/4d9026f3548309c8008eae0dab010cf79ceb7bcffeeabb9e87da0879797f0627.png" src="../_images/4d9026f3548309c8008eae0dab010cf79ceb7bcffeeabb9e87da0879797f0627.png" />
+<img alt="../_images/b40ebf62b620b4781257ac4f09e17ef3708a7ef695479f668eef08b7ad044091.png" src="../_images/b40ebf62b620b4781257ac4f09e17ef3708a7ef695479f668eef08b7ad044091.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -609,8 +604,8 @@ type Y  &lt;class &#39;list&#39;&gt;
 <span class="k">else</span><span class="p">:</span>
     <span class="n">n_channel_in</span> <span class="o">=</span> <span class="mi">1</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;ladybug_first_try&quot;</span>
-<span class="n">new_model</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s2">&quot;stardist_for_ladybugs&quot;</span>
+<span class="n">new_model</span> <span class="o">=</span> <span class="kc">True</span>
 
 <span class="k">if</span> <span class="n">new_model</span><span class="p">:</span>
 
@@ -622,18 +617,7 @@ type Y  &lt;class &#39;list&#39;&gt;
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-23 19:21:24.535863: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.536005: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.536079: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.589061: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.589212: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.589335: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-23 19:21:24.589406: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 6264 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 4070 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loading network weights from &#39;weights_best.h5&#39;.
-Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
-Using default values: prob_thresh=0.5, nms_thresh=0.4.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using default values: prob_thresh=0.5, nms_thresh=0.4.
 </pre></div>
 </div>
 </div>
@@ -649,65 +633,6 @@ Using default values: prob_thresh=0.5, nms_thresh=0.4.
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/20
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1729725695.026569  186943 service.cc:145] XLA service 0x76296001fe20 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
-I0000 00:00:1729725695.026618  186943 service.cc:153]   StreamExecutor device (0): NVIDIA GeForce RTX 4070 Laptop GPU, Compute Capability 8.9
-2024-10-23 19:21:35.112017: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
-2024-10-23 19:21:40.489358: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:465] Loaded cuDNN version 8907
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">  2/200</span> <span class=" -Color -Color-White">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 73ms/step - dist_dist_iou_metric: 0.8748 - dist_relevant_mae: 1.3071 - dist_relevant_mse: 5.3448 - loss: 0.4891 - prob_kld: 0.0135 
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I0000 00:00:1729725710.258196  186943 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">41s</span> 117ms/step - dist_dist_iou_metric: 0.9127 - dist_relevant_mae: 0.8487 - dist_relevant_mse: 2.1027 - loss: 0.3870 - prob_kld: 0.0061 - val_dist_dist_iou_metric: 0.9314 - val_dist_relevant_mae: 0.6628 - val_dist_relevant_mse: 1.3742 - val_loss: 0.3480 - val_prob_kld: 0.0023 - learning_rate: 3.0000e-04
-Epoch 2/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 76ms/step - dist_dist_iou_metric: 0.9309 - dist_relevant_mae: 0.6504 - dist_relevant_mse: 1.2761 - loss: 0.3443 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9267 - val_dist_relevant_mae: 0.7218 - val_dist_relevant_mse: 1.4885 - val_loss: 0.3597 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 3/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9300 - dist_relevant_mae: 0.6621 - dist_relevant_mse: 1.3125 - loss: 0.3464 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9331 - val_dist_relevant_mae: 0.6468 - val_dist_relevant_mse: 1.3480 - val_loss: 0.3447 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 4/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9316 - dist_relevant_mae: 0.6439 - dist_relevant_mse: 1.2671 - loss: 0.3429 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9305 - val_dist_relevant_mae: 0.6684 - val_dist_relevant_mse: 1.4020 - val_loss: 0.3493 - val_prob_kld: 0.0024 - learning_rate: 3.0000e-04
-Epoch 5/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9315 - dist_relevant_mae: 0.6448 - dist_relevant_mse: 1.2840 - loss: 0.3426 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9328 - val_dist_relevant_mae: 0.6494 - val_dist_relevant_mse: 1.3462 - val_loss: 0.3451 - val_prob_kld: 0.0020 - learning_rate: 3.0000e-04
-Epoch 6/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9279 - dist_relevant_mae: 0.6820 - dist_relevant_mse: 1.3543 - loss: 0.3499 - prob_kld: 0.0025 - val_dist_dist_iou_metric: 0.9317 - val_dist_relevant_mae: 0.6632 - val_dist_relevant_mse: 1.3746 - val_loss: 0.3479 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 7/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9279 - dist_relevant_mae: 0.6855 - dist_relevant_mse: 1.3461 - loss: 0.3514 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9270 - val_dist_relevant_mae: 0.7192 - val_dist_relevant_mse: 1.4800 - val_loss: 0.3593 - val_prob_kld: 0.0023 - learning_rate: 3.0000e-04
-Epoch 8/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9317 - dist_relevant_mae: 0.6413 - dist_relevant_mse: 1.2437 - loss: 0.3420 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9326 - val_dist_relevant_mae: 0.6485 - val_dist_relevant_mse: 1.3469 - val_loss: 0.3450 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 9/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 75ms/step - dist_dist_iou_metric: 0.9329 - dist_relevant_mae: 0.6306 - dist_relevant_mse: 1.2301 - loss: 0.3395 - prob_kld: 0.0021 - val_dist_dist_iou_metric: 0.9310 - val_dist_relevant_mae: 0.6686 - val_dist_relevant_mse: 1.3967 - val_loss: 0.3490 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 10/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 74ms/step - dist_dist_iou_metric: 0.9311 - dist_relevant_mae: 0.6473 - dist_relevant_mse: 1.2746 - loss: 0.3437 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9321 - val_dist_relevant_mae: 0.6555 - val_dist_relevant_mse: 1.3666 - val_loss: 0.3465 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
-Epoch 11/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9313 - dist_relevant_mae: 0.6476 - dist_relevant_mse: 1.2763 - loss: 0.3433 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9330 - val_dist_relevant_mae: 0.6471 - val_dist_relevant_mse: 1.3454 - val_loss: 0.3447 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 12/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9307 - dist_relevant_mae: 0.6525 - dist_relevant_mse: 1.2789 - loss: 0.3444 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9278 - val_dist_relevant_mae: 0.6973 - val_dist_relevant_mse: 1.4575 - val_loss: 0.3549 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
-Epoch 13/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9261 - dist_relevant_mae: 0.7020 - dist_relevant_mse: 1.4089 - loss: 0.3541 - prob_kld: 0.0025 - val_dist_dist_iou_metric: 0.9333 - val_dist_relevant_mae: 0.6484 - val_dist_relevant_mse: 1.3356 - val_loss: 0.3450 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 14/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9310 - dist_relevant_mae: 0.6477 - dist_relevant_mse: 1.2430 - loss: 0.3423 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9325 - val_dist_relevant_mae: 0.6481 - val_dist_relevant_mse: 1.3436 - val_loss: 0.3449 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 15/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 72ms/step - dist_dist_iou_metric: 0.9319 - dist_relevant_mae: 0.6399 - dist_relevant_mse: 1.2357 - loss: 0.3421 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9303 - val_dist_relevant_mae: 0.6683 - val_dist_relevant_mse: 1.3854 - val_loss: 0.3490 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 16/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 72ms/step - dist_dist_iou_metric: 0.9314 - dist_relevant_mae: 0.6475 - dist_relevant_mse: 1.2724 - loss: 0.3431 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9290 - val_dist_relevant_mae: 0.6875 - val_dist_relevant_mse: 1.4323 - val_loss: 0.3529 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
-Epoch 17/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9304 - dist_relevant_mae: 0.6581 - dist_relevant_mse: 1.2802 - loss: 0.3467 - prob_kld: 0.0023 - val_dist_dist_iou_metric: 0.9332 - val_dist_relevant_mae: 0.6418 - val_dist_relevant_mse: 1.3289 - val_loss: 0.3437 - val_prob_kld: 0.0021 - learning_rate: 3.0000e-04
-Epoch 18/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9322 - dist_relevant_mae: 0.6386 - dist_relevant_mse: 1.2430 - loss: 0.3422 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9333 - val_dist_relevant_mae: 0.6503 - val_dist_relevant_mse: 1.3397 - val_loss: 0.3453 - val_prob_kld: 0.0020 - learning_rate: 3.0000e-04
-Epoch 19/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">15s</span> 73ms/step - dist_dist_iou_metric: 0.9326 - dist_relevant_mae: 0.6320 - dist_relevant_mse: 1.2272 - loss: 0.3391 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9303 - val_dist_relevant_mae: 0.6722 - val_dist_relevant_mse: 1.3922 - val_loss: 0.3498 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
-Epoch 20/20
-<span class=" -Color -Color-Bold">200/200</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">14s</span> 72ms/step - dist_dist_iou_metric: 0.9318 - dist_relevant_mae: 0.6443 - dist_relevant_mse: 1.2580 - loss: 0.3427 - prob_kld: 0.0022 - val_dist_dist_iou_metric: 0.9334 - val_dist_relevant_mae: 0.6430 - val_dist_relevant_mse: 1.3208 - val_loss: 0.3440 - val_prob_kld: 0.0022 - learning_rate: 3.0000e-04
-
-Loading network weights from &#39;weights_best.h5&#39;.
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.src.callbacks.history.History at 0x762a96b3c650&gt;
 </pre></div>
 </div>
 </div>

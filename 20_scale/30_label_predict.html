@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Explore Data &#8212; My Jupyter Book</title>
+    <title>Label and Predict &#8212; My Jupyter Book</title>
   
   
   
@@ -163,10 +163,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/05_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
 
 
@@ -217,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Label and Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -407,7 +411,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Explore Data</h1>
+    <h1>Label and Predict</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -421,8 +425,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="explore-data">
-<h1>Explore Data<a class="headerlink" href="#explore-data" title="Permalink to this heading">#</a></h1>
+  <section id="label-and-predict">
+<h1>Label and Predict<a class="headerlink" href="#label-and-predict" title="Permalink to this heading">#</a></h1>
 <p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -434,17 +438,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:albumentations.check_version:A new version of Albumentations is available: 1.4.18 (you have 1.4.11). Upgrade using: pip install --upgrade albumentations
-2024-10-22 09:33:47.202751: I tensorflow/core/util/port.cc:113] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
-2024-10-22 09:33:47.212745: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:479] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
-2024-10-22 09:33:47.227159: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:10575] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
-2024-10-22 09:33:47.227184: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1442] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
-2024-10-22 09:33:47.236538: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
-To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
-2024-10-22 09:33:47.848762: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -460,13 +455,13 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
 <span class="p">)</span>
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
-<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_sparse&#39;</span><span class="p">)</span>
+<span class="c1">#data_path = r&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_series&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;ladybug_sparse&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_ladybugs_scale2&#39;</span>
 <span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
 
 
@@ -474,13 +469,12 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
 
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    model = batch_dl.deep_learning_project.models[model_type]</span>
-<span class="sd">    model.prob_thresh = -1</span>
-<span class="sd">    model.flow_thresh = 0.4</span>
-<span class="sd">    model.chan_segment = 2</span>
-<span class="sd">    model.chan2 = 3</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">1</span>
+       
 
     <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">param_widgets</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
     <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_model</span><span class="p">()</span>
@@ -488,55 +482,53 @@ To enable the following instructions: AVX2 AVX_VNNI FMA, in other operations, re
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  StardistInstanceModel
-Loading network weights from &#39;weights_best.h5&#39;.
-Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
-Using default values: prob_thresh=0.5, nms_thresh=0.4.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+found class  PytorchSemanticModel
+found class  CellPoseInstanceModel
+creating new log file
+2024-10-24 13:13:26,303 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-24 13:13:26,304 [INFO] 
+cellpose version: 	3.0.9 
+platform:       	win32 
+python version: 	3.10.14 
+torch version:  	2.2.2+cu118
+found class  MobileSAMModel
+found class  YoloSAMModel
+2024-10-24 13:13:28,692 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-24 13:13:28,693 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-24 13:13:28,810 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_series\models\cellpose_ladybugs_scale2
+2024-10-24 13:13:28,969 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+2024-10-24 13:13:28,970 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  181.358 (mean diameter of training ROIs)
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-22 09:33:54.386041: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.427335: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.427538: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.428746: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.429002: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.429196: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.509732: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.509939: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.510043: I external/local_xla/xla/stream_executor/cuda/cuda_executor.cc:998] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero. See more at https://github.com/torvalds/linux/blob/v6.0/Documentation/ABI/testing/sysfs-bus-pci#L344-L355
-2024-10-22 09:33:54.510114: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1928] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 1138 MB memory:  -&gt; device: 0, name: NVIDIA GeForce RTX 4070 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.9
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1729604086.216713   73333 service.cc:145] XLA service 0x79618400a560 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
-I0000 00:00:1729604086.216732   73333 service.cc:153]   StreamExecutor device (0): NVIDIA GeForce RTX 4070 Laptop GPU, Compute Capability 8.9
-2024-10-22 09:34:46.235030: I tensorflow/compiler/mlir/tensorflow/utils/dump_mlir_util.cc:268] disabling MLIR crash reproducer, set env var `MLIR_CRASH_REPRODUCER_DIRECTORY` to enable.
-2024-10-22 09:34:46.290192: I external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:465] Loaded cuDNN version 8907
-2024-10-22 09:34:47.594859: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.20GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:47.653799: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 16.27GiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:49.339816: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.14MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:49.370611: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.14MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:50.165242: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:50.165271: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:50.173946: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:50.182620: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-2024-10-22 09:34:50.182627: W external/local_tsl/tsl/framework/bfc_allocator.cc:296] Allocator (GPU_0_bfc) ran out of memory trying to allocate 496.02MiB with freed_by_count=0. The caller indicates that this is not a failure, but this may mean that there could be performance gains if more memory were available.
-I0000 00:00:1729604090.484897   73333 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_path</span> <span class="o">=</span><span class="sa">r</span><span class="s1">&#39;D:\images\tnia-python-images</span><span class="se">\\</span><span class="s1">imagesc</span><span class="se">\\</span><span class="s1">2024_10_07_cellpose_multi_nuclear&#39;</span>
-
-<span class="n">test</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;Empty_02 - Copy.tif&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint16&#39;</span><span class="p">)</span>
-
-<span class="n">test</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 65535)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>send signal to update  1
+send signal to update  2
+send signal to update  3
+send signal to update  4
+send signal to update  5
+send signal to update  6
+send signal to update  7
+send signal to update  8
+send signal to update  9
+send signal to update  10
+send signal to update  11
+send signal to update  12
+send signal to update  13
+send signal to update  14
+send signal to update  15
+send signal to update  16
+send signal to update  17
+send signal to update  18
+send signal to update  19
+send signal to update  20
+send signal to update  21
+send signal to update  22
+send signal to update  23
+send signal to update  24
+send signal to update  25
+send signal to update  26
+send signal to update  27
+send signal to update  28
 </pre></div>
 </div>
 </div>

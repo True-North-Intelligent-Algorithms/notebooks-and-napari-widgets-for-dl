@@ -64,7 +64,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '00_course_preparation/10_Dependencies';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Labeling and Augmentation" href="../10_label_augment_train/05_introduction.html" />
+    <link rel="next" title="Data" href="15_data.html" />
     <link rel="prev" title="Setup" href="05_Setup.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -163,10 +163,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_data.html">Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/05_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
 
 
@@ -217,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -449,7 +453,7 @@ document.write(`
     <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
 </pre></div>
 </div>
-<p>You will also need one or more of stardist, cellpose, segment-everything or Yolo</p>
+<p>You will also need stardist, cellpose, segment-everything and Yolo.  On Windows you will likely need to create separate environments for Stardist and the Pytorch dependencies (Cellpose, SAM and YOLO).</p>
 <section id="stardist">
 <h2>Stardist<a class="headerlink" href="#stardist" title="Permalink to this heading">#</a></h2>
 <section id="windows">
@@ -468,7 +472,7 @@ document.write(`
 <section id="windows-and-linux">
 <h3>Windows and Linux<a class="headerlink" href="#windows-and-linux" title="Permalink to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span> 
-<span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span> 
+<span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span><span class="o">==</span><span class="mf">0.2.15</span> 
 <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span> 
 </pre></div>
 </div>
@@ -476,7 +480,8 @@ document.write(`
 </section>
 <section id="pytorch-for-unet-segmentation">
 <h2>Pytorch (for unet segmentation)<a class="headerlink" href="#pytorch-for-unet-segmentation" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip3</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
+<p>NOTE:  On Windows you will likely have to create a separate environment for Stardist and for the Pytorch related dependencies (Cellpose and SAM)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
@@ -549,11 +554,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="../10_label_augment_train/05_introduction.html"
+       href="15_data.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Labeling and Augmentation</p>
+        <p class="prev-next-title">Data</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -64,8 +64,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = '10_label_augment_train/10_label_predict';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Make patches from labels" href="20_create_patches.html" />
-    <link rel="prev" title="Labeling and Augmentation" href="05_introduction.html" />
+    <link rel="next" title="Augmentation" href="15_augment.html" />
+    <link rel="prev" title="File Organization" href="07_file_organization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -163,10 +163,14 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Data</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Labeling and Augmentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="07_file_organization.html">File Organization</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
 
 
@@ -217,7 +221,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
@@ -396,7 +400,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
 </div></div>
       
     </div>
@@ -412,6 +418,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explore Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-the-image-with-a-napari-widget">Label the Image with a Napari widget</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -434,49 +450,53 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:albumentations.check_version:A new version of Albumentations is available: 1.4.18 (you have 1.4.12). Upgrade using: pip install -U albumentations. To disable automatic update checks, set the environment variable NO_ALBUMENTATIONS_UPDATE to 1.
-</pre></div>
 </div>
 </div>
-</div>
+</section>
+<section id="label-the-image-with-a-napari-widget">
+<h1>Label the Image with a Napari widget<a class="headerlink" href="#label-the-image-with-a-napari-widget" title="Permalink to this heading">#</a></h1>
+<p>Here we call the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget in <code class="docutils literal notranslate"><span class="pre">label_only</span></code> mode so we can label the images.   Optionally if a model has already been trained we can pass it to the Widget.  Then we can make predictions and correct them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
 
-<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
 
 <span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span>
     <span class="n">batch_dl</span>
 <span class="p">)</span>
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<span class="c1">#data_path = r&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;ladybug_first_try&#39;</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
-
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
-
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
 
+<span class="n">model_name</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="c1">#model_name = &#39;stardist_for_ladybugs&#39;</span>
+<span class="c1">#model_name = &#39;cellpose_for_ladybugs&#39;</span>
 
-<span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span><span class="p">:</span>
+    <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
+    <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
+    <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span><span class="p">:</span>
+    <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
 
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    model = batch_dl.deep_learning_project.models[model_type]</span>
-<span class="sd">    model.prob_thresh = -1</span>
-<span class="sd">    model.flow_thresh = 0.4</span>
-<span class="sd">    model.chan_segment = 2</span>
-<span class="sd">    model.chan2 = 3</span>
-<span class="sd">    &#39;&#39;&#39;</span>    
+    
+    <span class="n">model</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">models</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">0</span> 
+    <span class="n">model</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">param_widgets</span><span class="p">[</span><span class="n">model_type</span><span class="p">]</span>
     <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_model</span><span class="p">()</span>
@@ -484,36 +504,23 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.io:WRITING LOG OUTPUT TO /home/bnorthan/.cellpose/run.log
-INFO:cellpose.io:
-cellpose version: 	3.0.10 
-platform:       	linux 
-python version: 	3.12.4 
-torch version:  	2.4.0+cu121
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>found class  CellPoseInstanceModel
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.core:** TORCH CUDA version installed and working. **
-INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
-INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs1/models/cellpose_for_ladybugs
-/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  state_dict = torch.load(filename, map_location=device)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_labels =  34.060 (mean diameter of training ROIs)
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>INFO:cellpose.models:&gt;&gt; cyto3 &lt;&lt; model set to be used
-INFO:cellpose.models:Downloading: &quot;https://www.cellpose.org/models/cyto3&quot; to /home/bnorthan/.cellpose/models/cyto3
-
-100%|██████████| 25.3M/25.3M [00:02&lt;00:00, 9.74MB/s]
-INFO:cellpose.core:** TORCH CUDA version installed and working. **
-INFO:cellpose.core:&gt;&gt;&gt;&gt; using GPU
-INFO:cellpose.models:&gt;&gt;&gt;&gt; loading model /home/bnorthan/.cellpose/models/cyto3
-/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/cellpose/resnet_torch.py:276: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don&#39;t have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
-  state_dict = torch.load(filename, map_location=device)
-INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+found class  PytorchSemanticModel
+found class  CellPoseInstanceModel
+creating new log file
+2024-10-25 06:30:11,407 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-25 06:30:11,408 [INFO] 
+cellpose version: 	3.0.9 
+platform:       	win32 
+python version: 	3.10.14 
+torch version:  	2.2.2+cu118
+found class  MobileSAMModel
+found class  YoloSAMModel
+2024-10-25 06:30:13,111 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-25 06:30:13,112 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-25 06:30:13,490 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\models\cellpose_for_ladybugs
+2024-10-25 06:30:13,655 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+2024-10-25 06:30:13,656 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  34.060 (mean diameter of training ROIs)
 </pre></div>
 </div>
 </div>
@@ -552,20 +559,20 @@ INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled t
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="05_introduction.html"
+       href="07_file_organization.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Labeling and Augmentation</p>
+        <p class="prev-next-title">File Organization</p>
       </div>
     </a>
     <a class="right-next"
-       href="20_create_patches.html"
+       href="15_augment.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Make patches from labels</p>
+        <p class="prev-next-title">Augmentation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -578,6 +585,22 @@ INFO:cellpose.models:&gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled t
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explore Data</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-the-image-with-a-napari-widget">Label the Image with a Napari widget</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
