@@ -9,7 +9,7 @@ You will need to install napari and for augmentation you will need albumentation
     pip install matplotlib
 ```
 
-You will also need one or more of stardist, cellpose, segment-everything or Yolo
+You will also need stardist, cellpose, segment-everything and Yolo.  On Windows you will likely need to create separate environments for Stardist and the Pytorch dependencies (Cellpose, SAM and YOLO).
 
 ### Stardist
 
@@ -30,14 +30,16 @@ You will also need one or more of stardist, cellpose, segment-everything or Yolo
 
 ```
 pip install stardist 
-pip install gputools 
+pip install gputools==0.2.15 
 pip install edt 
 ```
 
 ### Pytorch (for unet segmentation)
 
+NOTE:  On Windows you will likely have to create a separate environment for Stardist and for the Pytorch related dependencies (Cellpose and SAM)
+
 ```
-    pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+    pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
     pip install pytorch-lightning
     pip install monai
     pip install scipy
