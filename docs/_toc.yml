@@ -33,6 +33,9 @@ parts:
     - file: 20_scale/10_stardist_receptive_field 2D.ipynb
     - file: 20_scale/20_cell_pose_diameter.ipynb
     - file: 20_scale/30_label_predict.ipynb
+    - file: 20_scale/40_create_patches.ipynb
+    - file: 20_scale/50_cellpose_training_2d.ipynb
+    - file: 20_scale/80_protrusions.ipynb
   - file: 30_segment_everything/05_introduction
     sections:
     - file: 30_segment_everything/10_explore_data.ipynb
