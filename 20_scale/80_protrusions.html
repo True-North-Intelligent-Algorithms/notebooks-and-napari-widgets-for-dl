@@ -1,0 +1,873 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Large objects with protrusions &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '20_scale/80_protrusions';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Data</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/05_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore Data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+
+
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_sparse_labelling/05_introduction.html">Sparse Labeling</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/10_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/20_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/30_stardist_training_2d.html">Sparse Stardist training example</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_introduction.html">Scale</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="30_label_predict.html">Label and Predict</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/30_filter_labels.html">Filtering Labels</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F20_scale/80_protrusions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/20_scale/80_protrusions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Large objects with protrusions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Large objects with protrusions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replicate-training-image-to-minimize-randomness-in-training">Replicate training image to minimize ‘randomness’ in training</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="large-objects-with-protrusions">
+<h1>Large objects with protrusions<a class="headerlink" href="#large-objects-with-protrusions" title="Permalink to this heading">#</a></h1>
+<p>In this example, inspired by this <a class="reference external" href="http://Image.sc">Image.sc</a> <a class="reference external" href="https://forum.image.sc/t/challenging-segmentation-with-cellpose-need-help/103618">question</a> we try to finetune Cellpose to segment large objects with long protrusions.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">from</span> <span class="nn">tnia.deeplearning.dl_helper</span> <span class="kn">import</span> <span class="n">quantile_normalization</span><span class="p">,</span> <span class="n">get_label_paths</span>
+<span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">imshow_multi2d</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="kn">import</span> <span class="n">label</span>
+<span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">io</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;protrusions&#39;</span><span class="p">)</span>
+<span class="n">label_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+
+<span class="c1"># open the info file</span>
+<span class="n">json_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">label_path</span><span class="p">,</span> <span class="s1">&#39;info.json&#39;</span><span class="p">)</span>
+<span class="n">json_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">json_name</span><span class="p">))</span>
+
+<span class="c1"># get number of inputs and number of ground truths for this problem</span>
+<span class="n">num_inputs</span> <span class="o">=</span> <span class="n">json_</span><span class="p">[</span><span class="s1">&#39;num_inputs&#39;</span><span class="p">]</span>
+<span class="n">num_ground_truths</span> <span class="o">=</span> <span class="n">json_</span><span class="p">[</span><span class="s1">&#39;num_truths&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num inputs: &#39;</span><span class="p">,</span> <span class="n">num_inputs</span><span class="p">)</span>   
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num ground truth: &#39;</span><span class="p">,</span> <span class="n">num_ground_truths</span><span class="p">)</span>
+
+<span class="n">image_label_paths</span><span class="p">,</span> <span class="n">ground_truths_label_paths</span> <span class="o">=</span> <span class="n">get_label_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_ground_truths</span><span class="p">,</span> <span class="n">label_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;image label paths&#39;</span><span class="p">,</span><span class="n">image_label_paths</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ground_truth_label_paths&quot;</span><span class="p">,</span> <span class="n">ground_truths_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;img153_0.tif&#39;</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ground_truths_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;img153_0.tif&#39;</span><span class="p">))</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">quantile_normalization</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">label</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>num inputs:  1
+num ground truth:  1
+image label paths [WindowsPath(&#39;C:/Users/bnort/work/ImageJ2022/tnia/notebooks-and-napari-widgets-for-dl/data/protrusions/labels/input0&#39;)]
+ground_truth_label_paths C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\protrusions\labels\ground truth0
+</pre></div>
+</div>
+<img alt="../_images/f7441cf007e64ed40fd1218c7760b40713c7b432fe74327b5618594d35b15478.png" src="../_images/f7441cf007e64ed40fd1218c7760b40713c7b432fe74327b5618594d35b15478.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_cyto3</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto3&quot;</span><span class="p">)</span>
+<span class="n">model_finetuned_defaults</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto3&quot;</span><span class="p">)</span>
+<span class="n">model_finetuned_no_rescale</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto3&quot;</span><span class="p">)</span>
+<span class="n">model_finetuned_no_rescale_bsize_512</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto3&quot;</span><span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">logger_setup</span><span class="p">()</span>
+
+<span class="n">masks</span> <span class="o">=</span> <span class="n">model_cyto3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">masks</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;masks&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>creating new log file
+2024-10-25 20:04:35,397 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-25 20:04:35,398 [INFO] 
+cellpose version: 	3.0.9 
+platform:       	win32 
+python version: 	3.10.14 
+torch version:  	2.2.2+cu118
+</pre></div>
+</div>
+<img alt="../_images/d555a62fe5b8c694bcd5b64495104d09ca53cd2251fbca9a153f5d52b4d7295e.png" src="../_images/d555a62fe5b8c694bcd5b64495104d09ca53cd2251fbca9a153f5d52b4d7295e.png" />
+</div>
+</div>
+</section>
+<section id="replicate-training-image-to-minimize-randomness-in-training">
+<h1>Replicate training image to minimize ‘randomness’ in training<a class="headerlink" href="#replicate-training-image-to-minimize-randomness-in-training" title="Permalink to this heading">#</a></h1>
+<p>Here we copy the training data 100 times.  Cellpose training has a built in augmentation step (which I don’t think we can turn off through the API.. correct me if I missed this option).  Thus if we only have 1 training image, each epoch will consist of 1 augmented image, and the model at the end of an epoch can be randomly different depending on the augmentation… however if we present 100 of the same images, an epoch will consist of 100 random augmentations, thus minimizing the randomness.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">X</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span>
+<span class="n">Y_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">Y</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X_list</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">cellpose</span> <span class="kn">import</span> <span class="n">train</span>
+
+<span class="n">train</span><span class="o">.</span><span class="n">train_seg</span><span class="p">(</span> <span class="n">model_finetuned_no_rescale</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">X_list</span><span class="p">,</span> <span class="n">Y_list</span><span class="p">,</span>   
+                <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> 
+                <span class="n">save_path</span><span class="o">=</span><span class="n">parent_path</span><span class="p">,</span> 
+                <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">min_train_masks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">rescale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  
+                <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;no_rescale&#39;</span><span class="p">,</span>
+                <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-26 06:37:55,489 [INFO] computing flows for labels
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:28&lt;00:00,  3.57it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-26 06:38:23,640 [INFO] &gt;&gt;&gt; computing diameters
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:00&lt;00:00, 421.16it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-26 06:38:23,881 [INFO] &gt;&gt;&gt; using channels [2, 3]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-26 06:38:24,448 [INFO] &gt;&gt;&gt; n_epochs=200, n_train=100, n_test=None
+2024-10-26 06:38:24,450 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
+2024-10-26 06:38:24,452 [INFO] &gt;&gt;&gt; saving model to C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\protrusions\models\no_rescale
+2024-10-26 06:38:26,875 [INFO] 0, train_loss=0.2434, test_loss=0.0000, LR=0.0000, time 2.42s
+2024-10-26 06:38:38,890 [INFO] 5, train_loss=0.2466, test_loss=0.0000, LR=0.0028, time 14.44s
+2024-10-26 06:38:50,857 [INFO] 10, train_loss=0.2546, test_loss=0.0000, LR=0.0050, time 26.41s
+2024-10-26 06:39:14,255 [INFO] 20, train_loss=0.2458, test_loss=0.0000, LR=0.0050, time 49.80s
+2024-10-26 06:39:37,033 [INFO] 30, train_loss=0.2401, test_loss=0.0000, LR=0.0050, time 72.58s
+2024-10-26 06:39:59,496 [INFO] 40, train_loss=0.2438, test_loss=0.0000, LR=0.0050, time 95.04s
+2024-10-26 06:40:22,067 [INFO] 50, train_loss=0.2290, test_loss=0.0000, LR=0.0050, time 117.62s
+2024-10-26 06:40:44,484 [INFO] 60, train_loss=0.2301, test_loss=0.0000, LR=0.0050, time 140.03s
+2024-10-26 06:41:06,838 [INFO] 70, train_loss=0.2191, test_loss=0.0000, LR=0.0050, time 162.39s
+2024-10-26 06:41:29,371 [INFO] 80, train_loss=0.2207, test_loss=0.0000, LR=0.0050, time 184.92s
+2024-10-26 06:41:52,217 [INFO] 90, train_loss=0.2170, test_loss=0.0000, LR=0.0050, time 207.77s
+2024-10-26 06:42:15,099 [INFO] 100, train_loss=0.2074, test_loss=0.0000, LR=0.0050, time 230.65s
+2024-10-26 06:42:37,683 [INFO] 110, train_loss=0.2113, test_loss=0.0000, LR=0.0050, time 253.23s
+2024-10-26 06:43:00,423 [INFO] 120, train_loss=0.2082, test_loss=0.0000, LR=0.0050, time 275.97s
+2024-10-26 06:43:23,141 [INFO] 130, train_loss=0.2030, test_loss=0.0000, LR=0.0050, time 298.69s
+2024-10-26 06:43:45,545 [INFO] 140, train_loss=0.2018, test_loss=0.0000, LR=0.0050, time 321.09s
+2024-10-26 06:44:08,421 [INFO] 150, train_loss=0.1972, test_loss=0.0000, LR=0.0025, time 343.97s
+2024-10-26 06:44:31,537 [INFO] 160, train_loss=0.1925, test_loss=0.0000, LR=0.0006, time 367.09s
+2024-10-26 06:44:54,871 [INFO] 170, train_loss=0.1918, test_loss=0.0000, LR=0.0002, time 390.42s
+2024-10-26 06:45:18,034 [INFO] 180, train_loss=0.1924, test_loss=0.0000, LR=0.0000, time 413.58s
+2024-10-26 06:45:41,031 [INFO] 190, train_loss=0.1888, test_loss=0.0000, LR=0.0000, time 436.58s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WindowsPath(&#39;C:/Users/bnort/work/ImageJ2022/tnia/notebooks-and-napari-widgets-for-dl/data/protrusions/models/no_rescale&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">train_seg</span><span class="p">(</span> <span class="n">model_finetuned_no_rescale_bsize_512</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">X_list</span><span class="p">,</span> <span class="n">Y_list</span><span class="p">,</span>   
+                <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> 
+                <span class="n">save_path</span><span class="o">=</span><span class="n">parent_path</span><span class="p">,</span> 
+                <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">min_train_masks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">rescale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  
+                <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;no_rescale_bsize_512&#39;</span><span class="p">,</span>
+                <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">bsize</span><span class="o">=</span><span class="mi">512</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 21:34:47,714 [INFO] computing flows for labels
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:25&lt;00:00,  3.88it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 21:35:13,606 [INFO] &gt;&gt;&gt; computing diameters
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:00&lt;00:00, 407.59it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 21:35:13,855 [INFO] &gt;&gt;&gt; using channels [2, 3]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 21:35:14,391 [INFO] &gt;&gt;&gt; n_epochs=200, n_train=100, n_test=None
+2024-10-25 21:35:14,393 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
+2024-10-25 21:35:14,397 [INFO] &gt;&gt;&gt; saving model to C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\protrusions\models\no_rescale_bsize_512
+2024-10-25 21:35:21,599 [INFO] 0, train_loss=0.1079, test_loss=0.0000, LR=0.0000, time 7.20s
+2024-10-25 21:35:58,652 [INFO] 5, train_loss=0.1066, test_loss=0.0000, LR=0.0028, time 44.26s
+2024-10-25 21:36:36,469 [INFO] 10, train_loss=0.1090, test_loss=0.0000, LR=0.0050, time 82.07s
+2024-10-25 21:37:53,347 [INFO] 20, train_loss=0.1064, test_loss=0.0000, LR=0.0050, time 158.95s
+2024-10-25 21:39:10,593 [INFO] 30, train_loss=0.1042, test_loss=0.0000, LR=0.0050, time 236.20s
+2024-10-25 21:40:27,608 [INFO] 40, train_loss=0.1010, test_loss=0.0000, LR=0.0050, time 313.21s
+2024-10-25 21:41:44,177 [INFO] 50, train_loss=0.0975, test_loss=0.0000, LR=0.0050, time 389.78s
+2024-10-25 21:43:01,017 [INFO] 60, train_loss=0.0961, test_loss=0.0000, LR=0.0050, time 466.62s
+2024-10-25 21:44:18,238 [INFO] 70, train_loss=0.0931, test_loss=0.0000, LR=0.0050, time 543.84s
+2024-10-25 21:45:34,787 [INFO] 80, train_loss=0.0929, test_loss=0.0000, LR=0.0050, time 620.39s
+2024-10-25 21:46:51,170 [INFO] 90, train_loss=0.0895, test_loss=0.0000, LR=0.0050, time 696.77s
+2024-10-25 21:48:07,559 [INFO] 100, train_loss=0.0892, test_loss=0.0000, LR=0.0050, time 773.16s
+2024-10-25 21:49:23,979 [INFO] 110, train_loss=0.0871, test_loss=0.0000, LR=0.0050, time 849.58s
+2024-10-25 21:50:40,138 [INFO] 120, train_loss=0.0848, test_loss=0.0000, LR=0.0050, time 925.74s
+2024-10-25 21:51:56,507 [INFO] 130, train_loss=0.0831, test_loss=0.0000, LR=0.0050, time 1002.11s
+2024-10-25 21:53:12,730 [INFO] 140, train_loss=0.0829, test_loss=0.0000, LR=0.0050, time 1078.33s
+2024-10-25 21:54:28,650 [INFO] 150, train_loss=0.0807, test_loss=0.0000, LR=0.0025, time 1154.25s
+2024-10-25 21:55:44,426 [INFO] 160, train_loss=0.0785, test_loss=0.0000, LR=0.0006, time 1230.03s
+2024-10-25 21:57:00,460 [INFO] 170, train_loss=0.0777, test_loss=0.0000, LR=0.0002, time 1306.06s
+2024-10-25 21:58:16,458 [INFO] 180, train_loss=0.0788, test_loss=0.0000, LR=0.0000, time 1382.06s
+2024-10-25 21:59:32,614 [INFO] 190, train_loss=0.0780, test_loss=0.0000, LR=0.0000, time 1458.22s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WindowsPath(&#39;C:/Users/bnort/work/ImageJ2022/tnia/notebooks-and-napari-widgets-for-dl/data/protrusions/models/no_rescale_bsize_512&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">train</span><span class="o">.</span><span class="n">train_seg</span><span class="p">(</span> <span class="n">model_finetuned_defaults</span><span class="o">.</span><span class="n">net</span><span class="p">,</span> <span class="n">X_list</span><span class="p">,</span> <span class="n">Y_list</span><span class="p">,</span>   
+                <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> 
+                <span class="n">save_path</span><span class="o">=</span><span class="n">parent_path</span><span class="p">,</span> 
+                <span class="n">n_epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+                <span class="n">min_train_masks</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                <span class="n">model_name</span><span class="o">=</span><span class="s1">&#39;defaults&#39;</span><span class="p">,</span>
+                <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 22:03:00,623 [INFO] computing flows for labels
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:25&lt;00:00,  3.93it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 22:03:26,180 [INFO] &gt;&gt;&gt; computing diameters
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 100/100 [00:00&lt;00:00, 434.06it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 22:03:26,417 [INFO] &gt;&gt;&gt; using channels [2, 3]
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-25 22:03:26,914 [INFO] &gt;&gt;&gt; n_epochs=200, n_train=100, n_test=None
+2024-10-25 22:03:26,915 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
+2024-10-25 22:03:26,918 [INFO] &gt;&gt;&gt; saving model to C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\protrusions\models\defaults
+2024-10-25 22:03:29,286 [INFO] 0, train_loss=0.0798, test_loss=0.0000, LR=0.0000, time 2.37s
+2024-10-25 22:03:40,945 [INFO] 5, train_loss=0.0786, test_loss=0.0000, LR=0.0028, time 14.03s
+2024-10-25 22:03:52,542 [INFO] 10, train_loss=0.0788, test_loss=0.0000, LR=0.0050, time 25.62s
+2024-10-25 22:04:16,297 [INFO] 20, train_loss=0.0779, test_loss=0.0000, LR=0.0050, time 49.38s
+2024-10-25 22:04:39,360 [INFO] 30, train_loss=0.0773, test_loss=0.0000, LR=0.0050, time 72.44s
+2024-10-25 22:05:02,300 [INFO] 40, train_loss=0.0758, test_loss=0.0000, LR=0.0050, time 95.38s
+2024-10-25 22:05:25,183 [INFO] 50, train_loss=0.0744, test_loss=0.0000, LR=0.0050, time 118.27s
+2024-10-25 22:05:48,125 [INFO] 60, train_loss=0.0739, test_loss=0.0000, LR=0.0050, time 141.21s
+2024-10-25 22:06:11,099 [INFO] 70, train_loss=0.0729, test_loss=0.0000, LR=0.0050, time 164.18s
+2024-10-25 22:06:33,856 [INFO] 80, train_loss=0.0721, test_loss=0.0000, LR=0.0050, time 186.94s
+2024-10-25 22:06:56,824 [INFO] 90, train_loss=0.0709, test_loss=0.0000, LR=0.0050, time 209.91s
+2024-10-25 22:07:20,030 [INFO] 100, train_loss=0.0710, test_loss=0.0000, LR=0.0050, time 233.11s
+2024-10-25 22:07:43,052 [INFO] 110, train_loss=0.0713, test_loss=0.0000, LR=0.0050, time 256.13s
+2024-10-25 22:08:06,117 [INFO] 120, train_loss=0.0699, test_loss=0.0000, LR=0.0050, time 279.20s
+2024-10-25 22:08:29,160 [INFO] 130, train_loss=0.0691, test_loss=0.0000, LR=0.0050, time 302.24s
+2024-10-25 22:08:52,030 [INFO] 140, train_loss=0.0687, test_loss=0.0000, LR=0.0050, time 325.11s
+2024-10-25 22:09:15,006 [INFO] 150, train_loss=0.0679, test_loss=0.0000, LR=0.0025, time 348.09s
+2024-10-25 22:09:38,033 [INFO] 160, train_loss=0.0666, test_loss=0.0000, LR=0.0006, time 371.12s
+2024-10-25 22:10:00,939 [INFO] 170, train_loss=0.0656, test_loss=0.0000, LR=0.0002, time 394.02s
+2024-10-25 22:10:23,893 [INFO] 180, train_loss=0.0663, test_loss=0.0000, LR=0.0000, time 416.98s
+2024-10-25 22:10:46,736 [INFO] 190, train_loss=0.0659, test_loss=0.0000, LR=0.0000, time 439.82s
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WindowsPath(&#39;C:/Users/bnort/work/ImageJ2022/tnia/notebooks-and-napari-widgets-for-dl/data/protrusions/models/defaults&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">masks</span> <span class="o">=</span> <span class="n">model_cyto3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">masks</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">masks</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;flows&#39;</span><span class="p">,</span> <span class="s1">&#39;masks cyto3 diameter 100&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">masks_defaults</span> <span class="o">=</span> <span class="n">model_finetuned_defaults</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">130</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">masks_defaults</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">masks_defaults</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;flows&#39;</span><span class="p">,</span> <span class="s1">&#39;masks finetuned defaults diameter 100&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">masks_no_rescale</span> <span class="o">=</span> <span class="n">model_finetuned_no_rescale</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">masks_no_rescale</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">masks_no_rescale</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;flows&#39;</span><span class="p">,</span> <span class="s1">&#39;masks finetuned no rescale&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">masks_no_rescale_bsize_512</span> <span class="o">=</span> <span class="n">model_finetuned_no_rescale_bsize_512</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="n">cellprob_threshold</span><span class="o">=-</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">masks_no_rescale_bsize_512</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">masks_no_rescale_bsize_512</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="s1">&#39;X&#39;</span><span class="p">,</span> <span class="s1">&#39;Y&#39;</span><span class="p">,</span> <span class="s1">&#39;flows&#39;</span><span class="p">,</span> <span class="s1">&#39;masks finetuned no rescale bsize 512&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/2b24956e6807bd36500878829fe8e27d583d292a9075f08e6bd77ea4c9c59559.png" src="../_images/2b24956e6807bd36500878829fe8e27d583d292a9075f08e6bd77ea4c9c59559.png" />
+<img alt="../_images/e946043322c0dd37740b8ba19a29e11dfc94db856bf0c410f69d46cd0d9cd893.png" src="../_images/e946043322c0dd37740b8ba19a29e11dfc94db856bf0c410f69d46cd0d9cd893.png" />
+<img alt="../_images/bddba2066cdc01087a3eb4e87f89117008fc64b8b39506bafb3b0940472887b2.png" src="../_images/bddba2066cdc01087a3eb4e87f89117008fc64b8b39506bafb3b0940472887b2.png" />
+<img alt="../_images/a7ef4fb7e727dec901d5c415b402c25cc9587b11e2f28221a57e3d2b55e026d5.png" src="../_images/a7ef4fb7e727dec901d5c415b402c25cc9587b11e2f28221a57e3d2b55e026d5.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
+
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">masks_no_rescale_bsize_512</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;prediction&#39;</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">masks_no_rescale_bsize_512</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;flow&#39;</span><span class="p">)</span>
+<span class="c1">#viewer.add_image(masks_no_rescale_bsize_512[2], name=&#39;what&#39;)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;flow&#39; at 0x11bff80e800&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./20_scale"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Large objects with protrusions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replicate-training-image-to-minimize-randomness-in-training">Replicate training image to minimize ‘randomness’ in training</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

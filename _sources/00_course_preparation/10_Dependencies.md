@@ -57,7 +57,7 @@ NOTE:  On Windows you will likely have to create a separate environment for Star
 Install ```segment-everything``` which will install SAM as a dependency and also has a vendored copy of [MobileSAMv2](https://github.com/ChaoningZhang/MobileSAM)
 
 ```
-    pip install segment-everything
+    pip install git+https://github.com/True-North-Intelligent-Algorithms/segment-everything.git
 ```
 
 ### Napari-easy-augment-batch-dl and tnia-python

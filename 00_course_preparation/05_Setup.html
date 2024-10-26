@@ -224,7 +224,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/30_filter_labels.html">Filtering Labels</a></li>
@@ -423,7 +423,11 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites-to-learn">Pre-requisites to learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites-to-run-code">Pre-requisites to run code</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conda">Conda</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-studio-code">Visual Studio Code</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-studio-code-extensions">Visual Studio Code extensions</a></li>
@@ -444,8 +448,14 @@ document.write(`
                   
   <section id="setup">
 <h1>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h1>
-<p>Pre-requisites to learn:  No pre-requisites are needed to watch and learn from the examples.  It may be valuable to follow the examples, even if you are not able to run the code.  While these examples are done using ‘Jupyter notebooks’ the concepts should be relevant to any deep learning framework (including GUI based ones) that expose parameters to address scale and sparsity.</p>
-<p>Pre-requisites to run code:  To run the examples you need a python environment, a dependency manager, and a means to run Jupyter notebooks.  A ‘conda’ flavor and Visual Studio code is recomended</p>
+<section id="pre-requisites-to-learn">
+<h2>Pre-requisites to learn<a class="headerlink" href="#pre-requisites-to-learn" title="Permalink to this heading">#</a></h2>
+<p>No pre-requisites are needed to watch and learn from the examples.  It may be valuable to follow the examples, even if you are not able to run the code.  While these examples are done using ‘Jupyter notebooks’ the concepts should be relevant to any deep learning framework (including GUI based ones) that expose parameters to address scale and sparsity.</p>
+</section>
+<section id="pre-requisites-to-run-code">
+<h2>Pre-requisites to run code<a class="headerlink" href="#pre-requisites-to-run-code" title="Permalink to this heading">#</a></h2>
+<p>To run the examples you need a python environment, a dependency manager, and a means to run Jupyter notebooks.  A ‘conda’ flavor and Visual Studio code is recomended</p>
+</section>
 </section>
 <section id="conda">
 <h1>Conda<a class="headerlink" href="#conda" title="Permalink to this heading">#</a></h1>
@@ -534,7 +544,11 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Setup</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites-to-learn">Pre-requisites to learn</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pre-requisites-to-run-code">Pre-requisites to run code</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#conda">Conda</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-studio-code">Visual Studio Code</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visual-studio-code-extensions">Visual Studio Code extensions</a></li>

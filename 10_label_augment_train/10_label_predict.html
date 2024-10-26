@@ -224,7 +224,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/30_filter_labels.html">Filtering Labels</a></li>
@@ -449,12 +449,6 @@ document.write(`
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
-</pre></div>
-</div>
-</div>
 </div>
 </section>
 <section id="label-the-image-with-a-napari-widget">
@@ -464,29 +458,28 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
 
-<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span>
     <span class="n">batch_dl</span>
 <span class="p">)</span>
 
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data&#39;</span>
-<span class="c1">#data_path = r&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
 <span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
 
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
 
 <span class="n">model_name</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="c1">#model_name = &#39;stardist_for_ladybugs&#39;</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span>
 <span class="c1">#model_name = &#39;cellpose_for_ladybugs&#39;</span>
 
 
-<span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span><span class="p">:</span>
     <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;Stardist Model&quot;</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span><span class="p">:</span>
+<span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span><span class="p">:</span>
     <span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">model_type</span><span class="p">)</span>
     <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">set_pretrained_model</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">),</span> <span class="n">model_type</span><span class="p">)</span>
@@ -504,23 +497,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
-found class  PytorchSemanticModel
-found class  CellPoseInstanceModel
-creating new log file
-2024-10-25 06:30:11,407 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2024-10-25 06:30:11,408 [INFO] 
-cellpose version: 	3.0.9 
-platform:       	win32 
-python version: 	3.10.14 
-torch version:  	2.2.2+cu118
-found class  MobileSAMModel
-found class  YoloSAMModel
-2024-10-25 06:30:13,111 [INFO] ** TORCH CUDA version installed and working. **
-2024-10-25 06:30:13,112 [INFO] &gt;&gt;&gt;&gt; using GPU
-2024-10-25 06:30:13,490 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs1\models\cellpose_for_ladybugs
-2024-10-25 06:30:13,655 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
-2024-10-25 06:30:13,656 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  34.060 (mean diameter of training ROIs)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No module named &#39;segment_everything&#39;
+found class  StardistInstanceModel
+Loading network weights from &#39;weights_best.h5&#39;.
+Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
+Using default values: prob_thresh=0.5, nms_thresh=0.4.
 </pre></div>
 </div>
 </div>

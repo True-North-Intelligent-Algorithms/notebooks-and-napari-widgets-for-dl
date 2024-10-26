@@ -223,7 +223,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Segment Everything</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Segment Everything with SAM</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="10_explore_data.html">Explore data with SAM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Filtering Labels</a></li>
@@ -426,6 +426,12 @@ document.write(`
                   
   <section id="filtering-labels">
 <h1>Filtering Labels<a class="headerlink" href="#filtering-labels" title="Permalink to this heading">#</a></h1>
+<p>Mobile SAM can return (potentially) hundreds or thousands of labels.   Many of the labels may not be of interest.  There are a couple of potential ways to deal with this.</p>
+<ol class="arabic simple">
+<li><p>Train the prompt detector to also classify objects (for example YOLO can be trained to classify) then only keep the prompts corresponding to classes of interest.</p></li>
+<li><p>Filter the labels by a criteria so we only keep objects of interest.</p></li>
+</ol>
+<p>This example shows the latter strategy.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">segment_everything.detect_and_segment</span> <span class="kn">import</span> <span class="n">segment_from_stacked_labels</span>
@@ -435,6 +441,7 @@ document.write(`
 <span class="kn">from</span> <span class="nn">segment_everything.detect_and_segment</span> <span class="kn">import</span> <span class="n">segment_from_stacked_labels</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">tnia.plotting.plt_helper</span> <span class="kn">import</span> <span class="n">random_label_cmap</span><span class="p">,</span> <span class="n">mask_overlay</span><span class="p">,</span> <span class="n">imshow_multi2d</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
 </div>
 </div>
@@ -456,8 +463,11 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage.io</span> <span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">import</span> <span class="nn">os</span>
 
-<span class="n">image_name</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_series\5784124_7185843.jpg&#39;</span>
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_series&#39;</span><span class="p">)</span>
+<span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;5784124_7185843.jpg&#39;</span><span class="p">)</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_name</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -476,8 +486,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1024x928 18 objects, 169.6ms
-Speed: 9.9ms preprocess, 169.6ms inference, 68.7ms postprocess per image at shape (1, 3, 1024, 1024)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1024x928 18 objects, 84.7ms
+Speed: 21.9ms preprocess, 84.7ms inference, 3.1ms postprocess per image at shape (1, 3, 1024, 1024)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
@@ -495,7 +505,7 @@ Speed: 9.9ms preprocess, 169.6ms inference, 68.7ms postprocess per image at shap
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b1002993d3f265b8c57a66041c201299a126b680c32351f36df517c34bb2197b.png" src="../_images/b1002993d3f265b8c57a66041c201299a126b680c32351f36df517c34bb2197b.png" />
+<img alt="../_images/85578f760a377ecd06026a2fe210ce57c758f9670d6434b0ff6653a86bd5d30c.png" src="../_images/85578f760a377ecd06026a2fe210ce57c758f9670d6434b0ff6653a86bd5d30c.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -572,7 +582,6 @@ Speed: 9.9ms preprocess, 169.6ms inference, 68.7ms postprocess per image at shap
 
         <span class="n">result</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">result</span><span class="p">[</span><span class="s2">&quot;label_num&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">enum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
         
 </pre></div>
 </div>
@@ -580,8 +589,15 @@ Speed: 9.9ms preprocess, 169.6ms inference, 68.7ms postprocess per image at shap
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_properties_to_label_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stat_limits</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">100000</span><span class="p">},</span>
+    <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">},</span>
     <span class="s2">&quot;label_num&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">100000000</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">10000000000</span><span class="p">},</span>
     <span class="s2">&quot;solidity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
     <span class="s2">&quot;circularity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
@@ -610,39 +626,10 @@ Speed: 9.9ms preprocess, 169.6ms inference, 68.7ms postprocess per image at shap
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x17c7d6fc430&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2625063ea40&gt;
 </pre></div>
 </div>
-<img alt="../_images/f39cca8e644c5b96e59116ed8f5785d1ce75fad3587d1ea363877e812bf044af.png" src="../_images/f39cca8e644c5b96e59116ed8f5785d1ce75fad3587d1ea363877e812bf044af.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_properties_to_label_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-</pre></div>
-</div>
+<img alt="../_images/49b56949a0534ff8f0136a9b419d321d4512766ab8f443ae126f509c117ddccf.png" src="../_images/49b56949a0534ff8f0136a9b419d321d4512766ab8f443ae126f509c117ddccf.png" />
 </div>
 </div>
 <div class="cell docutils container">
