@@ -1,8 +1,12 @@
 ## Setup
 
-Pre-requisites to learn:  No pre-requisites are needed to watch and learn from the examples.  It may be valuable to follow the examples, even if you are not able to run the code.  While these examples are done using 'Jupyter notebooks' the concepts should be relevant to any deep learning framework (including GUI based ones) that expose parameters to address scale and sparsity. 
+#### Pre-requisites to learn  
 
-Pre-requisites to run code:  To run the examples you need a python environment, a dependency manager, and a means to run Jupyter notebooks.  A 'conda' flavor and Visual Studio code is recomended 
+No pre-requisites are needed to watch and learn from the examples.  It may be valuable to follow the examples, even if you are not able to run the code.  While these examples are done using 'Jupyter notebooks' the concepts should be relevant to any deep learning framework (including GUI based ones) that expose parameters to address scale and sparsity. 
+
+#### Pre-requisites to run code
+
+To run the examples you need a python environment, a dependency manager, and a means to run Jupyter notebooks.  A 'conda' flavor and Visual Studio code is recomended 
 
 ## Conda
 
