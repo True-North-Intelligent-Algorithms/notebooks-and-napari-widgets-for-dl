@@ -163,6 +163,9 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Dependencies</a></li>
+
+
+
 <li class="toctree-l2"><a class="reference internal" href="15_data.html">Data</a></li>
 </ul>
 </li>
@@ -435,17 +438,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-and-linux">Windows and Linux</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dependencies</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-and-tnia-python">Napari-easy-augment-batch-dl and tnia-python</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -459,65 +461,98 @@ document.write(`
   <section id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading">#</a></h1>
 <p>You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">napari</span><span class="p">[</span><span class="nb">all</span><span class="p">]</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
-</pre></div>
-</div>
 <p>You will also need stardist, cellpose, segment-everything and Yolo.  On Windows you will likely need to create separate environments for Stardist and the Pytorch dependencies (Cellpose, SAM and YOLO).</p>
-<section id="stardist">
-<h2>Stardist<a class="headerlink" href="#stardist" title="Permalink to this heading">#</a></h2>
-<section id="windows">
-<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.8</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
-    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow&lt;2.11&quot;</span>
-</pre></div>
-</div>
+<p>In addition to the popular deep learning toolkits these tutorials use 4 helper and widget libraries.  (Note that Yolo is installed via the vendored version of <a class="reference external" href="https://github.com/ChaoningZhang/MobileSAM">MobileSam</a> installed through <code class="docutils literal notranslate"><span class="pre">segment-everything</span></code>)</p>
+<p><strong>tnia-python:</strong> General image processing and deep learning helpers.<br />
+<strong>napari-easy-augment-batch-dl:</strong>  Napari widgets for labelling and running deep learning workflows on image series.<br />
+<strong>segment-everything:</strong>  Helper to run YOLO and SAM variations and work with lists representing (possibly overlapping) labels.<br />
+<strong>napari-segment-everything:</strong>  Napari GUI for segment-everything.</p>
 </section>
 <section id="linux">
-<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">tensorflow</span><span class="p">[</span><span class="ow">and</span><span class="o">-</span><span class="n">cuda</span><span class="p">]</span>
-</pre></div>
-</div>
-</section>
-<section id="windows-and-linux">
-<h3>Windows and Linux<a class="headerlink" href="#windows-and-linux" title="Permalink to this heading">#</a></h3>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span> 
-<span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span><span class="o">==</span><span class="mf">0.2.15</span> 
-<span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span> 
-</pre></div>
-</div>
-</section>
-</section>
-<section id="pytorch-for-unet-segmentation">
-<h2>Pytorch (for unet segmentation)<a class="headerlink" href="#pytorch-for-unet-segmentation" title="Permalink to this heading">#</a></h2>
-<p>NOTE:  On Windows you will likely have to create a separate environment for Stardist and for the Pytorch related dependencies (Cellpose and SAM)</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
+<h1>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2K2024_dl</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+    <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2K2024_dl</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span> <span class="c1"># </span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[all]&quot;</span> <span class="c1"># requires quotation marks to parse the square brackets on Linux, not sure if generalizes</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow[and-cuda]&quot;</span> <span class="c1"># as above, requires quotation marks</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span><span class="o">==</span><span class="mf">0.2.15</span> <span class="c1"># I think numpy v2.1.2 gets installed here for me</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span> <span class="c1"># pip throws: numba v0.60.0, tensorflow v2.18.0 require lower versions of numpy. Should still work but iffy.</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">tifffile</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </section>
-<section id="cellpose">
-<h2>Cellpose<a class="headerlink" href="#cellpose" title="Permalink to this heading">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+<section id="mac-m1">
+<h1>Mac M1<a class="headerlink" href="#mac-m1" title="Permalink to this heading">#</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2K2024_dl</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+    <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2K2024_dl</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span> <span class="c1"># </span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[all]&quot;</span> <span class="c1"># also requires quotes on Mac</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow[and-cuda]&quot;</span> <span class="c1"># as above, requires quotation marks. Pip throws a bunch of conflicts, but whatever.</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span><span class="o">==</span><span class="mf">0.2.15</span> <span class="c1"># pip dependency incompatibilities</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="c1"># remove the index flag url</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">tifffile</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </section>
-<section id="sam-segment-anything">
-<h2>SAM (Segment Anything)<a class="headerlink" href="#sam-segment-anything" title="Permalink to this heading">#</a></h2>
-<p>Install <code class="docutils literal notranslate"><span class="pre">segment-everything</span></code> which will install SAM as a dependency and also has a vendored copy of <a class="reference external" href="https://github.com/ChaoningZhang/MobileSAM">MobileSAMv2</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
+<section id="windows">
+<h1>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h1>
+<p>Note that to use GPU with Stardist in Windows we need two different environments because Windows needs an older version of tensorflow, which is not compatible wither newer version of pytorch based toolkits.</p>
+<section id="windows-stardist-environment">
+<h2>Windows stardist environment<a class="headerlink" href="#windows-stardist-environment" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2k2024_stardist</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+    <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2k2024_stardist</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[all]&quot;</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+    <span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">conda</span><span class="o">-</span><span class="n">forge</span> <span class="n">cudatoolkit</span><span class="o">=</span><span class="mf">11.8</span> <span class="n">cudnn</span><span class="o">=</span><span class="mf">8.1.0</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;tensorflow&lt;2.11&quot;</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">stardist</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">gputools</span><span class="o">==</span><span class="mf">0.2.15</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">edt</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span> 
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
 </section>
-<section id="napari-easy-augment-batch-dl-and-tnia-python">
-<h2>Napari-easy-augment-batch-dl and tnia-python<a class="headerlink" href="#napari-easy-augment-batch-dl-and-tnia-python" title="Permalink to this heading">#</a></h2>
-<p>Install latest development version of napari-easy-augment-batch-dl, tnia-python and napari-segment-everything.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bnorthan</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
+<section id="windows-pytorch-environment">
+<h2>Windows pytorch environment<a class="headerlink" href="#windows-pytorch-environment" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2k2024_pytorch</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
+    <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2k2024_pytorch</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="s2">&quot;napari[all]&quot;</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">albumentations</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">matplotlib</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">torch</span> <span class="n">torchvision</span> <span class="n">torchaudio</span> <span class="o">--</span><span class="n">index</span><span class="o">-</span><span class="n">url</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">download</span><span class="o">.</span><span class="n">pytorch</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">whl</span><span class="o">/</span><span class="n">cu118</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">pytorch</span><span class="o">-</span><span class="n">lightning</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">monai</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">scipy</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">tifffile</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">cellpose</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
+    <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">easy</span><span class="o">-</span><span class="n">augment</span><span class="o">-</span><span class="n">batch</span><span class="o">-</span><span class="n">dl</span><span class="o">.</span><span class="n">git</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">tnia</span><span class="o">-</span><span class="n">python</span><span class="o">.</span><span class="n">git</span> 
     <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
@@ -592,17 +627,16 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stardist">Stardist</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-and-linux">Windows and Linux</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dependencies</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-for-unet-segmentation">Pytorch (for unet segmentation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cellpose">Cellpose</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#sam-segment-anything">SAM (Segment Anything)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-and-tnia-python">Napari-easy-augment-batch-dl and tnia-python</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
