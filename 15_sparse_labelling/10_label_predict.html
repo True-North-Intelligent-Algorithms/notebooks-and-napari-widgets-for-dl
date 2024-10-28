@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Explore the ‘sparse labels’ Data &#8212; My Jupyter Book</title>
+    <title>Explore and label the ‘sparse labels’ Data &#8212; My Jupyter Book</title>
   
   
   
@@ -167,7 +167,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore and label data</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
@@ -191,7 +191,7 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 </li>
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Sparse Labeling</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore the ‘sparse labels’ Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore and label the ‘sparse labels’ Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
 
 <li class="toctree-l2"><a class="reference internal" href="30_stardist_training_2d.html">Sparse Stardist training example</a></li>
@@ -423,7 +423,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Explore the ‘sparse labels’ Data</h1>
+    <h1>Explore and label the ‘sparse labels’ Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -437,8 +437,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="explore-the-sparse-labels-data">
-<h1>Explore the ‘sparse labels’ Data<a class="headerlink" href="#explore-the-sparse-labels-data" title="Permalink to this heading">#</a></h1>
+  <section id="explore-and-label-the-sparse-labels-data">
+<h1>Explore and label the ‘sparse labels’ Data<a class="headerlink" href="#explore-and-label-the-sparse-labels-data" title="Permalink to this heading">#</a></h1>
 <p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  We point the plugin to the ‘ladybugs_sparse’ directory which contains 3 highly clustered lady bug images, and we use the ‘ladybug_sparse’ model which has been pretrained on the sparse labels.</p>
 <p>Take home point: The model does pretty predicting ladybugs that were not labeled on the same images that were partially labeled.  However not so good on the image which did not have any data labeled.  More training images are likely needed to get a good lady bug model… the good news is we probably don’t have to label every single ladybug on all images, we can sparsely label several images to accelerate the process.</p>
 <div class="cell docutils container">
