@@ -16,3 +16,11 @@ This work is licensed by Brian Northan and Ian Coccimiglio
 This repository is maintained using [Jupyter lab](https://jupyterlab.readthedocs.io/en/stable/) and build using [Jupyter book](https://jupyterbook.org/intro.html).
 
 ## Acknowledgements
+
+[Image.sc](Image.sc) discussions are the inspiration for most of the material in this tutorial.  
+
+[Cellpose](https://www.nature.com/articles/s41592-020-01018-x)  Carsen Stringer, Tim Wang, Michalis Michaelos, Marius Pachitariu and [Cellpose 2.0](https://www.nature.com/articles/s41592-022-01663-4)
+
+[Stardist](https://arxiv.org/abs/1806.03535) Uwe Schmidt, Martin Weigert, Coleman Broaddus, Gene Myers.
+
+[Mobile SAM](https://arxiv.org/abs/2312.09579) Chaoning Zhang

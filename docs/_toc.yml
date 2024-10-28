@@ -15,6 +15,7 @@ parts:
     - file: 00_course_preparation/05_Setup
     - file: 00_course_preparation/10_Dependencies
     - file: 00_course_preparation/15_data
+    - file: 00_course_preparation/25_exercises
   - file: 10_label_augment_train/05_introduction
     sections:
     - file: 10_label_augment_train/07_file_organization
