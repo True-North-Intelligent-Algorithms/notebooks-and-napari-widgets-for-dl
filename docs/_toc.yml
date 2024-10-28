@@ -18,6 +18,7 @@ parts:
     - file: 00_course_preparation/25_exercises
   - file: 10_label_augment_train/05_introduction
     sections:
+    - file: 10_label_augment_train/03_napari_layers.ipynb
     - file: 10_label_augment_train/07_file_organization
     - file: 10_label_augment_train/10_label_predict.ipynb
     - file: 10_label_augment_train/15_augment
