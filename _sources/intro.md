@@ -17,7 +17,7 @@ This repository is maintained using [Jupyter lab](https://jupyterlab.readthedocs
 
 ## Acknowledgements
 
-[Image.sc](Image.sc) discussions are the inspiration for most of the material in this tutorial.  
+[Image SC](https://forum.image.sc/) discussions are the inspiration for most of the material in this tutorial.  
 
 [Cellpose](https://www.nature.com/articles/s41592-020-01018-x)  Carsen Stringer, Tim Wang, Michalis Michaelos, Marius Pachitariu and [Cellpose 2.0](https://www.nature.com/articles/s41592-022-01663-4)
 

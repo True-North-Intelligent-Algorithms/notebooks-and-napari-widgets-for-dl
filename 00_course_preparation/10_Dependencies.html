@@ -158,9 +158,16 @@ const thebe_selector_output = ".output, .cell_output"
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="02_tools.html">Tools used for this workshop</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="02_tools.html">Tools used for this workshop</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="05_Setup.html">Setup</a></li>
 
-<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/05_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_data.html">Code and Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="25_exercises.html">Suggested exercises</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/01_introduction.html">Labeling and Augmentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/03_napari_layers.html">Some Napari Basics</a></li>
 
 
@@ -190,7 +197,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../15_sparse_labelling/05_introduction.html">Sparse Labeling</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_sparse_labelling/05_introduction.html">Sparse Labeling</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/10_label_predict.html">Explore and label the ‘sparse labels’ Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/20_create_patches.html">Make patches from labels</a></li>
 
@@ -205,7 +212,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../20_scale/10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
 
 
@@ -234,7 +241,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 </ul>
 </li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-4"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-5"><i class="fa-solid fa-chevron-down"></i></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
 
@@ -435,16 +442,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dependencies</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
 </ul>
 </li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -455,7 +460,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="dependencies">
+  <section class="tex2jax_ignore mathjax_ignore" id="dependencies">
 <h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this heading">#</a></h1>
 <p>You will need to install napari and for augmentation you will need albumentations library.  Also explicitly install numpy 1.26.  (We have not tested with numpy 2.0 so it is a good idea to explicitly install numpy 1.26 to avoid another dependency installing numpy 2.x)</p>
 <p>You will also need stardist, cellpose, segment-everything and Yolo.  On Windows you will likely need to create separate environments for Stardist and the Pytorch dependencies (Cellpose, SAM and YOLO).</p>
@@ -464,9 +469,8 @@ document.write(`
 <strong>napari-easy-augment-batch-dl:</strong>  Napari widgets for labelling and running deep learning workflows on image series.<br />
 <strong>segment-everything:</strong>  Helper to run YOLO and SAM variations and work with lists representing (possibly overlapping) labels.<br />
 <strong>napari-segment-everything:</strong>  Napari GUI for segment-everything.</p>
-</section>
 <section id="linux">
-<h1>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h1>
+<h2>Linux<a class="headerlink" href="#linux" title="Permalink to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2K2024_dl</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
     <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2K2024_dl</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span> <span class="c1"># </span>
@@ -491,7 +495,7 @@ document.write(`
 </div>
 </section>
 <section id="mac-m1">
-<h1>Mac M1<a class="headerlink" href="#mac-m1" title="Permalink to this heading">#</a></h1>
+<h2>Mac M1<a class="headerlink" href="#mac-m1" title="Permalink to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2K2024_dl</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
     <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2K2024_dl</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span> <span class="c1"># </span>
@@ -514,10 +518,10 @@ document.write(`
 </div>
 </section>
 <section id="windows">
-<h1>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h1>
+<h2>Windows<a class="headerlink" href="#windows" title="Permalink to this heading">#</a></h2>
 <p>Note that to use GPU with Stardist in Windows we need two different environments because Windows needs an older version of tensorflow, which is not compatible wither newer version of pytorch based toolkits.</p>
 <section id="windows-stardist-environment">
-<h2>Windows stardist environment<a class="headerlink" href="#windows-stardist-environment" title="Permalink to this heading">#</a></h2>
+<h3>Windows stardist environment<a class="headerlink" href="#windows-stardist-environment" title="Permalink to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2k2024_stardist</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
     <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2k2024_stardist</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
@@ -535,7 +539,7 @@ document.write(`
 </div>
 </section>
 <section id="windows-pytorch-environment">
-<h2>Windows pytorch environment<a class="headerlink" href="#windows-pytorch-environment" title="Permalink to this heading">#</a></h2>
+<h3>Windows pytorch environment<a class="headerlink" href="#windows-pytorch-environment" title="Permalink to this heading">#</a></h3>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">conda</span> <span class="n">create</span> <span class="o">-</span><span class="n">n</span> <span class="n">I2k2024_pytorch</span> <span class="n">python</span><span class="o">=</span><span class="mf">3.10</span>
     <span class="n">conda</span> <span class="n">activate</span> <span class="n">I2k2024_pytorch</span>
     <span class="n">pip</span> <span class="n">install</span> <span class="n">numpy</span><span class="o">==</span><span class="mf">1.26</span>
@@ -554,6 +558,7 @@ document.write(`
     <span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="kc">True</span><span class="o">-</span><span class="n">North</span><span class="o">-</span><span class="n">Intelligent</span><span class="o">-</span><span class="n">Algorithms</span><span class="o">/</span><span class="n">napari</span><span class="o">-</span><span class="n">segment</span><span class="o">-</span><span class="n">everything</span><span class="o">.</span><span class="n">git</span>
 </pre></div>
 </div>
+</section>
 </section>
 </section>
 
@@ -624,16 +629,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Dependencies</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linux">Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-m1">Mac M1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#windows">Windows</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-stardist-environment">Windows stardist environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#windows-pytorch-environment">Windows pytorch environment</a></li>
 </ul>
 </li>
 </ul>
-
   </nav></div>
 
 </div></div>

@@ -1,4 +1,4 @@
-## Code and Data  
+# Code and Data  
 
 The code for this workshop can be found [here](https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl)
 
