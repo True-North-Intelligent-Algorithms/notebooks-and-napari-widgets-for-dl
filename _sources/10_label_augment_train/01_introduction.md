@@ -4,7 +4,15 @@
 
 1.  Use Napari ROIs to divide single image into training and testing sets
 2.  Use data augmentation to train Stardist or Cellpose with a small number of labels
-3.  Compare deep learning results from different frameworks in the same viewer.  
+3.  (TODO) Compare deep learning results from different frameworks in the same viewer.  
+
+### What are training, validation and test sets? 
+
+1.  Training - this is the data that is input into the training algorithm.  The model learns patterns from this data and adjust the weights using this data. 
+
+2.  Validation - This is a data that is not fed to the model directly, but used during the training process to tune parameters and evaluate performance. 
+
+3.  Test - This is an 'unseen' partition of data that is used to evaluate how well the model generalizes. 
 
 ### Napari-easy-augment-batch-dl tool
 

@@ -443,6 +443,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-section">In this section:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-training-validation-and-test-sets">What are training, validation and test sets?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-tool">Napari-easy-augment-batch-dl tool</a></li>
 </ul>
             </nav>
@@ -462,7 +463,15 @@ document.write(`
 <ol class="arabic simple">
 <li><p>Use Napari ROIs to divide single image into training and testing sets</p></li>
 <li><p>Use data augmentation to train Stardist or Cellpose with a small number of labels</p></li>
-<li><p>Compare deep learning results from different frameworks in the same viewer.</p></li>
+<li><p>(TODO) Compare deep learning results from different frameworks in the same viewer.</p></li>
+</ol>
+</section>
+<section id="what-are-training-validation-and-test-sets">
+<h2>What are training, validation and test sets?<a class="headerlink" href="#what-are-training-validation-and-test-sets" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Training - this is the data that is input into the training algorithm.  The model learns patterns from this data and adjust the weights using this data.</p></li>
+<li><p>Validation - This is a data that is not fed to the model directly, but used during the training process to tune parameters and evaluate performance.</p></li>
+<li><p>Test - This is an ‘unseen’ partition of data that is used to evaluate how well the model generalizes.</p></li>
 </ol>
 </section>
 <section id="napari-easy-augment-batch-dl-tool">
@@ -560,6 +569,7 @@ document.write(`
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-this-section">In this section:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-are-training-validation-and-test-sets">What are training, validation and test sets?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#napari-easy-augment-batch-dl-tool">Napari-easy-augment-batch-dl tool</a></li>
 </ul>
   </nav></div>
