@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Data &#8212; My Jupyter Book</title>
+    <title>Suggested exercises &#8212; My Jupyter Book</title>
   
   
   
@@ -61,11 +61,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '00_course_preparation/15_data';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '00_course_preparation/25_exercises';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Suggested exercises" href="25_exercises.html" />
-    <link rel="prev" title="Dependencies" href="10_Dependencies.html" />
+    <link rel="next" title="Labeling and Augmentation" href="../10_label_augment_train/05_introduction.html" />
+    <link rel="prev" title="Data" href="15_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -308,7 +308,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F00_course_preparation/15_data.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F00_course_preparation/25_exercises.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -338,7 +338,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/00_course_preparation/15_data.md" target="_blank"
+      <li><a href="../_sources/00_course_preparation/25_exercises.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -418,7 +418,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Data</h1>
+    <h1>Suggested exercises</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,10 +432,18 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="data">
-<h1>Data<a class="headerlink" href="#data" title="Permalink to this heading">#</a></h1>
-<p>Data can be found <a class="reference external" href="https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=4ibypc0u40ub702trdipzokir%26st=spgp9ckc%26dl=0">here</a></p>
-<p>Place the data in the code directory, that is directly under the <code class="docutils literal notranslate"><span class="pre">notebooks-and-napari-widgets-for-dl</span></code> from github.</p>
+  <section id="suggested-exercises">
+<h1>Suggested exercises<a class="headerlink" href="#suggested-exercises" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p>Install dependencies, download the data, and run the notebooks to test whether dependencies were installed correctly.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">10_label_augment_train\03_napari_layers</span></code> and practice interacting with Napari Layers in a notebook.</p></li>
+<li><p>Run the notebooks in <code class="docutils literal notranslate"><span class="pre">10_label_augment_train</span></code> on one of your own images.  Label a single ROI and try to train a model to detect object in the rest of the image.</p></li>
+<li><p>Run the notebooks in <code class="docutils literal notranslate"><span class="pre">15_sparse_labeling</span></code>, add additional labels and try to improve the clustered ladybug detection.</p></li>
+<li><p>Run the notebook in <code class="docutils literal notranslate"><span class="pre">20_scale\20_cell_pose_diameter.ipynb</span></code>, and try tweaking the test image (for example make the spheres closer together or even overlapping)</p></li>
+<li><p>Run the notebooks 30 through 50 in <code class="docutils literal notranslate"><span class="pre">20_scale</span></code> and try to train a cellpose model to detect ladybugs at different scales.</p></li>
+<li><p>Run notebook <code class="docutils literal notranslate"><span class="pre">20_scale\80_protrusions</span></code> on one of your own tough images, and try to get perfect results self-predicting a single image.</p></li>
+<li><p>Run notebook <code class="docutils literal notranslate"><span class="pre">20_mobile_sam</span></code> or <code class="docutils literal notranslate"><span class="pre">30_filter_labels</span></code> and try to find a filterset that finds ladybugs and discards other objects.</p></li>
+</ol>
 </section>
 
     <script type="text/x-thebe-config">
@@ -470,20 +478,20 @@ document.write(`
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="10_Dependencies.html"
+       href="15_data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Dependencies</p>
+        <p class="prev-next-title">Data</p>
       </div>
     </a>
     <a class="right-next"
-       href="25_exercises.html"
+       href="../10_label_augment_train/05_introduction.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Suggested exercises</p>
+        <p class="prev-next-title">Labeling and Augmentation</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

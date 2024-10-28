@@ -9,3 +9,9 @@ This workshop uses Jupyter Notebooks, Napari, Segment Anything (SAM), Cellpose, 
 [segment-everything](https://github.com/True-North-Intelligent-Algorithms/segment-everything) - This contains utilities for rendering and training prompt-based and overlapping segmentation models (like SAM).  
 
 [napari-segment-everything](https://github.com/True-North-Intelligent-Algorithms/napari-segment-everything) - This is a Napari GUI for segment-everything
+
+## Some example may be 'under construction' 
+
+
+
+![not found](under_construction.jpg)   
