@@ -1,4 +1,4 @@
-## Tools used for this workshop
+# Tools used for this workshop
 
 This workshop uses Jupyter Notebooks, Napari, Segment Anything (SAM), Cellpose, Stardist and Albumentations among other tools.  In addition the following other projects are used.
 

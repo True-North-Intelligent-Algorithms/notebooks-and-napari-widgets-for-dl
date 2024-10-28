@@ -1,4 +1,4 @@
-## Suggested exercises
+# Suggested exercises
 
 1.  Install dependencies, download the data, and run the notebooks to test whether dependencies were installed correctly. 
 
