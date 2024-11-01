@@ -464,7 +464,7 @@ document.write(`
                   
   <section id="cellpose-trained-to-learn-scale">
 <h1>Cellpose trained to learn scale<a class="headerlink" href="#cellpose-trained-to-learn-scale" title="Permalink to this heading">#</a></h1>
-<p>This example shows how to train cellpose to find objects at different scales.  It is an iteration on a previous example which trained cellpose on a trivial image with one very small and one very large sphere.  This time we try to use the same cellpose model to detect several spheres of varying sizes in the same image.</p>
+<p>This example shows how to train cellpose to find objects at different scales.  We try to use the same cellpose model to detect several spheres of varying sizes in the same image.</p>
 <p>When applying a cellpose model to an image, it is common to use the ‘diameter’ parameter to rescale image to detect structure at a different scale than the network was trained for.  However this may not work if single images have objects at different scales within the image.</p>
 <p>If the training data has a mixture of small and large objects, cellpose can learn these.   This can be shown with a simple simulation.</p>
 <div class="cell docutils container">
@@ -486,10 +486,7 @@ document.write(`
 <p>To create a training set we a keep a copy of the single spheres (which are put in 224 by 224 arrays by raster geometry… perfect for training patches)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sympy</span> <span class="kn">import</span> <span class="n">im</span>
-
-
-<span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">624</span><span class="p">,</span> <span class="mi">224</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">624</span><span class="p">,</span> <span class="mi">224</span>
 
 <span class="n">image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
 <span class="n">truth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">height</span><span class="p">,</span> <span class="n">width</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
@@ -513,14 +510,21 @@ document.write(`
     <span class="n">x_</span> <span class="o">=</span> <span class="n">x_</span> <span class="o">+</span> <span class="mi">50</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">r</span>
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 
-<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
-<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">truth</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">3.5</span><span class="p">)</span>
+<span class="c1"># set title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Image&#39;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow2d</span><span class="p">(</span><span class="n">truth</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">3.5</span><span class="p">)</span>
+<span class="c1"># set title</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Truth&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6f22e752021583b29a5d7d0f06f2f781cffb6a800d07af3260854e908d8b02a0.png" src="../_images/6f22e752021583b29a5d7d0f06f2f781cffb6a800d07af3260854e908d8b02a0.png" />
-<img alt="../_images/803ff5d27e8f0cc22df20c64cc22111a5dc89493de3882c3aba39acb60e08054.png" src="../_images/803ff5d27e8f0cc22df20c64cc22111a5dc89493de3882c3aba39acb60e08054.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 0.98, &#39;Truth&#39;)
+</pre></div>
+</div>
+<img alt="../_images/12f25ca36a0d56ea85d795fdc59c63b9b6809304f2bbccd0290fd06b1068770a.png" src="../_images/12f25ca36a0d56ea85d795fdc59c63b9b6809304f2bbccd0290fd06b1068770a.png" />
+<img alt="../_images/a1581bff2a9cdc280217a52566c9bc3ee96e9a60ed9b992e5bb74c4742de1b39.png" src="../_images/a1581bff2a9cdc280217a52566c9bc3ee96e9a60ed9b992e5bb74c4742de1b39.png" />
 </div>
 </div>
 </section>
@@ -536,11 +540,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:31:05,573 [INFO] &gt;&gt; cyto2 &lt;&lt; model set to be used
-2024-10-20 16:31:05,576 [INFO] ** TORCH CUDA version installed and working. **
-2024-10-20 16:31:05,577 [INFO] &gt;&gt;&gt;&gt; using GPU
-2024-10-20 16:31:05,721 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cyto2torch_0
-2024-10-20 16:31:05,885 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-31 19:57:01,797 [INFO] &gt;&gt; cyto2 &lt;&lt; model set to be used
+2024-10-31 19:57:01,799 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-31 19:57:01,800 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-31 19:57:01,941 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cyto2torch_0
+2024-10-31 19:57:02,119 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
 cyto2 diameter mean 30.0
 </pre></div>
 </div>
@@ -616,15 +620,15 @@ False True
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>creating new log file
-2024-10-20 16:31:14,260 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2024-10-20 16:31:14,261 [INFO] 
+2024-10-31 19:45:43,152 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2024-10-31 19:45:43,153 [INFO] 
 cellpose version: 	3.0.9 
 platform:       	win32 
 python version: 	3.10.14 
 torch version:  	2.2.2+cu118
-2024-10-20 16:31:14,264 [INFO] ** TORCH CUDA version installed and working. **
-2024-10-20 16:31:14,266 [INFO] &gt;&gt;&gt;&gt; using GPU
-2024-10-20 16:31:14,366 [INFO] &gt;&gt;&gt;&gt; no model weights loaded
+2024-10-31 19:45:43,156 [INFO] ** TORCH CUDA version installed and working. **
+2024-10-31 19:45:43,157 [INFO] &gt;&gt;&gt;&gt; using GPU
+2024-10-31 19:45:43,274 [INFO] &gt;&gt;&gt;&gt; no model weights loaded
 </pre></div>
 </div>
 </div>
@@ -643,7 +647,6 @@ torch version:  	2.2.2+cu118
     <span class="n">channels</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> 
     <span class="n">save_path</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> 
     <span class="n">n_epochs</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span>
-    <span class="c1">#nimg_per_epoch=60,</span>
     <span class="n">min_train_masks</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">normalize</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">rescale</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>  
@@ -652,46 +655,47 @@ torch version:  	2.2.2+cu118
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:06,177 [INFO] computing flows for labels
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-31 19:45:51,212 [INFO] computing flows for labels
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:02&lt;00:00, 21.77it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:03&lt;00:00, 15.67it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:08,943 [INFO] &gt;&gt;&gt; computing diameters
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-31 19:45:55,063 [INFO] &gt;&gt;&gt; computing diameters
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:00&lt;00:00, 3538.80it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████| 60/60 [00:00&lt;00:00, 3177.30it/s]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:08,964 [INFO] &gt;&gt;&gt; using channels [0, 0]
-2024-10-20 16:47:08,979 [INFO] &gt;&gt;&gt; n_epochs=180, n_train=60, n_test=None
-2024-10-20 16:47:08,979 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
-2024-10-20 16:47:08,982 [INFO] &gt;&gt;&gt; saving model to models\custom
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-31 19:45:55,088 [INFO] &gt;&gt;&gt; using channels [0, 0]
+2024-10-31 19:45:55,102 [INFO] &gt;&gt;&gt; n_epochs=180, n_train=60, n_test=None
+2024-10-31 19:45:55,103 [INFO] &gt;&gt;&gt; AdamW, learning_rate=0.00500, weight_decay=0.00001
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-20 16:47:09,875 [INFO] 0, train_loss=0.0033, test_loss=0.0000, LR=0.0000, time 0.89s
-2024-10-20 16:47:13,725 [INFO] 5, train_loss=0.0266, test_loss=0.0000, LR=0.0028, time 4.74s
-2024-10-20 16:47:17,567 [INFO] 10, train_loss=0.0362, test_loss=0.0000, LR=0.0050, time 8.59s
-2024-10-20 16:47:25,326 [INFO] 20, train_loss=0.0367, test_loss=0.0000, LR=0.0050, time 16.34s
-2024-10-20 16:47:33,275 [INFO] 30, train_loss=0.0267, test_loss=0.0000, LR=0.0050, time 24.29s
-2024-10-20 16:47:41,591 [INFO] 40, train_loss=0.0116, test_loss=0.0000, LR=0.0050, time 32.61s
-2024-10-20 16:47:50,123 [INFO] 50, train_loss=0.0313, test_loss=0.0000, LR=0.0050, time 41.14s
-2024-10-20 16:47:58,326 [INFO] 60, train_loss=0.0147, test_loss=0.0000, LR=0.0050, time 49.34s
-2024-10-20 16:48:06,804 [INFO] 70, train_loss=0.0089, test_loss=0.0000, LR=0.0050, time 57.82s
-2024-10-20 16:48:15,201 [INFO] 80, train_loss=0.0064, test_loss=0.0000, LR=0.0050, time 66.22s
-2024-10-20 16:48:23,334 [INFO] 90, train_loss=0.0061, test_loss=0.0000, LR=0.0050, time 74.35s
-2024-10-20 16:48:31,438 [INFO] 100, train_loss=0.0059, test_loss=0.0000, LR=0.0050, time 82.46s
-2024-10-20 16:48:40,012 [INFO] 110, train_loss=0.0055, test_loss=0.0000, LR=0.0050, time 91.03s
-2024-10-20 16:48:48,520 [INFO] 120, train_loss=0.0043, test_loss=0.0000, LR=0.0050, time 99.54s
-2024-10-20 16:48:57,288 [INFO] 130, train_loss=0.0061, test_loss=0.0000, LR=0.0025, time 108.31s
-2024-10-20 16:49:05,305 [INFO] 140, train_loss=0.0041, test_loss=0.0000, LR=0.0006, time 116.32s
-2024-10-20 16:49:13,360 [INFO] 150, train_loss=0.0028, test_loss=0.0000, LR=0.0002, time 124.38s
-2024-10-20 16:49:21,820 [INFO] 160, train_loss=0.0032, test_loss=0.0000, LR=0.0000, time 132.84s
-2024-10-20 16:49:29,869 [INFO] 170, train_loss=0.0029, test_loss=0.0000, LR=0.0000, time 140.89s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2024-10-31 19:45:56,518 [INFO] &gt;&gt;&gt; saving model to models\custom
+2024-10-31 19:45:58,628 [INFO] 0, train_loss=1.3979, test_loss=0.0000, LR=0.0000, time 2.11s
+2024-10-31 19:46:02,912 [INFO] 5, train_loss=0.6603, test_loss=0.0000, LR=0.0028, time 6.40s
+2024-10-31 19:46:07,598 [INFO] 10, train_loss=0.2332, test_loss=0.0000, LR=0.0050, time 11.08s
+2024-10-31 19:46:16,200 [INFO] 20, train_loss=0.0675, test_loss=0.0000, LR=0.0050, time 19.68s
+2024-10-31 19:46:24,772 [INFO] 30, train_loss=0.0446, test_loss=0.0000, LR=0.0050, time 28.26s
+2024-10-31 19:46:33,404 [INFO] 40, train_loss=0.0205, test_loss=0.0000, LR=0.0050, time 36.89s
+2024-10-31 19:46:42,490 [INFO] 50, train_loss=0.0246, test_loss=0.0000, LR=0.0050, time 45.97s
+2024-10-31 19:46:51,256 [INFO] 60, train_loss=0.0340, test_loss=0.0000, LR=0.0050, time 54.74s
+2024-10-31 19:47:00,675 [INFO] 70, train_loss=0.0157, test_loss=0.0000, LR=0.0050, time 64.16s
+2024-10-31 19:47:09,308 [INFO] 80, train_loss=0.0114, test_loss=0.0000, LR=0.0050, time 72.79s
+2024-10-31 19:47:18,246 [INFO] 90, train_loss=0.0096, test_loss=0.0000, LR=0.0050, time 81.73s
+2024-10-31 19:47:27,333 [INFO] 100, train_loss=0.0107, test_loss=0.0000, LR=0.0050, time 90.82s
+2024-10-31 19:47:37,041 [INFO] 110, train_loss=0.0097, test_loss=0.0000, LR=0.0050, time 100.52s
+2024-10-31 19:47:46,038 [INFO] 120, train_loss=0.0059, test_loss=0.0000, LR=0.0050, time 109.52s
+2024-10-31 19:47:55,011 [INFO] 130, train_loss=0.0088, test_loss=0.0000, LR=0.0025, time 118.49s
+2024-10-31 19:48:04,208 [INFO] 140, train_loss=0.0054, test_loss=0.0000, LR=0.0006, time 127.69s
+2024-10-31 19:48:12,957 [INFO] 150, train_loss=0.0034, test_loss=0.0000, LR=0.0002, time 136.44s
+2024-10-31 19:48:21,825 [INFO] 160, train_loss=0.0037, test_loss=0.0000, LR=0.0000, time 145.31s
+2024-10-31 19:48:30,924 [INFO] 170, train_loss=0.0034, test_loss=0.0000, LR=0.0000, time 154.41s
 </pre></div>
 </div>
 </div>
@@ -709,24 +713,10 @@ torch version:  	2.2.2+cu118
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
-<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
-<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Image layer &#39;Image&#39; at 0x25068f3e230&gt;
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="show-all-the-cyto-labels-and-label-custom">
 <h1>Show all the cyto labels and label custom<a class="headerlink" href="#show-all-the-cyto-labels-and-label-custom" title="Permalink to this heading">#</a></h1>
-<p>Note, cyto can only find objects of different sizes by tuning the <code class="docutils literal notranslate"><span class="pre">diameter</span></code> param.  Custom can find very different object sizes by default.</p>
+<p>Note: cyto can only find objects of different sizes by tuning the <code class="docutils literal notranslate"><span class="pre">diameter</span></code> param.  Custom can find very different object sizes by default.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
@@ -745,6 +735,21 @@ torch version:  	2.2.2+cu118
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;flows&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;flows&#39;)
+</pre></div>
+</div>
+<img alt="../_images/944438258b29e0166feaab7adbf43e583da4fff5e36872b7a2594262089df999.png" src="../_images/944438258b29e0166feaab7adbf43e583da4fff5e36872b7a2594262089df999.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model_custom</span><span class="o">.</span><span class="n">diam_labels</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">model_cyto2</span><span class="o">.</span><span class="n">diam_labels</span><span class="p">)</span>
 </pre></div>
@@ -753,6 +758,15 @@ torch version:  	2.2.2+cu118
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.0
 30.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
