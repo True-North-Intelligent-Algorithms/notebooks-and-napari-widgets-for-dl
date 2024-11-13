@@ -246,6 +246,7 @@ const thebe_selector_output = ".output, .cell_output"
 
 
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Filtering Labels</a></li>
+
 </ul>
 </li>
 </ul>
@@ -441,13 +442,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Filtering Labels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-yolo-detector">Create a Yolo Detector</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-a-test-image">Load a test image</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#call-yolo-then-sam">Call Yolo then SAM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-original-and-segmented">Show Original and Segmented</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-helper-functions">Create Helper functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-helpers-to-filter-objects">Use helpers to filter objects.</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-labels-in-3d">Explore labels in 3D</a></li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -492,9 +497,9 @@ document.write(`
 <h2>Create a Yolo Detector<a class="headerlink" href="#create-a-yolo-detector" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="o">=</span> <span class="mf">0.5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span> <span class="o">=</span> <span class="mf">0.2</span>
 <span class="n">iou</span> <span class="o">=</span> <span class="mf">0.8</span>
-<span class="n">imagesz</span> <span class="o">=</span> <span class="mi">1024</span>
+<span class="n">imagesz</span> <span class="o">=</span> <span class="mi">2048</span>
 <span class="n">descriptor</span> <span class="o">=</span> <span class="s2">&quot;MobileSAM Model&quot;</span>
 <span class="n">boxes</span> <span class="o">=</span> <span class="kc">True</span>
 
@@ -511,17 +516,20 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_SAM&#39;</span><span class="p">)</span>
-<span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;5784124_7185843.jpg&#39;</span><span class="p">)</span>
+<span class="c1">#image_name = os.path.join(parent_path, &#39;5784124_7185843.jpg&#39;)</span>
+<span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;6337689_7986324.jpg&#39;</span><span class="p">)</span>
 <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_name</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">overlay_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;overlays&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">overlay_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">overlay_path</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2929116eb00&gt;
-</pre></div>
-</div>
-<img alt="../_images/83f227e548630259943570d7a6982c5e34411d9a6178cf939f1d7ce74e0812cb.png" src="../_images/83f227e548630259943570d7a6982c5e34411d9a6178cf939f1d7ce74e0812cb.png" />
+<img alt="../_images/e68235a4ff82874fc13f1c8feb2f449b633b216fa957b210e83140bbbbb56e8c.png" src="../_images/e68235a4ff82874fc13f1c8feb2f449b633b216fa957b210e83140bbbbb56e8c.png" />
 </div>
 </div>
 </section>
@@ -547,8 +555,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1024x928 18 objects, 159.5ms
-Speed: 8.0ms preprocess, 159.5ms inference, 72.8ms postprocess per image at shape (1, 3, 1024, 1024)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x2048 23 objects, 152.6ms
+Speed: 28.9ms preprocess, 152.6ms inference, 67.8ms postprocess per image at shape (1, 3, 2048, 2048)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
@@ -569,94 +577,7 @@ Speed: 8.0ms preprocess, 159.5ms inference, 72.8ms postprocess per image at shap
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/9e19fdfcf50546354fabb10307bdf849e0f25491fe0a9e72cdc78e6e9715bdef.png" src="../_images/9e19fdfcf50546354fabb10307bdf849e0f25491fe0a9e72cdc78e6e9715bdef.png" />
-</div>
-</div>
-</section>
-<section id="create-helper-functions">
-<h2>Create Helper functions<a class="headerlink" href="#create-helper-functions" title="Permalink to this heading">#</a></h2>
-<p>We add a couple of helper functions.</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">add_properties_to_label_image</span></code> this helper adds several properties to the mask collection</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">filter_labels_3d_multi</span></code> this helper loops through the mask collection and sets a flag as to whether we keep the mask depending on the ranges in <code class="docutils literal notranslate"><span class="pre">stat_limits</span></code></p></li>
-</ol>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">skimage</span> <span class="kn">import</span> <span class="n">color</span>
-<span class="kn">from</span> <span class="nn">skimage.measure</span> <span class="kn">import</span> <span class="n">regionprops</span>
-
-<span class="k">def</span> <span class="nf">filter_labels_3d_multi</span><span class="p">(</span><span class="n">label_image</span><span class="p">,</span> <span class="n">sorted_results</span><span class="p">,</span> <span class="n">stat_limits</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">enum</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">):</span>
-        <span class="c1"># Check if the result should be kept based on the limits in stat_limits</span>
-        <span class="n">keep</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
-            <span class="n">stat_limits</span><span class="p">[</span><span class="n">stat</span><span class="p">][</span><span class="s2">&quot;min&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">result</span><span class="p">[</span><span class="n">stat</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">stat_limits</span><span class="p">[</span><span class="n">stat</span><span class="p">][</span><span class="s2">&quot;max&quot;</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">stat</span> <span class="ow">in</span> <span class="n">stat_limits</span>
-        <span class="p">)</span>
-<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">        print(result[&#39;area&#39;], stat_limits[&#39;area&#39;][&#39;min&#39;], stat_limits[&#39;area&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;circularity&#39;], stat_limits[&#39;circularity&#39;][&#39;min&#39;], stat_limits[&#39;circularity&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;solidity&#39;], stat_limits[&#39;solidity&#39;][&#39;min&#39;], stat_limits[&#39;solidity&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;mean_intensity&#39;], stat_limits[&#39;mean_intensity&#39;][&#39;min&#39;], stat_limits[&#39;mean_intensity&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;10th_percentile_intensity&#39;], stat_limits[&#39;10th_percentile_intensity&#39;][&#39;min&#39;], stat_limits[&#39;10th_percentile_intensity&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;mean_hue&#39;], stat_limits[&#39;mean_hue&#39;][&#39;min&#39;], stat_limits[&#39;mean_hue&#39;][&#39;max&#39;])</span>
-<span class="sd">        print(result[&#39;mean_saturation&#39;], stat_limits[&#39;mean_saturation&#39;][&#39;min&#39;], stat_limits[&#39;mean_saturation&#39;][&#39;max&#39;])</span>
-<span class="sd">        </span>
-<span class="sd">        print(keep)</span>
-<span class="sd">        print()</span>
-<span class="sd">        &#39;&#39;&#39;</span>
-        <span class="k">if</span> <span class="n">keep</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keep&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;segmentation&quot;</span><span class="p">])</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">label_image</span><span class="p">[</span><span class="n">enum</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-            <span class="n">temp</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keep&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
-                <span class="k">continue</span>
-            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;keep&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-            <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="s2">&quot;segmentation&quot;</span><span class="p">])</span>
-            <span class="n">temp</span> <span class="o">=</span> <span class="n">label_image</span><span class="p">[</span><span class="n">enum</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
-            <span class="n">temp</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            
-<span class="k">def</span> <span class="nf">add_properties_to_label_image</span><span class="p">(</span><span class="n">orig_image</span><span class="p">,</span> <span class="n">sorted_results</span><span class="p">):</span>
-
-    <span class="n">hsv_image</span> <span class="o">=</span> <span class="n">color</span><span class="o">.</span><span class="n">rgb2hsv</span><span class="p">(</span><span class="n">orig_image</span><span class="p">)</span>
-    <span class="c1"># switch to this? https://forum.image.sc/t/looking-for-a-faster-version-of-rgb2hsv/95214/12</span>
-
-    <span class="n">hue</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">hsv_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">saturation</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">hsv_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">1</span><span class="p">]</span>
-    <span class="n">intensity</span> <span class="o">=</span> <span class="mi">255</span> <span class="o">*</span> <span class="n">hsv_image</span><span class="p">[:,</span> <span class="p">:,</span> <span class="mi">2</span><span class="p">]</span>
-
-    <span class="k">for</span> <span class="n">enum</span><span class="p">,</span> <span class="n">result</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sorted_results</span><span class="p">):</span>
-        <span class="n">segmentation</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;segmentation&quot;</span><span class="p">]</span>
-        <span class="n">coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">segmentation</span><span class="p">)</span>
-        <span class="n">regions</span> <span class="o">=</span> <span class="n">regionprops</span><span class="p">(</span><span class="n">segmentation</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s2">&quot;uint8&quot;</span><span class="p">))</span>
-
-        <span class="c1"># calculate circularity</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;circularity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="mi">4</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">area</span> <span class="o">/</span> <span class="p">(</span><span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">perimeter</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
-        <span class="p">)</span>
-        <span class="c1"># for small pixelated objects, circularity can be &gt; 1 so we cap it</span>
-        <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s2">&quot;circularity&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">result</span><span class="p">[</span><span class="s2">&quot;circularity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;solidity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">regions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">solidity</span>
-        <span class="n">intensity_pixels</span> <span class="o">=</span> <span class="n">intensity</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;mean_intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">intensity_pixels</span><span class="p">)</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;10th_percentile_intensity&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span>
-            <span class="n">intensity_pixels</span><span class="p">,</span> <span class="mi">10</span>
-        <span class="p">)</span>
-        <span class="n">hue_pixels</span> <span class="o">=</span> <span class="n">hue</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;mean_hue&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">hue_pixels</span><span class="p">)</span>
-        <span class="n">saturation_pixels</span> <span class="o">=</span> <span class="n">saturation</span><span class="p">[</span><span class="n">coords</span><span class="p">]</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;mean_saturation&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">saturation_pixels</span><span class="p">)</span>
-
-        <span class="n">result</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="n">result</span><span class="p">[</span><span class="s2">&quot;label_num&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">enum</span> <span class="o">+</span> <span class="mi">1</span>
-        
-</pre></div>
-</div>
+<img alt="../_images/a0e7500986f7acc608f0b70156c81cbeaeb8a0d9b2298bc0eedc5496af9ef0ee.png" src="../_images/a0e7500986f7acc608f0b70156c81cbeaeb8a0d9b2298bc0eedc5496af9ef0ee.png" />
 </div>
 </div>
 </section>
@@ -664,18 +585,11 @@ Speed: 8.0ms preprocess, 159.5ms inference, 72.8ms postprocess per image at shap
 <h2>Use helpers to filter objects.<a class="headerlink" href="#use-helpers-to-filter-objects" title="Permalink to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">add_properties_to_label_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stat_limits</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">1000</span><span class="p">},</span>
+    <span class="s2">&quot;area&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">100000000</span><span class="p">},</span>
     <span class="s2">&quot;label_num&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="o">-</span><span class="mi">100000000</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">10000000000</span><span class="p">},</span>
     <span class="s2">&quot;solidity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
-    <span class="s2">&quot;circularity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
+    <span class="s2">&quot;circularity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">},</span>
     <span class="s2">&quot;mean_intensity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">255</span><span class="p">},</span>
     <span class="s2">&quot;10th_percentile_intensity&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">255</span><span class="p">},</span>
     <span class="s2">&quot;mean_hue&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mi">360</span><span class="p">},</span>
@@ -684,29 +598,27 @@ Speed: 8.0ms preprocess, 159.5ms inference, 72.8ms postprocess per image at shap
     <span class="s2">&quot;stability_score&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;min&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">temp</span> <span class="o">=</span> <span class="n">stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">add_properties_to_label_image</span><span class="p">()</span>
 
-<span class="n">stacked_labels</span><span class="o">.</span><span class="n">make_3d_label_image</span><span class="p">()</span>
+<span class="n">_2d_labels</span> <span class="o">=</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">make_2d_labels</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
 
-<span class="n">filter_labels_3d_multi</span><span class="p">(</span><span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">label_image</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">,</span> <span class="n">stat_limits</span><span class="p">)</span>
-
-<span class="c1"># min project label_image</span>
-<span class="n">masked_label_image</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">masked_equal</span><span class="p">(</span><span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">label_image</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-<span class="c1"># Perform the min projection on the masked array</span>
-<span class="n">_2d_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ma</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">masked_label_image</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">filter_labels_3d_multi</span><span class="p">(</span><span class="n">stat_limits</span><span class="p">)</span>
+<span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">filter_labels_hue_inverse</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span>
+<span class="n">_2d_labels_filtered</span> <span class="o">=</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">make_2d_labels</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
 
 <span class="n">test</span> <span class="o">=</span> <span class="n">mask_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">_2d_labels</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">())</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">img</span><span class="p">,</span> <span class="n">_2d_labels</span><span class="p">,</span> <span class="n">_2d_labels_filtered</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;img&#39;</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">,</span> <span class="s1">&#39;filtered&#39;</span><span class="p">],</span> <span class="mi">1</span> <span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x29358e76140&gt;
-</pre></div>
-</div>
-<img alt="../_images/30a7a90a7b50ce0828950a08f0cd3e5c682d7ca998f0a6beddb21227dab6c3dd.png" src="../_images/30a7a90a7b50ce0828950a08f0cd3e5c682d7ca998f0a6beddb21227dab6c3dd.png" />
+<img alt="../_images/78d79ea6232fbe1e25e4787aa3e5057d06f53ce7475ee0c4ffe91a3cd158676e.png" src="../_images/78d79ea6232fbe1e25e4787aa3e5057d06f53ce7475ee0c4ffe91a3cd158676e.png" />
 </div>
 </div>
+</section>
+</section>
+<section id="explore-labels-in-3d">
+<h1>Explore labels in 3D<a class="headerlink" href="#explore-labels-in-3d" title="Permalink to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">napari</span>
@@ -716,25 +628,237 @@ Speed: 8.0ms preprocess, 159.5ms inference, 72.8ms postprocess per image at shap
 <span class="n">segment_everything_widget</span><span class="o">=</span><span class="n">segment_everything</span><span class="o">.</span><span class="n">NapariSegmentEverything</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span><span class="n">segment_everything_widget</span><span class="p">)</span>
 <span class="n">segment_everything_widget</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
+<span class="n">layer</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;SAM 3D labels&#39;</span><span class="p">]</span>
+<span class="n">image_layer</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">layer</span><span class="o">.</span><span class="n">translate</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area 192.0 27982.0
-label_num 1 39
-solidity 0.32764505119453924 0.9727636181909045
-circularity 0.19237908137929463 0.8234817265690586
-mean_intensity 25.31562302340291 197.359375
-10th_percentile_intensity 4.0 184.1
-mean_hue 20.537680290775494 75.34663411191669
-mean_saturation 85.16564983216925 217.41005184234092
-predicted_iou 0.5472383499145508 0.980248212814331
-stability_score 0.6202531456947327 0.9825803637504578
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area 166.0 206395.0
+label_num 1 43
+solidity 0.01993598023249284 0.9738467126770796
+circularity 0.01146839776452461 0.891755107515581
+mean_intensity 13.874257771568285 251.5404556166536
+10th_percentile_intensity 2.0 250.0
+mean_hue 18.738092496660403 181.30021879475947
+mean_saturation 9.257852128168935 222.12476670924994
+predicted_iou 0.42657896876335144 1.0178486108779907
+stability_score 0.0 0.9932249188423157
 </pre></div>
 </div>
 </div>
 </div>
-</section>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get all image in parent path</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="n">image_list</span> <span class="o">=</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;*.jpg&#39;</span><span class="p">))</span>
+
+<span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">for</span> <span class="n">image_name</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
+    <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_name</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">yolo_detecter</span><span class="o">.</span><span class="n">get_results</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">conf</span><span class="o">=</span><span class="n">conf</span><span class="p">,</span> <span class="n">iou</span><span class="o">=</span> <span class="n">iou</span><span class="p">,</span> <span class="n">imgsz</span><span class="o">=</span><span class="n">imagesz</span><span class="p">,</span> <span class="n">max_det</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+    <span class="n">bbs</span><span class="o">=</span><span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">boxes</span><span class="o">.</span><span class="n">xyxy</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">stacked_labels</span> <span class="o">=</span> <span class="n">StackedLabels</span><span class="o">.</span><span class="n">from_yolo_results</span><span class="p">(</span><span class="n">bbs</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="n">img</span><span class="p">)</span>
+    <span class="n">segmented_stacked_labels</span> <span class="o">=</span> <span class="n">segment_from_stacked_labels</span><span class="p">(</span><span class="n">stacked_labels</span><span class="p">,</span> <span class="s2">&quot;MobileSamV2&quot;</span><span class="p">)</span>
+    <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">sort_largest_to_smallest</span><span class="p">()</span>
+    <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">add_properties_to_label_image</span><span class="p">()</span>
+    
+    <span class="n">_2d_labels</span> <span class="o">=</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">make_2d_labels</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
+    <span class="n">overlay</span> <span class="o">=</span> <span class="n">mask_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">_2d_labels</span><span class="p">)</span>
+
+    <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">filter_labels_3d_multi</span><span class="p">(</span><span class="n">stat_limits</span><span class="p">)</span>
+    <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">filter_labels_hue_inverse</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">330</span><span class="p">)</span>
+    
+    <span class="n">_2d_labels_filtered</span> <span class="o">=</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">make_2d_labels</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">)</span>
+    <span class="n">overlay_filtered</span> <span class="o">=</span> <span class="n">mask_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">_2d_labels_filtered</span><span class="p">)</span>
+    
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">img</span><span class="p">,</span> <span class="n">overlay</span><span class="p">,</span> <span class="n">overlay_filtered</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;Original&quot;</span><span class="p">,</span> <span class="s2">&quot;Segmented&quot;</span><span class="p">,</span> <span class="s2">&quot;Filtered&quot;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">overlay_path</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;image</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s1">.png&#39;</span><span class="p">))</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+ 
+    
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x2048 37 objects, 159.1ms
+Speed: 26.9ms preprocess, 159.1ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 24 objects, 181.4ms
+Speed: 23.1ms preprocess, 181.4ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1024 113 objects, 158.6ms
+Speed: 14.0ms preprocess, 158.6ms inference, 4.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 48 objects, 126.7ms
+Speed: 21.9ms preprocess, 126.7ms inference, 2.9ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1920 144 objects, 160.0ms
+Speed: 25.9ms preprocess, 160.0ms inference, 2.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 254 objects, 129.9ms
+Speed: 22.1ms preprocess, 129.9ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1376x2048 87 objects, 165.5ms
+Speed: 19.0ms preprocess, 165.5ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 58 objects, 125.6ms
+Speed: 22.0ms preprocess, 125.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 93 objects, 129.6ms
+Speed: 21.9ms preprocess, 129.6ms inference, 3.1ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1536x2048 370 objects, 148.6ms
+Speed: 22.9ms preprocess, 148.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 108 objects, 127.7ms
+Speed: 21.9ms preprocess, 127.7ms inference, 3.1ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1536x2048 56 objects, 129.7ms
+Speed: 22.9ms preprocess, 129.7ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1376 31 objects, 155.7ms
+Speed: 18.9ms preprocess, 155.7ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1536x2048 65 objects, 130.7ms
+Speed: 27.9ms preprocess, 130.7ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1312x2048 176 objects, 155.6ms
+Speed: 22.9ms preprocess, 155.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1856 33 objects, 160.6ms
+Speed: 24.9ms preprocess, 160.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1664x2048 177 objects, 157.8ms
+Speed: 22.0ms preprocess, 157.8ms inference, 3.9ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x2048 23 objects, 148.6ms
+Speed: 27.0ms preprocess, 148.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 141 objects, 128.7ms
+Speed: 22.9ms preprocess, 128.7ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 2048x1536 397 objects, 128.7ms
+Speed: 21.9ms preprocess, 128.7ms inference, 4.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1184x2048 127 objects, 155.6ms
+Speed: 17.0ms preprocess, 155.6ms inference, 3.0ms postprocess per image at shape (1, 3, 2048, 2048)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\users\bnort\work\imagej2022\tnia\tnia-python\tnia\plotting\plt_helper.py:45: RuntimeWarning: More than 20 figures have been opened. Figures created through the pyplot interface (`matplotlib.pyplot.figure`) are retained until explicitly closed and may consume too much memory. (To control this warning, see the rcParam `figure.max_open_warning`). Consider using `matplotlib.pyplot.close()`.
+  fig, axes = plt.subplots(rows, cols, figsize=(width,height))
+</pre></div>
+</div>
+<img alt="../_images/e38d35ef99d46a50c3b1ef17ea9bfb87a59d04a1d684ae8f57b483f196e6ad92.png" src="../_images/e38d35ef99d46a50c3b1ef17ea9bfb87a59d04a1d684ae8f57b483f196e6ad92.png" />
+<img alt="../_images/0cf78a9d43f1ed3fbd0cf509d08c3d7b9cf7cf6da1894b92a025824669b1223d.png" src="../_images/0cf78a9d43f1ed3fbd0cf509d08c3d7b9cf7cf6da1894b92a025824669b1223d.png" />
+<img alt="../_images/fe31854e90c6bffbe031eb37118c45575a4cba1fb29c401c254c66fffe82d392.png" src="../_images/fe31854e90c6bffbe031eb37118c45575a4cba1fb29c401c254c66fffe82d392.png" />
+<img alt="../_images/1793d2ea091143e7289286bc47eab6b4f5c283815b418055d5edbdd9b723858b.png" src="../_images/1793d2ea091143e7289286bc47eab6b4f5c283815b418055d5edbdd9b723858b.png" />
+<img alt="../_images/52ca07c73783a0a9c0d1d0cc799e5e1acd3896f1dd2a4d1e008911c601860ca0.png" src="../_images/52ca07c73783a0a9c0d1d0cc799e5e1acd3896f1dd2a4d1e008911c601860ca0.png" />
+<img alt="../_images/88982defc09dc1ba58d0190e64a77ec068fb2663ffe6301f0fd07036e6d8c260.png" src="../_images/88982defc09dc1ba58d0190e64a77ec068fb2663ffe6301f0fd07036e6d8c260.png" />
+<img alt="../_images/bae63d5e65643791a97cf958e6d26846726fbe72eec16bb6cb2d5db736f3b8b2.png" src="../_images/bae63d5e65643791a97cf958e6d26846726fbe72eec16bb6cb2d5db736f3b8b2.png" />
+<img alt="../_images/32007692fbf1c4140de414f459e718398635cee3d28eb36c4644e6060d4289bd.png" src="../_images/32007692fbf1c4140de414f459e718398635cee3d28eb36c4644e6060d4289bd.png" />
+<img alt="../_images/0ada0a5f079b597a17601c6c3c5e6950979f7803050fce8c01332b6f4b91b2f2.png" src="../_images/0ada0a5f079b597a17601c6c3c5e6950979f7803050fce8c01332b6f4b91b2f2.png" />
+<img alt="../_images/f353911f4a361ccea8f5980576e5086eef38e5b8875e9be23ed69409c50cd885.png" src="../_images/f353911f4a361ccea8f5980576e5086eef38e5b8875e9be23ed69409c50cd885.png" />
+<img alt="../_images/d1a889d11a0f799c9648de745873f1b0cc2590525242752538e0ebd980a62d73.png" src="../_images/d1a889d11a0f799c9648de745873f1b0cc2590525242752538e0ebd980a62d73.png" />
+<img alt="../_images/ceef32c3432778d01725f3f92b3dd5a24e6e6e54bc67d48f5202b21491f94541.png" src="../_images/ceef32c3432778d01725f3f92b3dd5a24e6e6e54bc67d48f5202b21491f94541.png" />
+<img alt="../_images/075f2c44f1a42e8ce359be5940974bb8a246233494baac4fa456e0cbe0b0e70d.png" src="../_images/075f2c44f1a42e8ce359be5940974bb8a246233494baac4fa456e0cbe0b0e70d.png" />
+<img alt="../_images/1d7413a79b2ecfb182209583e2098c3b42b73b5d0dd3d772167d243932176ddf.png" src="../_images/1d7413a79b2ecfb182209583e2098c3b42b73b5d0dd3d772167d243932176ddf.png" />
+<img alt="../_images/c6777890b8e90ff459ec3b1c8769ca0661430207e9ddc3d91c2a2b7034c17259.png" src="../_images/c6777890b8e90ff459ec3b1c8769ca0661430207e9ddc3d91c2a2b7034c17259.png" />
+<img alt="../_images/7ea91118ca3f4e7651d17d0a82f4e5625e4c9a37fb4e20c19ead4b3000517679.png" src="../_images/7ea91118ca3f4e7651d17d0a82f4e5625e4c9a37fb4e20c19ead4b3000517679.png" />
+<img alt="../_images/7d82e73905c1ce8940c823a42cb0331827f18dba8076e350a8509df760297545.png" src="../_images/7d82e73905c1ce8940c823a42cb0331827f18dba8076e350a8509df760297545.png" />
+<img alt="../_images/0d55e4be10078256024c14ce29b77494c39f627debc1c86bb49532b52b423ffa.png" src="../_images/0d55e4be10078256024c14ce29b77494c39f627debc1c86bb49532b52b423ffa.png" />
+<img alt="../_images/8f5e5a61a342b7cb85b18031a4ef89195b70308b5f14af86bebd1d71f6497c98.png" src="../_images/8f5e5a61a342b7cb85b18031a4ef89195b70308b5f14af86bebd1d71f6497c98.png" />
+<img alt="../_images/920fe67ea8db3d8dc31275ef18ddf93dd1e4405e73acabcd8ea7471eb854862f.png" src="../_images/920fe67ea8db3d8dc31275ef18ddf93dd1e4405e73acabcd8ea7471eb854862f.png" />
+<img alt="../_images/d656d70a164f8acaddafd41a1753d33cc4a0678a382643d54ae4f6afd91e77bd.png" src="../_images/d656d70a164f8acaddafd41a1753d33cc4a0678a382643d54ae4f6afd91e77bd.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -795,13 +919,17 @@ stability_score 0.6202531456947327 0.9825803637504578
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Filtering Labels</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-yolo-detector">Create a Yolo Detector</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-a-test-image">Load a test image</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#call-yolo-then-sam">Call Yolo then SAM</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#show-original-and-segmented">Show Original and Segmented</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-helper-functions">Create Helper functions</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#use-helpers-to-filter-objects">Use helpers to filter objects.</a></li>
 </ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-labels-in-3d">Explore labels in 3D</a></li>
+</ul>
+
   </nav></div>
 
 </div></div>
