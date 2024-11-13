@@ -480,6 +480,12 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\pytorch_and_SAM3\lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+</div>
 </div>
 <section id="create-a-yolo-detector">
 <h2>Create a Yolo Detector<a class="headerlink" href="#create-a-yolo-detector" title="Permalink to this heading">#</a></h2>
@@ -508,7 +514,7 @@ document.write(`
 
 <span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
 <span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_SAM&#39;</span><span class="p">)</span>
-<span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;41108879_65181698.jpg&#39;</span><span class="p">)</span>
+<span class="n">image_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;620818_780868.jpg&#39;</span><span class="p">)</span>
 
 <span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_name</span><span class="p">)</span>
 
@@ -517,10 +523,10 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2ac17d5a380&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x22d3d6d7550&gt;
 </pre></div>
 </div>
-<img alt="../_images/0cd6749bed78d1315eeef97a4b7baa2a84223e29ff0076a1e0f618330d9ee173.png" src="../_images/0cd6749bed78d1315eeef97a4b7baa2a84223e29ff0076a1e0f618330d9ee173.png" />
+<img alt="../_images/7a2ec3fd5b04a12610f86f6f224bda9a75b6e69b28be56daed6c8d65fb850e50.png" src="../_images/7a2ec3fd5b04a12610f86f6f224bda9a75b6e69b28be56daed6c8d65fb850e50.png" />
 </div>
 </div>
 <section id="call-yolo-then-sam">
@@ -544,8 +550,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 1024x704 26 objects, 57.0ms
-Speed: 4.1ms preprocess, 57.0ms inference, 6.1ms postprocess per image at shape (1, 3, 1024, 1024)
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0: 832x1024 126 objects, 150.6ms
+Speed: 6.0ms preprocess, 150.6ms inference, 65.8ms postprocess per image at shape (1, 3, 1024, 1024)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
@@ -562,10 +568,10 @@ Speed: 4.1ms preprocess, 57.0ms inference, 6.1ms postprocess per image at shape 
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x2ac17e9ae00&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x22d3d7f7400&gt;
 </pre></div>
 </div>
-<img alt="../_images/64e3e35d7506ce96ad052bee6ff7569be0cbecefd0e9bdfacc3e5687ff47530f.png" src="../_images/64e3e35d7506ce96ad052bee6ff7569be0cbecefd0e9bdfacc3e5687ff47530f.png" />
+<img alt="../_images/492515214313843768e3620c1e989406101d683625bcb412f499e64fb293f4d6.png" src="../_images/492515214313843768e3620c1e989406101d683625bcb412f499e64fb293f4d6.png" />
 </div>
 </div>
 </section>
@@ -581,21 +587,45 @@ Speed: 4.1ms preprocess, 57.0ms inference, 6.1ms postprocess per image at shape 
 <span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
 <span class="n">segment_everything_widget</span><span class="o">=</span><span class="n">segment_everything</span><span class="o">.</span><span class="n">NapariSegmentEverything</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span><span class="n">segment_everything_widget</span><span class="p">)</span>
+<span class="n">segment_everything_widget</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">stacked_labels</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area 357 838656
+label_num 1 126
+solidity 1.0 1.0
+circularity 0.3928803832138205 0.8653924207805217
+mean_intensity 77.3516393442623 226.80461538461537
+10th_percentile_intensity 32.99999999999999 185.0
+mean_hue 28.668195924939397 193.1675254293533
+mean_saturation 28.33593590867213 169.38237657707205
+predicted_iou 1 1
+stability_score 1 1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+<span class="n">segment_everything_widget</span><span class="o">=</span><span class="n">segment_everything</span><span class="o">.</span><span class="n">NapariSegmentEverything</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span><span class="n">segment_everything_widget</span><span class="p">)</span>
 <span class="n">segment_everything_widget</span><span class="o">.</span><span class="n">load_project</span><span class="p">(</span><span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">segmented_stacked_labels</span><span class="o">.</span><span class="n">mask_list</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area 740.0 255449.0
-label_num 1 26
-solidity 0.4784172661870504 0.9746682750301568
-circularity 0.136122165105899 0.861142628998894
-mean_intensity 20.925378326665506 178.02056202878683
-10th_percentile_intensity 3.0 149.0
-mean_hue 29.870610092695426 92.09416869831918
-mean_saturation 37.81571733819619 214.5295492284336
-predicted_iou 0.8793807625770569 0.9723882675170898
-stability_score 0.891812264919281 0.9911127090454102
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>area 252.0 454760.0
+label_num 1 126
+solidity 0.41750943396226414 0.9882313829787234
+circularity 0.02318357323121467 0.9606249350277302
+mean_intensity 53.47422680412371 226.48439531859557
+10th_percentile_intensity 32.0 195.99999999999997
+mean_hue 18.968102369780265 222.2363446489838
+mean_saturation 18.894646379585843 173.6389744766525
+predicted_iou 0.36465099453926086 0.9798977375030518
+stability_score 0.6757801175117493 0.991579532623291
 </pre></div>
 </div>
 </div>

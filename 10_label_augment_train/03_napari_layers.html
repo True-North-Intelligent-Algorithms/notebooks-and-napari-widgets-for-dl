@@ -480,7 +480,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x23cf2070760&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1d0cad1c760&gt;
 </pre></div>
 </div>
 <img alt="../_images/ca7b3351c88921e603e4b8854955ef672f3d8fac43a298ec00704fd9372f8c79.png" src="../_images/ca7b3351c88921e603e4b8854955ef672f3d8fac43a298ec00704fd9372f8c79.png" />
@@ -497,12 +497,10 @@ document.write(`
 
 <span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ladybug&#39;</span><span class="p">)</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
-<span class="n">viewer</span><span class="o">.</span><span class="n">add_shapes</span><span class="p">(</span><span class="n">face_color</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">edge_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;rois&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Shapes layer &#39;rois&#39; at 0x23c856896c0&gt;
+<span class="n">rois_layer</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">add_shapes</span><span class="p">(</span><span class="n">face_color</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">edge_width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;rois&#39;</span><span class="p">)</span>
+
+<span class="n">box</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">],[</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">],</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span><span class="mi">100</span><span class="p">]]</span>
+<span class="n">rois_layer</span><span class="o">.</span><span class="n">add_rectangles</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -522,7 +520,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Labels layer &#39;cyto3 masks [1]&#39; at 0x23d0d35ae30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Labels layer &#39;cyto3 masks&#39; at 0x1d11026e920&gt;
 </pre></div>
 </div>
 </div>
@@ -533,8 +531,7 @@ document.write(`
 <p>… and update the Cellpose layer</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">model_cyto3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">model_cyto3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">140</span><span class="p">)</span>
 <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;cyto3 masks&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -571,17 +568,17 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
-2
-[[ 85.6028611   63.59423846]
- [ 85.6028611  636.68055205]
- [568.02512899 636.68055205]
- [568.02512899  63.59423846]]
+1
+[[103.55742401  68.2272757 ]
+ [103.55742401 717.98806052]
+ [544.32298732 717.98806052]
+ [544.32298732  68.2272757 ]]
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1d78c194af0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x23c8b3a9b10&gt;
 </pre></div>
 </div>
-<img alt="../_images/5a1bb7d7bdda748489a640c0af2eb9c53de688efb1ee92ff32cd8e8439294e2c.png" src="../_images/5a1bb7d7bdda748489a640c0af2eb9c53de688efb1ee92ff32cd8e8439294e2c.png" />
+<img alt="../_images/053cc02ef64db1f8074ab605f9d13be7cdd77da84250a75208edb9b67c8d225d.png" src="../_images/053cc02ef64db1f8074ab605f9d13be7cdd77da84250a75208edb9b67c8d225d.png" />
 </div>
 </div>
 </section>
