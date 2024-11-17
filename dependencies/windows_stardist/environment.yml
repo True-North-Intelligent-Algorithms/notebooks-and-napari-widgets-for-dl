@@ -1,0 +1,10 @@
+name: stardist_napari_windows
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+  - cudatoolkit=11.8
+  - cudnn=8.1.0
+  - pip:
+    - -r requirements.txt
