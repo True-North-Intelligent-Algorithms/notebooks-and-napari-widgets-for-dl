@@ -4,3 +4,4 @@ tensorflow<2.11
 stardist
 gputools==0.2.15
 edt
+albumentations
