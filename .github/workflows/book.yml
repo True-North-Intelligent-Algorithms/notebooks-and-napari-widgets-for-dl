@@ -6,6 +6,7 @@ on:
     branches:
     - master
     - main
+  workflow_dispatch:  # ← allows manual run from GitHub
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
