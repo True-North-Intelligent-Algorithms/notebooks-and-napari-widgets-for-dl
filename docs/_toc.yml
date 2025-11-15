@@ -44,5 +44,12 @@ parts:
     - file: 30_segment_everything/10_explore_data.ipynb
     - file: 30_segment_everything/20_mobile_sam.ipynb
     - file: 30_segment_everything/30_filter_labels.ipynb
+  - file: 2025_updates_and_advances/01_tools
+    sections:
+    - file: 2025_updates_and_advances/02_Pixi
+    - file: 2025_updates_and_advances/03_test_pixi.ipynb
+    - file: 2025_updates_and_advances/05_microsam.ipynb
+    - file: 2025_updates_and_advances/10_some_sam.ipynb
+    - file: 2025_updates_and_advances/15_appose_run_all.ipynb
 
   
