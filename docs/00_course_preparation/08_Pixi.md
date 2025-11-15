@@ -1,6 +1,6 @@
-# Pixi
+## Pixi
 
-## What is Pixi?
+### What is Pixi?
 
 Pixi is a modern package management tool that makes it easy to install and manage software dependencies for your projects. Think of it as a smart assistant that:
 
@@ -23,3 +23,5 @@ If you've ever struggled with "it works on my computer but not yours" problems, 
 ---
 
 *This section will be expanded with installation instructions and examples in the following parts of the course.*
+
+MORE PIXI TO COME LATER!
