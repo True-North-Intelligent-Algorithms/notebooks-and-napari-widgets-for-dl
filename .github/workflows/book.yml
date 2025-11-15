@@ -37,6 +37,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/_build/html
-        keep_history: true       # push to existing gh-pages
         force_orphan: false      # don’t try to create orphan branch
 
