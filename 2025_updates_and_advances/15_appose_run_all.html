@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook &#8212; My Jupyter Book</title>
+    <title>Run multiple frameworks with Appose &#8212; My Jupyter Book</title>
   
   
   
@@ -60,7 +60,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/15_appose_run_all';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook" href="10_some_sam.html" />
+    <link rel="prev" title="Multiple frameworks" href="10_some_sam.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -281,15 +281,17 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_tools.html">Tools used for the 2025 update</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_tools.html">2025 Updates and Advances</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Multiple frameworks</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Run multiple frameworks with Appose</a></li>
 </ul>
 </details></li>
 </ul>
@@ -475,7 +477,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</h1>
+    <h1>Run multiple frameworks with Appose</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -489,8 +491,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="call-multiple-deep-learning-frameworks-cellpose-cyto3-cellposesam-microsam-and-mobilesam-in-the-same-notebook">
-<h1>Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook<a class="headerlink" href="#call-multiple-deep-learning-frameworks-cellpose-cyto3-cellposesam-microsam-and-mobilesam-in-the-same-notebook" title="Link to this heading">#</a></h1>
+  <section id="run-multiple-frameworks-with-appose">
+<h1>Run multiple frameworks with Appose<a class="headerlink" href="#run-multiple-frameworks-with-appose" title="Link to this heading">#</a></h1>
+<p>Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -534,7 +537,7 @@ document.write(`
 Loaded image shape: (1920, 2560, 3), dtype: uint8
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1ae78c75750&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x18af874ab10&gt;
 </pre></div>
 </div>
 <img alt="../_images/7f39f5e0cd2bb7017128127c8f5c3d779cf18d1547caa2325264e45ea8d68623.png" src="../_images/7f39f5e0cd2bb7017128127c8f5c3d779cf18d1547caa2325264e45ea8d68623.png" />
@@ -579,30 +582,26 @@ Loaded image shape: (1920, 2560, 3), dtype: uint8
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cellpose not available locally - generated execution string for remote processing
 This string can be sent to a cellpose-enabled environment for execution
+dict_keys([&#39;mask&#39;])
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x18afae03910&gt;
 </pre></div>
 </div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">AttributeError</span><span class="g g-Whitespace">                            </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">14</span><span class="p">],</span> <span class="n">line</span> <span class="mi">5</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">cellpose_env_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellpose3\.pixi\envs\default&quot;</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">result</span> <span class="o">=</span> <span class="n">execute_appose</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">segmenter</span><span class="p">,</span> <span class="n">cellpose_env_path</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">5</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">ndarray</span><span class="p">())</span>
-
-<span class="ne">AttributeError</span>: &#39;NoneType&#39; object has no attribute &#39;ndarray&#39;
-</pre></div>
-</div>
+<img alt="../_images/0fcf7069750d16eda903c71fea0b2618e11553df931143873d88960a608d14b9.png" src="../_images/0fcf7069750d16eda903c71fea0b2618e11553df931143873d88960a608d14b9.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">execution_string</span> <span class="o">=</span> <span class="n">segmenter</span><span class="o">.</span><span class="n">get_execution_string</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">appose</span>
 
-<span class="n">env</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">environment_path</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
-<span class="n">ndarr_img</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">NDArray</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="n">ndarr_img</span><span class="o">.</span><span class="n">ndarray</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">image</span>
+<span class="n">additional_inputs</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">execution_string</span> <span class="o">=</span> <span class="n">segmenter</span><span class="o">.</span><span class="n">get_execution_string</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">cellpose_env_path</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="n">ndarr_img</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">NDArray</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">ndarr_img</span><span class="o">.</span><span class="n">ndarray</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">img</span>
 
 <span class="c1"># Always include image, optionally add additional inputs</span>
 <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">ndarr_img</span><span class="p">}</span>
@@ -610,16 +609,122 @@ This string can be sent to a cellpose-enabled environment for execution
     <span class="n">inputs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">additional_inputs</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">env</span><span class="o">.</span><span class="n">python</span><span class="p">()</span> <span class="k">as</span> <span class="n">python</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;run task&#39;</span><span class="p">)</span>
     <span class="n">task</span> <span class="o">=</span> <span class="n">python</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="n">execution_string</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
     <span class="n">task</span><span class="o">.</span><span class="n">wait_for</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Task error: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hello finished&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
 
     <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cellpose not available locally - generated execution string for remote processing
+This string can be sent to a cellpose-enabled environment for execution
+run task
+hello finished
+dict_keys([&#39;mask&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">ndarray</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x18afad0b910&gt;
+</pre></div>
+</div>
+<img alt="../_images/0fcf7069750d16eda903c71fea0b2618e11553df931143873d88960a608d14b9.png" src="../_images/0fcf7069750d16eda903c71fea0b2618e11553df931143873d88960a608d14b9.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">execution_string</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>import numpy as np
+import cellpose
+from cellpose import models
+
+# Parameters from segmenter
+model_type = &quot;cyto2&quot;
+use_gpu = False
+diameter = 30
+flow_threshold = 0.4
+cellpose_iterations = 200
+
+# Image will be provided as &#39;image&#39; variable
+# image.shape = (1920, 2560, 3)
+# image.dtype = uint8
+
+def cellpose_segment_remote(image):
+    &quot;&quot;&quot;Remote cellpose segmentation function.&quot;&quot;&quot;
+
+    # Get cellpose version and create appropriate model
+    major_number = cellpose.version.split(&#39;.&#39;)[0]
+    print(f&quot;Cellpose version: {cellpose.version} (major number: {major_number})&quot;)
+
+    try:
+        if major_number == &#39;4&#39;:
+            model = models.CellposeModel(gpu=use_gpu, model_type=model_type)
+        else:
+            # For version 3 and all other versions, use the older API
+            model = models.Cellpose(gpu=use_gpu, model_type=model_type)
+
+        print(f&quot;Created Cellpose model: {model_type}, GPU: {use_gpu}&quot;)
+
+    except Exception as e:
+        print(f&quot;Error creating Cellpose model: {e}&quot;)
+        print(&quot;Falling back to CPU mode...&quot;)
+        try:
+            if major_number == &#39;4&#39;:
+                model = models.CellposeModel(gpu=False, model_type=model_type)
+            else:
+                # For version 3 and all other versions, use the older API
+                model = models.Cellpose(gpu=False, model_type=model_type)
+        except Exception as fallback_error:
+            raise RuntimeError(f&quot;Could not create Cellpose model: {fallback_error}&quot;)
+
+    # Perform segmentation
+    diameter_value = None if diameter == &quot;None&quot; else diameter
+
+    print(f&quot;Cellpose: Segmenting image, diameter={diameter_value}, flow_threshold={flow_threshold}&quot;)
+
+    masks, flows, styles, diams = model.eval(
+        image.ndarray(),
+        diameter=diameter_value,
+        flow_threshold=flow_threshold,
+        niter=cellpose_iterations
+    )
+
+    print(f&quot;Cellpose: Found {len(np.unique(masks)) - 1} cells&quot;)
+    if diameter_value is None:
+        print(f&quot;Cellpose: Auto-detected diameter: {diams}&quot;)
+
+    return masks.astype(np.uint16)
+
+# Execute segmentation
+result = cellpose_segment_remote(image)
+
+# Convert result to appose format for output
+import appose
+
+ndarr_mask = appose.NDArray(dtype=str(result.dtype), shape=result.shape)
+ndarr_mask.ndarray()[:] = result
+
+task.outputs[&quot;mask&quot;] = ndarr_mask
 </pre></div>
 </div>
 </div>
@@ -662,7 +767,7 @@ This string can be sent to a cellpose-enabled environment for execution
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</p>
+        <p class="prev-next-title">Multiple frameworks</p>
       </div>
     </a>
 </div>

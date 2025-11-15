@@ -1,4 +1,4 @@
-# Tools used for the 2025 update
+# 2025 Updates and Advances 
 
 This workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.
 

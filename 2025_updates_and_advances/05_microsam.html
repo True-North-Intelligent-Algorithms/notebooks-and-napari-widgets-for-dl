@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; My Jupyter Book</title>
+    <title>Microsam example &#8212; My Jupyter Book</title>
   
   
   
@@ -60,8 +60,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/05_microsam';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook" href="10_some_sam.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="03_test_pixi.html" />
+    <link rel="next" title="Multiple frameworks" href="10_some_sam.html" />
+    <link rel="prev" title="Test Pixi" href="03_test_pixi.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
 
@@ -282,15 +282,17 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="01_tools.html">Tools used for the 2025 update</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_tools.html">2025 Updates and Advances</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Microsam example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Multiple frameworks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
 </ul>
 </details></li>
 </ul>
@@ -465,9 +467,7 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="fa-solid fa-list"></span>
-</button>
+
 </div></div>
       
     </div>
@@ -478,19 +478,11 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1><no title></h1>
+    <h1>Microsam example</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
-            <div>
-                <h2> Contents </h2>
-            </div>
-            <nav aria-label="Page">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -500,7 +492,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section id="microsam-example">
+<h1>Microsam example<a class="headerlink" href="#microsam-example" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -586,6 +580,7 @@ Initialize instance segmentation with decoder: 100%|█████████�
 <img alt="../_images/2e5907e899dd1fadf1899a0e6364acc9cbd71b5f11b5f453fd9feb6a834db540.png" src="../_images/2e5907e899dd1fadf1899a0e6364acc9cbd71b5f11b5f453fd9feb6a834db540.png" />
 </div>
 </div>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -623,7 +618,7 @@ Initialize instance segmentation with decoder: 100%|█████████�
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">&lt;no title&gt;</p>
+        <p class="prev-next-title">Test Pixi</p>
       </div>
     </a>
     <a class="right-next"
@@ -631,7 +626,7 @@ Initialize instance segmentation with decoder: 100%|█████████�
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</p>
+        <p class="prev-next-title">Multiple frameworks</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -641,21 +636,6 @@ Initialize instance segmentation with decoder: 100%|█████████�
             </div>
             
             
-              
-                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
-
-
-  <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> Contents
-  </div>
-  <nav class="bd-toc-nav page-toc">
-    <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-  </nav></div>
-
-</div></div>
               
             
           </div>
