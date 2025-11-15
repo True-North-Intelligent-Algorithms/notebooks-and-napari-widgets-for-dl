@@ -1,0 +1,764 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Make patches from labels &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '15_sparse_labelling/20_create_patches';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sparse Stardist training example" href="30_stardist_training_2d.html" />
+    <link rel="prev" title="Explore and label the ‘sparse labels’ Data" href="10_label_predict.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="My Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="My Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/08_Pixi.html">Pixi</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Code and Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/25_exercises.html">Suggested exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/01_introduction.html">Labeling and Augmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/03_napari_layers.html">Some Napari Basics</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore and label data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Sparse Labeling</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="10_label_predict.html">Explore and label the ‘sparse labels’ Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Make patches from labels</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="30_stardist_training_2d.html">Sparse Stardist training example</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/40_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/50_cellpose_training_2d.html">Train a cellpose 2D model for different scales</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/80_protrusions.html">Large objects with protrusions and “self prediction”</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/30_filter_labels.html">Filtering Labels</a></li>
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F15_sparse_labelling/20_create_patches.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/15_sparse_labelling/20_create_patches.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Make patches from labels</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Make patches from labels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#augment">Augment</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="make-patches-from-labels">
+<h1>Make patches from labels<a class="headerlink" href="#make-patches-from-labels" title="Link to this heading">#</a></h1>
+<p>Make a set of augmented patches from labels.</p>
+<p>The difference between labels and patches is:</p>
+<ol class="arabic simple">
+<li><p>Labels are a set of images and annotated ground truths, generated manually, or automatically.  Labels can be different sizes.</p></li>
+<li><p>Patches are a set of images and annotated ground truths generated from labels.  They are usually cropped from labels to be all the same size.  They are often augmented.  1 label can be used to generate many patches.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.deeplearning.dl_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">quantile_normalization</span><span class="p">,</span> <span class="n">get_label_paths</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.plotting.plt_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">imshow_multi2d</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.deeplearning.augmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">uber_augmenter</span>
+
+<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_sparse&#39;</span><span class="p">)</span>
+<span class="n">label_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;labels&#39;</span><span class="p">)</span>
+
+<span class="c1"># open the info file</span>
+<span class="n">json_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">label_path</span><span class="p">,</span> <span class="s1">&#39;info.json&#39;</span><span class="p">)</span>
+<span class="n">json_</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">json_name</span><span class="p">))</span>
+
+<span class="c1"># get number of inputs and number of ground truths for this problem</span>
+<span class="n">num_inputs</span> <span class="o">=</span> <span class="n">json_</span><span class="p">[</span><span class="s1">&#39;num_inputs&#39;</span><span class="p">]</span>
+<span class="n">num_ground_truths</span> <span class="o">=</span> <span class="n">json_</span><span class="p">[</span><span class="s1">&#39;num_truths&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num inputs: &#39;</span><span class="p">,</span> <span class="n">num_inputs</span><span class="p">)</span>   
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num ground truth: &#39;</span><span class="p">,</span> <span class="n">num_ground_truths</span><span class="p">)</span>
+
+<span class="n">image_label_paths</span><span class="p">,</span> <span class="n">ground_truths_label_paths</span> <span class="o">=</span> <span class="n">get_label_paths</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">num_ground_truths</span><span class="p">,</span> <span class="n">label_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;image label paths&#39;</span><span class="p">,</span><span class="n">image_label_paths</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ground_truth_label_paths&quot;</span><span class="p">,</span> <span class="n">ground_truths_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="c1"># get list of tif files in image_label_path</span>
+<span class="n">tif_files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;*.tif&#39;</span><span class="p">)))</span>
+<span class="n">json_files</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;*.json&#39;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">tif_file</span> <span class="ow">in</span> <span class="n">tif_files</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tif_file: &quot;</span><span class="p">,</span> <span class="n">tif_file</span><span class="p">)</span>
+
+<span class="n">patch_path</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">patch_path</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">patch_path</span><span class="p">)</span>
+<span class="n">axes</span> <span class="o">=</span> <span class="s1">&#39;YXC&#39;</span>
+<span class="n">sub_sample</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>num inputs:  1
+num ground truth:  1
+image label paths [PosixPath(&#39;/home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/labels/input0&#39;)]
+ground_truth_label_paths /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/labels/ground truth0
+
+tif_file:  /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/labels/input0/6410573_8085113_0.tif
+tif_file:  /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/labels/input0/8220954_10897041_0.tif
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="augment">
+<h1>Augment<a class="headerlink" href="#augment" title="Link to this heading">#</a></h1>
+<p>In this step we loop through all the labels, normalize them and augment each label to create patches.</p>
+<p>The code is almost identical to what was done in the <code class="docutils literal notranslate"><span class="pre">20_create_patches</span></code> notebook from the previous section.  The one important difference is that we subtract 1 from the image so that all ‘unlabeled’ pixels are negative, and background pixels are 0.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">patch_size</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">number_patches</span> <span class="o">=</span> <span class="mi">200</span>
+
+<span class="c1"># create a df to save the label names in </span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;base_name&#39;</span><span class="p">,</span> <span class="s1">&#39;xstart&#39;</span><span class="p">,</span> <span class="s1">&#39;ystart&#39;</span><span class="p">,</span> <span class="s1">&#39;xend&#39;</span><span class="p">,</span> <span class="s1">&#39;yend&#39;</span><span class="p">])</span>  
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tif_files</span><span class="p">)):</span>
+    <span class="c1"># User input set index of label</span>
+
+    <span class="c1"># get tif name</span>
+    <span class="n">tif_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">tif_files</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tiff name is&#39;</span><span class="p">,</span> <span class="n">tif_name</span><span class="p">)</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">image_label_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span> <span class="p">(</span><span class="n">tif_name</span><span class="p">)))</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">image</span>
+
+    <span class="c1"># read labels (there can be more than one class)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ground_truths_label_path</span> <span class="ow">in</span> <span class="n">ground_truths_label_paths</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ground_truths_label_path</span> <span class="o">/</span> <span class="p">(</span><span class="n">tif_name</span><span class="p">)))</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">label</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">labels</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+
+    <span class="c1"># show labels image </span>
+    <span class="n">images_to_show</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">titles</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">images_to_show</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+    <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;image&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">label</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="n">images_to_show</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
+        <span class="n">titles</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">(</span><span class="n">images_to_show</span><span class="p">,</span> <span class="n">titles</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">images_to_show</span><span class="p">),</span> <span class="n">width</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    
+    <span class="n">image</span> <span class="o">=</span> <span class="n">quantile_normalization</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">quantile_low</span> <span class="o">=</span> <span class="mf">.01</span><span class="p">,</span> <span class="n">quantile_high</span><span class="o">=</span><span class="mf">.998</span><span class="p">,</span> <span class="n">clip</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+    
+    <span class="n">uber_augmenter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">patch_path</span><span class="p">),</span> <span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">number_patches</span><span class="p">,</span> <span class="n">do_random_brightness_contrast</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">do_random_gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">uber_augmenter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">patch_path</span><span class="p">),</span> <span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">number_patches</span><span class="p">,</span> <span class="n">do_random_brightness_contrast</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">do_random_gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">uber_augmenter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">patch_path</span><span class="p">),</span> <span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">number_patches</span><span class="p">,</span> <span class="n">do_random_brightness_contrast</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">do_random_gamma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">uber_augmenter</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="n">patch_path</span><span class="p">),</span> <span class="s1">&#39;grid&#39;</span><span class="p">,</span> <span class="n">patch_size</span><span class="p">,</span> <span class="n">number_patches</span><span class="p">,</span> <span class="n">do_random_brightness_contrast</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">do_random_gamma</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">do_color_jitter</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tiff name is 6410573_8085113_0.tif
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/bnorthan/code/i2k/tnia/tnia-python/tnia/deeplearning/augmentation.py:227: UserWarning: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/patches/ground truth0/grid_31.tif is a low contrast image
+  imsave(label_name, label_aug[j])
+/home/bnorthan/code/i2k/tnia/tnia-python/tnia/deeplearning/augmentation.py:227: UserWarning: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/patches/ground truth0/grid_353.tif is a low contrast image
+  imsave(label_name, label_aug[j])
+/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/albumentations/augmentations/functional.py:747: RuntimeWarning: invalid value encountered in power
+  return np.power(img, gamma)
+/home/bnorthan/code/i2k/tnia/tnia-python/tnia/deeplearning/augmentation.py:227: UserWarning: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/patches/ground truth0/grid_459.tif is a low contrast image
+  imsave(label_name, label_aug[j])
+/home/bnorthan/mambaforge/envs/easy_augment_pytorch/lib/python3.12/site-packages/pydantic/main.py:364: UserWarning: Pydantic serializer warnings:
+  Expected `Union[float, tuple[float, float]]` but got `list` - serialized value may not be as expected
+  Expected `Union[float, tuple[float, float]]` but got `list` - serialized value may not be as expected
+  Expected `Union[float, tuple[float, float]]` but got `list` - serialized value may not be as expected
+  return self.__pydantic_serializer__.to_python(
+/home/bnorthan/code/i2k/tnia/tnia-python/tnia/deeplearning/augmentation.py:227: UserWarning: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/patches/ground truth0/grid_597.tif is a low contrast image
+  imsave(label_name, label_aug[j])
+/home/bnorthan/code/i2k/tnia/tnia-python/tnia/deeplearning/augmentation.py:227: UserWarning: /home/bnorthan/code/i2k/tnia/notebooks-and-napari-widgets-for-dl/data/ladybugs_sparse/patches/ground truth0/grid_647.tif is a low contrast image
+  imsave(label_name, label_aug[j])
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tiff name is 8220954_10897041_0.tif
+</pre></div>
+</div>
+<img alt="../_images/a3e0c893a6af809f83ad2554f97ed2772db3cb8d7af9f4a2ccdb3b1dd470ede6.png" src="../_images/a3e0c893a6af809f83ad2554f97ed2772db3cb8d7af9f4a2ccdb3b1dd470ede6.png" />
+<img alt="../_images/7a6afa4705a83f65600d8602b70507f567b21a651502f3af7fc4ad936de74fa6.png" src="../_images/7a6afa4705a83f65600d8602b70507f567b21a651502f3af7fc4ad936de74fa6.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./15_sparse_labelling"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="10_label_predict.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Explore and label the ‘sparse labels’ Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="30_stardist_training_2d.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Sparse Stardist training example</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Make patches from labels</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#augment">Augment</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
