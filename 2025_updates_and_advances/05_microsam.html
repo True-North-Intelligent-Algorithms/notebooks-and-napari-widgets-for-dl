@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Some Napari Basics &#8212; My Jupyter Book</title>
+    <title>&lt;no title&gt; &#8212; My Jupyter Book</title>
   
   
   
@@ -57,11 +57,11 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10_label_augment_train/03_napari_layers';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/05_microsam';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="File Organization" href="07_file_organization.html" />
-    <link rel="prev" title="Labeling and Augmentation" href="01_introduction.html" />
+    <link rel="next" title="Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook" href="10_some_sam.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="03_test_pixi.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
 
@@ -195,28 +195,28 @@
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/25_exercises.html">Suggested exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_introduction.html">Labeling and Augmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Some Napari Basics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/01_introduction.html">Labeling and Augmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/03_napari_layers.html">Some Napari Basics</a></li>
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="07_file_organization.html">File Organization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="10_label_predict.html">Explore and label data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore and label data</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="15_augment.html">Augmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
-
-
-<li class="toctree-l2"><a class="reference internal" href="30_stardist_training_2d.html">Stardist training example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
 
 
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
 
 
 
@@ -282,15 +282,15 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../2025_updates_and_advances/01_tools.html">Tools used for the 2025 update</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/02_Pixi.html">Pixi</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_tools.html">Tools used for the 2025 update</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/10_some_sam.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/15_appose_run_all.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</a></li>
 </ul>
 </details></li>
 </ul>
@@ -364,7 +364,7 @@
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F10_label_augment_train/03_napari_layers.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F2025_updates_and_advances/05_microsam.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -394,7 +394,7 @@
       
       
       
-      <li><a href="../_sources/10_label_augment_train/03_napari_layers.ipynb" target="_blank"
+      <li><a href="../_sources/2025_updates_and_advances/05_microsam.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -478,7 +478,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Some Napari Basics</h1>
+    <h1><no title></h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -487,12 +487,7 @@ document.write(`
                 <h2> Contents </h2>
             </div>
             <nav aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Some Napari Basics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-viewer-and-add-several-layers">Start Napari viewer and add several layers</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-cellpose-cyto3-model">Create a Cellpose cyto3 model…</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#call-cellpose">Call Cellpose …</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-roi-and-labels-we-drew-in-napari">Get the ROI and labels we drew in Napari</a></li>
+                <ul class="simple visible nav section-nav flex-column">
 </ul>
 
             </nav>
@@ -505,128 +500,92 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="some-napari-basics">
-<h1>Some Napari Basics<a class="headerlink" href="#some-napari-basics" title="Link to this heading">#</a></h1>
-<p>The examples in this workshop make use of some of my personal ‘helper’ and ‘widget’ libraries.  These are all built on the concept of Napari ROIs, Layers and labelling tools.</p>
-<p>For those interested in starting to learn the Napari API and building your own ‘helper’ libraries, this notebook shows how to use these tools directly from Napari.</p>
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">micro_sam.automatic_segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_predictor_and_segmenter</span><span class="p">,</span> <span class="n">automatic_instance_segmentation</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.plotting.plt_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">random_label_cmap</span><span class="p">,</span> <span class="n">imshow_multi2d</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\miniconda3\envs\microsam_cellpose\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tile_shape</span> <span class="o">=</span> <span class="kc">None</span> <span class="c1">#(384, 384)</span>
+<span class="n">halo</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;vit_b_lm&quot;</span>
+
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span> <span class="c1"># the device/GPU used for training</span>
+<span class="c1"># Step 1: Get the &#39;predictor&#39; and &#39;segmenter&#39; to perform automatic instance segmentation.</span>
+<span class="n">predictor</span><span class="p">,</span> <span class="n">segmenter</span> <span class="o">=</span> <span class="n">get_predictor_and_segmenter</span><span class="p">(</span>
+    <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="c1"># choice of the Segment Anything model</span>
+    <span class="c1">#checkpoint=best_checkpoint,  # overwrite to pass your own finetuned model.</span>
+    <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>  <span class="c1"># the device to run the model inference.</span>
+    <span class="n">is_tiled</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1">#(tile_shape is not None),  # whether the model is tiled or not.</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span> 
-<span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
-<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_series&#39;</span><span class="p">)</span>
-<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;26638467_41374651.jpg&#39;</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="c1">#image = imread(&#39;tough_cellpose.tif&#39;)</span>
+<span class="c1">#image = imread(&#39;cell_00260.tif&#39;</span>
+
+<span class="n">image_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;D:\images\tnia-python-images\imagesc\2024_03_27_SOTA_segmentation\images\cell_00068.bmp&quot;</span>
+<span class="c1">#image_path = r&quot;C:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\data\ladybugs_series\16746885_25273748.jpg&quot;  # Replace with your image path</span>
+<span class="n">image</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+
+<span class="n">image</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1d0cad1c760&gt;
-</pre></div>
-</div>
-<img alt="../_images/ca7b3351c88921e603e4b8854955ef672f3d8fac43a298ec00704fd9372f8c79.png" src="../_images/ca7b3351c88921e603e4b8854955ef672f3d8fac43a298ec00704fd9372f8c79.png" />
-</div>
-</div>
-</section>
-<section id="start-napari-viewer-and-add-several-layers">
-<h1>Start Napari viewer and add several layers<a class="headerlink" href="#start-napari-viewer-and-add-several-layers" title="Link to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
-
-<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-
-<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ladybug&#39;</span><span class="p">)</span>
-<span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;labels&#39;</span><span class="p">)</span>
-<span class="n">rois_layer</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">add_shapes</span><span class="p">(</span><span class="n">face_color</span><span class="o">=</span><span class="s1">&#39;transparent&#39;</span><span class="p">,</span> <span class="n">edge_width</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">edge_color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;rois&#39;</span><span class="p">)</span>
-
-<span class="n">box</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">],</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">500</span><span class="p">],[</span><span class="mi">500</span><span class="p">,</span><span class="mi">500</span><span class="p">],</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span><span class="mi">100</span><span class="p">]]</span>
-<span class="n">rois_layer</span><span class="o">.</span><span class="n">add_rectangles</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1536, 2040, 3)
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="create-a-cellpose-cyto3-model">
-<h1>Create a Cellpose cyto3 model…<a class="headerlink" href="#create-a-cellpose-cyto3-model" title="Link to this heading">#</a></h1>
-<p>… and add a layer for Cellose results</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">cellpose</span><span class="w"> </span><span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">io</span>
-<span class="n">model_cyto3</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CellposeModel</span><span class="p">(</span><span class="n">gpu</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;cyto3&quot;</span><span class="p">)</span>
-
-<span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">uint16</span><span class="p">)</span>
-<span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;cyto3 masks&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Step 2: Get the instance segmentation for the given image.</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">automatic_instance_segmentation</span><span class="p">(</span>
+    <span class="n">predictor</span><span class="o">=</span><span class="n">predictor</span><span class="p">,</span>  <span class="c1"># the predictor for the Segment Anything model.</span>
+    <span class="n">segmenter</span><span class="o">=</span><span class="n">segmenter</span><span class="p">,</span>  <span class="c1"># the segmenter class responsible for generating predictions.</span>
+    <span class="n">input_path</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+    <span class="n">ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="c1">#tile_shape=tile_shape,</span>
+    <span class="c1">#halo=halo,</span>
+<span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Labels layer &#39;cyto3 masks&#39; at 0x1d11026e920&gt;
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 2D: 100%|██████████| 1/1 [00:01&lt;00:00,  1.87s/it]
+Initialize instance segmentation with decoder: 100%|██████████| 1/1 [00:00&lt;00:00,  3.18it/s]
 </pre></div>
 </div>
 </div>
 </div>
-</section>
-<section id="call-cellpose">
-<h1>Call Cellpose …<a class="headerlink" href="#call-cellpose" title="Link to this heading">#</a></h1>
-<p>… and update the Cellpose layer</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="n">model_cyto3</span><span class="o">.</span><span class="n">eval</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">diameter</span><span class="o">=</span><span class="mi">140</span><span class="p">)</span>
-<span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;cyto3 masks&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">imshow_multi2d</span><span class="p">([</span><span class="n">image</span><span class="p">,</span> <span class="n">prediction</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;image&#39;</span><span class="p">,</span> <span class="s1">&#39;prediction&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="n">colormaps</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">random_label_cmap</span><span class="p">()])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: more than 2 channels given, use &#39;channels&#39; input for specifying channels - just using first 2 channels to run processing
-</pre></div>
+<img alt="../_images/2e5907e899dd1fadf1899a0e6364acc9cbd71b5f11b5f453fd9feb6a834db540.png" src="../_images/2e5907e899dd1fadf1899a0e6364acc9cbd71b5f11b5f453fd9feb6a834db540.png" />
 </div>
 </div>
-</div>
-</section>
-<section id="get-the-roi-and-labels-we-drew-in-napari">
-<h1>Get the ROI and labels we drew in Napari<a class="headerlink" href="#get-the-roi-and-labels-we-drew-in-napari" title="Link to this heading">#</a></h1>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">roi</span> <span class="o">=</span> <span class="n">viewer</span><span class="o">.</span><span class="n">layers</span><span class="p">[</span><span class="s1">&#39;rois&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">roi</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">roi</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-
-<span class="n">roi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int16</span><span class="p">)</span>
-
-<span class="n">crop</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span><span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-<span class="n">crop_label</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span><span class="n">roi</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">roi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span><span class="n">roi</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span>
-                    
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">crop</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">crop_label</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;list&#39;&gt;
-1
-[[103.55742401  68.2272757 ]
- [103.55742401 717.98806052]
- [544.32298732 717.98806052]
- [544.32298732  68.2272757 ]]
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x23c8b3a9b10&gt;
-</pre></div>
-</div>
-<img alt="../_images/053cc02ef64db1f8074ab605f9d13be7cdd77da84250a75208edb9b67c8d225d.png" src="../_images/053cc02ef64db1f8074ab605f9d13be7cdd77da84250a75208edb9b67c8d225d.png" />
-</div>
-</div>
-</section>
 
     <script type="text/x-thebe-config">
     {
@@ -641,7 +600,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./10_label_augment_train"
+            path: "./2025_updates_and_advances"
         },
         predefinedOutput: true
     }
@@ -659,20 +618,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="01_introduction.html"
+       href="03_test_pixi.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Labeling and Augmentation</p>
+        <p class="prev-next-title">&lt;no title&gt;</p>
       </div>
     </a>
     <a class="right-next"
-       href="07_file_organization.html"
+       href="10_some_sam.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">File Organization</p>
+        <p class="prev-next-title">Call multiple deep learning frameworks (cellpose cyto3, cellposesam, microsam, and mobilesam) in the same notebook</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -691,12 +650,7 @@ document.write(`
     <i class="fa-solid fa-list"></i> Contents
   </div>
   <nav class="bd-toc-nav page-toc">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Some Napari Basics</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-viewer-and-add-several-layers">Start Napari viewer and add several layers</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-cellpose-cyto3-model">Create a Cellpose cyto3 model…</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#call-cellpose">Call Cellpose …</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-roi-and-labels-we-drew-in-napari">Get the ROI and labels we drew in Napari</a></li>
+    <ul class="simple visible nav section-nav flex-column">
 </ul>
 
   </nav></div>
