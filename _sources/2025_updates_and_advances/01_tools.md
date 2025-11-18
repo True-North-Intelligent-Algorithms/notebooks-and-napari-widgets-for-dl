@@ -12,9 +12,9 @@ And how they will help make the entire workshop (including last year's sections)
 
 #### Pixi
 
-Pixi solves the "it worked last year but breaks today" problem. Unlike conda environments that can drift over time or break with OS updates, Pixi creates locked, reproducible environments from a single `pixi.toml` file. 
+Pixi solves the "it worked last year but breaks today" problem. Unlike conda environments that can drift over time or break because ambiguous dependencies change, Pixi creates locked, reproducible environments from a single `pixi.toml` file. 
 
-**The secret sauce:** The `pixi.lock` file. Even if someone writes a sloppy `pixi.toml` with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.
+The key is `pixi.lock` file. Even if someone writes a sloppy `pixi.toml` with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.
 
 This means:
 - Examples from 2024 will still run in 2030

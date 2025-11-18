@@ -527,8 +527,8 @@ document.write(`
 <p>And how they will help make the entire workshop (including last year’s sections) more robust:</p>
 <section id="pixi">
 <h3>Pixi<a class="headerlink" href="#pixi" title="Link to this heading">#</a></h3>
-<p>Pixi solves the “it worked last year but breaks today” problem. Unlike conda environments that can drift over time or break with OS updates, Pixi creates locked, reproducible environments from a single <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file.</p>
-<p><strong>The secret sauce:</strong> The <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> file. Even if someone writes a sloppy <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.</p>
+<p>Pixi solves the “it worked last year but breaks today” problem. Unlike conda environments that can drift over time or break because ambiguous dependencies change, Pixi creates locked, reproducible environments from a single <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file.</p>
+<p>The key is <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> file. Even if someone writes a sloppy <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.</p>
 <p>This means:</p>
 <ul class="simple">
 <li><p>Examples from 2024 will still run in 2030</p></li>
