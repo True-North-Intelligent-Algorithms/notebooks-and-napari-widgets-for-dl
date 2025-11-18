@@ -287,9 +287,6 @@
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Pixi</a></li>
 
 
-
-
-
 <li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Multiple frameworks</a></li>
@@ -493,20 +490,16 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pixi</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pixi">What is Pixi?</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-pixi">Why Use Pixi?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-benefits">Key Benefits</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-create-the-environment-don-t-run-tasks">Just Create the Environment (Don’t Run Tasks)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment-and-run-a-task">Create Environment AND Run a Task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-environment-in-vscode">Load environment in VSCode</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pixi-environment-available-to-vs-code-notebooks">Make Pixi Environment Available to VS Code Notebooks</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-register-as-jupyter-kernel-recommended">Option 1: Register as Jupyter Kernel (Recommended)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-select-python-interpreter-directly">Option 2: Select Python Interpreter Directly</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-as-jupyter-kernel">Register as Jupyter Kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pixi-shell-for-proper-environment-setup">Using Pixi Shell for Proper Environment Setup</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -525,60 +518,19 @@ document.write(`
 <h1>Pixi<a class="headerlink" href="#pixi" title="Link to this heading">#</a></h1>
 <section id="what-is-pixi">
 <h2>What is Pixi?<a class="headerlink" href="#what-is-pixi" title="Link to this heading">#</a></h2>
-<p>Pixi is a modern package management tool that makes it easy to install and manage software dependencies for your projects. Think of it as a smart assistant that:</p>
-<ul class="simple">
-<li><p><strong>Installs packages</strong> - Downloads and sets up the software you need</p></li>
-<li><p><strong>Manages environments</strong> - Keeps different projects separate so they don’t conflict</p></li>
-<li><p><strong>Handles dependencies</strong> - Automatically figures out what other software is needed</p></li>
-<li><p><strong>Works cross-platform</strong> - Runs the same way on Windows, Mac, and Linux</p></li>
-</ul>
-</section>
-</section>
-<section id="why-use-pixi">
-<h1>Why Use Pixi?<a class="headerlink" href="#why-use-pixi" title="Link to this heading">#</a></h1>
-<p>If you’ve ever struggled with “it works on my computer but not yours” problems, Pixi helps solve that. It creates reproducible environments where everyone working on a project gets exactly the same software versions.</p>
-</section>
-<section id="key-benefits">
-<h1>Key Benefits<a class="headerlink" href="#key-benefits" title="Link to this heading">#</a></h1>
-<ul class="simple">
-<li><p><strong>Fast</strong> - Downloads and installs packages quickly</p></li>
-<li><p><strong>Reliable</strong> - Ensures everyone gets the same setup</p></li>
-<li><p><strong>Simple</strong> - Easy commands to get started</p></li>
-<li><p><strong>Compatible</strong> - Works with existing Python, R, and other ecosystems</p></li>
-</ul>
-<hr class="docutils" />
-<p><em>This section will be expanded with installation instructions and examples in the following parts of the course.</em></p>
-<p>MORE PIXI TO COME LATER!</p>
+<p>Pixi is a modern replacement for conda. If you use conda environments, pixi does the same job but <strong>faster</strong> and <strong>more reliable</strong>. It creates reproducible environments from a single <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file, eliminating “works on my machine” problems that plague conda workflows.</p>
 </section>
 <section id="creating-environments">
-<h1>Creating Environments<a class="headerlink" href="#creating-environments" title="Link to this heading">#</a></h1>
-<section id="just-create-the-environment-don-t-run-tasks">
-<h2>Just Create the Environment (Don’t Run Tasks)<a class="headerlink" href="#just-create-the-environment-don-t-run-tasks" title="Link to this heading">#</a></h2>
-<p>If you want to create the pixi environment without running any tasks:</p>
+<h2>Creating Environments<a class="headerlink" href="#creating-environments" title="Link to this heading">#</a></h2>
+<p><strong>Important:</strong> Run these commands in a folder containing <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">pixi/appose_napari_ai/</span></code>, <code class="docutils literal notranslate"><span class="pre">pixi/microsam_cellpose3/</span></code>, or <code class="docutils literal notranslate"><span class="pre">pixi/stardist/</span></code>).</p>
+<p><strong>Create environment only:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>install
 </pre></div>
 </div>
-<p>This command:</p>
-<ul class="simple">
-<li><p>Reads your <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file</p></li>
-<li><p>Creates the environment</p></li>
-<li><p>Installs all dependencies</p></li>
-<li><p><strong>Does NOT run any tasks</strong></p></li>
-</ul>
-</section>
-<section id="create-environment-and-run-a-task">
-<h2>Create Environment AND Run a Task<a class="headerlink" href="#create-environment-and-run-a-task" title="Link to this heading">#</a></h2>
-<p>If you want to both create the environment and run a specific task:</p>
+<p><strong>Create environment AND run a task:</strong></p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>startup
 </pre></div>
 </div>
-<p>This command:</p>
-<ul class="simple">
-<li><p>Creates the environment (if it doesn’t exist)</p></li>
-<li><p>Installs dependencies</p></li>
-<li><p><strong>Also runs the “startup” task</strong></p></li>
-</ul>
-<p><strong>Tip:</strong> Use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> when you just want to set up the environment for the first time or update dependencies without running anything.</p>
 </section>
 </section>
 <section id="load-environment-in-vscode">
@@ -593,29 +545,18 @@ document.write(`
 </section>
 <section id="make-pixi-environment-available-to-vs-code-notebooks">
 <h1>Make Pixi Environment Available to VS Code Notebooks<a class="headerlink" href="#make-pixi-environment-available-to-vs-code-notebooks" title="Link to this heading">#</a></h1>
-<p>There are two ways to use your pixi environment with VS Code notebooks:</p>
-<section id="option-1-register-as-jupyter-kernel-recommended">
-<h2>Option 1: Register as Jupyter Kernel (Recommended)<a class="headerlink" href="#option-1-register-as-jupyter-kernel-recommended" title="Link to this heading">#</a></h2>
+<section id="register-as-jupyter-kernel">
+<h2>Register as Jupyter Kernel<a class="headerlink" href="#register-as-jupyter-kernel" title="Link to this heading">#</a></h2>
 <p>This makes your environment appear in the kernel selector dropdown:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>appose_napari_ai<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (appose_napari_ai)&quot;</span>
+<p>For example to make the <code class="docutils literal notranslate"><span class="pre">appose_napari_ai</span></code> environment available you would run the below command in the <code class="docutils literal notranslate"><span class="pre">pixi/appose_napari_ai/</span></code> folder.  For different environments you would change folder and environment display names.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>appose_napari_ai<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Pixi (appose_napari_ai)&quot;</span>
 </pre></div>
 </div>
-<p><strong>If this fails with “No module named ipykernel”:</strong></p>
+<p><strong>Note If this fails with “No module named ipykernel”:</strong></p>
 <ol class="arabic simple">
 <li><p>First add ipykernel to your project: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">add</span> <span class="pre">ipykernel</span></code></p></li>
 <li><p>Then run the command above</p></li>
 </ol>
-</section>
-<section id="option-2-select-python-interpreter-directly">
-<h2>Option 2: Select Python Interpreter Directly<a class="headerlink" href="#option-2-select-python-interpreter-directly" title="Link to this heading">#</a></h2>
-<p>In any notebook:</p>
-<ol class="arabic simple">
-<li><p>Click the kernel selector (top right of notebook)</p></li>
-<li><p>Choose “Select Another Kernel”</p></li>
-<li><p>Choose “Python Environments”</p></li>
-<li><p>Browse to your pixi environment’s Python executable</p></li>
-</ol>
-<p><strong>Pixi environment location:</strong> Usually in <code class="docutils literal notranslate"><span class="pre">.pixi/envs/default/bin/python</span></code> (Linux/Mac) or <code class="docutils literal notranslate"><span class="pre">.pixi/envs/default/python.exe</span></code> (Windows)</p>
 </section>
 <section id="troubleshooting">
 <h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
@@ -624,6 +565,16 @@ document.write(`
 <li><p><strong>Can’t find environment</strong>: Use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">info</span></code> to see environment path</p></li>
 <li><p><strong>Kernel not showing up</strong>: Restart VS Code after registering kernel</p></li>
 </ul>
+<section id="using-pixi-shell-for-proper-environment-setup">
+<h3>Using Pixi Shell for Proper Environment Setup<a class="headerlink" href="#using-pixi-shell-for-proper-environment-setup" title="Link to this heading">#</a></h3>
+<p>For environments that need special DLLs (like CUDNN), use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code> to ensure all paths are set correctly:</p>
+<ol class="arabic simple">
+<li><p>Navigate to your environment folder (e.g., <code class="docutils literal notranslate"><span class="pre">pixi/microsam_cellposesam/</span></code>)</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code> to activate the environment with all paths</p></li>
+<li><p>Start VS Code from within the shell: <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code></p></li>
+</ol>
+<p>This ensures VS Code inherits the complete environment setup, including DLL paths that might be missing otherwise.</p>
+</section>
 </section>
 </section>
 
@@ -693,20 +644,16 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Pixi</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-pixi">What is Pixi?</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-pixi">Why Use Pixi?</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-benefits">Key Benefits</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-create-the-environment-don-t-run-tasks">Just Create the Environment (Don’t Run Tasks)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment-and-run-a-task">Create Environment AND Run a Task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-environment-in-vscode">Load environment in VSCode</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pixi-environment-available-to-vs-code-notebooks">Make Pixi Environment Available to VS Code Notebooks</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-register-as-jupyter-kernel-recommended">Option 1: Register as Jupyter Kernel (Recommended)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-select-python-interpreter-directly">Option 2: Select Python Interpreter Directly</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#register-as-jupyter-kernel">Register as Jupyter Kernel</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-pixi-shell-for-proper-environment-setup">Using Pixi Shell for Proper Environment Setup</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
