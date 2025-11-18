@@ -494,6 +494,15 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-does-the-2024-workshop-still-work">Question:  Does the 2024 workshop still work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-technologies-we-will-learn-today">New technologies we will learn today</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pixi">Pixi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appose">Appose</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-book-view">Jupyter book view</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-examples-may-be-under-construction">Some examples may be ‘under construction’</a></li>
 </ul>
             </nav>
@@ -508,10 +517,57 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="updates-and-advances">
 <h1>2025 Updates and Advances<a class="headerlink" href="#updates-and-advances" title="Link to this heading">#</a></h1>
+<p>This workshop is an update to the 2024 workshop.</p>
+<section id="question-does-the-2024-workshop-still-work">
+<h2>Question:  Does the 2024 workshop still work?<a class="headerlink" href="#question-does-the-2024-workshop-still-work" title="Link to this heading">#</a></h2>
+<p><strong>Answer</strong>:  I don’t know.  I haven’t gone back yet and tried to re-run sections 10 to 30.  I will eventually, and try to integrate the new examples toward a more organized flow.  First step is to introduce technologies that will allow the old examples to be more robust to age.</p>
+</section>
+<section id="new-technologies-we-will-learn-today">
+<h2>New technologies we will learn today<a class="headerlink" href="#new-technologies-we-will-learn-today" title="Link to this heading">#</a></h2>
+<p>And how they will help make the entire workshop (including last year’s sections) more robust:</p>
+<section id="pixi">
+<h3>Pixi<a class="headerlink" href="#pixi" title="Link to this heading">#</a></h3>
+<p>Pixi solves the “it worked last year but breaks today” problem. Unlike conda environments that can drift over time or break with OS updates, Pixi creates locked, reproducible environments from a single <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file.</p>
+<p><strong>The secret sauce:</strong> The <code class="docutils literal notranslate"><span class="pre">pixi.lock</span></code> file. Even if someone writes a sloppy <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.</p>
+<p>This means:</p>
+<ul class="simple">
+<li><p>Examples from 2024 will still run in 2030</p></li>
+<li><p>No more “conda environment not found” errors</p></li>
+<li><p>Faster setup - one <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> command gets everything</p></li>
+<li><p>Cross-platform consistency</p></li>
+<li><p>Exact reproducibility thanks to locked dependency versions</p></li>
+</ul>
+<p>Pixi makes our deep learning workflows future-proof by eliminating the dependency hell that often breaks older tutorials.</p>
+</section>
+<section id="appose">
+<h3>Appose<a class="headerlink" href="#appose" title="Link to this heading">#</a></h3>
+<p>Appose lets us run conflicting deep learning models in the same notebook without environment clashes. Instead of choosing between Cellpose v3 vs v4, or SAM vs MicroSAM, we can use them all.</p>
+<p>This means:</p>
+<ul class="simple">
+<li><p>Compare multiple models side-by-side easily</p></li>
+<li><p>No more “this breaks that” dependency conflicts</p></li>
+<li><p>Future models can be added without breaking existing ones</p></li>
+<li><p>Notebooks become model comparison laboratories</p></li>
+</ul>
+<p>Appose makes our examples resilient to the fast-changing deep learning landscape by isolating each model in its own environment while keeping them accessible from one place.</p>
+</section>
+</section>
+<section id="code">
+<h2>Code<a class="headerlink" href="#code" title="Link to this heading">#</a></h2>
+<p>Code for the entire workshop can be found <a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl">here</a>. Please clone this repository before the course. Today we will focus on the notebooks in this <a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/tree/main/docs/2025_updates_and_advances">section</a>.</p>
+</section>
+<section id="jupyter-book-view">
+<h2>Jupyter book view<a class="headerlink" href="#jupyter-book-view" title="Link to this heading">#</a></h2>
+<p>The Jupyter book view of the workshop can be found <a class="reference external" href="https://true-north-intelligent-algorithms.github.io/notebooks-and-napari-widgets-for-dl/intro.html">here</a></p>
+</section>
+<section id="data">
+<h2>Data<a class="headerlink" href="#data" title="Link to this heading">#</a></h2>
+<p>Data can be found on Dropbox <a class="reference external" href="https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=4ibypc0u40ub702trdipzokir&amp;amp;st=g70qjhe6&amp;amp;dl=0">here</a>. Download all the data and place it at the top level of the repository in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
 <p>The 2025 update to the workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.  We will be using Pixi to get these projects.</p>
 <p><a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/tnia-python">tnia-python</a> - This is a general utility project for image processing including deep learning utilities.</p>
-<p><a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl">easy-augment-batch-dl</a> A plugin to perform deep learning on small to medium sized image sets with UNETs, Cellpose, Stardist, SAM and friends.  In particular this plugin is useful for performing deep learning with a small number of labels and augmentation, and experimenting with different deep learning frameworks.</p>
-<p><a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/napari-ai-lab">napari-ai-lab</a> A collection of plugins and utilities for ND segmentation with Cellpose, StarDist, SAM and more.  The motivation for this newer project is to construct a better base to handle ND datasets and complicated dependency handling (vie Appose and Pixi)</p>
+<p><a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl">easy-augment-batch-dl</a> - A plugin to perform deep learning on small to medium-sized image sets with UNETs, Cellpose, Stardist, SAM and friends. This plugin is particularly useful for performing deep learning with a small number of labels and augmentation, and for experimenting with different deep learning frameworks.</p>
+<p><a class="reference external" href="https://github.com/True-North-Intelligent-Algorithms/napari-ai-lab">napari-ai-lab</a> - A collection of plugins and utilities for ND segmentation with Cellpose, StarDist, SAM and more. The motivation for this newer project is to construct a better foundation for handling ND datasets and complicated dependency management (via Appose and Pixi).</p>
+</section>
 <section id="some-examples-may-be-under-construction">
 <h2>Some examples may be ‘under construction’<a class="headerlink" href="#some-examples-may-be-under-construction" title="Link to this heading">#</a></h2>
 <p><img alt="not found" src="../_images/under_construction1.jpg" /></p>
@@ -584,6 +640,15 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#question-does-the-2024-workshop-still-work">Question:  Does the 2024 workshop still work?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-technologies-we-will-learn-today">New technologies we will learn today</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pixi">Pixi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#appose">Appose</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#code">Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jupyter-book-view">Jupyter book view</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data">Data</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-examples-may-be-under-construction">Some examples may be ‘under construction’</a></li>
 </ul>
   </nav></div>
