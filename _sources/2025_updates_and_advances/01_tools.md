@@ -1,6 +1,6 @@
 # 2025 Updates and Advances 
 
-This workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.
+The 2025 update to the workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.  We will be using Pixi to get these projects. 
 
 [tnia-python](https://github.com/True-North-Intelligent-Algorithms/tnia-python) - This is a general utility project for image processing including deep learning utilities.
 

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Test Pixi &#8212; My Jupyter Book</title>
+    <title>Test Pixi Environment &#8212; My Jupyter Book</title>
   
   
   
@@ -287,7 +287,7 @@
 <li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Test Pixi</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Test Pixi Environment</a></li>
 <li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam example</a></li>
 <li class="toctree-l2"><a class="reference internal" href="10_some_sam.html">Multiple frameworks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
@@ -465,7 +465,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -476,11 +478,21 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Test Pixi</h1>
+    <h1>Test Pixi Environment</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pixi-environment-in-vs-code-notebooks">How to Use Pixi Environment in VS Code Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-package-imports">Testing Package Imports</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -490,8 +502,26 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="test-pixi">
-<h1>Test Pixi<a class="headerlink" href="#test-pixi" title="Link to this heading">#</a></h1>
+  <section id="test-pixi-environment">
+<h1>Test Pixi Environment<a class="headerlink" href="#test-pixi-environment" title="Link to this heading">#</a></h1>
+<section id="goal">
+<h2>Goal<a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<p>Test if the Pixi environments actually work in VS Code by importing and checking versions of key packages.</p>
+</section>
+<section id="how-to-use-pixi-environment-in-vs-code-notebooks">
+<h2>How to Use Pixi Environment in VS Code Notebooks<a class="headerlink" href="#how-to-use-pixi-environment-in-vs-code-notebooks" title="Link to this heading">#</a></h2>
+<p><strong>Important:</strong> Make sure you’ve registered the pixi environment as a Jupyter kernel first:</p>
+<ol class="arabic simple">
+<li><p>Navigate to your pixi environment folder (e.g., <code class="docutils literal notranslate"><span class="pre">pixi/appose_napari_ai/</span></code>)</p></li>
+<li><p>Run: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ipykernel</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">--name=appose_napari_ai</span> <span class="pre">--display-name</span> <span class="pre">&quot;Python</span> <span class="pre">(appose_napari_ai)&quot;</span></code>
+<strong>Note:</strong> After registering a new kernel, you may need to restart VS Code for the environment to appear in the kernel selector.</p></li>
+<li><p>In VS Code, click the kernel selector (top right of notebook)</p></li>
+<li><p>Choose “Select Another Kernel” → “Jupyter Kernel” → “Python (appose_napari_ai)”</p></li>
+</ol>
+<p>If the imports below work without errors, your pixi environment is properly configured!</p>
+</section>
+<section id="testing-package-imports">
+<h2>Testing Package Imports<a class="headerlink" href="#testing-package-imports" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">appose</span>
@@ -512,7 +542,13 @@ document.write(`
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0.2.dev62+nogit.g21ee86122.d20251117
+</pre></div>
 </div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -569,6 +605,23 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pixi-environment-in-vs-code-notebooks">How to Use Pixi Environment in VS Code Notebooks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-package-imports">Testing Package Imports</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
