@@ -46,10 +46,18 @@ parts:
     - file: 30_segment_everything/30_filter_labels.ipynb
   - file: 2025_updates_and_advances/01_tools
     sections:
+    - file: 2025_updates_and_advances/01_zsetup
     - file: 2025_updates_and_advances/02_Pixi
     - file: 2025_updates_and_advances/03_test_pixi.ipynb
     - file: 2025_updates_and_advances/05_microsam.ipynb
-    - file: 2025_updates_and_advances/10_some_sam.ipynb
+    - file: 2025_updates_and_advances/10_cellposesam.ipynb
+    - file: 2025_updates_and_advances/11_Appose
+    - file: 2025_updates_and_advances/12_test_appose.ipynb
+    - file: 2025_updates_and_advances/14_appose_cellpose.ipynb
     - file: 2025_updates_and_advances/15_appose_run_all.ipynb
+    - file: 2025_updates_and_advances/63_napari_easy_augment_batch_dl
+    - file: 2025_updates_and_advances/68_neabdl_cell_data.ipynb
+    - file: 2025_updates_and_advances/70_sam_finetuning_cell_data.ipynb
+    - file: 2025_updates_and_advances/85_neabdl_vessel_data.ipynb
 
   
