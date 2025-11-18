@@ -1,0 +1,1341 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Finetuning Segment Anything with µsam &#8212; My Jupyter Book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/70_sam_finetuning_cell_data';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Use Napari-Easy-Augment-Batch-DL to load and label images" href="85_neabdl_vessel_data.html" />
+    <link rel="prev" title="Explore Data" href="68_neabdl_cell_data.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.jpeg" class="logo__image only-light" alt="My Jupyter Book - Home"/>
+    <script>document.write(`<img src="../_static/logo.jpeg" class="logo__image only-dark" alt="My Jupyter Book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/08_Pixi.html">Pixi</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/10_Dependencies.html">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/15_data.html">Code and Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/25_exercises.html">Suggested exercises</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/01_introduction.html">Labeling and Augmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/03_napari_layers.html">Some Napari Basics</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore and label data</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../15_sparse_labelling/05_introduction.html">Sparse Labeling</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/10_label_predict.html">Explore and label the ‘sparse labels’ Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/20_create_patches.html">Make patches from labels</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../15_sparse_labelling/30_stardist_training_2d.html">Sparse Stardist training example</a></li>
+
+
+
+
+
+
+
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
+
+
+
+
+
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/40_create_patches.html">Make patches from labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/50_cellpose_training_2d.html">Train a cellpose 2D model for different scales</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/80_protrusions.html">Large objects with protrusions and “self prediction”</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../30_segment_everything/05_introduction.html">Segment Everything with SAM</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/10_explore_data.html">Explore data with SAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/20_mobile_sam.html">Viewing and exploring overlapping labels</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../30_segment_everything/30_filter_labels.html">Filtering Labels</a></li>
+
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_tools.html">2025 Updates and Advances</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_zsetup.html">Setup</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam via Pixi environment example</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="10_cellposesam.html">Cellposesam (cellpose 4) via Pixi</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="63_napari_easy_augment_batch_dl.html">napari-easy-augment-batch-dl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="68_neabdl_cell_data.html">Explore Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="85_neabdl_vessel_data.html">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
+
+
+
+
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F2025_updates_and_advances/70_sam_finetuning_cell_data.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/2025_updates_and_advances/70_sam_finetuning_cell_data.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Finetuning Segment Anything with µsam</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook-with-pixi-generated-environment">Running this notebook with Pixi generated environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-libraries">Importing the libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-paths">Set paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-8-bit">convert to 8 bit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-create-the-dataloaders">Let’s create the dataloaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-let-s-visualize-how-our-samples-look">First, let’s visualize how our samples look.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-actual-model-finetuning">Run the actual model finetuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-run-the-automatic-instance-segmentation-ais">Let’s run the automatic instance segmentation (AIS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-next">What next?</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="finetuning-segment-anything-with-sam">
+<h1>Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code><a class="headerlink" href="#finetuning-segment-anything-with-sam" title="Link to this heading">#</a></h1>
+<p>This notebook shows how to use Segment Anything for Microscopy to fine-tune a Segment Anything Model (SAM) on the images of cells with long protrusions from this <a class="reference external" href="https://forum.image.sc/t/challenging-segmentation-with-cellpose-need-help/103618">question</a>.</p>
+<p>(this is a derivative of the <a class="reference external" href="https://github.com/computational-cell-analytics/micro-sam/blob/master/notebooks/sam_finetuning.ipynb">micro-sam fine tuning</a> example)</p>
+<section id="running-this-notebook-with-pixi-generated-environment">
+<h2>Running this notebook with Pixi generated environment<a class="headerlink" href="#running-this-notebook-with-pixi-generated-environment" title="Link to this heading">#</a></h2>
+<p>If you have an environment with <code class="docutils literal notranslate"><span class="pre">µsam</span></code> on your computer you can run this notebook in there. You can follow the <a class="reference external" href="https://computational-cell-analytics.github.io/micro-sam/micro_sam.html#installation">installation instructions</a> to install it on your computer.</p>
+<p>You can also run this notebook in the cloud on <a class="reference external" href="https://www.kaggle.com/code/">Kaggle Notebooks</a>. This service offers free usage of a GPU to speed up running the code. The next cells will take care of the installation for you if you are using it.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">())</span>  <span class="c1"># Returns True if a GPU is available</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">current_device</span><span class="p">())</span>  <span class="c1"># Returns the current GPU device index</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">device_count</span><span class="p">())</span>    <span class="c1"># Number of available GPUs</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">get_device_name</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>  <span class="c1"># Name of the first GPU (if available)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+0
+1
+NVIDIA GeForce RTX 3090
+</pre></div>
+</div>
+</div>
+</div>
+<section id="importing-the-libraries">
+<h3>Importing the libraries<a class="headerlink" href="#importing-the-libraries" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.plotting.plt_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">random_label_cmap</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">micro_sam</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using micro_sam version </span><span class="si">{</span><span class="n">micro_sam</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">glob</span><span class="w"> </span><span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">IPython.display</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileLink</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">imageio.v3</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">imageio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">skimage.measure</span><span class="w"> </span><span class="kn">import</span> <span class="n">label</span> <span class="k">as</span> <span class="n">connected_components</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_em.util.debug</span><span class="w"> </span><span class="kn">import</span> <span class="n">check_loader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_em.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinInstanceSampler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch_em.util.util</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_random_colors</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">micro_sam.training</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sam_training</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">micro_sam.sample_data</span><span class="w"> </span><span class="kn">import</span> <span class="n">fetch_tracking_example_data</span><span class="p">,</span> <span class="n">fetch_tracking_segmentation_data</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">micro_sam.automatic_segmentation</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_predictor_and_segmenter</span><span class="p">,</span> <span class="n">automatic_instance_segmentation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using micro_sam version 1.6.2
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="set-paths">
+<h2>Set paths<a class="headerlink" href="#set-paths" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">parent_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;..\..\data\cells_with_protrusions&#39;</span>
+
+<span class="n">train_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;patches&#39;</span><span class="p">)</span>
+<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
+
+<span class="n">segmentation_dir</span> <span class="o">=</span> <span class="n">train_path</span> <span class="o">+</span> <span class="s1">&#39;/ground truth0&#39;</span>
+<span class="n">image_dir</span> <span class="o">=</span> <span class="n">train_path</span> <span class="o">+</span> <span class="s1">&#39;/input0&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="convert-to-8-bit">
+<h2>convert to 8 bit<a class="headerlink" href="#convert-to-8-bit" title="Link to this heading">#</a></h2>
+<p>For micro-sam inputs must be in 8 bit.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_dir_255</span> <span class="o">=</span> <span class="n">train_path</span> <span class="o">+</span> <span class="s1">&#39;/input0_255&#39;</span>
+
+<span class="c1"># if no 8-bit images yet make them</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">image_dir_255</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">image_dir_255</span><span class="p">)</span>
+
+    <span class="n">image_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+
+    <span class="k">for</span> <span class="n">image_path</span> <span class="ow">in</span> <span class="n">image_paths</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="p">(</span><span class="n">image</span> <span class="o">*</span> <span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">)</span>
+        <span class="n">imageio</span><span class="o">.</span><span class="n">imwrite</span><span class="p">(</span><span class="n">image_path</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="n">image_dir_255</span><span class="p">),</span> <span class="n">image</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="let-s-create-the-dataloaders">
+<h3>Let’s create the dataloaders<a class="headerlink" href="#let-s-create-the-dataloaders" title="Link to this heading">#</a></h3>
+<p>Our task is to segment HeLa cells on a flat glass in DIC microscopic images. The dataset comes from <a class="reference external" href="https://celltrackingchallenge.net/2d-datasets/">https://celltrackingchallenge.net/2d-datasets/</a>, and the dataloader has been implemented in <a class="reference external" href="https://github.com/constantinpape/torch-em/blob/main/torch_em/data/datasets/ctc.py">torch-em</a>.</p>
+<section id="first-let-s-visualize-how-our-samples-look">
+<h4>First, let’s visualize how our samples look.<a class="headerlink" href="#first-let-s-visualize-how-our-samples-look" title="Link to this heading">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_dir</span> <span class="o">=</span> <span class="n">image_dir_255</span>
+<span class="n">image_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">image_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num images is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">image_paths</span><span class="p">))</span>
+<span class="n">segmentation_paths</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">segmentation_dir</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;num segmentations is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">segmentation_paths</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">segmentation_path</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_paths</span><span class="p">,</span> <span class="n">segmentation_paths</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;image size is&#39;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">segmentation</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">segmentation_path</span><span class="p">)</span>
+
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Input Image&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+    <span class="n">segmentation</span> <span class="o">=</span> <span class="n">connected_components</span><span class="p">(</span><span class="n">segmentation</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">segmentation</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ground Truth Instances&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">break</span>  <span class="c1"># comment this out in case you want to visualize all the images</span>
+
+<span class="n">image_paths_to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">segmentation_paths_to_remove</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">segmentation_path</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_paths</span><span class="p">,</span> <span class="n">segmentation_paths</span><span class="p">):</span>
+    <span class="n">segmentation</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">segmentation_path</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">segmentation</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: segmentation </span><span class="si">{</span><span class="n">segmentation_path</span><span class="si">}</span><span class="s2"> is empty.&quot;</span><span class="p">)</span>
+        <span class="n">image_paths_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+        <span class="n">segmentation_paths_to_remove</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segmentation_path</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">image_paths_to_remove</span><span class="p">)</span><span class="si">}</span><span class="s2"> images with empty segmentations.&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">segmentation_path</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_paths_to_remove</span><span class="p">,</span> <span class="n">segmentation_paths_to_remove</span><span class="p">):</span>
+    <span class="c1"># remove empty file (because microsam throws an error if empty segmentation is present)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Removing </span><span class="si">{</span><span class="n">image_path</span><span class="si">}</span><span class="s2"> and </span><span class="si">{</span><span class="n">segmentation_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">segmentation_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>num images is 360
+num segmentations is 360
+image size is (512, 512, 3)
+</pre></div>
+</div>
+<img alt="../_images/91a004de19d337fea9ccce72c9bc5b569b443cfa183aab07bae2718f6a94e608.png" src="../_images/91a004de19d337fea9ccce72c9bc5b569b443cfa183aab07bae2718f6a94e608.png" />
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Removing 0 images with empty segmentations.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &#39;micro_sam.training.default_sam_loader&#39; is a convenience function to build a pytorch dataloader from image data and labels for training segmentation models.</span>
+<span class="c1"># This is wrapped around the &#39;torch_em.default_segmentation_loader&#39;.</span>
+<span class="c1"># It supports image data in various formats.</span>
+<span class="c1"># Here, we load image data and labels from the two folders with tif images that were downloaded by the example data functionality,</span>
+<span class="c1"># by specifying `raw_key` and `label_key` as `*.tif`.</span>
+<span class="c1"># This means all images in the respective folders that end with .tif will be loaded.</span>
+<span class="c1"># The function supports many other file formats. For example, if you have tif stacks with multiple slices instead of multiple tif images in a folder,</span>
+<span class="c1"># then you can pass &#39;raw_key=label_key=None&#39;.</span>
+<span class="c1"># For more information, here is the documentation: https://github.com/constantinpape/torch-em/blob/main/torch_em/data/datasets/README.md</span>
+<span class="c1"># And here is a tutorial on creating dataloaders using &#39;torch-em&#39;: https://github.com/constantinpape/torch-em/blob/main/notebooks/tutorial_create_dataloaders.ipynb</span>
+
+<span class="c1"># Load images from multiple files in folder via pattern (here: all tif files)</span>
+<span class="n">raw_key</span><span class="p">,</span> <span class="n">label_key</span> <span class="o">=</span> <span class="s2">&quot;*.tif&quot;</span><span class="p">,</span> <span class="s2">&quot;*.tif&quot;</span>
+
+<span class="c1"># Alternative: if you have tif stacks you can just set &#39;raw_key&#39; and &#39;label_key&#39; to None</span>
+<span class="c1"># raw_key, label_key= None, None</span>
+
+<span class="c1"># The &#39;roi&#39; argument can be used to subselect parts of the data.</span>
+<span class="c1"># Here, we use it to select the first 70 images (frames) for the train split and the other frames for the val split.</span>
+<span class="n">train_roi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[:</span><span class="mi">1180</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+<span class="n">val_roi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[</span><span class="mi">1180</span><span class="p">:</span><span class="mi">1200</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The script below returns the train or val data loader for finetuning Segment Anything Model (SAM).</span>
+<span class="c1"># The data loader must be a torch data loader that returns `x, y` tensors, where `x` is the image data and `y` are the labels.</span>
+<span class="c1"># The labels have to be in a label mask instance segmentation format.</span>
+<span class="c1"># i.e. a tensor of the same spatial shape as `x`, with each object mask having its own ID.</span>
+<span class="c1"># Important: the ID 0 is reseved for background, and the IDs must be consecutive</span>
+
+<span class="c1"># Here, we use `micro_sam.training.default_sam_loader` for creating a suitable data loader from</span>
+<span class="c1"># the example hela data. You can either adapt this for your own data or write a suitable torch dataloader yourself.</span>
+<span class="c1"># Here&#39;s a quickstart notebook to create your own dataloaders: https://github.com/constantinpape/torch-em/blob/main/notebooks/tutorial_create_dataloaders.ipynb</span>
+
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># the training batch size</span>
+<span class="n">patch_shape</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">512</span><span class="p">,</span> <span class="mi">512</span><span class="p">)</span>  <span class="c1"># the size of patches for training</span>
+
+<span class="c1"># Train an additional convolutional decoder for end-to-end automatic instance segmentation</span>
+<span class="c1"># NOTE 1: It&#39;s important to have densely annotated-labels while training the additional convolutional decoder.</span>
+<span class="c1"># NOTE 2: In case you do not have labeled images, we recommend using `micro-sam` annotator tools to annotate as many objects as possible per image for best performance.</span>
+<span class="n">train_instance_segmentation</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="c1"># NOTE: The dataloader internally takes care of adding label transforms: i.e. used to convert the ground-truth</span>
+<span class="c1"># labels to the desired instances for finetuning Segment Anythhing, or, to learn the foreground and distances</span>
+<span class="c1"># to the object centers and object boundaries for automatic segmentation.</span>
+
+<span class="c1"># There are cases where our inputs are large and the labeled objects are not evenly distributed across the image.</span>
+<span class="c1"># For this we use samplers, which ensure that valid inputs are chosen subjected to the paired labels.</span>
+<span class="c1"># The sampler chosen below makes sure that the chosen inputs have atleast one foreground instance, and filters out small objects.</span>
+<span class="n">sampler</span> <span class="o">=</span> <span class="n">MinInstanceSampler</span><span class="p">(</span><span class="n">min_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># NOTE: The choice of &#39;min_size&#39; value is paired with the same value in &#39;min_size&#39; filter in &#39;label_transform&#39;.</span>
+
+<span class="n">train_loader</span> <span class="o">=</span> <span class="n">sam_training</span><span class="o">.</span><span class="n">default_sam_loader</span><span class="p">(</span>
+    <span class="n">raw_paths</span><span class="o">=</span><span class="n">image_dir</span><span class="p">,</span>
+    <span class="n">raw_key</span><span class="o">=</span><span class="n">raw_key</span><span class="p">,</span>
+    <span class="n">label_paths</span><span class="o">=</span><span class="n">segmentation_dir</span><span class="p">,</span>
+    <span class="n">label_key</span><span class="o">=</span><span class="n">label_key</span><span class="p">,</span>
+    <span class="n">with_segmentation_decoder</span><span class="o">=</span><span class="n">train_instance_segmentation</span><span class="p">,</span>
+    <span class="n">patch_shape</span><span class="o">=</span><span class="n">patch_shape</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">is_seg_dataset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rois</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="c1">#train_roi,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">raw_transform</span><span class="o">=</span><span class="n">sam_training</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">,</span>
+    <span class="c1">#with_channels = True,</span>
+<span class="p">)</span>
+
+<span class="n">val_loader</span> <span class="o">=</span> <span class="n">sam_training</span><span class="o">.</span><span class="n">default_sam_loader</span><span class="p">(</span>
+    <span class="n">raw_paths</span><span class="o">=</span><span class="n">image_dir</span><span class="p">,</span>
+    <span class="n">raw_key</span><span class="o">=</span><span class="n">raw_key</span><span class="p">,</span>
+    <span class="n">label_paths</span><span class="o">=</span><span class="n">segmentation_dir</span><span class="p">,</span>
+    <span class="n">label_key</span><span class="o">=</span><span class="n">label_key</span><span class="p">,</span>
+    <span class="n">with_segmentation_decoder</span><span class="o">=</span><span class="n">train_instance_segmentation</span><span class="p">,</span>
+    <span class="n">patch_shape</span><span class="o">=</span><span class="n">patch_shape</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+    <span class="n">is_seg_dataset</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">rois</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="c1">#val_roi,</span>
+    <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">raw_transform</span><span class="o">=</span><span class="n">sam_training</span><span class="o">.</span><span class="n">identity</span><span class="p">,</span>
+    <span class="n">sampler</span><span class="o">=</span><span class="n">sampler</span><span class="p">,</span>
+    <span class="c1">#with_channels = True, </span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>..\..\data\cells_with_protrusions\patches/input0_255 ..\..\data\cells_with_protrusions\patches/ground truth0 None
+..\..\data\cells_with_protrusions\patches/input0_255 ..\..\data\cells_with_protrusions\patches/ground truth0 None
+..\..\data\cells_with_protrusions\patches/input0_255 ..\..\data\cells_with_protrusions\patches/ground truth0 None
+..\..\data\cells_with_protrusions\patches/input0_255 ..\..\data\cells_with_protrusions\patches/ground truth0 None
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">train_loader</span><span class="o">.</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">test</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(tensor(0.), tensor(255.), tensor(0.), tensor(22.))
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s check how our samples look from the dataloader</span>
+<span class="n">check_loader</span><span class="p">(</span><span class="n">train_loader</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">plt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/d9eeed178b1020ffca8bfdf5d191759853ac39bf9f09379947061cf9e63bc3dc.png" src="../_images/d9eeed178b1020ffca8bfdf5d191759853ac39bf9f09379947061cf9e63bc3dc.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="run-the-actual-model-finetuning">
+<h3>Run the actual model finetuning<a class="headerlink" href="#run-the-actual-model-finetuning" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All hyperparameters for training.</span>
+<span class="n">n_objects_per_batch</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># the number of objects per batch that will be sampled</span>
+<span class="n">device</span> <span class="o">=</span> <span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span> <span class="c1"># the device/GPU used for training</span>
+<span class="n">n_epochs</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># how long we train (in epochs)</span>
+
+<span class="c1"># The model_type determines which base model is used to initialize the weights that are finetuned.</span>
+<span class="c1"># We use vit_b here because it can be trained faster. Note that vit_h usually yields higher quality results.</span>
+<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;vit_b&quot;</span>
+
+<span class="c1"># The name of the checkpoint. The checkpoints will be stored in &#39;./checkpoints/&lt;checkpoint_name&gt;&#39;</span>
+<span class="n">checkpoint_name</span> <span class="o">=</span> <span class="s2">&quot;microsam_nov17_4.5_vitb&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>NOTE</strong>: The user needs to decide whether to finetune the Segment Anything model, or the <code class="docutils literal notranslate"><span class="pre">µsam</span></code>’s “finetuned microscopy models” for their dataset. Here, we finetune on the Segment Anything model for simplicity. For example, if you choose to finetune the model from the light microscopy generalist models, you need to update the <code class="docutils literal notranslate"><span class="pre">model_type</span></code> to <code class="docutils literal notranslate"><span class="pre">vit_b_lm</span></code> and it takes care of initializing the model with the desired weights)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">help</span><span class="p">(</span><span class="n">sam_training</span><span class="o">.</span><span class="n">train_sam</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Help on function train_sam in module micro_sam.training.training:
+
+train_sam(name: str, model_type: str, train_loader: torch.utils.data.dataloader.DataLoader, val_loader: torch.utils.data.dataloader.DataLoader, n_epochs: int = 100, early_stopping: Optional[int] = 10, n_objects_per_batch: Optional[int] = 25, checkpoint_path: Union[str, os.PathLike, NoneType] = None, with_segmentation_decoder: bool = True, freeze: Optional[List[str]] = None, device: Union[str, torch.device, NoneType] = None, lr: float = 1e-05, n_sub_iteration: int = 8, save_root: Union[str, os.PathLike, NoneType] = None, mask_prob: float = 0.5, n_iterations: Optional[int] = None, scheduler_class: Optional[torch.optim.lr_scheduler._LRScheduler] = &lt;class &#39;torch.optim.lr_scheduler.ReduceLROnPlateau&#39;&gt;, scheduler_kwargs: Optional[Dict[str, Any]] = None, save_every_kth_epoch: Optional[int] = None, pbar_signals: Optional[PyQt5.QtCore.QObject] = None, optimizer_class: Optional[torch.optim.optimizer.Optimizer] = &lt;class &#39;torch.optim.adamw.AdamW&#39;&gt;, peft_kwargs: Optional[Dict] = None, ignore_warnings: bool = True, verify_n_labels_in_loader: Optional[int] = 50, box_distortion_factor: Optional[float] = 0.025, overwrite_training: bool = True, **model_kwargs) -&gt; None
+    Run training for a SAM model.
+    
+    Args:
+        name: The name of the model to be trained. The checkpoint and logs will have this name.
+        model_type: The type of the SAM model.
+        train_loader: The dataloader for training.
+        val_loader: The dataloader for validation.
+        n_epochs: The number of epochs to train for.
+        early_stopping: Enable early stopping after this number of epochs without improvement.
+            By default, the value is set to &#39;10&#39; epochs.
+        n_objects_per_batch: The number of objects per batch used to compute
+            the loss for interative segmentation. If None all objects will be used,
+            if given objects will be randomly sub-sampled. By default, the number of objects per batch are &#39;25&#39;.
+        checkpoint_path: Path to checkpoint for initializing the SAM model.
+        with_segmentation_decoder: Whether to train additional UNETR decoder for automatic instance segmentation.
+            By default, trains with the additional instance segmentation decoder.
+        freeze: Specify parts of the model that should be frozen, namely: image_encoder, prompt_encoder and mask_decoder
+            By default nothing is frozen and the full model is updated.
+        device: The device to use for training. By default, automatically chooses the best available device to train.
+        lr: The learning rate. By default, set to &#39;1e-5&#39;.
+        n_sub_iteration: The number of iterative prompts per training iteration.
+            By default, the number of iterations is set to &#39;8&#39;.
+        save_root: Optional root directory for saving the checkpoints and logs.
+            If not given the current working directory is used.
+        mask_prob: The probability for using a mask as input in a given training sub-iteration.
+            By default, set to &#39;0.5&#39;.
+        n_iterations: The number of iterations to use for training. This will over-ride `n_epochs` if given.
+        scheduler_class: The learning rate scheduler to update the learning rate.
+            By default, `torch.optim.lr_scheduler.ReduceLROnPlateau` is used.
+        scheduler_kwargs: The learning rate scheduler parameters.
+            If passed &#39;None&#39;, the chosen default parameters are used in `ReduceLROnPlateau`.
+        save_every_kth_epoch: Save checkpoints after every kth epoch separately.
+        pbar_signals: Controls for napari progress bar.
+        optimizer_class: The optimizer class. By default, `torch.optim.AdamW` is used.
+        peft_kwargs: Keyword arguments for the PEFT wrapper class.
+        ignore_warnings: Whether to ignore raised warnings. By default, set to &#39;True&#39;.
+        verify_n_labels_in_loader: The number of labels to verify out of the train and validation dataloaders.
+            By default, 50 batches of labels are verified from the dataloaders.
+        box_distortion_factor: The factor for distorting the box annotations derived from the ground-truth masks.
+            By default, the distortion factor is set to &#39;0.025&#39;.
+        overwrite_training: Whether to overwrite the trained model stored at the same location.
+            By default, overwrites the trained model at each run.
+            If set to &#39;False&#39;, it will avoid retraining the model if the previous run was completed.
+        model_kwargs: Additional keyword arguments for the `micro_sam.util.get_sam_model`.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run training (best metric 0.027211)</span>
+<span class="n">sam_training</span><span class="o">.</span><span class="n">train_sam</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="n">checkpoint_name</span><span class="p">,</span>
+    <span class="n">save_root</span><span class="o">=</span><span class="n">model_path</span><span class="p">,</span> <span class="c1">#os.path.join(root_dir, &quot;models&quot;),</span>
+    <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span>
+    <span class="n">train_loader</span><span class="o">=</span><span class="n">train_loader</span><span class="p">,</span>
+    <span class="n">val_loader</span><span class="o">=</span><span class="n">val_loader</span><span class="p">,</span>
+    <span class="n">n_epochs</span><span class="o">=</span><span class="n">n_epochs</span><span class="p">,</span>
+    <span class="n">n_objects_per_batch</span><span class="o">=</span><span class="n">n_objects_per_batch</span><span class="p">,</span>
+    <span class="n">with_segmentation_decoder</span><span class="o">=</span><span class="n">train_instance_segmentation</span><span class="p">,</span>
+    <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Verifying labels in &#39;train&#39; dataloader: 100%|██████████| 50/50 [00:05&lt;00:00,  8.90it/s]
+Verifying labels in &#39;val&#39; dataloader: 100%|██████████| 50/50 [00:05&lt;00:00,  9.14it/s]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Start fitting for 1800 iterations /  5 epochs
+with 360 iterations per epoch
+Training with mixed precision
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 5: average [s/it]: 0.928116, current metric: 0.176352, best metric: 0.176352: 100%|█████████▉| 1799/1800 [38:50&lt;00:01,  1.30s/it]  
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Finished training after 5 epochs / 1800 iterations.
+The best epoch is number 4.
+Training took 2343.2302627563477 seconds (= 00:39:03 hours)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="n">The</span> <span class="n">Kernel</span> <span class="n">crashed</span> <span class="k">while</span> <span class="n">executing</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">current</span> <span class="n">cell</span> <span class="ow">or</span> <span class="n">a</span> <span class="n">previous</span> <span class="n">cell</span><span class="o">.</span> 
+
+<span class="n">Please</span> <span class="n">review</span> <span class="n">the</span> <span class="n">code</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">cell</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="n">to</span> <span class="n">identify</span> <span class="n">a</span> <span class="n">possible</span> <span class="n">cause</span> <span class="n">of</span> <span class="n">the</span> <span class="n">failure</span><span class="o">.</span> 
+
+<span class="n">Click</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;https://aka.ms/vscodeJupyterKernelCrash&#39;</span><span class="o">&gt;</span><span class="n">here</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">more</span> <span class="n">info</span><span class="o">.</span> 
+
+<span class="n">View</span> <span class="n">Jupyter</span> <span class="o">&lt;</span><span class="n">a</span> <span class="n">href</span><span class="o">=</span><span class="s1">&#39;command:jupyter.viewOutput&#39;</span><span class="o">&gt;</span><span class="n">log</span><span class="o">&lt;/</span><span class="n">a</span><span class="o">&gt;</span> <span class="k">for</span> <span class="n">further</span> <span class="n">details</span><span class="o">.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s spot our best checkpoint and download it to get started with the annotation tool</span>
+<span class="n">best_checkpoint</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="s2">&quot;checkpoints&quot;</span><span class="p">,</span> <span class="n">checkpoint_name</span><span class="p">,</span> <span class="s2">&quot;best.pt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Download link is automatically generated for the best model.</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Click here </span><span class="se">\u2193</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">FileLink</span><span class="p">(</span><span class="n">best_checkpoint</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Click here ↓
+</pre></div>
+</div>
+<div class="output text_html"><a href='D:\images\tnia-python-images\imagesc\2024_10_11_tough_cellpose_2\models\checkpoints\microsam_1.5_vitb\best.pt' target='_blank'>D:\images\tnia-python-images\imagesc\2024_10_11_tough_cellpose_2\models\checkpoints\microsam_1.5_vitb\best.pt</a><br></div></div>
+</div>
+</section>
+<section id="let-s-run-the-automatic-instance-segmentation-ais">
+<h3>Let’s run the automatic instance segmentation (AIS)<a class="headerlink" href="#let-s-run-the-automatic-instance-segmentation-ais" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_automatic_instance_segmentation</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="s2">&quot;vit_b_lm&quot;</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tile_shape</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">halo</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Automatic Instance Segmentation (AIS) by training an additional instance decoder in SAM.</span>
+
+<span class="sd">    NOTE: AIS is supported only for `µsam` models.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        image: The input image.</span>
+<span class="sd">        checkpoint_path: The path to stored checkpoints.</span>
+<span class="sd">        model_type: The choice of the `µsam` model.</span>
+<span class="sd">        device: The device to run the model inference.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The instance segmentation.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Step 1: Get the &#39;predictor&#39; and &#39;segmenter&#39; to perform automatic instance segmentation.</span>
+    <span class="n">predictor</span><span class="p">,</span> <span class="n">segmenter</span> <span class="o">=</span> <span class="n">get_predictor_and_segmenter</span><span class="p">(</span>
+        <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="c1"># choice of the Segment Anything model</span>
+        <span class="n">checkpoint</span><span class="o">=</span><span class="n">checkpoint_path</span><span class="p">,</span>  <span class="c1"># overwrite to pass your own finetuned model.</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span>  <span class="c1"># the device to run the model inference.</span>
+        <span class="n">is_tiled</span> <span class="o">=</span> <span class="p">(</span><span class="n">tile_shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">),</span>  <span class="c1"># whether the model is tiled or not.</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Step 2: Get the instance segmentation for the given image.</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">automatic_instance_segmentation</span><span class="p">(</span>
+        <span class="n">predictor</span><span class="o">=</span><span class="n">predictor</span><span class="p">,</span>  <span class="c1"># the predictor for the Segment Anything model.</span>
+        <span class="n">segmenter</span><span class="o">=</span><span class="n">segmenter</span><span class="p">,</span>  <span class="c1"># the segmenter class responsible for generating predictions.</span>
+        <span class="n">input_path</span><span class="o">=</span><span class="n">image</span><span class="p">,</span>
+        <span class="n">ndim</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+        <span class="n">tile_shape</span><span class="o">=</span><span class="n">tile_shape</span><span class="p">,</span>
+        <span class="n">halo</span><span class="o">=</span><span class="n">halo</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">assert</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">best_checkpoint</span><span class="p">),</span> <span class="s2">&quot;Please train the model first to run inference on the finetuned model.&quot;</span>
+<span class="k">assert</span> <span class="n">train_instance_segmentation</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;Oops. You didn&#39;t opt for finetuning using the decoder-based automatic instance segmentation.&quot;</span>
+
+<span class="c1"># Let&#39;s check the first 5 images. Feel free to comment out the line below to run inference on all images.</span>
+<span class="n">image_paths_</span> <span class="o">=</span> <span class="n">image_paths</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">segmentation_paths_</span> <span class="o">=</span> <span class="n">segmentation_paths</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">image_path</span><span class="p">,</span> <span class="n">segmentation_path</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">image_paths_</span><span class="p">,</span> <span class="n">segmentation_paths_</span><span class="p">):</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+    <span class="n">image_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="n">segmentation</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">segmentation_path</span><span class="p">)</span>
+
+    <span class="c1"># Predicted instances</span>
+    <span class="n">prediction</span> <span class="o">=</span> <span class="n">run_automatic_instance_segmentation</span><span class="p">(</span>
+        <span class="n">image</span><span class="o">=</span><span class="n">image_</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">best_checkpoint</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Visualize the predictions</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Input Image&quot;</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">segmentation</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Ground Truth Instances&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Predictions (AIS)&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Predictions (AIS)&quot;</span><span class="p">)</span>
+    
+    <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Predictions (AIS)&quot;</span><span class="p">)</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1">#break</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D: 100%|██████████| 3/3 [00:00&lt;00:00,  5.03it/s]
+Segment slices: 100%|██████████| 3/3 [00:00&lt;00:00, 10.00it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 43.48it/s]
+</pre></div>
+</div>
+<img alt="../_images/f44e5fbd96168270b3a906927b841de15ad3e2f17c9e8672fc9a91b037798ba6.png" src="../_images/f44e5fbd96168270b3a906927b841de15ad3e2f17c9e8672fc9a91b037798ba6.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D: 100%|██████████| 3/3 [00:00&lt;00:00,  5.32it/s]
+Segment slices: 100%|██████████| 3/3 [00:00&lt;00:00, 10.91it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 22.22it/s]
+</pre></div>
+</div>
+<img alt="../_images/a5e95901c6554c9d9da317db450928e216304f710e91ec792ea9bcff052157a7.png" src="../_images/a5e95901c6554c9d9da317db450928e216304f710e91ec792ea9bcff052157a7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D: 100%|██████████| 3/3 [00:00&lt;00:00,  4.67it/s]
+Segment slices: 100%|██████████| 3/3 [00:00&lt;00:00, 10.95it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 43.49it/s]
+</pre></div>
+</div>
+<img alt="../_images/a23f68551aa2000dd1505a836a57e019a6d0dc3ae06b1a6d9ccf353c76a0d56a.png" src="../_images/a23f68551aa2000dd1505a836a57e019a6d0dc3ae06b1a6d9ccf353c76a0d56a.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D: 100%|██████████| 3/3 [00:00&lt;00:00,  4.75it/s]
+Segment slices: 100%|██████████| 3/3 [00:00&lt;00:00, 10.56it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 45.45it/s]
+</pre></div>
+</div>
+<img alt="../_images/74eb6ecb78b484df017a7cf5b59e1b266cfc0108f383c4b06a1de3da32bbf9e3.png" src="../_images/74eb6ecb78b484df017a7cf5b59e1b266cfc0108f383c4b06a1de3da32bbf9e3.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D: 100%|██████████| 3/3 [00:00&lt;00:00,  5.19it/s]
+Segment slices: 100%|██████████| 3/3 [00:00&lt;00:00, 10.68it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 34.48it/s]
+</pre></div>
+</div>
+<img alt="../_images/437113050fc7fb861f416643aa53f88ae521fed1dfb479d45ccc88ef0c3b0c77.png" src="../_images/437113050fc7fb861f416643aa53f88ae521fed1dfb479d45ccc88ef0c3b0c77.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;D:\images\tnia-python-images\imagesc\2024_10_11_tough_cellpose_2\img52.tif&quot;</span><span class="p">)</span>
+<span class="n">im_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">run_automatic_instance_segmentation</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">im_</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">best_checkpoint</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">tile_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">384</span><span class="p">,</span> <span class="mi">384</span><span class="p">),</span> <span class="n">halo</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="c1">#image=im_whole, checkpoint_path=best_checkpoint, model_type=model_type, device=device</span>
+<span class="p">)</span>
+
+<span class="c1"># Visualize the predictions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="o">//</span><span class="mi">255</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Input roi&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Prediction 0&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Prediction 1&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Prediction 2&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 3D tiled: 100%|██████████| 12/12 [00:03&lt;00:00,  3.21it/s]
+Segment slices: 100%|██████████| 3/3 [00:01&lt;00:00,  2.50it/s]
+Merge segmentation: 100%|██████████| 1/1 [00:00&lt;00:00, 20.80it/s]
+WARNING:matplotlib.image:Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [0..257].
+</pre></div>
+</div>
+<img alt="../_images/551cd47cb477aa147453f9639073102c25efc5e1b3ea9cdd20c5428148c446e1.png" src="../_images/551cd47cb477aa147453f9639073102c25efc5e1b3ea9cdd20c5428148c446e1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">im</span> <span class="o">=</span> <span class="n">imageio</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;D:\images\tnia-python-images\imagesc\2024_10_11_tough_cellpose_2\img52.tif&quot;</span><span class="p">)</span>
+
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">run_automatic_instance_segmentation</span><span class="p">(</span>
+    <span class="n">image</span><span class="o">=</span><span class="n">im</span><span class="p">,</span> <span class="n">checkpoint_path</span><span class="o">=</span><span class="n">best_checkpoint</span><span class="p">,</span> <span class="n">model_type</span><span class="o">=</span><span class="n">model_type</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">,</span> <span class="n">tile_shape</span><span class="o">=</span><span class="p">(</span><span class="mi">384</span><span class="p">,</span> <span class="mi">384</span><span class="p">),</span> <span class="n">halo</span> <span class="o">=</span> <span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+    <span class="c1">#image=im_whole, checkpoint_path=best_checkpoint, model_type=model_type, device=device</span>
+<span class="p">)</span>
+
+<span class="c1"># Visualize the predictions</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">im</span><span class="o">//</span><span class="mi">255</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Input roi&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">random_label_cmap</span><span class="p">(),</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s2">&quot;off&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Prediction&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 2D tiled: 100%|██████████| 4/4 [00:01&lt;00:00,  2.53it/s]
+Initialize tiled instance segmentation with decoder: 100%|██████████| 4/4 [00:00&lt;00:00, 12.12it/s]
+WARNING:matplotlib.image:Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers). Got range [0..257].
+</pre></div>
+</div>
+<img alt="../_images/65bd9344792dde6c5ba2c686689bc9fc6237bb1e2470aa3939a87e5078c21dbe.png" src="../_images/65bd9344792dde6c5ba2c686689bc9fc6237bb1e2470aa3939a87e5078c21dbe.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
+
+<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Input Image&quot;</span><span class="p">,</span> <span class="n">colormap</span><span class="o">=</span><span class="s2">&quot;gray&quot;</span><span class="p">)</span>
+<span class="n">viewer</span><span class="o">.</span><span class="n">add_labels</span><span class="p">(</span><span class="n">prediction</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Predictions (AIS)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;Labels layer &#39;Predictions (AIS)&#39; at 0x2906579e590&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="what-next">
+<h3>What next?<a class="headerlink" href="#what-next" title="Link to this heading">#</a></h3>
+<p>It’s time to get started with your custom finetuned model using the annotator tool. Here is the documentation on how to get started with <code class="docutils literal notranslate"><span class="pre">µsam</span></code>: <a class="reference external" href="https://computational-cell-analytics.github.io/micro-sam/micro_sam.html#annotation-tools">Annotation Tools</a></p>
+<p>Happy annotating!</p>
+<p><em>This notebook was last ran on October 20, 2024</em></p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "microsam_cellposesam"
+        },
+        kernelOptions: {
+            name: "microsam_cellposesam",
+            path: "./2025_updates_and_advances"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'microsam_cellposesam'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="68_neabdl_cell_data.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Explore Data</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="85_neabdl_vessel_data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Use Napari-Easy-Augment-Batch-DL to load and label images</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#running-this-notebook-with-pixi-generated-environment">Running this notebook with Pixi generated environment</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#importing-the-libraries">Importing the libraries</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#set-paths">Set paths</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convert-to-8-bit">convert to 8 bit</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-create-the-dataloaders">Let’s create the dataloaders</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#first-let-s-visualize-how-our-samples-look">First, let’s visualize how our samples look.</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-actual-model-finetuning">Run the actual model finetuning</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#let-s-run-the-automatic-instance-segmentation-ais">Let’s run the automatic instance segmentation (AIS)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-next">What next?</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+<div class="extra_footer">
+  <p>
+Copyright: This work can be reused under the terms of the <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC-BY 4.0</a> license unless mentioned otherwise.
+</p>
+
+</div>
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Label and Predict &#8212; My Jupyter Book</title>
+    <title>Use Napari-Easy-Augment-Batch-DL to load and label images &#8212; My Jupyter Book</title>
   
   
   
@@ -57,11 +57,10 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '20_scale/30_label_predict';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/85_neabdl_vessel_data';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Make patches from labels" href="40_create_patches.html" />
-    <link rel="prev" title="Cellpose trained to learn scale" href="20_cell_pose_diameter.html" />
+    <link rel="prev" title="Finetuning Segment Anything with µsam" href="70_sam_finetuning_cell_data.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -241,36 +240,36 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="05_introduction.html">Scale</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../20_scale/05_introduction.html">Scale</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/10_stardist_receptive_field%202D.html">Stardist compute receptive field</a></li>
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
-
-
-
-
-
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/20_cell_pose_diameter.html">Cellpose trained to learn scale</a></li>
 
 
 
 
 
 
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Label and Predict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="40_create_patches.html">Make patches from labels</a></li>
-
-
-<li class="toctree-l2"><a class="reference internal" href="50_cellpose_training_2d.html">Train a cellpose 2D model for different scales</a></li>
 
 
 
 
 
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/30_label_predict.html">Label and Predict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/40_create_patches.html">Make patches from labels</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="80_protrusions.html">Large objects with protrusions and “self prediction”</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/50_cellpose_training_2d.html">Train a cellpose 2D model for different scales</a></li>
+
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="../20_scale/80_protrusions.html">Large objects with protrusions and “self prediction”</a></li>
 
 </ul>
 </details></li>
@@ -283,35 +282,35 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../2025_updates_and_advances/01_tools.html">2025 Updates and Advances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/01_zsetup.html">Setup</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_tools.html">2025 Updates and Advances</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_zsetup.html">Setup</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/02_Pixi.html">Pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/03_test_pixi.html">Test Pixi Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/05_microsam.html">Microsam via Pixi environment example</a></li>
-
-
-
-
-
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/10_cellposesam.html">Cellposesam (cellpose 4) via Pixi</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam via Pixi environment example</a></li>
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/11_Appose.html">Appose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/12_test_appose.html">Simple Appose Test</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/14_appose_cellpose.html">Run Cellpose with appose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/63_napari_easy_augment_batch_dl.html">napari-easy-augment-batch-dl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/68_neabdl_cell_data.html">Explore Data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/70_sam_finetuning_cell_data.html">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/85_neabdl_vessel_data.html">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_cellposesam.html">Cellposesam (cellpose 4) via Pixi</a></li>
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="63_napari_easy_augment_batch_dl.html">napari-easy-augment-batch-dl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="68_neabdl_cell_data.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="70_sam_finetuning_cell_data.html">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
 
 
 
@@ -389,7 +388,7 @@
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F20_scale/30_label_predict.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F2025_updates_and_advances/85_neabdl_vessel_data.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -419,7 +418,7 @@
       
       
       
-      <li><a href="../_sources/20_scale/30_label_predict.ipynb" target="_blank"
+      <li><a href="../_sources/2025_updates_and_advances/85_neabdl_vessel_data.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -490,7 +489,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -501,11 +502,24 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Label and Predict</h1>
+    <h1>Use Napari-Easy-Augment-Batch-DL to load and label images</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-labeling-vs-instance-labeling">Semantic Labeling vs Instance Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-labeling-vs-dense-labeling">Sparse Labeling vs Dense Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-check-versions">Import and check versions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-and-easy-augment-batch-dl">Start Napari and Easy Augment Batch DL</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -515,91 +529,106 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="label-and-predict">
-<h1>Label and Predict<a class="headerlink" href="#label-and-predict" title="Link to this heading">#</a></h1>
-<p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
+  <section id="use-napari-easy-augment-batch-dl-to-load-and-label-images">
+<h1>Use Napari-Easy-Augment-Batch-DL to load and label images<a class="headerlink" href="#use-napari-easy-augment-batch-dl-to-load-and-label-images" title="Link to this heading">#</a></h1>
+<p>This notebook starts up Napari-Easy-Augment-Batch-DL and points it to our project directory.  At the beginning of a project this directory is simply the location of our collection of images.  For the light sheet vessel example it will be the 2D slices we extracted and saved in the <code class="docutils literal notranslate"><span class="pre">10_generate_training_slices</span></code> notebook.</p>
+<p>For an overview of how <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> is used to load and label images, and how data should be organized see <a class="reference external" href="https://true-north-intelligent-algorithms.github.io/napari-easy-augment-batch-dl/load_and_label/">here</a>.</p>
+</section>
+<section id="semantic-labeling-vs-instance-labeling">
+<h1>Semantic Labeling vs Instance Labeling<a class="headerlink" href="#semantic-labeling-vs-instance-labeling" title="Link to this heading">#</a></h1>
+<p>In this example we will use semantic labeling</p>
+<p><strong>Semantic Labeling</strong> Each pixel is assigned a class (background, vessel, cell, brain barrier) but do not distinquish individual objects (instances).  In this example there will be four classes, so the maximum index used is 4.</p>
+<p><strong>Instance Labeling</strong> In instance labeling each pixel belonging to an object is given a unique ID.  Thus the maximum index will correspond to the number of objects.  For example if there are 40 objects the max index will be 40, if there are 10000 objects the max index will be 10000.</p>
+</section>
+<section id="sparse-labeling-vs-dense-labeling">
+<h1>Sparse Labeling vs Dense Labeling<a class="headerlink" href="#sparse-labeling-vs-dense-labeling" title="Link to this heading">#</a></h1>
+<p>In this example we will use sparse labeling.</p>
+<p><strong>Sparse Labeling</strong>:  Not every pixel has to be labeled.  However some background needs to be labeled to differentiate between background pixels and unlabeled pixels.  For example if there were 2 foreground classes use label 1 for background, 2 for “class 1”, and 3 for “class 2”.  Unlabeled pixels (0) will be ignored.</p>
+<p><strong>Dense Labeling</strong>:  Every foreground pixel needs to be labeled however background does not need to be labeled.  If there were 2 foreground classes, use 1 for “class 1”, 2 for “class 2” and then the remaining pixels (0) will be treated as background.</p>
+<p>The below screenshot shows Napari-Easy-Augment-Batch open with Semantic labels (1 background, 2 barrier, 3 vessel, 4 cell) drawn.</p>
+<p><img alt="Easy Augment Label Semantic" src="2025_updates_and_advances/screenshots/004_easy_augment_labelling.png" /></p>
+</section>
+<section id="import-and-check-versions">
+<h1>Import and check versions<a class="headerlink" href="#import-and-check-versions" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl</span><span class="w"> </span><span class="kn">import</span> <span class="n">easy_augment_batch_dl</span>
 
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl.frameworks.cellpose_instance_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">CellPoseInstanceFramework</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CellPoseInstanceFramework not loaded&#39;</span><span class="p">)</span>
+<span class="c1"># for trouble shooting print the napari and numpy version. This can give us clues if there are dependency issues</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;napari version&#39;</span><span class="p">,</span> <span class="n">napari</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;numpy version&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>napari version 0.6.6
+numpy version 2.3.4
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="start-napari-and-easy-augment-batch-dl">
+<h1>Start Napari and Easy Augment Batch DL<a class="headerlink" href="#start-napari-and-easy-augment-batch-dl" title="Link to this heading">#</a></h1>
+<p>Start Napari, show Easy-Augment-Batch-DL and show the parent directory.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
 
-<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">)</span>
 
 <span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span>
     <span class="n">batch_dl</span>
 <span class="p">)</span>
 
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
-<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs_series&#39;</span><span class="p">)</span>
-<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
+<span class="n">parent_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;..\..\data\vessel_3D_lightsheet&#39;</span>
 
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;cellpose_ladybugs_scale2&#39;</span>
-<span class="c1">#mod = models.Cellpose(gpu=True, model_type=&quot;cyto3&quot;)</span>
-<span class="n">model_type</span> <span class="o">=</span> <span class="s2">&quot;CellPose Instance Model&quot;</span>
 <span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
-
-
-<span class="k">if</span> <span class="n">model_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
-    <span class="c1"># set the drop down to the CellPoseInstanceFramework</span>
-    <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">)</span>
-    
-    <span class="c1"># get the cellpose widget</span>
-    <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_widgets</span><span class="p">[</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">]</span>
-
-    <span class="c1"># load model</span>
-    <span class="n">widget</span><span class="o">.</span><span class="n">load_model_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">))</span>
-
-   <span class="c1"># get the framework object</span>
-    <span class="n">framework</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">frameworks</span><span class="p">[</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">]</span>
-
-    <span class="c1"># set the parameters for the cellpose framework</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="n">framework</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="c1"># sync parameters on the widget after this we should see the widget in Napari synced with the parameters we set on the framework</span>
-    <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_framework</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>VIT checkpoint loaded successfully
-found framework is  MobileSAMFramework
-found framework is  YoloSAMFramework
-found framework is  RandomForestFramework
-found framework is  PytorchSemanticFramework
-found framework is  CellPoseInstanceFramework
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1086x1108+640+280 (frame: 1102x1147+632+249) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1086x1061+640+280 (frame: 1102x1100+632+249) margins: 8, 31, 8, 8 minimum size: 385x497 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=401,536 maxtrack=0,0)
+C:\Users\bnort\AppData\Local\Temp\ipykernel_11204\1010478278.py:3: DeprecationWarning: The &#39;label_only&#39; parameter is deprecated. Please use the &#39;mode&#39; parameter instead.
+  batch_dl = easy_augment_batch_dl.NapariEasyAugmentBatchDL(viewer)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No module named &#39;segment_everything&#39;
+Found framework CellPoseInstanceFramework
 creating new log file
-2025-02-13 18:54:19,541 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2025-02-13 18:54:19,542 [INFO] 
-cellpose version: 	3.1.0 
+2025-11-18 15:48:20,419 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2025-11-18 15:48:20,420 [INFO] 
+cellpose version: 	4.0.7 
 platform:       	win32 
-python version: 	3.10.14 
-torch version:  	2.2.2+cu118
-Zarr store already up-to-date.
-Zarr store already up-to-date.
-2025-02-13 18:54:22,297 [INFO] ** TORCH CUDA version installed and working. **
-2025-02-13 18:54:22,298 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
-2025-02-13 18:54:22,420 [INFO] &gt;&gt;&gt;&gt; loading model ../../data\ladybugs_series\models\cellpose_ladybugs_scale2
-2025-02-13 18:54:22,620 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
-2025-02-13 18:54:22,622 [INFO] &gt;&gt;&gt;&gt; model diam_labels =  181.358 (mean diameter of training ROIs)
-&#39;QCheckBox&#39; object has no attribute &#39;setValue&#39;
+python version: 	3.11.14 
+torch version:  	2.6.0
+2025-11-18 15:48:20,422 [WARNING] model_type argument is not used in v4.0.1+. Ignoring this argument...
+2025-11-18 15:48:20,643 [INFO] ** TORCH CUDA version installed and working. **
+2025-11-18 15:48:20,644 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
+2025-11-18 15:48:22,511 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cpsam
+Found framework RandomForestFramework
+Found framework VesselsSemanticFramework
+Found framework MicroSamInstanceFramework
+Error creating ml labels and features: No Zarr data type found that matches {&#39;name&#39;: &#39;|O&#39;, &#39;object_codec_id&#39;: &#39;json2&#39;}
+Error creating ml_labels: &#39;DeepLearningProject&#39; object has no attribute &#39;ml_labels&#39;
+Random Forest ML may not work properly
+Adding object boxes layer
+Adding predicted object boxes layer
+Adding label boxes
+Data changed
+Data changed
+Adding object boxes
+Adding predicted object boxes
+Setting object box classes
+Setting predicted object box classes
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+0+23 (frame: 1936x1147-8-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1920x1017+0+23 (frame: 1936x1056-8-8) margins: 8, 31, 8, 8 minimum size: 880x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=896,1147 maxtrack=0,0)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-18 15:48:30,305 [WARNING] QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+0+23 (frame: 1936x1147-8-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1920x1017+0+23 (frame: 1936x1056-8-8) margins: 8, 31, 8, 8 minimum size: 880x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=896,1147 maxtrack=0,0)
 </pre></div>
 </div>
 </div>
@@ -615,16 +644,16 @@ Zarr store already up-to-date.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "microsam_cellposesam"
         },
         kernelOptions: {
-            name: "python3",
-            path: "./20_scale"
+            name: "microsam_cellposesam",
+            path: "./2025_updates_and_advances"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'microsam_cellposesam'</script>
 
                 </article>
               
@@ -637,22 +666,13 @@ Zarr store already up-to-date.
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="20_cell_pose_diameter.html"
+       href="70_sam_finetuning_cell_data.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Cellpose trained to learn scale</p>
+        <p class="prev-next-title">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></p>
       </div>
-    </a>
-    <a class="right-next"
-       href="40_create_patches.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Make patches from labels</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -660,6 +680,26 @@ Zarr store already up-to-date.
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-labeling-vs-instance-labeling">Semantic Labeling vs Instance Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-labeling-vs-dense-labeling">Sparse Labeling vs Dense Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-check-versions">Import and check versions</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-and-easy-augment-batch-dl">Start Napari and Easy Augment Batch DL</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>
