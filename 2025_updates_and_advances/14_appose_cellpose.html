@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Explore and label data &#8212; My Jupyter Book</title>
+    <title>Run Cellpose with appose &#8212; My Jupyter Book</title>
   
   
   
@@ -57,11 +57,9 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = '10_label_augment_train/10_label_predict';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2025_updates_and_advances/14_appose_cellpose';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Augmentation" href="15_augment.html" />
-    <link rel="prev" title="File Organization" href="07_file_organization.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -180,7 +180,7 @@
             </li>
         </ul>
         <p aria-level="2" class="caption" role="heading"><span class="caption-text">Notebooks and Napari Widgets for Deep Learning</span></p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../00_course_preparation/02_tools.html">Tools used for this workshop</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/05_Setup.html">Setup</a></li>
 
@@ -196,28 +196,28 @@
 <li class="toctree-l2"><a class="reference internal" href="../00_course_preparation/25_exercises.html">Suggested exercises</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_introduction.html">Labeling and Augmentation</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="03_napari_layers.html">Some Napari Basics</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_label_augment_train/01_introduction.html">Labeling and Augmentation</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/03_napari_layers.html">Some Napari Basics</a></li>
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="07_file_organization.html">File Organization</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore and label data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/07_file_organization.html">File Organization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/10_label_predict.html">Explore and label data</a></li>
 
-<li class="toctree-l2"><a class="reference internal" href="15_augment.html">Augmentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="20_create_patches.html">Make patches from labels</a></li>
-
-
-<li class="toctree-l2"><a class="reference internal" href="30_stardist_training_2d.html">Stardist training example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/15_augment.html">Augmentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/20_create_patches.html">Make patches from labels</a></li>
 
 
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/30_stardist_training_2d.html">Stardist training example</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../10_label_augment_train/35_cellpose_training_2d.html">Train a cellpose 2D model</a></li>
 
 
 
@@ -283,18 +283,18 @@
 
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../2025_updates_and_advances/01_tools.html">2025 Updates and Advances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/02_Pixi.html">Pixi</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="01_tools.html">2025 Updates and Advances</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Pixi.html">Pixi</a></li>
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/03_test_pixi.html">Test Pixi Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/05_microsam.html">Microsam via Pixi environment example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_test_pixi.html">Test Pixi Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_microsam.html">Microsam via Pixi environment example</a></li>
 
 
 
 
 
-<li class="toctree-l2"><a class="reference internal" href="../2025_updates_and_advances/15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_appose_run_all.html">Run multiple frameworks with Appose</a></li>
 
 
 </ul>
@@ -370,7 +370,7 @@
       
       
       
-      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F10_label_augment_train/10_label_predict.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/True-North-Intelligent-Algorithms/notebooks-and-napari-widgets-for-dl/issues/new?title=Issue%20on%20page%20%2F2025_updates_and_advances/14_appose_cellpose.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -400,7 +400,7 @@
       
       
       
-      <li><a href="../_sources/10_label_augment_train/10_label_predict.ipynb" target="_blank"
+      <li><a href="../_sources/2025_updates_and_advances/14_appose_cellpose.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -484,7 +484,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Explore and label data</h1>
+    <h1>Run Cellpose with appose</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -494,10 +494,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explore and label data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-the-image-with-a-napari-widget">Label the Image with a Napari widget</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries-and-check-local-environment">Load Libraries and Check Local Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-our-test-image">Load Our Test Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-cellpose-code">Write the Cellpose Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-image-for-sending">Prepare the Image for Sending</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cellpose-in-the-other-environment">Run Cellpose in the Other Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-results">Compare Results</a></li>
 </ul>
-
             </nav>
         </div>
     </div>
@@ -508,125 +511,164 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="explore-and-label-data">
-<h1>Explore and label data<a class="headerlink" href="#explore-and-label-data" title="Link to this heading">#</a></h1>
-<p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
+  <section id="run-cellpose-with-appose">
+<h1>Run Cellpose with appose<a class="headerlink" href="#run-cellpose-with-appose" title="Link to this heading">#</a></h1>
+<p>Now let’s do something more exciting - run Cellpose segmentation using Appose! This shows how to send real data (an image) to another environment and get meaningful results back.</p>
+<p><strong>Important:</strong> Set your notebook kernel to ‘Python (appose_napari_ai)’ - this environment doesn’t have Cellpose installed, which perfectly demonstrates calling Cellpose from a different environment!</p>
+<section id="load-libraries-and-check-local-environment">
+<h2>Load Libraries and Check Local Environment<a class="headerlink" href="#load-libraries-and-check-local-environment" title="Link to this heading">#</a></h2>
+<p>First, let’s import what we need. Notice we check if cellpose is available locally - it probably isn’t, and that’s okay! We’ll run it in another environment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
-<span class="n">viewer</span> <span class="o">=</span> <span class="n">napari</span><span class="o">.</span><span class="n">Viewer</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">skimage.io</span><span class="w"> </span><span class="kn">import</span> <span class="n">imread</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">appose</span>
 
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">napari</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl</span><span class="w"> </span><span class="kn">import</span> <span class="n">easy_augment_batch_dl</span>
-
-<span class="c1"># import the frameworks you want to use.  As part of the import the framework wil be registered</span>
-<span class="c1"># if it calls the BaseFramework.register_framework() method</span>
 <span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl.frameworks.pytorch_semantic_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">PytorchSemanticFramework</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;PytorchSemanticFramework not loaded&#39;</span><span class="p">)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl.frameworks.cellpose_instance_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">CellPoseInstanceFramework</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;CellPoseInstanceFramework not loaded&#39;</span><span class="p">)</span>
-<span class="k">try</span><span class="p">:</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">napari_easy_augment_batch_dl.frameworks.stardist_instance_framework</span><span class="w"> </span><span class="kn">import</span> <span class="n">StardistInstanceFramework</span>
-<span class="k">except</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;StardistInstanceFramework not loaded&#39;</span><span class="p">)</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">cellpose</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cellpose is not installed.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
-No module named &#39;segment_everything&#39;
-PytorchSemanticFramework not loaded
-CellPoseInstanceFramework not loaded
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cellpose is not installed.
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="label-the-image-with-a-napari-widget">
-<h1>Label the Image with a Napari widget<a class="headerlink" href="#label-the-image-with-a-napari-widget" title="Link to this heading">#</a></h1>
-<p>Here we call the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget in <code class="docutils literal notranslate"><span class="pre">label_only</span></code> mode so we can label the images.   Optionally if a model has already been trained we can pass it to the Widget.  Then we can make predictions and correct them.</p>
+<section id="load-our-test-image">
+<h2>Load Our Test Image<a class="headerlink" href="#load-our-test-image" title="Link to this heading">#</a></h2>
+<p>Let’s load the same cell image we’ve been using. This will be sent to the Cellpose environment for segmentation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_dl</span> <span class="o">=</span> <span class="n">easy_augment_batch_dl</span><span class="o">.</span><span class="n">NapariEasyAugmentBatchDL</span><span class="p">(</span><span class="n">viewer</span><span class="p">,</span> <span class="n">label_only</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-
-<span class="n">viewer</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">add_dock_widget</span><span class="p">(</span>
-    <span class="n">batch_dl</span>
-<span class="p">)</span>
-
-<span class="n">data_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s1">&#39;../../data&#39;</span>
-<span class="n">parent_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_path</span><span class="p">,</span> <span class="s1">&#39;ladybugs1&#39;</span><span class="p">)</span>
-<span class="n">model_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">parent_path</span><span class="p">,</span> <span class="s1">&#39;models&#39;</span><span class="p">)</span>
-
-<span class="n">batch_dl</span><span class="o">.</span><span class="n">load_image_directory</span><span class="p">(</span><span class="n">parent_path</span><span class="p">)</span>
-
-<span class="n">model_name</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span>
-<span class="c1">#model_name = &#39;cellpose_for_ladybugs&#39;</span>
-
-
-<span class="k">if</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;stardist_for_ladybugs&#39;</span><span class="p">:</span>
-    <span class="c1"># set the drop down to the StardistInstanceFramework</span>
-    <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">StardistInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">)</span>
-
-    <span class="c1"># get the stardist widget</span>
-    <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_widgets</span><span class="p">[</span><span class="n">StardistInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">]</span>
-
-    <span class="c1"># load model</span>
-    <span class="n">widget</span><span class="o">.</span><span class="n">load_model_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">))</span>
-
-<span class="k">elif</span> <span class="n">model_name</span> <span class="o">==</span> <span class="s1">&#39;cellpose_for_ladybugs&#39;</span><span class="p">:</span>
-    <span class="c1"># set the drop down to the CellPoseInstanceFramework</span>
-    <span class="n">batch_dl</span><span class="o">.</span><span class="n">network_architecture_drop_down</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">)</span>
-    
-    <span class="c1"># get the cellpose widget</span>
-    <span class="n">widget</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_widgets</span><span class="p">[</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">]</span>
-    
-    <span class="c1"># load model</span>
-    <span class="n">widget</span><span class="o">.</span><span class="n">load_model_from_path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_path</span><span class="p">,</span> <span class="n">model_name</span><span class="p">))</span>
-
-    <span class="c1"># get the framework object</span>
-    <span class="n">framework</span> <span class="o">=</span> <span class="n">batch_dl</span><span class="o">.</span><span class="n">deep_learning_project</span><span class="o">.</span><span class="n">frameworks</span><span class="p">[</span><span class="n">CellPoseInstanceFramework</span><span class="o">.</span><span class="n">descriptor</span><span class="p">]</span>
-
-    <span class="c1"># set the parameters for the cellpose framework</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">prob_thresh</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">flow_thresh</span> <span class="o">=</span> <span class="mf">0.4</span>
-    <span class="n">framework</span><span class="o">.</span><span class="n">chan_segment</span> <span class="o">=</span> <span class="mi">0</span> 
-    <span class="n">framework</span><span class="o">.</span><span class="n">chan2</span> <span class="o">=</span> <span class="mi">1</span>
-
-    <span class="c1"># sync parameters on the widget after this we should see the widget in Napari synced with the parameters we set on the framework</span>
-    <span class="n">widget</span><span class="o">.</span><span class="n">sync_with_framework</span><span class="p">()</span>
-   
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">image_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;..\..\data\SOTA_segmentation\cell_00068.bmp&quot;</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">image_path</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CellPoseInstanceFramework not loaded
-PytorchSemanticFramework not loaded
-No module named &#39;segment_everything&#39;
-Found framework StardistInstanceFramework
-Error creating ml labels and features: &#39;results&#39;
-Error creating ml_labels: &#39;DeepLearningProject&#39; object has no attribute &#39;ml_labels&#39;
-Random Forest ML may not work properly
-Adding object boxes layer
-Adding predicted object boxes layer
-Adding label boxes
-Adding object boxes
-Adding predicted object boxes
-Setting object box classes
-Setting predicted object box classes
-Loading network weights from &#39;weights_best.h5&#39;.
-Couldn&#39;t load thresholds from &#39;thresholds.json&#39;, using default values. (Call &#39;optimize_thresholds&#39; to change that.)
-Using default values: prob_thresh=0.5, nms_thresh=0.4.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1ef3e6e7dd0&gt;
+</pre></div>
+</div>
+<img alt="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" src="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" />
+</div>
+</div>
+</section>
+<section id="write-the-cellpose-code">
+<h2>Write the Cellpose Code<a class="headerlink" href="#write-the-cellpose-code" title="Link to this heading">#</a></h2>
+<p>We write Cellpose code as a string that will run in the other environment. Note how we get the result back through <code class="docutils literal notranslate"><span class="pre">task.outputs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the execution string</span>
+<span class="n">execution_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">import numpy as np</span>
+<span class="s1">from cellpose import models</span>
+<span class="s1">import appose</span>
+
+<span class="s1">model = models.CellposeModel(gpu=True)</span>
+<span class="s1">    </span>
+<span class="s1">masks, flows, styles = model.eval(</span>
+<span class="s1">        image.ndarray(),</span>
+<span class="s1">        #diameter=30,</span>
+<span class="s1">        flow_threshold=0.5,</span>
+<span class="s1">        niter=200</span>
+<span class="s1">)</span>
+
+<span class="s1"># Convert result to appose format for output</span>
+
+<span class="s1">ndarr_mask = appose.NDArray(dtype=str(masks.dtype), shape=masks.shape)</span>
+<span class="s1">ndarr_mask.ndarray()[:] = masks</span>
+
+<span class="s1">task.outputs[&quot;mask&quot;] = ndarr_mask</span>
+<span class="s1">&#39;&#39;&#39;</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="prepare-the-image-for-sending">
+<h2>Prepare the Image for Sending<a class="headerlink" href="#prepare-the-image-for-sending" title="Link to this heading">#</a></h2>
+<p>We need to convert our image into Appose’s format so it can be sent to the other environment.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cellpose_env_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;..\..\pixi\microsam_cellposesam\.pixi\envs\default&quot;</span>
+
+<span class="n">env</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">base</span><span class="p">(</span><span class="n">cellpose_env_path</span><span class="p">)</span><span class="o">.</span><span class="n">build</span><span class="p">()</span>
+<span class="n">ndarr_img</span> <span class="o">=</span> <span class="n">appose</span><span class="o">.</span><span class="n">NDArray</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">ndarr_img</span><span class="o">.</span><span class="n">ndarray</span><span class="p">()[:]</span> <span class="o">=</span> <span class="n">img</span>
+
+<span class="c1"># Always include image, optionally add additional inputs</span>
+<span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;image&quot;</span><span class="p">:</span> <span class="n">ndarr_img</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="run-cellpose-in-the-other-environment">
+<h2>Run Cellpose in the Other Environment<a class="headerlink" href="#run-cellpose-in-the-other-environment" title="Link to this heading">#</a></h2>
+<p>Now we send our image and code to the Cellpose environment, wait for it to finish, and get our segmentation mask back.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">env</span><span class="o">.</span><span class="n">python</span><span class="p">()</span> <span class="k">as</span> <span class="n">python</span><span class="p">:</span>
+    <span class="n">task</span> <span class="o">=</span> <span class="n">python</span><span class="o">.</span><span class="n">task</span><span class="p">(</span><span class="n">execution_string</span><span class="p">,</span> <span class="n">inputs</span><span class="o">=</span><span class="n">inputs</span><span class="p">,</span> <span class="n">queue</span><span class="o">=</span><span class="s2">&quot;main&quot;</span><span class="p">)</span>
+    <span class="n">task</span><span class="o">.</span><span class="n">wait_for</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">task</span><span class="o">.</span><span class="n">error</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Task error: </span><span class="si">{</span><span class="n">task</span><span class="o">.</span><span class="n">error</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="o">.</span><span class="n">outputs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mask&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;mask&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="compare-results">
+<h2>Compare Results<a class="headerlink" href="#compare-results" title="Link to this heading">#</a></h2>
+<p>Let’s see how well our Appose-powered Cellpose did! We’ll compare it side-by-side with the ground truth.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load ground truth for comparison</span>
+<span class="n">label_path</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;..\..\data\SOTA_segmentation\cell_00068_label.tiff&quot;</span>
+<span class="n">ground_truth</span> <span class="o">=</span> <span class="n">imread</span><span class="p">(</span><span class="n">label_path</span><span class="p">)</span>
+
+<span class="c1"># Import visualization helper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tnia.plotting.plt_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">mask_overlay</span>
+
+<span class="c1"># Create overlays</span>
+<span class="n">ground_truth_overlay</span> <span class="o">=</span> <span class="n">mask_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ground_truth</span><span class="p">)</span>
+<span class="n">result_overlay</span> <span class="o">=</span> <span class="n">mask_overlay</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">ndarray</span><span class="p">())</span>
+
+<span class="c1"># Create comparison plot</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">ground_truth_overlay</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ground Truth&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">result_overlay</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Appose Cellpose Result&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/5e2f3d507a121426d938327d504437e5e5472f7ac3c37d7c1c4e567aee786a0f.png" src="../_images/5e2f3d507a121426d938327d504437e5e5472f7ac3c37d7c1c4e567aee786a0f.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -638,16 +680,16 @@ Using default values: prob_thresh=0.5, nms_thresh=0.4.
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "python"
+            mode: "appose_napari_ai"
         },
         kernelOptions: {
-            name: "python3",
-            path: "./10_label_augment_train"
+            name: "appose_napari_ai",
+            path: "./2025_updates_and_advances"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'python3'</script>
+    <script>kernelName = 'appose_napari_ai'</script>
 
                 </article>
               
@@ -659,24 +701,6 @@ Using default values: prob_thresh=0.5, nms_thresh=0.4.
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="07_file_organization.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">File Organization</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="15_augment.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Augmentation</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -693,10 +717,13 @@ Using default values: prob_thresh=0.5, nms_thresh=0.4.
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Explore and label data</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#label-the-image-with-a-napari-widget">Label the Image with a Napari widget</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-libraries-and-check-local-environment">Load Libraries and Check Local Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-our-test-image">Load Our Test Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#write-the-cellpose-code">Write the Cellpose Code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prepare-the-image-for-sending">Prepare the Image for Sending</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-cellpose-in-the-other-environment">Run Cellpose in the Other Environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compare-results">Compare Results</a></li>
 </ul>
-
   </nav></div>
 
 </div></div>
