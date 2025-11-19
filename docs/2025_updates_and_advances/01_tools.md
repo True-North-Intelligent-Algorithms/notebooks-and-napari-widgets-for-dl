@@ -63,6 +63,8 @@ Download all the data and place it at the top level of the repository in the ```
 
 The 2025 update to the workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.  We will be using Pixi to get these projects. 
 
+### Projects we use
+
 [tnia-python](https://github.com/True-North-Intelligent-Algorithms/tnia-python) - This is a general utility project for image processing including deep learning utilities.
 
 [easy-augment-batch-dl](https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl) - A plugin to perform deep learning on small to medium-sized image sets with UNETs, Cellpose, Stardist, SAM and friends. This plugin is particularly useful for performing deep learning with a small number of labels and augmentation, and for experimenting with different deep learning frameworks.  
