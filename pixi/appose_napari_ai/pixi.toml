@@ -1,0 +1,23 @@
+[project]
+name = "appose_napari_ai"
+authors = ["bnorthan <bnorthan@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+startup = "python startup.py"
+
+[dependencies]
+python = "3.11.*"
+ipykernel = ">=7.1.0,<8"
+
+[pypi-dependencies]
+tnia-python = { git = "https://github.com/True-North-Intelligent-Algorithms/tnia-python.git" }
+napari-ai-lab = { git = "https://github.com/True-North-Intelligent-Algorithms/napari-ai-lab" }
+
+# comment this in if you want to local editable install
+#napari-ai-lab = { path = "../../../napari-ai-lab", editable=true}
+
+appose = "*"
+

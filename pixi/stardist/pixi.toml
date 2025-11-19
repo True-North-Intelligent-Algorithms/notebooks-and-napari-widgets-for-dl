@@ -1,0 +1,42 @@
+[project]
+name = "stardist"
+authors = ["bnorthan <bnorthan@gmail.com>"]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64"]
+version = "0.1.0"
+
+[tasks]
+startup = "python startup.py"
+
+[dependencies]
+python = "3.10.*"
+napari = "*"
+pyqt = "*"
+stardist = "<0.9"
+ipykernel = ">=7.1.0,<8"
+
+[target.linux-64.dependencies]
+cudnn = "*"
+cudatoolkit = "*"
+
+[target.win-64.dependencies]
+cudatoolkit = "11.8.*"
+cudnn = "8.1.0.*"
+
+[pypi-dependencies]
+tensorflow = ">=2.0"  
+tnia-python = { git = "https://github.com/True-North-Intelligent-Algorithms/tnia-python.git" }
+appose = "*"
+
+# Use this to install from GitHub directly
+# napari-easy-augment-batch-dl = { git = "https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl.git" }
+
+# for specific commit
+# napari-easy-augment-batch-dl = { git = "https://github.com/True-North-Intelligent-Algorithms/napari-easy-augment-batch-dl.git",rev = "0d00a876da5d94b6ad873e2b8fae206e83237236"}
+
+# Use this to install from local folder in editable mode
+napari-easy-augment-batch-dl = { path = "../..", editable = true }
+
+# tensorflow needs to be below 2.11 for GPU support on windows
+[target.win-64.pypi-dependencies]
+tensorflow = "<2.11"
