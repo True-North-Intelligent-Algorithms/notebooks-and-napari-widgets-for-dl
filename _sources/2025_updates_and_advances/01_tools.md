@@ -2,17 +2,17 @@
 
 This workshop is an update to the 2024 workshop.  
 
-###  Question:  Does the 2024 workshop still work?
+### Question: Does the 2024 workshop still work?
 
-**Answer**:  I don't know.  I haven't gone back yet and tried to re-run sections 10 to 30.  I will eventually, and try to integrate the new examples toward a more organized flow.  First step is to introduce technologies that will allow the old examples to be more robust to age. 
+**Answer**: The 2024 instructions worked perfectly in 2024, but may not work reliably in 2025 due to dependency drift - when non-versioned dependencies and vague version ranges allow transitive dependencies to change over time. Rather than chasing these moving targets, this update first introduces new technologies that lock dependencies precisely, making workshops reproducible years later (we'll eventually update the other sections to use technologies such as Pixi and Appose)
 
 ### New technologies we will learn today
 
-And how they will help make the entire workshop (including last year's sections) more robust:
+These tools address the core challenges that make computational tutorials fragile over time:
 
 #### Pixi
 
-Pixi solves the "it worked last year but breaks today" problem. Unlike conda environments that can drift over time or break because ambiguous dependencies change, Pixi creates locked, reproducible environments from a single `pixi.toml` file. 
+[Pixi](https://pixi.sh/) solves the "it worked last year but breaks today" problem. Unlike conda environments that can drift over time or break because ambiguous dependencies change, Pixi creates locked, reproducible environments from a single `pixi.toml` file. 
 
 The key is `pixi.lock` file. Even if someone writes a sloppy `pixi.toml` with loose version constraints, the lock file captures the exact versions that actually worked. This lock file is what makes true reproduction possible.
 
@@ -27,7 +27,7 @@ Pixi makes our deep learning workflows future-proof by eliminating the dependenc
 
 #### Appose
 
-Appose lets us run conflicting deep learning models in the same notebook without environment clashes. Instead of choosing between Cellpose v3 vs v4, or SAM vs MicroSAM, we can use them all.
+[Appose](https://github.com/apposed) lets us run conflicting deep learning models in the same notebook without environment clashes. Instead of choosing between Cellpose v3 vs v4, or SAM vs MicroSAM, we can use them all.
 
 This means:
 - Compare multiple models side-by-side easily
