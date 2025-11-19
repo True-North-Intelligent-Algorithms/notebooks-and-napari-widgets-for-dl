@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Explore Data &#8212; My Jupyter Book</title>
+    <title>Easy-Augment-Batch-DL with Cell Data &#8212; My Jupyter Book</title>
   
   
   
@@ -306,11 +306,10 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="63_napari_easy_augment_batch_dl.html">napari-easy-augment-batch-dl</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Explore Data</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Easy-Augment-Batch-DL with Cell Data</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="70_sam_finetuning_cell_data.html">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="85_neabdl_vessel_data.html">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
-
-
+<li class="toctree-l2"><a class="reference internal" href="85_neabdl_vessel_data.html">Easy-Augment-Batch-DL with Vessel Data</a></li>
 
 
 </ul>
@@ -487,7 +486,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -498,11 +499,28 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Explore Data</h1>
+    <h1>Easy-Augment-Batch-DL with Cell Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Easy-Augment-Batch-DL with Cell Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-strategy">Labeling Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmentation">Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-predict">Train and Predict</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-data">Explore Data</a></li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -512,7 +530,42 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="explore-data">
+  <section id="easy-augment-batch-dl-with-cell-data">
+<h1>Easy-Augment-Batch-DL with Cell Data<a class="headerlink" href="#easy-augment-batch-dl-with-cell-data" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates how to use the napari-easy-augment-batch-dl plugin to train deep learning models on cell segmentation data.</p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
+<p>The easy-augment-batch-dl plugin provides a streamlined workflow for training deep learning models with minimal data. It has panes that allow you to</p>
+<ol class="arabic simple">
+<li><p>Draw labels</p></li>
+<li><p>Augment labels</p></li>
+<li><p>Train/predict with different architectures</p></li>
+</ol>
+</section>
+<section id="semantic-vs-instance-segmentation">
+<h2>Semantic vs Instance Segmentation<a class="headerlink" href="#semantic-vs-instance-segmentation" title="Link to this heading">#</a></h2>
+<p><strong>Semantic Segmentation</strong>: Every pixel gets classified into a category (background, vessel, cell, etc.)
+<strong>Instance Segmentation</strong>: Individual objects are separated (cell 1, cell 2, cell 3, etc.)</p>
+<p>For this cell example, we’ll use instance segmentation to identify individual cells.</p>
+</section>
+<section id="labeling-strategy">
+<h2>Labeling Strategy<a class="headerlink" href="#labeling-strategy" title="Link to this heading">#</a></h2>
+<p><strong>Sparse Labeling</strong>:  Not every pixel has to be labeled.  However some background needs to be labeled to differentiate between background pixels and unlabeled pixels.  For example if there were 2 foreground classes use label 1 for background, 2 for “class 1”, and 3 for “class 2”.  Unlabeled pixels (0) will be ignored.</p>
+<p><strong>Dense Labeling</strong>:  Every foreground pixel needs to be labeled however background does not need to be labeled.  If there were 2 foreground classes, use 1 for “class 1”, 2 for “class 2” and then the remaining pixels (0) will be treated as background.</p>
+<p>In this example we use dense labeling, as we label every object in the ROI.</p>
+</section>
+<section id="augmentation">
+<h2>Augmentation<a class="headerlink" href="#augmentation" title="Link to this heading">#</a></h2>
+<p>The plugin includes a panel with various augmentation options. Simply check the desired augmentation types (Horizontal Flip, Random Resize, Random Adjust Color, Elastic Deformation, etc.) and click “<strong>Augment All Images</strong>” or “<strong>Augment Single</strong>” to automatically generate additional training data from your labeled images.</p>
+</section>
+<section id="train-and-predict">
+<h2>Train and Predict<a class="headerlink" href="#train-and-predict" title="Link to this heading">#</a></h2>
+<p>After generating augmented patches, you can train a model. Use the dropdown menu to select your desired architecture (in the screenshot, <code class="docutils literal notranslate"><span class="pre">Micro-sam</span> <span class="pre">Instance</span> <span class="pre">Framework</span></code> is selected), then click “<strong>Train Network</strong>”. Once training is complete, you can use your trained model to predict on new images. You also have the option to load a previously trained model if available.</p>
+<p>The below screenshot shows Napari-Easy-Augment-Batch open with Instance labels for individual cells drawn.</p>
+<p><img alt="Easy Augment Label Instance" src="../_images/003_easy_augment_labelling.png" /></p>
+</section>
+</section>
+<section id="explore-data">
 <h1>Explore Data<a class="headerlink" href="#explore-data" title="Link to this heading">#</a></h1>
 <p>This notebook uses the <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> widget to explore and label the data.  If we have a model trained we can also predict using that model.</p>
 <p>Note:  <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> is a useful tool, especially for labelling, but is currently under construction for other uses.  Right now it <strong>may</strong> be best to use it for labelling and inspecting predictions and do other steps of the deep learning workflow (making patches, training) in notebooks.  (of course you are welcome to try the GUI for other steps and report and hiccups (or disasters) that occur)</p>
@@ -531,7 +584,7 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellpose3\.pixi\envs\default\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
   from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
@@ -570,32 +623,27 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1086x1108+2560+280 (frame: 1102x1147+2552+249) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY2&quot;. Resulting geometry: 1086x1061+2560+280 (frame: 1102x1100+2552+249) margins: 8, 31, 8, 8 minimum size: 385x497 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=401,536 maxtrack=0,0)
-C:\Users\bnort\AppData\Local\Temp\ipykernel_32928\3280710511.py:2: DeprecationWarning: The &#39;label_only&#39; parameter is deprecated. Please use the &#39;mode&#39; parameter instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\bnort\AppData\Local\Temp\ipykernel_40528\3280710511.py:2: DeprecationWarning: The &#39;label_only&#39; parameter is deprecated. Please use the &#39;mode&#39; parameter instead.
   batch_dl = easy_augment_batch_dl.NapariEasyAugmentBatchDL(viewer, label_only = False)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No module named &#39;segment_everything&#39;
 Found framework MicroSamInstanceFramework
 Found framework CellPoseInstanceFramework
-2025-11-18 15:20:21,543 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2025-11-18 15:20:21,544 [INFO] 
-cellpose version: 	3.1.1.2 
+creating new log file
+2025-11-18 19:59:58,551 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2025-11-18 19:59:58,552 [INFO] 
+cellpose version: 	4.0.7 
 platform:       	win32 
 python version: 	3.11.14 
-torch version:  	2.8.0
-2025-11-18 15:20:21,546 [INFO] &gt;&gt; cyto3 &lt;&lt; model set to be used
-2025-11-18 15:20:21,752 [INFO] ** TORCH CUDA version installed and working. **
-2025-11-18 15:20:21,754 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
-2025-11-18 15:20:21,833 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cyto3
-2025-11-18 15:20:21,933 [INFO] &gt;&gt;&gt;&gt; model diam_mean =  30.000 (ROIs rescaled to this size during training)
+torch version:  	2.6.0
+2025-11-18 19:59:58,553 [WARNING] model_type argument is not used in v4.0.1+. Ignoring this argument...
+2025-11-18 19:59:58,735 [INFO] ** TORCH CUDA version installed and working. **
+2025-11-18 19:59:58,737 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
+2025-11-18 20:00:00,673 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cpsam
 Found framework RandomForestFramework
 Found framework VesselsSemanticFramework
 Error creating ml labels and features: No Zarr data type found that matches {&#39;name&#39;: &#39;|O&#39;, &#39;object_codec_id&#39;: &#39;json2&#39;}
-Adding widget for Micro-sam Instance Framework
-Adding widget for CellPose Instance Framework
-Adding widget for Random Forest Model
-Adding widget for Monai UNET Model
 Error creating ml_labels: &#39;DeepLearningProject&#39; object has no attribute &#39;ml_labels&#39;
 Random Forest ML may not work properly
 Adding object boxes layer
@@ -607,16 +655,6 @@ Adding object boxes
 Adding predicted object boxes
 Setting object box classes
 Setting predicted object box classes
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellpose3\.pixi\envs\default\Lib\site-packages\napari\layers\utils\style_encoding.py:257: RuntimeWarning: Applying the encoding failed. Using the safe fallback value instead.
-  warnings.warn(
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+1920+23 (frame: 1936x1147+1912-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY2&quot;. Resulting geometry: 1920x1017+1920+23 (frame: 1936x1056+1912-8) margins: 8, 31, 8, 8 minimum size: 898x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=914,1147 maxtrack=0,0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-18 15:20:36,448 [WARNING] QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+1920+23 (frame: 1936x1147+1912-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY2&quot;. Resulting geometry: 1920x1017+1920+23 (frame: 1936x1056+1912-8) margins: 8, 31, 8, 8 minimum size: 898x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=914,1147 maxtrack=0,0)
 </pre></div>
 </div>
 </div>
@@ -632,16 +670,16 @@ Setting predicted object box classes
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "microsam_cellpose3"
+            mode: "microsam_cellposesam"
         },
         kernelOptions: {
-            name: "microsam_cellpose3",
+            name: "microsam_cellposesam",
             path: "./2025_updates_and_advances"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'microsam_cellpose3'</script>
+    <script>kernelName = 'microsam_cellposesam'</script>
 
                 </article>
               
@@ -677,6 +715,30 @@ Setting predicted object box classes
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Easy-Augment-Batch-DL with Cell Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-strategy">Labeling Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmentation">Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-predict">Train and Predict</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#explore-data">Explore Data</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
               
             
           </div>

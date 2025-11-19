@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Use Napari-Easy-Augment-Batch-DL to load and label images &#8212; My Jupyter Book</title>
+    <title>Easy-Augment-Batch-DL with Vessel Data &#8212; My Jupyter Book</title>
   
   
   
@@ -305,11 +305,10 @@
 
 
 <li class="toctree-l2"><a class="reference internal" href="63_napari_easy_augment_batch_dl.html">napari-easy-augment-batch-dl</a></li>
-<li class="toctree-l2"><a class="reference internal" href="68_neabdl_cell_data.html">Explore Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="68_neabdl_cell_data.html">Easy-Augment-Batch-DL with Cell Data</a></li>
+
 <li class="toctree-l2"><a class="reference internal" href="70_sam_finetuning_cell_data.html">Finetuning Segment Anything with <code class="docutils literal notranslate"><span class="pre">µsam</span></code></a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
-
-
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Easy-Augment-Batch-DL with Vessel Data</a></li>
 
 
 </ul>
@@ -499,7 +498,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Use Napari-Easy-Augment-Batch-DL to load and label images</h1>
+    <h1>Easy-Augment-Batch-DL with Vessel Data</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -509,9 +508,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-labeling-vs-instance-labeling">Semantic Labeling vs Instance Labeling</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-labeling-vs-dense-labeling">Sparse Labeling vs Dense Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Easy-Augment-Batch-DL with Vessel Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-strategy">Labeling Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmentation">Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-predict">Train and Predict</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-check-versions">Import and check versions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-and-easy-augment-batch-dl">Start Napari and Easy Augment Batch DL</a></li>
 </ul>
@@ -526,24 +530,39 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="use-napari-easy-augment-batch-dl-to-load-and-label-images">
-<h1>Use Napari-Easy-Augment-Batch-DL to load and label images<a class="headerlink" href="#use-napari-easy-augment-batch-dl-to-load-and-label-images" title="Link to this heading">#</a></h1>
-<p>This notebook starts up Napari-Easy-Augment-Batch-DL and points it to our project directory.  At the beginning of a project this directory is simply the location of our collection of images.  For the light sheet vessel example it will be the 2D slices we extracted and saved in the <code class="docutils literal notranslate"><span class="pre">10_generate_training_slices</span></code> notebook.</p>
-<p>For an overview of how <code class="docutils literal notranslate"><span class="pre">napari-easy-augment-batch-dl</span></code> is used to load and label images, and how data should be organized see <a class="reference external" href="https://true-north-intelligent-algorithms.github.io/napari-easy-augment-batch-dl/load_and_label/">here</a>.</p>
+  <section id="easy-augment-batch-dl-with-vessel-data">
+<h1>Easy-Augment-Batch-DL with Vessel Data<a class="headerlink" href="#easy-augment-batch-dl-with-vessel-data" title="Link to this heading">#</a></h1>
+<p>This notebook demonstrates how to use the napari-easy-augment-batch-dl plugin to train deep learning models on vessel segmentation data.</p>
+<section id="background">
+<h2>Background<a class="headerlink" href="#background" title="Link to this heading">#</a></h2>
+<p>The easy-augment-batch-dl plugin provides a streamlined workflow for training deep learning models with minimal data. It has panes that allow you to</p>
+<ol class="arabic simple">
+<li><p>Draw labels</p></li>
+<li><p>Augment labels</p></li>
+<li><p>Train/predict with different architectures</p></li>
+</ol>
 </section>
-<section id="semantic-labeling-vs-instance-labeling">
-<h1>Semantic Labeling vs Instance Labeling<a class="headerlink" href="#semantic-labeling-vs-instance-labeling" title="Link to this heading">#</a></h1>
-<p>In this example we will use semantic labeling</p>
-<p><strong>Semantic Labeling</strong> Each pixel is assigned a class (background, vessel, cell, brain barrier) but do not distinquish individual objects (instances).  In this example there will be four classes, so the maximum index used is 4.</p>
-<p><strong>Instance Labeling</strong> In instance labeling each pixel belonging to an object is given a unique ID.  Thus the maximum index will correspond to the number of objects.  For example if there are 40 objects the max index will be 40, if there are 10000 objects the max index will be 10000.</p>
+<section id="semantic-vs-instance-segmentation">
+<h2>Semantic vs Instance Segmentation<a class="headerlink" href="#semantic-vs-instance-segmentation" title="Link to this heading">#</a></h2>
+<p><strong>Semantic Segmentation</strong>: Every pixel gets classified into a category (background, vessel, cell, etc.)
+<strong>Instance Segmentation</strong>: Individual objects are separated (vessel 1, vessel 2, cell 1, cell 2, etc.)</p>
+<p>For this vessel example, we’ll use semantic segmentation with multiple classes.</p>
 </section>
-<section id="sparse-labeling-vs-dense-labeling">
-<h1>Sparse Labeling vs Dense Labeling<a class="headerlink" href="#sparse-labeling-vs-dense-labeling" title="Link to this heading">#</a></h1>
-<p>In this example we will use sparse labeling.</p>
+<section id="labeling-strategy">
+<h2>Labeling Strategy<a class="headerlink" href="#labeling-strategy" title="Link to this heading">#</a></h2>
 <p><strong>Sparse Labeling</strong>:  Not every pixel has to be labeled.  However some background needs to be labeled to differentiate between background pixels and unlabeled pixels.  For example if there were 2 foreground classes use label 1 for background, 2 for “class 1”, and 3 for “class 2”.  Unlabeled pixels (0) will be ignored.</p>
 <p><strong>Dense Labeling</strong>:  Every foreground pixel needs to be labeled however background does not need to be labeled.  If there were 2 foreground classes, use 1 for “class 1”, 2 for “class 2” and then the remaining pixels (0) will be treated as background.</p>
+</section>
+<section id="augmentation">
+<h2>Augmentation<a class="headerlink" href="#augmentation" title="Link to this heading">#</a></h2>
+<p>The plugin includes a panel with various augmentation options. Simply check the desired augmentation types (Horizontal Flip, Random Resize, Random Adjust Color, Elastic Deformation, etc.) and click “<strong>Augment All Images</strong>” or “<strong>Augment Single</strong>” to automatically generate additional training data from your labeled images.</p>
+</section>
+<section id="train-and-predict">
+<h2>Train and Predict<a class="headerlink" href="#train-and-predict" title="Link to this heading">#</a></h2>
+<p>After generating augmented patches, you can train a model. Use the dropdown menu to select your desired architecture (in the screenshot, <code class="docutils literal notranslate"><span class="pre">Monai</span> <span class="pre">UNet</span></code> is selected), then click “<strong>Train Network</strong>”. Once training is complete, you can use your trained model to predict on new images. You also have the option to load a previously trained model if available.</p>
 <p>The below screenshot shows Napari-Easy-Augment-Batch open with Semantic labels (1 background, 2 barrier, 3 vessel, 4 cell) drawn.</p>
-<p><img alt="Easy Augment Label Semantic" src="2025_updates_and_advances/screenshots/004_easy_augment_labelling.png" /></p>
+<p><img alt="Easy Augment Label Semantic" src="2025_updates_and_advances/screenshots/004_easy_augment_labelling.png?v=2" /></p>
+</section>
 </section>
 <section id="import-and-check-versions">
 <h1>Import and check versions<a class="headerlink" href="#import-and-check-versions" title="Link to this heading">#</a></h1>
@@ -560,7 +579,15 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>napari version 0.6.6
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>raster_geometry not imported.  This is only needed for the ellipsoid rendering in apply_stardist
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
+  from .autonotebook import tqdm as notebook_tqdm
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No module named &#39;segment_everything&#39;
+napari version 0.6.6
 numpy version 2.3.4
 </pre></div>
 </div>
@@ -587,31 +614,49 @@ numpy version 2.3.4
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1086x1108+640+280 (frame: 1102x1147+632+249) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1086x1061+640+280 (frame: 1102x1100+632+249) margins: 8, 31, 8, 8 minimum size: 385x497 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=401,536 maxtrack=0,0)
-C:\Users\bnort\AppData\Local\Temp\ipykernel_11204\1010478278.py:3: DeprecationWarning: The &#39;label_only&#39; parameter is deprecated. Please use the &#39;mode&#39; parameter instead.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\bnort\AppData\Local\Temp\ipykernel_2184\1010478278.py:3: DeprecationWarning: The &#39;label_only&#39; parameter is deprecated. Please use the &#39;mode&#39; parameter instead.
   batch_dl = easy_augment_batch_dl.NapariEasyAugmentBatchDL(viewer)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No module named &#39;segment_everything&#39;
 Found framework CellPoseInstanceFramework
 creating new log file
-2025-11-18 15:48:20,419 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
-2025-11-18 15:48:20,420 [INFO] 
+2025-11-18 19:25:56,443 [INFO] WRITING LOG OUTPUT TO C:\Users\bnort\.cellpose\run.log
+2025-11-18 19:25:56,444 [INFO] 
 cellpose version: 	4.0.7 
 platform:       	win32 
 python version: 	3.11.14 
 torch version:  	2.6.0
-2025-11-18 15:48:20,422 [WARNING] model_type argument is not used in v4.0.1+. Ignoring this argument...
-2025-11-18 15:48:20,643 [INFO] ** TORCH CUDA version installed and working. **
-2025-11-18 15:48:20,644 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
-2025-11-18 15:48:22,511 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cpsam
+2025-11-18 19:25:56,446 [WARNING] model_type argument is not used in v4.0.1+. Ignoring this argument...
+2025-11-18 19:25:56,444 [INFO] 
+cellpose version: 	4.0.7 
+platform:       	win32 
+python version: 	3.11.14 
+torch version:  	2.6.0
+2025-11-18 19:25:56,446 [WARNING] model_type argument is not used in v4.0.1+. Ignoring this argument...
+2025-11-18 19:25:56,665 [INFO] ** TORCH CUDA version installed and working. **
+2025-11-18 19:25:56,666 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
+2025-11-18 19:25:56,665 [INFO] ** TORCH CUDA version installed and working. **
+2025-11-18 19:25:56,666 [INFO] &gt;&gt;&gt;&gt; using GPU (CUDA)
+2025-11-18 19:25:58,533 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cpsam
+2025-11-18 19:25:58,533 [INFO] &gt;&gt;&gt;&gt; loading model C:\Users\bnort\.cellpose\models\cpsam
 Found framework RandomForestFramework
 Found framework VesselsSemanticFramework
 Found framework MicroSamInstanceFramework
-Error creating ml labels and features: No Zarr data type found that matches {&#39;name&#39;: &#39;|O&#39;, &#39;object_codec_id&#39;: &#39;json2&#39;}
+Exception occurred when creating filenames dataset  AsyncGroup.create_array() got an unexpected keyword argument &#39;object_codec&#39;
+Error creating ml labels and features: &#39;filenames&#39;
+Found framework RandomForestFramework
+Found framework VesselsSemanticFramework
+Found framework MicroSamInstanceFramework
+Exception occurred when creating filenames dataset  AsyncGroup.create_array() got an unexpected keyword argument &#39;object_codec&#39;
+Error creating ml labels and features: &#39;filenames&#39;
 Error creating ml_labels: &#39;DeepLearningProject&#39; object has no attribute &#39;ml_labels&#39;
 Random Forest ML may not work properly
 Adding object boxes layer
+Error creating ml_labels: &#39;DeepLearningProject&#39; object has no attribute &#39;ml_labels&#39;
+Random Forest ML may not work properly
+Adding object boxes layer
+Adding predicted object boxes layer
 Adding predicted object boxes layer
 Adding label boxes
 Data changed
@@ -620,12 +665,13 @@ Adding object boxes
 Adding predicted object boxes
 Setting object box classes
 Setting predicted object box classes
-</pre></div>
-</div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WARNING: QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+0+23 (frame: 1936x1147-8-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1920x1017+0+23 (frame: 1936x1056-8-8) margins: 8, 31, 8, 8 minimum size: 880x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=896,1147 maxtrack=0,0)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-11-18 15:48:30,305 [WARNING] QWindowsWindow::setGeometry: Unable to set geometry 1920x1108+0+23 (frame: 1936x1147-8-8) on QWidgetWindow/&quot;_QtMainWindowClassWindow&quot; on &quot;\\.\DISPLAY1&quot;. Resulting geometry: 1920x1017+0+23 (frame: 1936x1056-8-8) margins: 8, 31, 8, 8 minimum size: 880x1108 MINMAXINFO maxSize=0,0 maxpos=0,0 mintrack=896,1147 maxtrack=0,0)
+Adding label boxes
+Data changed
+Data changed
+Adding object boxes
+Adding predicted object boxes
+Setting object box classes
+Setting predicted object box classes
 </pre></div>
 </div>
 </div>
@@ -687,9 +733,14 @@ Setting predicted object box classes
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Use Napari-Easy-Augment-Batch-DL to load and label images</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-labeling-vs-instance-labeling">Semantic Labeling vs Instance Labeling</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#sparse-labeling-vs-dense-labeling">Sparse Labeling vs Dense Labeling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Easy-Augment-Batch-DL with Vessel Data</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#background">Background</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#semantic-vs-instance-segmentation">Semantic vs Instance Segmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#labeling-strategy">Labeling Strategy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#augmentation">Augmentation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#train-and-predict">Train and Predict</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#import-and-check-versions">Import and check versions</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#start-napari-and-easy-augment-batch-dl">Start Napari and Easy Augment Batch DL</a></li>
 </ul>
