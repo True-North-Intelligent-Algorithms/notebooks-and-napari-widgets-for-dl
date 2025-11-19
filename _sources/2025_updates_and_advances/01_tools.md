@@ -38,10 +38,10 @@ Pixi makes our deep learning workflows future-proof by eliminating the dependenc
 [Appose](https://github.com/apposed) lets us run conflicting deep learning models in the same notebook without environment clashes. Instead of choosing between Cellpose v3 vs v4, or SAM vs MicroSAM, we can use them all.
 
 This means:
-- Compare multiple models side-by-side easily
+- Compare multiple dl frameworks side-by-side easily
 - No more "this breaks that" dependency conflicts
-- Future models can be added without breaking existing ones
-- Notebooks become model comparison laboratories
+- Future frameworks can be added to comparisons without breaking existing ones
+- Notebooks become model/framework comparison laboratories
 
 Appose makes our examples resilient to the fast-changing deep learning landscape by isolating each model in its own environment while keeping them accessible from one place.
 
