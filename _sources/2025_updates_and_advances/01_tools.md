@@ -47,7 +47,11 @@ The Jupyter book view of the workshop can be found [here](https://true-north-int
 
 ### Data
 
-Data can be found on Dropbox [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=4ibypc0u40ub702trdipzokir&st=g70qjhe6&dl=0). Download all the data and place it at the top level of the repository in the ```data``` directory. 
+Data can be found on Dropbox [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=4ibypc0u40ub702trdipzokir&st=g70qjhe6&dl=0). 
+
+Data updated link [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=98xfo7iln3zry3oil86dx6ca9&st=kx75zve4&dl=0)
+
+Download all the data and place it at the top level of the repository in the ```data``` directory. 
 
 The 2025 update to the workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.  We will be using Pixi to get these projects. 
 
