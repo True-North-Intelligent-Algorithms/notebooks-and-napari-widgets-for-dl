@@ -4,7 +4,15 @@ This workshop is an update to the 2024 workshop.
 
 ### Question: Does the 2024 workshop still work?
 
-**Answer**: The 2024 instructions worked perfectly in 2024, but may not work reliably in 2025 due to dependency drift - when non-versioned dependencies and vague version ranges allow transitive dependencies to change over time. Rather than chasing these moving targets, this update first introduces new technologies that lock dependencies precisely, making workshops reproducible years later (we'll eventually update the other sections to use technologies such as Pixi and Appose)
+**Answer**: The 2024 instructions worked perfectly in 2024, but may not work reliably in 2025 due to dependency drift - when non-versioned dependencies and vague version ranges are a problem because transitive dependencies to change over time. Rather than chasing these moving targets, this update first introduces new technologies that lock dependencies precisely, making workshops reproducible years later (we'll eventually update the other sections to use technologies such as Pixi and Appose)
+
+### Question:  Does the 2024 workshop still produce the same results? 
+
+**Answer**:  I don't know.  However it may not.  Over the last year I've run into situations where the same code, run in different environments created with the same installation instructions, produces different results. 
+
+For example Cellpose:  With the move to Cellposesam you can get different results with newer versions.
+
+Word of warning with generalist models:  Even after controlling environments perfectly, could get different result if the model was updated. 
 
 ### New technologies we will learn today
 
