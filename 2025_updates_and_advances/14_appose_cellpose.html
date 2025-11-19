@@ -299,6 +299,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Run Cellpose with appose</a></li>
@@ -565,7 +566,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1ef3e6e7dd0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1d06f8a6810&gt;
 </pre></div>
 </div>
 <img alt="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" src="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" />
@@ -641,7 +642,40 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;mask&#39;])
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⚠️  Task error: Traceback (most recent call last):
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\appose\python_worker.py&quot;, line 145, in _run
+    exec(compile(block, &quot;&lt;string&gt;&quot;, mode=&quot;exec&quot;), _globals, binding)
+  File &quot;&lt;string&gt;&quot;, line 8, in &lt;module&gt;
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\models.py&quot;, line 338, in eval
+    masks = self._compute_masks(x.shape, dP, cellprob, flow_threshold=flow_threshold,
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\models.py&quot;, line 524, in _compute_masks
+    outputs = dynamics.resize_and_compute_masks(
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 610, in resize_and_compute_masks
+    mask = compute_masks(dP, cellprob, niter=niter,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 672, in compute_masks
+    mask = remove_bad_flow_masks(mask, dP, threshold=flow_threshold,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 443, in remove_bad_flow_masks
+    merrors, _ = flow_error(masks, flows, device0)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 300, in flow_error
+    dP_masks = masks_to_flows_gpu(maski, device=device)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 139, in masks_to_flows_gpu
+    mu = _extend_centers_gpu(neighbors, meds_p, isneighbor, shape, n_iter=n_iter,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File &quot;c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\cellpose\dynamics.py&quot;, line 45, in _extend_centers_gpu
+    Tneigh *= isneighbor
+RuntimeError: CUDA error: an illegal memory access was encountered
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+
+dict_keys([])
 </pre></div>
 </div>
 </div>

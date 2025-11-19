@@ -299,6 +299,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
@@ -510,7 +511,7 @@ document.write(`
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Microsam via Pixi environment example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-pixi-environment-visible-in-vs-code-reminder">Making Pixi Environment Visible in VS Code - Reminder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pixi-environment-in-vs-code-notebooks">How to Use Pixi Environment in VS Code Notebooks</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#other-imports">Other imports</a></li>
@@ -532,29 +533,38 @@ document.write(`
                   
   <section id="microsam-via-pixi-environment-example">
 <h1>Microsam via Pixi environment example<a class="headerlink" href="#microsam-via-pixi-environment-example" title="Link to this heading">#</a></h1>
-<section id="making-pixi-environment-visible-in-vs-code-reminder">
-<h2>Making Pixi Environment Visible in VS Code - Reminder<a class="headerlink" href="#making-pixi-environment-visible-in-vs-code-reminder" title="Link to this heading">#</a></h2>
-<p><strong>Standard Setup: Register as Jupyter Kernel</strong></p>
+<section id="how-to-use-pixi-environment-in-vs-code-notebooks">
+<h2>How to Use Pixi Environment in VS Code Notebooks<a class="headerlink" href="#how-to-use-pixi-environment-in-vs-code-notebooks" title="Link to this heading">#</a></h2>
+<p><strong>Important:</strong> Make sure you’ve registered the pixi environment as a Jupyter kernel first:</p>
 <ol class="arabic simple">
 <li><p>Navigate to your pixi environment folder (e.g., <code class="docutils literal notranslate"><span class="pre">pixi/microsam_cellpose3/</span></code>)</p></li>
-<li><p>Run: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ipykernel</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">--name=microsam</span> <span class="pre">--display-name</span> <span class="pre">&quot;Python</span> <span class="pre">(microsam)&quot;</span></code></p></li>
-<li><p>In VS Code, select the kernel from the dropdown</p></li>
+<li><p>If you haven’t created the pixi environment run <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> on the command line:</p></li>
 </ol>
-<p><strong>If DLLs aren’t loading correctly (CUDNN issues):</strong>
-You may need to launch VS Code from within pixi shell:</p>
-<ol class="arabic simple">
-<li><p>Navigate to environment folder: <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">pixi/microsam_cellpose3/</span></code></p></li>
-<li><p>Start pixi shell: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code></p></li>
-<li><p>Launch VS Code from shell: <code class="docutils literal notranslate"><span class="pre">code</span> <span class="pre">.</span></code></p></li>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>install
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>To register the environment (so VS Code can see it) run:</p></li>
 </ol>
-<p><strong>If you don’t use VS Code:</strong>
-If you prefer Jupyter notebook instead of VS Code, launching from pixi shell might work for you (we haven’t tested this):</p>
-<ol class="arabic simple">
-<li><p>Start pixi shell: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">shell</span></code></p></li>
-<li><p>Launch Jupyter: <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">notebook</span></code></p></li>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>microsam_cellpose3<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Pixi (microsam_cellpose3)&quot;</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> After registering a new environment, you may need to restart VS Code for the environment to appear in the kernel selector.</p>
+<ol class="arabic simple" start="4">
+<li><p>Because microsam relies on cuda you may have to start vscode (or jupyter notebook) from a the pixi shell.  Navigate to your pixi folder then type</p></li>
 </ol>
-<p><strong>Environment Verification</strong>
-We print package versions below to verify the environment is working correctly. Pay special attention to CUDNN version - if it shows as unavailable (or crashes the kernel), your paths may not be set correctly.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>shell
+</pre></div>
+</div>
+<p>then navigate to the tutorial folder and start vscode (or jupyter notebook).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">code</span> <span class="o">.</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="5">
+<li><p>In VS Code, click the kernel selector (top right of notebook)</p></li>
+<li><p>Choose “Select Another Kernel” → “Jupyter Kernel” → “Pixi (microsam)”</p></li>
+</ol>
+<p>If the imports below work without errors, your pixi environment is properly configured!</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">micro_sam</span>
@@ -577,14 +587,14 @@ We print package versions below to verify the environment is working correctly. 
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>microsam version: 1.6.2
-Torch version: 2.6.0
-NumPy version: 2.3.4
+Torch version: 2.8.0
+NumPy version: 2.3.5
 CUDA available: True
 GPU name: NVIDIA GeForce RTX 3090
 cuDNN available: True
 cuDNN version: 91002
-Torch version: 2.6.0
-NumPy version: 2.3.4
+Torch version: 2.8.0
+NumPy version: 2.3.5
 CUDA available: True
 GPU name: NVIDIA GeForce RTX 3090
 cuDNN available: True
@@ -605,12 +615,6 @@ cuDNN version: 91002
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="c1"># Import visualization helper</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">tnia.plotting.plt_helper</span><span class="w"> </span><span class="kn">import</span> <span class="n">mask_overlay</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>c:\Users\bnort\work\ImageJ2022\tnia\notebooks-and-napari-widgets-for-dl\pixi\microsam_cellposesam\.pixi\envs\default\Lib\site-packages\tqdm\auto.py:21: TqdmWarning: IProgress not found. Please update jupyter and ipywidgets. See https://ipywidgets.readthedocs.io/en/stable/user_install.html
-  from .autonotebook import tqdm as notebook_tqdm
 </pre></div>
 </div>
 </div>
@@ -677,9 +681,9 @@ Ground truth shape: (1536, 2040)
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 2D: 100%|██████████| 1/1 [00:01&lt;00:00,  1.08s/it]
-Compute Image Embeddings 2D: 100%|██████████| 1/1 [00:01&lt;00:00,  1.08s/it]&lt;?, ?it/s]
-Initialize instance segmentation with decoder: 100%|██████████| 1/1 [00:00&lt;00:00,  4.71it/s]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Compute Image Embeddings 2D: 100%|██████████| 1/1 [00:02&lt;00:00,  2.32s/it]
+Compute Image Embeddings 2D: 100%|██████████| 1/1 [00:02&lt;00:00,  2.32s/it]&lt;?, ?it/s]
+Initialize instance segmentation with decoder: 100%|██████████| 1/1 [00:01&lt;00:00,  1.80s/it]
 </pre></div>
 </div>
 </div>
@@ -711,7 +715,7 @@ Initialize instance segmentation with decoder: 100%|█████████�
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/21fe2e3f53c910e0d9238dfce3ee74ac6f6dbf6199dcec023947bba94319707e.png" src="../_images/21fe2e3f53c910e0d9238dfce3ee74ac6f6dbf6199dcec023947bba94319707e.png" />
+<img alt="../_images/595a4653bb425cd9943ad66c6f87f405c30344b7b2c0b4999942bacecffc525f.png" src="../_images/595a4653bb425cd9943ad66c6f87f405c30344b7b2c0b4999942bacecffc525f.png" />
 </div>
 </div>
 </section>
@@ -725,16 +729,16 @@ Initialize instance segmentation with decoder: 100%|█████████�
         },
         codeMirrorConfig: {
             theme: "abcdef",
-            mode: "microsam_cellposesam"
+            mode: "microsam"
         },
         kernelOptions: {
-            name: "microsam_cellposesam",
+            name: "microsam",
             path: "./2025_updates_and_advances"
         },
         predefinedOutput: true
     }
     </script>
-    <script>kernelName = 'microsam_cellposesam'</script>
+    <script>kernelName = 'microsam'</script>
 
                 </article>
               
@@ -781,7 +785,7 @@ Initialize instance segmentation with decoder: 100%|█████████�
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Microsam via Pixi environment example</a><ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#making-pixi-environment-visible-in-vs-code-reminder">Making Pixi Environment Visible in VS Code - Reminder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-use-pixi-environment-in-vs-code-notebooks">How to Use Pixi Environment in VS Code Notebooks</a></li>
 </ul>
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#other-imports">Other imports</a></li>

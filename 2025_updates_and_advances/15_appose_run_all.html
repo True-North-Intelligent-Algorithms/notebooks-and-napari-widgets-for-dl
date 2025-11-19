@@ -299,6 +299,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
@@ -566,6 +567,11 @@ document.write(`
     <span class="c1"># repeat channels so there is 3</span>
     <span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
+<span class="c1"># if you have smaller GPU try cropping image with ROI (switch comment (#) on below lines)</span>
+<span class="c1">#roi = np.s_[100:1100, 100:1100, ...]</span>
+<span class="n">roi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">s_</span><span class="p">[:]</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">roi</span><span class="p">]</span>
+
 <span class="c1"># Print image information</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loaded image shape: </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, dtype: </span><span class="si">{</span><span class="n">img</span><span class="o">.</span><span class="n">dtype</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
@@ -578,10 +584,10 @@ document.write(`
 Loaded image shape: (1536, 2040, 3), dtype: uint8
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x17ca67de8d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x1c5494f09d0&gt;
 </pre></div>
 </div>
-<img alt="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" src="../_images/094e822ce28b43bd1559a34e1e141c281602bd8848c218eb87df31b3b8c53f72.png" />
+<img alt="../_images/1ec0a19157462686927752089d985b7e6b33a44488a7e9fcce776a9a610966e1.png" src="../_images/1ec0a19157462686927752089d985b7e6b33a44488a7e9fcce776a9a610966e1.png" />
 </div>
 </div>
 </section>
@@ -745,7 +751,7 @@ dict_keys([&#39;mask&#39;])
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/b935a748d4a978b79109ea61025d43768825ff399ca44d9aae8516bb458d71fc.png" src="../_images/b935a748d4a978b79109ea61025d43768825ff399ca44d9aae8516bb458d71fc.png" />
+<img alt="../_images/7a38200733495bf0805c87cb4a45e3b7764680a4f9b5e9acb3e5f12d75b77e95.png" src="../_images/7a38200733495bf0805c87cb4a45e3b7764680a4f9b5e9acb3e5f12d75b77e95.png" />
 </div>
 </div>
 </section>

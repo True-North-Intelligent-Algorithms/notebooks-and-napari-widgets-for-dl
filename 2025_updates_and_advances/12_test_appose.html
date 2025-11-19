@@ -299,6 +299,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Simple Appose Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
@@ -513,6 +514,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-send-simple-code">Step 2: Send Simple Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-it-and-get-results">Step 3: Run It and Get Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#something-more-useful-check-what-s-available">Something More Useful: Check What’s Available</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-more-complex-execution-string">Create more complex execution string</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-environment-info">Get the Environment Info</a></li>
 </ul>
             </nav>
@@ -551,6 +553,11 @@ document.write(`
 <section id="step-2-send-simple-code">
 <h2>Step 2: Send Simple Code<a class="headerlink" href="#step-2-send-simple-code" title="Link to this heading">#</a></h2>
 <p>Now we write some Python code as a string. This code will run in the other environment, not here!</p>
+<p><strong>What’s happening:</strong> We’re creating a message to send to the other environment. The key part is <code class="docutils literal notranslate"><span class="pre">task.outputs[&quot;test&quot;]</span> <span class="pre">=</span> <span class="pre">117</span></code> - this is how we send information back from the other environment to our current notebook.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;test&quot;</span></code> is just a name we give to our result (like a label on an envelope)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">117</span></code> is the actual data we want to send back</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">execution_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
@@ -563,7 +570,7 @@ document.write(`
 </section>
 <section id="step-3-run-it-and-get-results">
 <h2>Step 3: Run It and Get Results<a class="headerlink" href="#step-3-run-it-and-get-results" title="Link to this heading">#</a></h2>
-<p>Here’s the magic! We send our code to the other environment and get the results back.</p>
+<p>Here’s the magic! We create a <code class="docutils literal notranslate"><span class="pre">task</span></code> and send our code to the other environment and get the results back.  The <code class="docutils literal notranslate"><span class="pre">task</span></code> is available in both environments, so when we add key, value pairs (such as “test”, 117) to the task outputs in the externel environment, we can read them back in our current environment.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">env</span><span class="o">.</span><span class="n">python</span><span class="p">()</span> <span class="k">as</span> <span class="n">python</span><span class="p">:</span>
@@ -587,7 +594,27 @@ document.write(`
 </section>
 <section id="something-more-useful-check-what-s-available">
 <h2>Something More Useful: Check What’s Available<a class="headerlink" href="#something-more-useful-check-what-s-available" title="Link to this heading">#</a></h2>
-<p>Let’s ask the other environment: “What versions of important libraries do you have?”</p>
+<p>First check if torch is in the environment of this notebook… it shouldn’t be…</p>
+<p>Then let’s ask the other environment: “What versions of important libraries do you have?”</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;⚠️  torch is not installed in the appose environment.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>⚠️  torch is not installed in the appose environment.
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-more-complex-execution-string">
+<h2>Create more complex execution string<a class="headerlink" href="#create-more-complex-execution-string" title="Link to this heading">#</a></h2>
+<p>Here we check the versions and availability of several packages and write the info to the <code class="docutils literal notranslate"><span class="pre">task.outputs</span></code> dictionary.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">execution_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&#39;&#39;</span>
@@ -609,7 +636,7 @@ document.write(`
 </section>
 <section id="get-the-environment-info">
 <h2>Get the Environment Info<a class="headerlink" href="#get-the-environment-info" title="Link to this heading">#</a></h2>
-<p>We run the above code-string in our second environment and find out which versions of torch, numpy, cuda and cudnn we have their.</p>
+<p>We run the above code-string in our second environment, we can read back the <code class="docutils literal notranslate"><span class="pre">task.outputs</span></code> dictionary and find out which versions of torch, numpy, cuda and cudnn we have there.</p>
 <p>Note if the second environment isn’t set up or connected right we may get errors.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -627,7 +654,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch_version: 2.6.0
-numpy_version: 2.3.4
+numpy_version: 1.26.4
 cuda_available: True
 cudnn_available: True
 cudnn_version: 91002
@@ -706,6 +733,7 @@ cudnn_version: 91002
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-send-simple-code">Step 2: Send Simple Code</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-run-it-and-get-results">Step 3: Run It and Get Results</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#something-more-useful-check-what-s-available">Something More Useful: Check What’s Available</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-more-complex-execution-string">Create more complex execution string</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-environment-info">Get the Environment Info</a></li>
 </ul>
   </nav></div>

@@ -299,6 +299,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="11_Appose.html">Appose</a></li>
 <li class="toctree-l2"><a class="reference internal" href="12_test_appose.html">Simple Appose Test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="14_appose_cellpose.html">Run Cellpose with appose</a></li>
@@ -534,10 +535,21 @@ document.write(`
 <p><strong>Important:</strong> Make sure you’ve registered the pixi environment as a Jupyter kernel first:</p>
 <ol class="arabic simple">
 <li><p>Navigate to your pixi environment folder (e.g., <code class="docutils literal notranslate"><span class="pre">pixi/appose_napari_ai/</span></code>)</p></li>
-<li><p>Run: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">run</span> <span class="pre">python</span> <span class="pre">-m</span> <span class="pre">ipykernel</span> <span class="pre">install</span> <span class="pre">--user</span> <span class="pre">--name=appose_napari_ai</span> <span class="pre">--display-name</span> <span class="pre">&quot;Python</span> <span class="pre">(appose_napari_ai)&quot;</span></code>
-<strong>Note:</strong> After registering a new kernel, you may need to restart VS Code for the environment to appear in the kernel selector.</p></li>
+<li><p>If you haven’t created the pixi environment run <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> on the command line:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>install
+</pre></div>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>To register the environment (so VS Code can see it) run:</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>appose_napari_ai<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Pixi (appose_napari_ai)&quot;</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> After registering a new environment, you may need to restart VS Code for the environment to appear in the kernel selector.</p>
+<ol class="arabic simple" start="4">
 <li><p>In VS Code, click the kernel selector (top right of notebook)</p></li>
-<li><p>Choose “Select Another Kernel” → “Jupyter Kernel” → “Python (appose_napari_ai)”</p></li>
+<li><p>Choose “Select Another Kernel” → “Jupyter Kernel” → “Pixi (appose_napari_ai)”</p></li>
 </ol>
 <p>If the imports below work without errors, your pixi environment is properly configured!</p>
 </section>
@@ -564,7 +576,7 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0.2.dev62+nogit.g21ee86122.d20251117
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.0.2.dev64+nogit.ge997cceb4
 </pre></div>
 </div>
 </div>
