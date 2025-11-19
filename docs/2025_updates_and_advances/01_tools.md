@@ -51,6 +51,8 @@ Data can be found on Dropbox [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0u
 
 Data updated link [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA?rlkey=98xfo7iln3zry3oil86dx6ca9&st=kx75zve4&dl=0)
 
+Data updated line 2 [here](https://www.dropbox.com/scl/fo/4lvuwq8pbdx0ubba9ey85/AMz_dint2PkRASM1oFWx6uA%3Frlkey%3D98xfo7iln3zry3oil86dx6ca9%26st%3Dkx75zve4%26dl%3D0)
+
 Download all the data and place it at the top level of the repository in the ```data``` directory. 
 
 The 2025 update to the workshop uses Jupyter Notebooks, Napari, Cellpose, Stardist and Microsam among other tools.  In addition the following other projects are used.  We will be using Pixi to get these projects. 
