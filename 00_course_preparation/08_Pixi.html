@@ -191,6 +191,7 @@
 
 
 
+
 <li class="toctree-l2"><a class="reference internal" href="10_Dependencies.html">Dependencies</a></li>
 <li class="toctree-l2"><a class="reference internal" href="15_data.html">Code and Data</a></li>
 <li class="toctree-l2"><a class="reference internal" href="25_exercises.html">Suggested exercises</a></li>
@@ -516,8 +517,18 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-pixi">Why Use Pixi?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-benefits">Key Benefits</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-create-the-environment-don-t-run-tasks">Just Create the Environment (Don’t Run Tasks)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment-and-run-a-task">Create Environment AND Run a Task</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-environment-in-vscode">Load environment in VSCode</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#install-environment-as-ipykernel-to-use-with-jupyter-notebook">Install environment as ipykernel to use with Jupyter notebook</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pixi-environment-available-to-vs-code-notebooks">Make Pixi Environment Available to VS Code Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-register-as-jupyter-kernel-recommended">Option 1: Register as Jupyter Kernel (Recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-select-python-interpreter-directly">Option 2: Select Python Interpreter Directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 
             </nav>
@@ -559,6 +570,37 @@ document.write(`
 <p><em>This section will be expanded with installation instructions and examples in the following parts of the course.</em></p>
 <p>MORE PIXI TO COME LATER!</p>
 </section>
+<section id="creating-environments">
+<h1>Creating Environments<a class="headerlink" href="#creating-environments" title="Link to this heading">#</a></h1>
+<section id="just-create-the-environment-don-t-run-tasks">
+<h2>Just Create the Environment (Don’t Run Tasks)<a class="headerlink" href="#just-create-the-environment-don-t-run-tasks" title="Link to this heading">#</a></h2>
+<p>If you want to create the pixi environment without running any tasks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>install
+</pre></div>
+</div>
+<p>This command:</p>
+<ul class="simple">
+<li><p>Reads your <code class="docutils literal notranslate"><span class="pre">pixi.toml</span></code> file</p></li>
+<li><p>Creates the environment</p></li>
+<li><p>Installs all dependencies</p></li>
+<li><p><strong>Does NOT run any tasks</strong></p></li>
+</ul>
+</section>
+<section id="create-environment-and-run-a-task">
+<h2>Create Environment AND Run a Task<a class="headerlink" href="#create-environment-and-run-a-task" title="Link to this heading">#</a></h2>
+<p>If you want to both create the environment and run a specific task:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>startup
+</pre></div>
+</div>
+<p>This command:</p>
+<ul class="simple">
+<li><p>Creates the environment (if it doesn’t exist)</p></li>
+<li><p>Installs dependencies</p></li>
+<li><p><strong>Also runs the “startup” task</strong></p></li>
+</ul>
+<p><strong>Tip:</strong> Use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">install</span></code> when you just want to set up the environment for the first time or update dependencies without running anything.</p>
+</section>
+</section>
 <section id="load-environment-in-vscode">
 <h1>Load environment in VSCode<a class="headerlink" href="#load-environment-in-vscode" title="Link to this heading">#</a></h1>
 <p>To run a script with a pixi created environment</p>
@@ -569,9 +611,40 @@ document.write(`
 <p>Then (see below screenshot) select Python interpreter</p>
 <p><img alt="no image found" src="../_images/selectpython.png" /></p>
 </section>
-<section id="install-environment-as-ipykernel-to-use-with-jupyter-notebook">
-<h1>Install environment as ipykernel to use with Jupyter notebook<a class="headerlink" href="#install-environment-as-ipykernel-to-use-with-jupyter-notebook" title="Link to this heading">#</a></h1>
-<p>pixi run python -m ipykernel install –user –name=mypixi –display-name “Python (mypixi)”</p>
+<section id="make-pixi-environment-available-to-vs-code-notebooks">
+<h1>Make Pixi Environment Available to VS Code Notebooks<a class="headerlink" href="#make-pixi-environment-available-to-vs-code-notebooks" title="Link to this heading">#</a></h1>
+<p>There are two ways to use your pixi environment with VS Code notebooks:</p>
+<section id="option-1-register-as-jupyter-kernel-recommended">
+<h2>Option 1: Register as Jupyter Kernel (Recommended)<a class="headerlink" href="#option-1-register-as-jupyter-kernel-recommended" title="Link to this heading">#</a></h2>
+<p>This makes your environment appear in the kernel selector dropdown:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pixi<span class="w"> </span>run<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>ipykernel<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>--name<span class="o">=</span>appose_napari_ai<span class="w"> </span>--display-name<span class="w"> </span><span class="s2">&quot;Python (appose_napari_ai)&quot;</span>
+</pre></div>
+</div>
+<p><strong>If this fails with “No module named ipykernel”:</strong></p>
+<ol class="arabic simple">
+<li><p>First add ipykernel to your project: <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">add</span> <span class="pre">ipykernel</span></code></p></li>
+<li><p>Then run the command above</p></li>
+</ol>
+</section>
+<section id="option-2-select-python-interpreter-directly">
+<h2>Option 2: Select Python Interpreter Directly<a class="headerlink" href="#option-2-select-python-interpreter-directly" title="Link to this heading">#</a></h2>
+<p>In any notebook:</p>
+<ol class="arabic simple">
+<li><p>Click the kernel selector (top right of notebook)</p></li>
+<li><p>Choose “Select Another Kernel”</p></li>
+<li><p>Choose “Python Environments”</p></li>
+<li><p>Browse to your pixi environment’s Python executable</p></li>
+</ol>
+<p><strong>Pixi environment location:</strong> Usually in <code class="docutils literal notranslate"><span class="pre">.pixi/envs/default/bin/python</span></code> (Linux/Mac) or <code class="docutils literal notranslate"><span class="pre">.pixi/envs/default/python.exe</span></code> (Windows)</p>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>“No module ipykernel”</strong>: Add it with <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">add</span> <span class="pre">ipykernel</span></code> first</p></li>
+<li><p><strong>Can’t find environment</strong>: Use <code class="docutils literal notranslate"><span class="pre">pixi</span> <span class="pre">info</span></code> to see environment path</p></li>
+<li><p><strong>Kernel not showing up</strong>: Restart VS Code after registering kernel</p></li>
+</ul>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -644,8 +717,18 @@ document.write(`
 </li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#why-use-pixi">Why Use Pixi?</a></li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#key-benefits">Key Benefits</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#creating-environments">Creating Environments</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#just-create-the-environment-don-t-run-tasks">Just Create the Environment (Don’t Run Tasks)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-environment-and-run-a-task">Create Environment AND Run a Task</a></li>
+</ul>
+</li>
 <li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#load-environment-in-vscode">Load environment in VSCode</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#install-environment-as-ipykernel-to-use-with-jupyter-notebook">Install environment as ipykernel to use with Jupyter notebook</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#make-pixi-environment-available-to-vs-code-notebooks">Make Pixi Environment Available to VS Code Notebooks</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-1-register-as-jupyter-kernel-recommended">Option 1: Register as Jupyter Kernel (Recommended)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#option-2-select-python-interpreter-directly">Option 2: Select Python Interpreter Directly</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
 </ul>
 
   </nav></div>

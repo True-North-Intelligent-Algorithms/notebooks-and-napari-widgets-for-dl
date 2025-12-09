@@ -26,6 +26,37 @@ If you've ever struggled with "it works on my computer but not yours" problems, 
 
 MORE PIXI TO COME LATER!
 
+## Creating Environments
+
+### Just Create the Environment (Don't Run Tasks)
+
+If you want to create the pixi environment without running any tasks:
+
+```bash
+pixi install
+```
+
+This command:
+- Reads your `pixi.toml` file
+- Creates the environment
+- Installs all dependencies
+- **Does NOT run any tasks**
+
+### Create Environment AND Run a Task
+
+If you want to both create the environment and run a specific task:
+
+```bash
+pixi run startup
+```
+
+This command:
+- Creates the environment (if it doesn't exist)
+- Installs dependencies
+- **Also runs the "startup" task**
+
+**Tip:** Use `pixi install` when you just want to set up the environment for the first time or update dependencies without running anything.
+
 ## Load environment in VSCode
 
 To run a script with a pixi created environment
@@ -40,6 +71,34 @@ Then (see below screenshot) select Python interpreter
 ![no image found](selectpython.png)
 
 
-## Install environment as ipykernel to use with Jupyter notebook
+## Make Pixi Environment Available to VS Code Notebooks
 
-pixi run python -m ipykernel install --user --name=mypixi --display-name "Python (mypixi)"
+There are two ways to use your pixi environment with VS Code notebooks:
+
+### Option 1: Register as Jupyter Kernel (Recommended)
+
+This makes your environment appear in the kernel selector dropdown:
+
+```bash
+pixi run python -m ipykernel install --user --name=appose_napari_ai --display-name "Python (appose_napari_ai)"
+```
+
+**If this fails with "No module named ipykernel":**
+1. First add ipykernel to your project: `pixi add ipykernel`
+2. Then run the command above
+
+### Option 2: Select Python Interpreter Directly
+
+In any notebook:
+1. Click the kernel selector (top right of notebook)
+2. Choose "Select Another Kernel"
+3. Choose "Python Environments"  
+4. Browse to your pixi environment's Python executable
+
+**Pixi environment location:** Usually in `.pixi/envs/default/bin/python` (Linux/Mac) or `.pixi/envs/default/python.exe` (Windows)
+
+### Troubleshooting
+
+- **"No module ipykernel"**: Add it with `pixi add ipykernel` first
+- **Can't find environment**: Use `pixi info` to see environment path
+- **Kernel not showing up**: Restart VS Code after registering kernel
